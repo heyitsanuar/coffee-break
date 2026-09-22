@@ -1,1 +1,7 @@
-export default [{files:['src/**/*.{ts,tsx}','electron/**/*.ts'],rules:{'no-debugger':'error'}}];
+import tseslint from 'typescript-eslint';
+
+export default [{
+  files: ['src/**/*.{ts,tsx}', 'electron/**/*.ts'],
+  languageOptions: { parser: tseslint.parser },
+  rules: { 'no-debugger': 'error' },
+}];

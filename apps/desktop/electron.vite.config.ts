@@ -25,13 +25,13 @@ export default defineConfig({
   },
 
   renderer: {
-    root: resolve(__dirname, 'src'),
+    root: resolve(__dirname),
 
     build: {
       rollupOptions: {
         input: resolve(
           __dirname,
-          'src/index.html',
+          'index.html',
         ),
       },
     },

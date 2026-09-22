@@ -16,7 +16,9 @@ npm run lint
 npm test
 npm run build
 ```
-Commit the generated `package-lock.json` before enabling CI: CI intentionally uses `npm ci`.
+`npm run dev` starts Electron and the renderer development server; saving a renderer file reloads the window through Vite hot reload. `typecheck`, `lint`, `test`, and `build` run across workspaces where the command is defined. The build creates Electron main, preload, and renderer output under `apps/desktop/out`; it does not create a distributable `.app` or `.dmg` package.
+
+The committed `package-lock.json` provides reproducible installs. CI uses `npm ci`.
 
 ## Issues import
 ```bash

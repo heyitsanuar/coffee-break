@@ -26,4 +26,7 @@ bash scripts/import-issues.sh OWNER/REPO --apply  # creates epic, labels and six
 Requires `gh auth login` and repository issue-write permissions. Import is idempotent by exact US prefix for up to 500 existing issues; use a new repository or inspect existing issues first. `--apply` changes the specified GitHub repository.
 
 ## Workflow
-One branch and PR per US: `feature/us-001-repository`. Run checks before review and merge. See AGENTS.md and docs/architecture/README.md. License decision is pending; do not assume open-source licensing.
+Use one branch and pull request per user story. Branches follow `feature/us-XXX-short-description` (for example, `feature/us-001-repository`). Run the documented checks before review and merge. See AGENTS.md and docs/architecture/README.md.
+
+## Versioning and license
+The repository starts at version `0.1.0`, defined in the root and desktop package manifests. Until a license is explicitly selected, the project is not offered under an open-source license; do not add license headers or assume permission to redistribute it. Future releases will use Semantic Versioning once the release process is established.

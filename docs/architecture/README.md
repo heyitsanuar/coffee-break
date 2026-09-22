@@ -1,0 +1,2 @@
+# Architecture boundary
+Electron main owns desktop lifecycle and future privileged IPC; React owns UI; Phaser 3 will render the 2D office in EP-02; domain contracts live in packages/contracts; the independent Node.js Connector will normalize provider events in EP-04. No direct provider calls from the renderer. Local transport and authentication require a dedicated security review before implementation.

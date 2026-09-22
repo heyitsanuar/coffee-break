@@ -1,0 +1,1 @@
+export default [{files:['src/**/*.{ts,tsx}','electron/**/*.ts'],rules:{'no-debugger':'error'}}];

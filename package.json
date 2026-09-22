@@ -1,0 +1,22 @@
+{
+ "name": "coffee-break",
+ "private": true,
+ "version": "0.1.0",
+ "type": "module",
+ "workspaces": [
+  "apps/*",
+  "packages/*"
+ ],
+ "scripts": {
+  "dev": "npm run dev -w @coffee-break/desktop",
+  "typecheck": "npm run typecheck --workspaces --if-present",
+  "lint": "npm run lint --workspaces --if-present",
+  "test": "npm run test --workspaces --if-present",
+  "build": "npm run build --workspaces --if-present"
+ },
+ "devDependencies": {
+  "@eslint/js": "^10.0.1",
+  "typescript": "^5.9.0",
+  "typescript-eslint": "^8.70.1"
+ }
+}

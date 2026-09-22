@@ -1,0 +1,129 @@
+[
+  {
+    "id": "US-001",
+    "epic": "EP-01",
+    "title": "Initialize Project Repository",
+    "priority": "P0",
+    "size": "S",
+    "dependencies": [],
+    "acceptance_criteria": [
+      "Git repository with main as default branch",
+      "README describes purpose, scope, prerequisites and architecture",
+      "gitignore excludes dependencies, build outputs, local settings and secrets",
+      "Initial directories separate app, contracts, docs and scripts",
+      "Branch convention feature/us-XXX-short-description documented",
+      "PR template includes US, changes, checks and acceptance criteria",
+      "License decision and versioning documented",
+      "Initial structure committed and pushed to main"
+    ]
+  },
+  {
+    "id": "US-002",
+    "epic": "EP-01",
+    "title": "Configure Desktop Application",
+    "priority": "P0",
+    "size": "M",
+    "dependencies": [
+      "US-001"
+    ],
+    "acceptance_criteria": [
+      "Electron desktop launches on macOS",
+      "Minimal Coffee Break welcome screen renders",
+      "Documented dev, typecheck, lint, test and build commands",
+      "Hot reload works for renderer changes",
+      "Strict TypeScript enabled",
+      "Reproducible dependency lockfile committed",
+      "Desktop and future connector responsibilities remain separate",
+      "Production application build succeeds"
+    ]
+  },
+  {
+    "id": "US-003",
+    "epic": "EP-01",
+    "title": "Establish Design System",
+    "priority": "P0",
+    "size": "M",
+    "dependencies": [
+      "US-002"
+    ],
+    "acceptance_criteria": [
+      "Reusable color, typography, spacing and radius tokens",
+      "Initial palette and typography documented",
+      "Desktop layout foundation exists",
+      "UI primitives use shared tokens",
+      "UI styling separate from Phaser art assets",
+      "Welcome screen demonstrates conventions",
+      "Usable at supported minimum window size",
+      "Guidelines cover agent status and interaction patterns"
+    ]
+  },
+  {
+    "id": "US-004",
+    "epic": "EP-01",
+    "title": "Define Application Architecture",
+    "priority": "P0",
+    "size": "M",
+    "dependencies": [
+      "US-002"
+    ],
+    "acceptance_criteria": [
+      "Major module responsibilities documented",
+      "Electron, UI and Connector boundaries documented",
+      "Provider-independent shared event contracts",
+      "Typed event envelope has id, type, timestamp, source and payload",
+      "Agent identity and lifecycle states defined",
+      "Provider normalization flow documented",
+      "Local data and security boundaries documented",
+      "Example provider event to state transition documented",
+      "Decisions and deferred concerns documented"
+    ]
+  },
+  {
+    "id": "US-005",
+    "epic": "EP-01",
+    "title": "Configure Codex Development Workflow",
+    "priority": "P0",
+    "size": "M",
+    "dependencies": [
+      "US-001",
+      "US-004"
+    ],
+    "acceptance_criteria": [
+      "Root AGENTS.md contains purpose, references, commands and conventions",
+      "YAGNI, minimal changes and reuse required",
+      "Skills stored in .agents/skills with SKILL.md",
+      "Architecture, UI, implementer, reviewer and testing skills exist",
+      "Each skill has purpose, activation and expected procedure/output",
+      "Instructions link docs rather than duplicate them",
+      "Implementer checks AC and dependencies before editing",
+      "Reviewer reports severity, evidence and correction",
+      "Hybrid testing guidelines documented",
+      "Representative implementer and reviewer exercise completed"
+    ]
+  },
+  {
+    "id": "US-006",
+    "epic": "EP-01",
+    "title": "Configure Continuous Integration",
+    "priority": "P0",
+    "size": "S",
+    "dependencies": [
+      "US-002",
+      "US-005"
+    ],
+    "acceptance_criteria": [
+      "GitHub Actions runs on PRs to main",
+      "Dependencies installed from committed lockfile",
+      "Typecheck failures fail workflow",
+      "Lint failures fail workflow",
+      "Test failures fail workflow",
+      "Build failures fail workflow",
+      "Least-privilege workflow permissions",
+      "Appropriate dependency caching",
+      "PR checks require no production credentials",
+      "Local equivalents documented",
+      "Successful PR run verified",
+      "Controlled failing check verified"
+    ]
+  }
+]

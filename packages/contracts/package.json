@@ -1,0 +1,1 @@
+{"name":"@coffee-break/contracts","private":true,"version":"0.1.0","type":"module","exports":{".":"./src/index.ts"},"scripts":{"typecheck":"tsc --noEmit -p tsconfig.json","test":"vitest run --passWithNoTests"},"devDependencies":{"vitest":"^3.2.0"}}

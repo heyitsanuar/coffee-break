@@ -5,6 +5,8 @@ out/
 release/
 coverage/
 .DS_Store
+.idea/
+.vscode/
 .env
 .env.*
 !.env.example

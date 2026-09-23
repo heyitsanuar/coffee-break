@@ -20,6 +20,9 @@ npm run build
 
 The committed `package-lock.json` provides reproducible installs. CI uses `npm ci`.
 
+## Continuous integration
+GitHub Actions runs [`.github/workflows/ci.yml`](.github/workflows/ci.yml) for pull requests targeting `main`. Run the same validation locally with `npm run typecheck`, `npm run lint`, `npm test`, and `npm run build`. Contributors can inspect results and open step logs from the pull request's checks; all CI checks must pass before approval and merge.
+
 ## Issues import
 ```bash
 bash scripts/import-issues.sh OWNER/REPO          # dry run

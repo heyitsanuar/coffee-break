@@ -26,9 +26,9 @@ GitHub Actions runs [`.github/workflows/ci.yml`](.github/workflows/ci.yml) for p
 ## Issues import
 ```bash
 bash scripts/import-issues.sh OWNER/REPO          # dry run
-bash scripts/import-issues.sh OWNER/REPO --apply  # creates epic, labels and six US issues
+bash scripts/import-issues.sh OWNER/REPO --apply  # creates missing planned epics, labels and stories
 ```
-Requires `gh auth login` and repository issue-write permissions. Import is idempotent by exact US prefix for up to 500 existing issues; use a new repository or inspect existing issues first. `--apply` changes the specified GitHub repository.
+Requires `gh auth login` and repository issue-write permissions. Import is idempotent by the existing epic title or ID prefix and by story ID prefix for up to 500 existing issues; inspect existing issues before applying. `--apply` changes the specified GitHub repository.
 
 ## Workflow
 Use one branch and pull request per user story. Branches follow `feature/us-XXX-short-description` (for example, `feature/us-001-repository`). Run the documented checks before review and merge. See AGENTS.md and docs/architecture/README.md.

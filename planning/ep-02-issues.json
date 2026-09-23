@@ -1,0 +1,159 @@
+{
+  "epic": {
+    "id": "EP-02",
+    "title": "Virtual Office Foundation",
+    "objective": "Establish the Phaser-based virtual-office presentation inside the existing Electron/React desktop application using one fixed 2D pixel-art room, a small original asset set created for Coffee Break, three animated mock agents, and read-only agent inspection.",
+    "design": [
+      "One fixed office room with recognizable work and coffee-break areas.",
+      "Three mock agents visible simultaneously: one idle, one working, and one on break.",
+      "Subtle, state-specific looping animations; no autonomous navigation.",
+      "Original, locally bundled pixel-art assets.",
+      "Agent selection and read-only inspection.",
+      "No live AI-provider or Connector integration."
+    ],
+    "dependencies": [
+      "EP-01"
+    ],
+    "exit_criteria": [
+      "The desktop application renders the office room and all three mock agents.",
+      "Idle, working, and break states are visually distinguishable.",
+      "Agent selection and inspection work.",
+      "The office remains usable at supported desktop window sizes.",
+      "Relevant automated, visual, and interaction checks pass."
+    ],
+    "out_of_scope": [
+      "Live Connector transport",
+      "provider authentication",
+      "real agent execution",
+      "persistence",
+      "multiple rooms",
+      "furniture editing",
+      "autonomous walking",
+      "pathfinding",
+      "production deployment"
+    ]
+  },
+  "stories": [
+    {
+      "id": "US-007",
+      "epic": "EP-02",
+      "title": "Integrate Phaser Office Scene",
+      "dependencies": [
+        "US-002",
+        "US-004",
+        "US-005"
+      ],
+      "user_story": "As a user, I want to see a Phaser-powered office scene inside Coffee Break so that the desktop application can display the virtual workspace.",
+      "acceptance_criteria": [
+        "Phaser mounts within a designated area of the existing React desktop interface.",
+        "A locally rendered placeholder room is visible when the desktop application launches.",
+        "Phaser initialization and disposal follow the React host lifecycle.",
+        "Ordinary React remounting leaves no duplicate canvases, game instances, or listeners.",
+        "The integration preserves Electron security boundaries and does not access providers directly.",
+        "Relevant typecheck, lint, test, and build checks pass; a local desktop launch confirms scene rendering."
+      ],
+      "boundary": "Integration and lifecycle only. No finished office art, agents, selection panel, or dedicated resizing behavior."
+    },
+    {
+      "id": "US-008",
+      "epic": "EP-02",
+      "title": "Build the Pixel-Art Office",
+      "dependencies": [
+        "US-003",
+        "US-007"
+      ],
+      "user_story": "As a user, I want a recognizable pixel-art office so that I can distinguish the agents’ work and break areas.",
+      "acceptance_criteria": [
+        "One fixed room contains recognizable work and coffee-break areas.",
+        "The room uses a small, original pixel-art asset set created specifically for Coffee Break.",
+        "Desks, coffee station, flooring, and other necessary elements follow a consistent pixel scale and visual style.",
+        "The room defines three unobstructed agent positions appropriate to the planned mock states.",
+        "Assets are bundled locally and require no runtime downloads.",
+        "A desktop screenshot and visual review confirm that the room and agent positions are readable."
+      ],
+      "boundary": "Fixed environment and room art only. No furniture editor, multiple rooms, agent movement, or finished character sprites."
+    },
+    {
+      "id": "US-009",
+      "epic": "EP-02",
+      "title": "Render Animated Mock Agents",
+      "dependencies": [
+        "US-004",
+        "US-008"
+      ],
+      "user_story": "As a user, I want to see three animated agents with distinct states so that I can understand their simulated activity at a glance.",
+      "acceptance_criteria": [
+        "Three agents render simultaneously from typed, deterministic mock data.",
+        "Their initial states are idle, working, and break, with one agent in each state.",
+        "Each agent has a stable identity, display name, state, and mock activity description.",
+        "A small, original pixel-art character asset set supports subtle, looping, state-specific animations.",
+        "State distinctions do not rely on color alone.",
+        "Agents occupy designated positions without obscuring essential room elements.",
+        "Rendering is data-driven rather than three unrelated hard-coded character implementations.",
+        "Mock states are clearly simulated and do not imply live provider activity."
+      ],
+      "boundary": "Visual states and looping animations only. No autonomous navigation, real-time provider events, task execution, or simulation engine."
+    },
+    {
+      "id": "US-010",
+      "epic": "EP-02",
+      "title": "Inspect an Agent",
+      "dependencies": [
+        "US-009"
+      ],
+      "user_story": "As a user, I want to select an agent and inspect its details so that I can understand who it represents and what it is doing.",
+      "acceptance_criteria": [
+        "Clicking an agent selects it and displays a visible selection indicator.",
+        "The React interface displays the selected agent’s name, current state, and mock activity.",
+        "Selecting another agent updates the details without retaining stale information.",
+        "A defined interaction clears the selection.",
+        "Displayed details remain consistent with typed mock data.",
+        "An accessible keyboard-operated mechanism supports selecting agents and inspecting their details.",
+        "The interaction issues no agent commands and does not communicate with external providers."
+      ],
+      "boundary": "Read-only inspection. No agent control, chat, task history, or live activity feed."
+    },
+    {
+      "id": "US-011",
+      "epic": "EP-02",
+      "title": "Support Office Resizing",
+      "dependencies": [
+        "US-008",
+        "US-010"
+      ],
+      "user_story": "As a user, I want the office to remain usable when I resize the desktop window so that I can continue viewing and inspecting agents.",
+      "acceptance_criteria": [
+        "Resizing creates no duplicate Phaser instances, canvases, or listeners.",
+        "Pixel-art rendering remains visually consistent without unintended smoothing or distortion.",
+        "The room and all three agents remain accessible at the supported minimum desktop window size.",
+        "Selected-agent details remain accessible at that size.",
+        "Selection targets remain aligned with rendered agents after resizing.",
+        "Repeated resizing does not break selection or leave stale scene elements.",
+        "Verification covers the normal desktop size and a documented minimum supported size."
+      ],
+      "boundary": "Desktop-window resizing only. No mobile layout, alternate room configuration, or zoom-control feature."
+    },
+    {
+      "id": "US-012",
+      "epic": "EP-02",
+      "title": "Verify the Virtual Office MVP",
+      "dependencies": [
+        "US-009",
+        "US-010",
+        "US-011"
+      ],
+      "user_story": "As a developer, I want to verify the integrated virtual office so that its rendering, mock states, interactions, and lifecycle behavior remain reliable.",
+      "acceptance_criteria": [
+        "The integrated desktop application launches and displays the completed office.",
+        "Verification confirms all three mock agents render in their intended initial states.",
+        "Verification covers selecting an agent, switching selection, and clearing selection.",
+        "Verification covers relevant mounting, unmounting, and resizing behavior.",
+        "Automated tests cover appropriate deterministic logic and interaction boundaries without unnecessarily duplicating existing tests.",
+        "Desktop visual and accessibility checks are documented, including limitations.",
+        "Typecheck, lint, tests, and build pass.",
+        "An independent review confirms the integrated experience meets EP-02 exit criteria."
+      ],
+      "boundary": "Integration verification and necessary corrections only. No new office features or live Connector integration."
+    }
+  ]
+}

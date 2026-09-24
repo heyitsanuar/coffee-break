@@ -54,7 +54,7 @@ export function OfficeSceneHost(): React.JSX.Element {
       ref={hostRef}
       className="office-scene-host"
       role="img"
-      aria-label="Pixel-art office with workstations and a coffee-break area"
+      aria-label="Pixel-art office with three simulated agents: one idle, one working, and one on break"
     />
   );
 }

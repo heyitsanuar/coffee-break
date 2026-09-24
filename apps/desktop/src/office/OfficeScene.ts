@@ -1,7 +1,15 @@
 import Phaser from 'phaser';
+import mockAgentsUrl from './assets/mock-agents.png';
 import officeRoomBackgroundUrl from './assets/office-room-background.png';
 import officeRoomForegroundUrl from './assets/office-room-foreground.png';
 import {
+  MOCK_AGENT_FRAME_HEIGHT,
+  MOCK_AGENT_FRAME_WIDTH,
+  MOCK_AGENT_RENDER_SCALE,
+  MOCK_AGENTS,
+} from './mockAgents';
+import {
+  OFFICE_AGENT_ANCHORS,
   OFFICE_ART_SCALE,
   OFFICE_DEPTHS,
   OFFICE_SCENE_HEIGHT,
@@ -12,6 +20,7 @@ export { OFFICE_SCENE_HEIGHT, OFFICE_SCENE_WIDTH } from './officeLayout';
 
 const OFFICE_BACKGROUND_TEXTURE = 'office-room-background';
 const OFFICE_FOREGROUND_TEXTURE = 'office-room-foreground';
+const MOCK_AGENTS_TEXTURE = 'mock-agents';
 
 export class OfficeScene extends Phaser.Scene {
   constructor() {
@@ -21,26 +30,70 @@ export class OfficeScene extends Phaser.Scene {
   preload(): void {
     this.load.image(OFFICE_BACKGROUND_TEXTURE, officeRoomBackgroundUrl);
     this.load.image(OFFICE_FOREGROUND_TEXTURE, officeRoomForegroundUrl);
+    this.load.spritesheet(MOCK_AGENTS_TEXTURE, mockAgentsUrl, {
+      frameWidth: MOCK_AGENT_FRAME_WIDTH,
+      frameHeight: MOCK_AGENT_FRAME_HEIGHT,
+    });
   }
 
   create(): void {
-    if (
-      !this.textures.exists(OFFICE_BACKGROUND_TEXTURE)
-      || !this.textures.exists(OFFICE_FOREGROUND_TEXTURE)
-    ) {
+    const roomTexturesAvailable = this.textures.exists(OFFICE_BACKGROUND_TEXTURE)
+      && this.textures.exists(OFFICE_FOREGROUND_TEXTURE);
+
+    if (roomTexturesAvailable) {
+      this.add.image(0, 0, OFFICE_BACKGROUND_TEXTURE)
+        .setOrigin(0)
+        .setScale(OFFICE_ART_SCALE)
+        .setDepth(OFFICE_DEPTHS.background);
+    } else {
       this.createFallbackRoom();
+    }
+
+    this.createMockAgents();
+
+    if (roomTexturesAvailable) {
+      this.add.image(0, 0, OFFICE_FOREGROUND_TEXTURE)
+        .setOrigin(0)
+        .setScale(OFFICE_ART_SCALE)
+        .setDepth(OFFICE_DEPTHS.foreground);
+    }
+  }
+
+  private createMockAgents(): void {
+    if (!this.textures.exists(MOCK_AGENTS_TEXTURE)) {
+      console.error('Mock agent spritesheet failed to load.');
       return;
     }
 
-    this.add.image(0, 0, OFFICE_BACKGROUND_TEXTURE)
-      .setOrigin(0)
-      .setScale(OFFICE_ART_SCALE)
-      .setDepth(OFFICE_DEPTHS.background);
+    for (const agent of MOCK_AGENTS) {
+      const anchor = OFFICE_AGENT_ANCHORS.find(({ id }) => id === agent.anchorId);
 
-    this.add.image(0, 0, OFFICE_FOREGROUND_TEXTURE)
-      .setOrigin(0)
-      .setScale(OFFICE_ART_SCALE)
-      .setDepth(OFFICE_DEPTHS.foreground);
+      if (!anchor) {
+        console.error(`Mock agent anchor was not found: ${agent.anchorId}`);
+        continue;
+      }
+
+      const animationKey = `mock-agent-${agent.state}`;
+
+      if (!this.anims.exists(animationKey)) {
+        this.anims.create({
+          key: animationKey,
+          frames: agent.animation.frames.map((frame) => ({
+            key: MOCK_AGENTS_TEXTURE,
+            frame,
+          })),
+          frameRate: agent.animation.frameRate,
+          repeat: agent.animation.repeat,
+        });
+      }
+
+      this.add.sprite(anchor.x, anchor.y, MOCK_AGENTS_TEXTURE)
+        .setName(agent.id)
+        .setOrigin(0.5, 1)
+        .setScale(MOCK_AGENT_RENDER_SCALE)
+        .setDepth(OFFICE_DEPTHS.futureAgents)
+        .play(animationKey);
+    }
   }
 
   private createFallbackRoom(): void {

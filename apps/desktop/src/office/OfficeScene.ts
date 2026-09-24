@@ -7,6 +7,7 @@ import {
   MOCK_AGENT_FRAME_WIDTH,
   MOCK_AGENT_RENDER_SCALE,
   MOCK_AGENTS,
+  type MockAgentId,
 } from './mockAgents';
 import {
   OFFICE_AGENT_ANCHORS,
@@ -23,8 +24,17 @@ const OFFICE_FOREGROUND_TEXTURE = 'office-room-foreground';
 const MOCK_AGENTS_TEXTURE = 'mock-agents';
 
 export class OfficeScene extends Phaser.Scene {
-  constructor() {
+  private readonly agentSprites = new Map<MockAgentId, Phaser.GameObjects.Sprite>();
+  private selectionIndicator?: Phaser.GameObjects.Graphics;
+  private selectedAgentId: MockAgentId | null = null;
+
+  constructor(private readonly onAgentSelected: (agentId: MockAgentId) => void = () => {}) {
     super('office');
+  }
+
+  setSelectedAgent(agentId: MockAgentId | null): void {
+    this.selectedAgentId = agentId;
+    this.updateSelectionIndicator();
   }
 
   preload(): void {
@@ -50,6 +60,9 @@ export class OfficeScene extends Phaser.Scene {
     }
 
     this.createMockAgents();
+    this.selectionIndicator = this.add.graphics()
+      .setDepth(OFFICE_DEPTHS.futureAgents + 1);
+    this.updateSelectionIndicator();
 
     if (roomTexturesAvailable) {
       this.add.image(0, 0, OFFICE_FOREGROUND_TEXTURE)
@@ -87,13 +100,47 @@ export class OfficeScene extends Phaser.Scene {
         });
       }
 
-      this.add.sprite(anchor.x, anchor.y, MOCK_AGENTS_TEXTURE)
+      const sprite = this.add.sprite(anchor.x, anchor.y, MOCK_AGENTS_TEXTURE)
         .setName(agent.id)
         .setOrigin(0.5, 1)
         .setScale(MOCK_AGENT_RENDER_SCALE)
         .setDepth(OFFICE_DEPTHS.futureAgents)
+        .setInteractive({ useHandCursor: true })
+        .on(Phaser.Input.Events.POINTER_DOWN, () => this.onAgentSelected(agent.id))
         .play(animationKey);
+
+      this.agentSprites.set(agent.id, sprite);
     }
+
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
+      this.agentSprites.clear();
+      this.selectionIndicator = undefined;
+    });
+  }
+
+  private updateSelectionIndicator(): void {
+    const indicator = this.selectionIndicator;
+
+    if (!indicator) {
+      return;
+    }
+
+    indicator.clear();
+    const selectedSprite = this.selectedAgentId
+      ? this.agentSprites.get(this.selectedAgentId)
+      : undefined;
+
+    if (!selectedSprite) {
+      return;
+    }
+
+    const x = selectedSprite.x - 23;
+    const y = selectedSprite.y - 55;
+
+    indicator.lineStyle(3, 0x302b29, 1);
+    indicator.strokeRect(x, y, 46, 54);
+    indicator.lineStyle(1, 0xf5e7c8, 1);
+    indicator.strokeRect(x + 2, y + 2, 42, 50);
   }
 
   private createFallbackRoom(): void {

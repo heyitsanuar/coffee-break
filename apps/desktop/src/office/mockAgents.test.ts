@@ -5,6 +5,7 @@ import {
   MOCK_AGENT_FRAME_WIDTH,
   MOCK_AGENT_RENDER_SCALE,
   MOCK_AGENTS,
+  getMockAgent,
 } from './mockAgents';
 
 describe('mock agent fixtures', () => {
@@ -27,6 +28,14 @@ describe('mock agent fixtures', () => {
       'idle',
       'working',
     ]);
+  });
+
+  it('resolves each stable ID to its typed fixture', () => {
+    for (const agent of MOCK_AGENTS) {
+      expect(getMockAgent(agent.id)).toBe(agent);
+    }
+
+    expect(getMockAgent(null)).toBeUndefined();
   });
 
   it('keeps the approved identities, activities, anchors, and animation rates', () => {

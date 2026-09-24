@@ -40,19 +40,18 @@ body {
   padding: var(--space-6);
 }
 
-.welcome-panel {
+.office-panel {
   position: relative;
-  width: min(100%, 36rem);
+  width: min(100%, 46rem);
   overflow: hidden;
-  padding: clamp(var(--space-8), 6vw, 4rem);
+  padding: var(--space-6);
   border: 1px solid color-mix(in srgb, var(--color-coffee) 24%, transparent);
   border-radius: var(--radius-panel);
   background: var(--color-surface);
   box-shadow: 0 1.25rem 3rem color-mix(in srgb, var(--color-ink) 10%, transparent);
-  text-align: center;
 }
 
-.welcome-panel::before {
+.office-panel::before {
   content: "";
   position: absolute;
   inset: 0 0 auto;
@@ -60,11 +59,17 @@ body {
   background: linear-gradient(90deg, var(--color-coffee), var(--color-sage));
 }
 
+.office-heading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+}
+
 .brand-mark {
   display: grid;
-  width: 4.5rem;
-  height: 4.5rem;
-  margin: 0 auto var(--space-6);
+  flex: 0 0 auto;
+  width: 4rem;
+  height: 4rem;
   place-items: center;
   border-radius: var(--radius-round);
   background: var(--color-canvas);
@@ -87,7 +92,7 @@ small {
 
 h1 {
   margin: var(--space-2) 0 var(--space-3);
-  font-size: var(--font-size-title);
+  font-size: clamp(2rem, 5vw, 3.5rem);
   letter-spacing: -0.04em;
   line-height: 1;
 }
@@ -98,8 +103,24 @@ h1 {
   line-height: 1.6;
 }
 
+.office-scene-host {
+  width: 640px;
+  height: 360px;
+  max-width: 100%;
+  margin: var(--space-6) auto 0;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--color-ink) 24%, transparent);
+  border-radius: calc(var(--radius-panel) / 2);
+  background: #d9ddd0;
+}
+
+.office-scene-host canvas {
+  display: block;
+}
+
 small {
   display: block;
-  margin-top: var(--space-8);
+  margin-top: var(--space-6);
   color: var(--color-ink-muted);
+  text-align: center;
 }

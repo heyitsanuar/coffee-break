@@ -13,6 +13,8 @@ Independent approval is outside the Developer role. US-012 AC-08 and the indepen
 - Approved and verified baseline: `e7db21c813887e4edba8fb102468ccd44436d54c`
 - Baseline source: merge of PR #27, including US-007 through US-011
 - Verification branch: `feature/us-012-mvp-verification`
+- Verification evidence and documentation commit: `4c557367e63f5bf19825f53e1610de925b2f5877`
+- Exact final PR HEAD: recorded in the US-012 pull request after this report metadata update
 - Operating system: macOS 26.2 (build 25C56)
 - Shell Node.js: 22.23.2
 - npm: 10.9.8

@@ -104,6 +104,7 @@ h1 {
 }
 
 .office-scene-host {
+  box-sizing: content-box;
   width: 640px;
   height: 360px;
   max-width: 100%;

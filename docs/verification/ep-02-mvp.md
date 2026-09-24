@@ -69,9 +69,9 @@ Exactly three agents appeared simultaneously at the approved anchors:
 | Mina | working | Reviewing mock changes | `(320, 248)` |
 | Sol | break | Taking a coffee break | `(520, 248)` |
 
-Four time-separated canvas captures were taken. Hashes of each agent's 48 × 64 clearance region produced at least two distinct values for Ari, Mina, and Sol, directly demonstrating that every rendered sprite changed over time. Ari and Sol alternated across the 250 ms samples; Mina's 4 fps change was captured by the additional 125 ms offset. The observed frames returned to earlier hashes, consistent with the configured two-frame loops. Configuration tests separately verify each agent's frames, rate, repeat value, and non-color animation cue.
+Four time-separated full-canvas captures demonstrate Ari and Sol changing frames. Mina's alternate working frame is demonstrated separately by two captures of her same 48 × 64 CSS-pixel clearance region, recorded 83 ms apart with no selected agent or selection indicator. The offscreen Electron backing images are both 96 × 128 pixels; their raw bitmap SHA-256 hashes are `446deb1769941020fe169e3a88c2f77f5e9dc630d4dafb1af9027c852912e751` and `c47296057d62d14575bed37884f236be45df20931c1a1229d8b48dfa443d1024`. Direct bitmap comparison found 512 changed pixels, confined to backing-pixel bounds x=20–75 and y=59–82 around Mina's arm and tablet pose; the room background and crop remained unchanged. Configuration tests separately verify each agent's frames, rate, repeat value, and non-color animation cue.
 
-Evidence: [frame 1](assets/animation-frame-1.png), [frame 2](assets/animation-frame-2.png), [frame 3](assets/animation-frame-3.png), and [frame 4](assets/animation-frame-4.png).
+Evidence: [full-canvas frame 1](assets/animation-frame-1.png), [full-canvas frame 2](assets/animation-frame-2.png), [full-canvas frame 3](assets/animation-frame-3.png), [full-canvas frame 4](assets/animation-frame-4.png), [Mina frame A](assets/mina-animation-frame-a.png), and [Mina frame B](assets/mina-animation-frame-b.png).
 
 ### Pointer selection and inspection
 
@@ -141,7 +141,7 @@ Electron main still uses `contextIsolation: true`, `sandbox: true`, and `nodeInt
 | Criterion | Evidence | Developer status |
 | --- | --- | --- |
 | AC-01 | Actual development launch; secured production-renderer launch; one completed 640 × 360 office; normal screenshot; no application errors | PASS |
-| AC-02 | Three visible agents; fixture/state/activity checks; anchor inspection; per-agent time-separated region hashes | PASS |
+| AC-02 | Three visible agents; fixture/state/activity checks; anchor inspection; full-canvas Ari/Sol frames and dedicated distinct Mina-region captures | PASS |
 | AC-03 | Direct clicks and keyboard activation for all agents; switching; clear; matching outline, pressed state, and details | PASS |
 | AC-04 | Five resize cycles, stable canvas identity/count and selection; reload to clean state; destroy to zero windows; lifecycle tests | PASS, with cleanup limits documented |
 | AC-05 | Existing 23 tests cover deterministic logic and interaction boundaries; no redundant tests added | PASS |

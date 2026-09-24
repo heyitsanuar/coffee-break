@@ -4,6 +4,7 @@ export const MOCK_AGENT_FRAME_WIDTH = 20;
 export const MOCK_AGENT_FRAME_HEIGHT = 24;
 export const MOCK_AGENT_RENDER_SCALE = 2;
 
+export type MockAgentId = 'mock-agent-ari' | 'mock-agent-mina' | 'mock-agent-sol';
 export type MockAgentState = 'idle' | 'working' | 'break';
 export type MockAgentMode = 'simulated';
 export type MockAgentAnimationCue = 'breathing' | 'typing-tablet' | 'mug-raise';
@@ -16,7 +17,7 @@ export interface MockAgentAnimation {
 }
 
 export interface MockAgentFixture {
-  readonly id: string;
+  readonly id: MockAgentId;
   readonly displayName: string;
   readonly state: MockAgentState;
   readonly activity: string;
@@ -79,3 +80,9 @@ export const MOCK_AGENTS: readonly Readonly<MockAgentFixture>[] = Object.freeze(
     },
   }),
 ]);
+
+export const getMockAgent = (
+  agentId: MockAgentId | null,
+): Readonly<MockAgentFixture> | undefined => (
+  agentId === null ? undefined : MOCK_AGENTS.find(({ id }) => id === agentId)
+);

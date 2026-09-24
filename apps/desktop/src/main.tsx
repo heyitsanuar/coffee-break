@@ -16,7 +16,7 @@ createRoot(document.getElementById('root')!).render(
           </div>
         </header>
         <OfficeSceneHost />
-        <small>EP-02 · Virtual Office Foundation</small>
+        <small>Simulated agent activity · No live connection</small>
       </section>
     </main>
   </React.StrictMode>,

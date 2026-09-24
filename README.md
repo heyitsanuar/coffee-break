@@ -2,7 +2,7 @@
 Your AI office, alive. Local-first desktop office for observing AI agents and development activity. MVP 0.1 targets macOS; Windows is later.
 
 ## Stack
-Electron + React + strict TypeScript; Phaser 3 planned for the 2D office; independent Node.js + TypeScript Connector planned for EP-04. This EP-01 scaffold renders a welcome screen only; it does **not** connect to Codex or GitHub.
+Electron + React + strict TypeScript with Phaser 3 rendering the implemented 2D virtual office; an independent Node.js + TypeScript Connector is planned for EP-04. The current desktop application uses local simulated agent data and does **not** connect to Codex or GitHub.
 
 ## Prerequisites
 Node.js 22+, npm 10+, macOS for the first development target. For GitHub import, install and authenticate `gh`.

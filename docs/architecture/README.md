@@ -1,8 +1,8 @@
 # Application architecture
 
-Coffee Break is a local-first desktop application. Electron is the trusted desktop host, React renders application UI, and a future Phaser layer will render the virtual office. An independent Node.js Connector will translate provider activity into the provider-neutral contracts in `packages/contracts`.
+Coffee Break is a local-first desktop application. Electron is the trusted desktop host, React renders application UI, and Phaser renders the virtual office. An independent Node.js Connector will translate provider activity into the provider-neutral contracts in `packages/contracts`.
 
-Only the Electron shell, React welcome screen, and shared contract package exist today. The Phaser scene, application state store, Connector implementation, local transport, and IPC bridge described below are planned work.
+The Electron shell, React office interface, fixed Phaser scene with simulated agents, and shared contract package exist today. The application state store, Connector implementation, local transport, and IPC bridge described below are planned work.
 
 ## Responsibilities
 
@@ -10,8 +10,8 @@ Only the Electron shell, React welcome screen, and shared contract package exist
 | --- | --- | --- |
 | Electron main | Implemented shell; event ingress planned | Own the application lifecycle and windows. A future ingress adapter will authenticate the local Connector, validate events, deduplicate them, and forward accepted events. |
 | Electron preload | Empty secure preload implemented; bridge planned | Expose a narrow, typed subscription API through `contextBridge`. It must not expose Electron IPC primitives, filesystem, shell, or general Node.js access. |
-| React UI | Welcome screen implemented; state views planned | Render desktop chrome and accessible controls from application state. It never calls provider APIs or the Connector. |
-| Phaser scene | Planned for EP-02 | Render office entities and animations from a presentation model. It does not own integration state and does not call React, providers, or the Connector. |
+| React UI | Office shell and read-only simulated-agent inspection implemented; live state views planned | Render desktop chrome and accessible controls from application state. It never calls provider APIs or the Connector. |
+| Phaser scene | Fixed EP-02 office and simulated-agent presentation implemented | Render office entities and animations from a presentation model. It does not own integration state and does not call React, providers, or the Connector. |
 | Application events and state | Planned | A renderer-side store will be the session-state owner. A pure reducer will apply validated application events; React selectors and a Phaser adapter will read the resulting state independently. |
 | Shared contracts | Initial contracts implemented | Define provider-neutral identities, lifecycle states, and events used on process boundaries. Contracts contain no Electron, React, Phaser, or provider SDK types. |
 | Local Connector | Planned for EP-04 | Observe supported local providers, normalize their payloads, and send validated-shape application events to Electron. It does not know about React, Phaser, UI copy, or animations. |
@@ -97,7 +97,7 @@ Decisions in US-004:
 
 Deferred work:
 
-- Phaser scenes, presentation adapters, agent behavior, and animation belong to EP-02.
+- The fixed Phaser office and simulated-agent animations were implemented in EP-02; live-state presentation adapters and behavior remain future work.
 - Connector adapters, transport, authentication, runtime schemas, reconnection, and backpressure belong to EP-04 and require security review.
 - The application state implementation, IPC bridge, persistence, replay, telemetry, and recovery policies will be added by stories that exercise them.
 - Codex and GitHub integrations, release packaging, and Windows support are outside US-004.

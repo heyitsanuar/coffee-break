@@ -19,6 +19,7 @@ const capacityExhaustedEvent = {
       displayName: 'Codex',
     },
     state: 'waiting',
+    activity: 'Waiting for capacity',
     reason: 'capacity_exhausted',
   },
 } satisfies AgentStateChangedEvent;

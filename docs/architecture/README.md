@@ -2,18 +2,18 @@
 
 Coffee Break is a local-first desktop application. Electron is the trusted desktop host, React renders application UI, and Phaser renders the virtual office. An independent Node.js Connector will translate provider activity into the provider-neutral contracts in `packages/contracts`.
 
-The Electron shell, React office interface, fixed Phaser scene with simulated agents, and shared contract package exist today. The application state store, Connector implementation, local transport, and IPC bridge described below are planned work.
+The Electron shell, React office interface, fixed Phaser scene with simulated agents, and shared contract package exist today. US-013 adds an Electron-main local ingress capability; ordinary desktop startup does not activate it. The renderer application state store, Connector process, and IPC bridge remain planned work.
 
 ## Responsibilities
 
 | Module | Status | Responsibility |
 | --- | --- | --- |
-| Electron main | Implemented shell; event ingress planned | Own the application lifecycle and windows. A future ingress adapter will authenticate the local Connector, validate events, deduplicate them, and forward accepted events. |
+| Electron main | Implemented shell and inactive ingress capability | Own the application lifecycle and windows. The ingress authenticates a local Connector, validates and deduplicates events, and maintains a minimal synchronization mirror. US-015 will activate it with an owned simulator child. |
 | Electron preload | Empty secure preload implemented; bridge planned | Expose a narrow, typed subscription API through `contextBridge`. It must not expose Electron IPC primitives, filesystem, shell, or general Node.js access. |
 | React UI | Office shell and read-only simulated-agent inspection implemented; live state views planned | Render desktop chrome and accessible controls from application state. It never calls provider APIs or the Connector. |
 | Phaser scene | Fixed EP-02 office and simulated-agent presentation implemented | Render office entities and animations from a presentation model. It does not own integration state and does not call React, providers, or the Connector. |
 | Application events and state | Planned | A renderer-side store will be the session-state owner. A pure reducer will apply validated application events; React selectors and a Phaser adapter will read the resulting state independently. |
-| Shared contracts | Initial contracts implemented | Define provider-neutral identities, lifecycle states, and events used on process boundaries. Contracts contain no Electron, React, Phaser, or provider SDK types. |
+| Shared contracts | Initial contracts and mandatory activity implemented | Define provider-neutral identities, lifecycle states, and events used on process boundaries. Contracts contain no Electron, React, Phaser, or provider SDK types. |
 | Local Connector | Planned for EP-04 | Observe supported local providers, normalize their payloads, and send validated-shape application events to Electron. It does not know about React, Phaser, UI copy, or animations. |
 
 ## Allowed dependency direction
@@ -38,19 +38,19 @@ Dependencies move toward provider-neutral events and state. React and Phaser may
 
 Every application event has an `id`, `type`, ISO 8601 `timestamp`, `source`, and `payload`. `source` identifies the local Connector instance, not the upstream provider. `AgentIdentity` supplies a stable provider-neutral ID and display name. `AgentLifecycleState` is limited to `idle`, `working`, `waiting`, `completed`, and `error`.
 
-US-004 defines one event: `agent.state.changed`. Its payload contains an agent identity, the new lifecycle state, and an optional provider-neutral reason. Reasons currently cover approval waits and exhausted capacity. Provider request IDs, raw messages, token counts, SDK objects, and credentials do not cross into renderer-facing contracts.
+US-004 defines one event: `agent.state.changed`. US-013 makes bounded, provider-neutral `activity` mandatory in the same payload as agent identity and lifecycle state; the optional reason still covers approval waits and exhausted capacity. Provider request IDs, raw messages, token counts, SDK objects, and credentials do not cross into renderer-facing contracts.
 
-TypeScript types do not validate untrusted runtime data. When transport is implemented, Electron main must validate the complete envelope and the payload selected by `type` before forwarding it. Unknown event types, unknown fields where the schema is strict, invalid timestamps, oversized messages, and malformed identities must be rejected and logged without including secrets.
+TypeScript types do not validate untrusted runtime data. Electron main validates the complete envelope and the payload selected by `type` before making a message available to future renderer delivery. Unknown event types, unknown fields, invalid timestamps, oversized messages, and malformed identities are rejected with fixed diagnostic codes that do not include secrets.
 
 ## State ownership, ordering, and deduplication
 
-Electron main will own the accepted-event boundary, while the renderer application store will own current session state. Neither React components nor Phaser objects mutate integration state directly. The reducer will turn an accepted event into the next state; React and Phaser will receive derived views of that state.
+Electron main owns the accepted-event boundary and a minimal current-state mirror with a monotonic local revision. The renderer application store in US-014 will own renderer session state. Neither React components nor Phaser objects mutate integration state directly. The reducer will turn an accepted event into the next state; React and Phaser will receive derived views of that state.
 
-Event IDs are unique within a Connector instance. Electron main will use `(source.instanceId, event.id)` as the deduplication key in a bounded recent-event cache. Repeated IDs from the same Connector instance are duplicates within that cache window; identical IDs from different Connector instances are distinct events. Accepted events are applied in arrival order. The provider-supplied occurrence time is normalized to `timestamp` for display and diagnostics, not used to reorder state. If a provider later requires replay or deterministic reordering, sequence metadata and persistence must be designed explicitly rather than inferred from timestamps.
+Event IDs are unique within a Connector instance. Electron main uses `(source.instanceId, event.id)` as the deduplication key in a bounded recent-event cache. Repeated IDs from the same Connector instance are duplicates within that cache window; identical IDs from different Connector instances are distinct events. Accepted events are applied in arrival order. The provider-supplied occurrence time is normalized to `timestamp` for display and diagnostics, not used to reorder state. If a provider later requires replay or deterministic reordering, sequence metadata and persistence must be designed explicitly rather than inferred from timestamps.
 
 ## Security and local communication
 
-The Connector-to-main link will use a minimal authenticated local transport. The choice between a Unix domain socket and loopback transport, credential storage, connection lifecycle, message-size limit, and protocol framing is deferred to the Connector security review. It must not listen on a public interface or accept unauthenticated events.
+US-013 assigns the minimum local transport, authentication, runtime validation, synchronization, and reconnection-capable session protocol to EP-03. Electron main's inactive ingress capability binds a Node `net` listener only to `127.0.0.1` on an OS-assigned port. The exact wire protocol, secret handling, limits, and mirror behavior are documented in [local-transport.md](local-transport.md). US-015 will activate this capability with the owned development simulator; real provider adapters and production Connector orchestration remain EP-04 work.
 
 Renderer security settings already enforce `contextIsolation: true`, `sandbox: true`, and `nodeIntegration: false`. They must remain enabled. The future preload bridge should expose only an application-specific subscription such as `onApplicationEvent(callback)`, validate outbound data again at the boundary, return an unsubscribe function, and remove listeners when consumers unsubscribe. The renderer receives no unrestricted `send`, `invoke`, filesystem, shell, socket, or Node.js API.
 
@@ -76,10 +76,11 @@ Example normalized event:
   },
   "payload": {
     "agent": {
-      "id": "agent_01",
-      "displayName": "Codex"
+      "id": "mock-agent-ari",
+      "displayName": "Ari"
     },
     "state": "waiting",
+    "activity": "Waiting for capacity",
     "reason": "capacity_exhausted"
   }
 }
@@ -98,6 +99,7 @@ Decisions in US-004:
 Deferred work:
 
 - The fixed Phaser office and simulated-agent animations were implemented in EP-02; live-state presentation adapters and behavior remain future work.
-- Connector adapters, transport, authentication, runtime schemas, reconnection, and backpressure belong to EP-04 and require security review.
+- EP-03 implements the minimum authenticated local transport, validation, synchronization, and reconnection-capable protocol. US-014 adds the preload bridge and renderer store; US-015 activates the ingress and simulator; US-016 maps state to presentation; US-017 completes user-visible loss and recovery behavior.
+- Real-provider Connector adapters, production process orchestration, and any broader transport or backpressure policy remain EP-04 work and require their own review.
 - The application state implementation, IPC bridge, persistence, replay, telemetry, and recovery policies will be added by stories that exercise them.
 - Codex and GitHub integrations, release packaging, and Windows support are outside US-004.

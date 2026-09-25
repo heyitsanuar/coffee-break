@@ -1,0 +1,171 @@
+{
+  "epic": {
+    "id": "EP-03",
+    "title": "Local Agent State Integration",
+    "objective": "Establish a secure, provider-neutral, local event pipeline and use a deterministic local simulator to drive the existing three-agent virtual office. This makes the Connector-to-desktop architecture observable and testable before introducing a real provider.",
+    "design": [
+      "A development-only, separate-process simulator drives Ari, Mina, and Sol through a scripted sequence once, then remains connected without further scripted events.",
+      "Electron main owns an authenticated Node net listener bound only to 127.0.0.1 on an OS-assigned port; this minimum transport, authentication, runtime validation, synchronization, and reconnection slice moves from the previously deferred EP-04 work into EP-03. Real-provider adapters and production Connector orchestration remain in EP-04.",
+      "Main enforces runtime validation, message limits, bounded deduplication, and explicit current-state synchronization before forwarding accepted events.",
+      "A narrow preload bridge delivers accepted events and connection status to one in-memory renderer state owner.",
+      "React inspection and the existing Phaser presentation consume that state. A simulation-only presentation mapping handles coffee-break animation without changing provider-neutral lifecycle states.",
+      "Startup, disconnect, reconnect, renderer reload or remount, and cleanup have explicit behavior. Disconnect retains last-known agent data and displays Disconnected.",
+      "Automated and integrated verification covers the full local event path."
+    ],
+    "dependencies": [
+      "EP-02"
+    ],
+    "exit_criteria": [
+      "A dedicated development command runs a deterministic three-agent simulator as a separate local Connector process. Its events reach the desktop through the authenticated loopback transport.",
+      "Electron main rejects unauthenticated, malformed, unsupported, oversized, duplicate, and otherwise invalid input before it reaches the renderer. Accepted events follow documented identity and arrival-order rules.",
+      "The renderer initializes through explicit current-state synchronization and maintains a single in-memory source of truth for agent state, activity, and connection status.",
+      "Accepted events update the appropriate existing office presentation and inspection details without recreating Phaser or losing selection.",
+      "Startup, Connector loss, reconnection, renderer reload/remount, and application shutdown have documented behavior. Disconnect retains last-known agent data and displays Disconnected without duplicate subscriptions or leaked owned resources.",
+      "Automated tests cover the relevant contract, validation, transport, reducer, presentation, synchronization, and lifecycle boundaries. Integrated verification documents visual and interaction behavior and limitations.",
+      "Typecheck, lint, tests, and build pass on the final integrated revision. Independent review confirms all approved exit criteria before the maintainer closes the epic."
+    ],
+    "out_of_scope": [
+      "Real Codex or other provider adapters",
+      "starting or controlling real AI agents",
+      "remote access or public network listeners",
+      "persistent event history, database, and cross-restart replay",
+      "new rooms, artwork, agent movement, or simulation UI controls",
+      "production process orchestration, packaging, and general-purpose messaging infrastructure"
+    ]
+  },
+  "stories": [
+    {
+      "id": "US-013",
+      "epic": "EP-03",
+      "title": "Establish the Local Transport and Trust Boundary",
+      "dependencies": [
+        "EP-02"
+      ],
+      "user_story": "Define and implement the minimum authenticated local Connector-to-Electron transport, provider-neutral contract changes, ingress validation, and synchronization protocol.",
+      "acceptance_criteria": [
+        "Architecture documentation explicitly assigns the minimum local transport, authentication, runtime validation, synchronization, and reconnection slice to EP-03 and clarifies what remains in EP-04.",
+        "Electron main owns a Node net listener bound only to 127.0.0.1 on an OS-assigned port. A session-specific token is required before events are accepted. Endpoint and token are not logged.",
+        "The protocol defines a versioned handshake, one framing format, a documented maximum frame size, connection ownership, and rejection/closure behavior. Limits are tested.",
+        "Main validates complete supported runtime event payloads, including identity, lifecycle state, bounded activity, source identity, event ID, and timestamp.",
+        "Main implements bounded deduplication by (source.instanceId, event.id) and forwards accepted events in arrival order.",
+        "Unknown agent IDs are rejected for the fixed three-agent MVP.",
+        "The provider-neutral lifecycle vocabulary is preserved; activity is included atomically in state-change events. A separate, explicit simulation-presentation mapping handles the coffee-break animation without equating generic waiting or idle with a coffee break.",
+        "An explicit current-state synchronization protocol specifies snapshot schema, snapshot/event ordering, and renderer reload behavior. The transport supports the required messages.",
+        "Tests cover successful authentication/delivery and rejection of invalid tokens, malformed or oversized frames, invalid payloads, duplicate events, and clean shutdown.",
+        "Existing Electron context isolation, sandboxing, and disabled Node integration remain intact."
+      ],
+      "boundary": "Transport, contracts, validation, and architecture documentation only. No React store, Phaser integration, or scripted simulator sequence."
+    },
+    {
+      "id": "US-014",
+      "epic": "EP-03",
+      "title": "Add the Preload Bridge and In-Memory Agent Store",
+      "dependencies": [
+        "US-013"
+      ],
+      "user_story": "Deliver validated events, current-state synchronization, and connection status to one in-memory renderer state owner.",
+      "acceptance_criteria": [
+        "Preload exposes narrow application-specific event, snapshot, and status access without exposing raw ipcRenderer, arbitrary channels, sockets, filesystem access, or generic Node APIs.",
+        "A newly loaded renderer can obtain current state without missing subsequent events.",
+        "One in-memory renderer store owns the three agents' current lifecycle states and activities, plus connection status.",
+        "A pure reducer applies accepted events in arrival order, updates only the intended agent, and follows the approved snapshot protocol.",
+        "Duplicate or stale delivery across synchronization boundaries cannot silently roll back current state.",
+        "Disconnect retains last-known agent state and activity; connection status remains separate from lifecycle state.",
+        "React Strict Mode remount and cleanup do not accumulate listeners or subscriptions.",
+        "Tests cover initialization, updates, status changes, snapshot/event ordering, cleanup, and unknown-agent handling."
+      ],
+      "boundary": "Bridge and store only; no Phaser or inspection redesign."
+    },
+    {
+      "id": "US-015",
+      "epic": "EP-03",
+      "title": "Add the Deterministic Local Connector Simulator",
+      "dependencies": [
+        "US-013"
+      ],
+      "user_story": "Provide a repeatable, development-only three-agent event source through the real approved transport.",
+      "acceptance_criteria": [
+        "A dedicated development command starts the desktop and exactly one simulator process. Existing npm run dev behavior remains unchanged.",
+        "Electron main owns the simulator child process in simulation mode and passes the endpoint and session token through a controlled environment without printing the token.",
+        "The simulator completes authentication and synchronization before sending live events.",
+        "It uses the existing Ari, Mina, and Sol IDs and publishes a documented initial snapshot and fixed transition sequence.",
+        "Repeated runs preserve transition order, event-ID sequence, state/activity payloads, and controlled delays. Each new process uses a fresh source.instanceId.",
+        "All three agents visibly change state or activity over the sequence, including Sol's explicit simulation-only coffee-break presentation.",
+        "The sequence runs once and stops producing scripted events while the Connector remains connected.",
+        "Stopping the simulator clears timers and closes its socket. Desktop shutdown terminates its owned simulator process.",
+        "Controlled-time tests verify sequencing, event shape, identity rules, and cleanup.",
+        "No real providers are invoked and no provider credentials are read."
+      ],
+      "boundary": "Simulator and development command only; no UI controls or real-provider adapter."
+    },
+    {
+      "id": "US-016",
+      "epic": "EP-03",
+      "title": "Drive the Virtual Office from Agent State",
+      "dependencies": [
+        "US-014",
+        "US-015"
+      ],
+      "user_story": "Replace mutable mock-fixture state with renderer-store state while retaining existing visual metadata and interactions.",
+      "acceptance_criteria": [
+        "Agent state and activity in the office come from the renderer store, not fixed mock-fixture runtime values.",
+        "Existing fixtures may retain stable identity, sprite, anchor, and approved visual metadata.",
+        "Accepted events update only the corresponding agent's inspection details and mapped Phaser presentation.",
+        "Selection persists through state/activity updates; events for other agents do not replace selection.",
+        "Ordinary state changes do not recreate the Phaser game or room; sprites update through a narrow presentation interface.",
+        "The existing room, three agent identities, anchors, 640x360 canvas, selection, and window-size behavior remain intact.",
+        "The UI clearly identifies its data as a local simulation rather than live provider activity.",
+        "Tests cover presentation mapping, sprite updates, and inspection/selection consistency."
+      ],
+      "boundary": "Existing office presentation and inspection only; no visual redesign or new agents."
+    },
+    {
+      "id": "US-017",
+      "epic": "EP-03",
+      "title": "Complete Connection Loss and Resynchronization Behavior",
+      "dependencies": [
+        "US-014",
+        "US-015",
+        "US-016"
+      ],
+      "user_story": "Show Connector availability accurately, retain last-known agent data during interruptions, and safely resume after reconnection.",
+      "acceptance_criteria": [
+        "The UI distinguishes connecting, connected, and disconnected from agent lifecycle states.",
+        "Startup without a Connector follows a documented failure/timeout policy and eventually displays Disconnected.",
+        "Connector loss displays Disconnected while preserving last-known agent states and activities.",
+        "Reconnection establishes a new authenticated session and completes current-state synchronization before normal updates resume.",
+        "Stale events from an earlier session cannot overwrite the active session's synchronized state.",
+        "Renderer reload/remount restores current state and status without missing or duplicating updates.",
+        "Simulator restart does not accumulate processes, sockets, timers, IPC listeners, React subscriptions, or Phaser canvases.",
+        "Desktop shutdown releases its owned listener and simulator process.",
+        "Tests cover startup failure, loss, reconnect, stale-session input, reload/remount, and cleanup."
+      ],
+      "boundary": "Local availability and recovery only; no persistent queue or general offline framework."
+    },
+    {
+      "id": "US-018",
+      "epic": "EP-03",
+      "title": "Verify the Integrated Local Event MVP",
+      "dependencies": [
+        "US-013",
+        "US-014",
+        "US-015",
+        "US-016",
+        "US-017"
+      ],
+      "user_story": "Produce exact-revision evidence that the simulated local event pipeline updates the office safely and predictably.",
+      "acceptance_criteria": [
+        "The dedicated simulation command launches the integrated desktop and delivers events through the Connector transport.",
+        "Verification demonstrates initial synchronization and scripted transitions for all three agents, including presentation and activity text.",
+        "Selection persists and inspection updates while events arrive.",
+        "Verification covers startup without a Connector, disconnect with retained state, reconnect/resynchronization, renderer reload/remount, and shutdown.",
+        "Representative unauthenticated, invalid, oversized, and duplicate inputs are rejected without unintended renderer changes.",
+        "Automated tests cover relevant deterministic and integration boundaries without unnecessary duplication.",
+        "A committed verification report documents event flow, security/protocol checks, visual and accessibility observations, lifecycle checks, evidence provenance, and limitations.",
+        "Typecheck, lint, tests, and build pass on the final integrated revision.",
+        "Independent review confirms every approved EP-03 exit criterion before maintainer approval."
+      ],
+      "boundary": "Verification and narrowly necessary fixes only; no new features."
+    }
+  ]
+}

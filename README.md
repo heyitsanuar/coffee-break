@@ -18,6 +18,8 @@ npm run build
 ```
 `npm run dev` starts Electron and the renderer development server; saving a renderer file reloads the window through Vite hot reload. `typecheck`, `lint`, `test`, and `build` run across workspaces where the command is defined. The build creates Electron main, preload, and renderer output under `apps/desktop/out`; it does not create a distributable `.app` or `.dmg` package.
 
+`npm run dev` leaves the local ingress dormant. To exercise the EP-03 pipeline with one development-only simulator child, use `npm run dev:simulated`. Its fixed Ari/Mina/Sol scenario runs once, then the child and authenticated socket remain connected until the desktop exits. Electron main owns the child; no provider or provider credentials are used. The renderer store receives live state, while React/Phaser presentation remains US-016 work. See [the simulator architecture](docs/architecture/local-simulator.md) for the exact scenario.
+
 The committed `package-lock.json` provides reproducible installs. CI uses `npm ci`.
 
 ## Continuous integration

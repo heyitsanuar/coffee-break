@@ -2,13 +2,13 @@
 
 Coffee Break is a local-first desktop application. Electron is the trusted desktop host, React renders application UI, and Phaser renders the virtual office. An independent Node.js Connector will translate provider activity into the provider-neutral contracts in `packages/contracts`.
 
-The Electron shell, React office interface, fixed Phaser scene with simulated agents, and shared contract package exist today. US-013 adds an Electron-main local ingress capability; ordinary desktop startup does not activate it. US-014 adds the narrow preload bridge and one renderer application state store. The Connector process and runtime presentation mapping remain planned work.
+The Electron shell, React office interface, fixed Phaser scene with simulated agents, and shared contract package exist today. US-013 adds an Electron-main local ingress capability; ordinary desktop startup does not activate it. US-014 adds the narrow preload bridge and one renderer application state store. US-015 adds a development-only simulator process; runtime presentation mapping and real-provider Connector work remain planned.
 
 ## Responsibilities
 
 | Module | Status | Responsibility |
 | --- | --- | --- |
-| Electron main | Implemented shell and inactive ingress capability | Own the application lifecycle and windows. The ingress authenticates a local Connector, validates and deduplicates events, and maintains a minimal synchronization mirror. US-015 will activate it with an owned simulator child. |
+| Electron main | Implemented shell, ingress, and opt-in simulator ownership | Own the application lifecycle and windows. In simulated development mode, start ingress and one simulator child; authenticate, validate, deduplicate, and mirror its events. |
 | Electron preload | Agent-state bridge implemented | Expose one typed `window.coffeeBreak.agentState.watch` capability through `contextBridge`. It does not expose Electron IPC primitives, filesystem, shell, or general Node.js access. |
 | React UI | Office shell and read-only simulated-agent inspection implemented; live state views planned | Render desktop chrome and accessible controls from application state. It never calls provider APIs or the Connector. |
 | Phaser scene | Fixed EP-02 office and simulated-agent presentation implemented | Render office entities and animations from a presentation model. It does not own integration state and does not call React, providers, or the Connector. |
@@ -52,7 +52,7 @@ Event IDs are unique within a Connector instance. Electron main uses `(source.in
 
 ## Security and local communication
 
-US-013 assigns the minimum local transport, authentication, runtime validation, synchronization, and reconnection-capable session protocol to EP-03. Electron main's inactive ingress capability binds a Node `net` listener only to `127.0.0.1` on an OS-assigned port. The exact wire protocol, secret handling, limits, and mirror behavior are documented in [local-transport.md](local-transport.md). US-015 will activate this capability with the owned development simulator; real provider adapters and production Connector orchestration remain EP-04 work.
+US-013 assigns the minimum local transport, authentication, runtime validation, synchronization, and reconnection-capable session protocol to EP-03. Electron main's ingress binds a Node `net` listener only to `127.0.0.1` on an OS-assigned port when the explicit simulated development command runs. The exact wire protocol, secret handling, limits, and mirror behavior are documented in [local-transport.md](local-transport.md). [local-simulator.md](local-simulator.md) documents the owned development child and its one-shot scenario; real provider adapters and production Connector orchestration remain EP-04 work.
 
 Renderer security settings enforce `contextIsolation: true`, `sandbox: true`, and `nodeIntegration: false`. The bundled CommonJS preload exposes only the application-specific agent-state watch capability and removes its listener on close or failure. Main projects only accepted state, activity, phase, revision, and session data; token, endpoint, event envelope metadata, and diagnostics remain private. The renderer receives no unrestricted `send`, `invoke`, filesystem, shell, socket, or Node.js API.
 

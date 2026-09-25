@@ -11,7 +11,7 @@
   "dev": "npm run dev -w @coffee-break/desktop",
   "typecheck": "npm run typecheck --workspaces --if-present",
   "lint": "npm run lint --workspaces --if-present",
-  "test": "npm run test --workspaces --if-present",
+  "test": "node --test scripts/import-ep-03.test.mjs && npm run test --workspaces --if-present",
   "build": "npm run build --workspaces --if-present"
  },
  "devDependencies": {

@@ -27,8 +27,10 @@ GitHub Actions runs [`.github/workflows/ci.yml`](.github/workflows/ci.yml) for p
 ```bash
 bash scripts/import-issues.sh OWNER/REPO          # dry run
 bash scripts/import-issues.sh OWNER/REPO --apply  # creates missing planned epics, labels and stories
+bash scripts/import-issues.sh OWNER/REPO --epic EP-03          # read-only EP-03 preview
+bash scripts/import-issues.sh OWNER/REPO --epic EP-03 --apply  # create only missing EP-03 issues
 ```
-Requires `gh auth login` and repository issue-write permissions. Import is idempotent by the existing epic title or ID prefix and by story ID prefix for up to 500 existing issues; inspect existing issues before applying. `--apply` changes the specified GitHub repository.
+Requires `gh auth login`; apply also requires repository issue-write permissions. The original commands retain their existing EP-01/EP-02 behavior: their dry run does not query GitHub, and apply checks up to 500 existing issues. The EP-03 preview is read-only and queries all open and closed GitHub issues. It prints each proposed title and full body, resolved links where the referenced issue exists, and CREATE, SKIP, or CONFLICT status. Previewed links to issues that do not exist yet remain plain IDs; apply resolves them as it creates issues. EP-03 apply validates the planning file, re-checks existing issues before each creation, creates only the missing EP-03 epic and US-013 through US-018, and never edits existing issue bodies or EP-01/EP-02 issues. It reports title or body conflicts instead of overwriting them. GitHub issue creation is not transactional: after a partial failure, inspect GitHub and rerun the same EP-03 command safely. Story IDs such as US-013 are planning IDs, not GitHub issue numbers. Run the importer tests with `node --test scripts/import-ep-03.test.mjs` (also included in `npm test`).
 
 ## Workflow
 Use one branch and pull request per user story. Branches follow `feature/us-XXX-short-description` (for example, `feature/us-001-repository`). Run the documented checks before review and merge. See AGENTS.md and docs/architecture/README.md.

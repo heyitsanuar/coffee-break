@@ -35,8 +35,11 @@ export type AgentStateReason =
 export interface AgentStateChangedPayload {
   agent: AgentIdentity;
   state: AgentLifecycleState;
+  activity: string;
   reason?: AgentStateReason;
 }
+
+export type AgentCurrentState = AgentStateChangedPayload;
 
 export type AgentStateChangedEvent = EventEnvelope<
   'agent.state.changed',

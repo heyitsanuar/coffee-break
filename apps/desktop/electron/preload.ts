@@ -1,2 +1,6 @@
-// Expose only explicitly approved, validated IPC APIs in future stories.
-export {};
+import { contextBridge, ipcRenderer } from 'electron';
+import { createAgentStateApi } from './agentStatePreload.js';
+
+contextBridge.exposeInMainWorld('coffeeBreak', {
+  agentState: createAgentStateApi(ipcRenderer),
+});

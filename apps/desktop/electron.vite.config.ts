@@ -20,6 +20,7 @@ export default defineConfig({
           __dirname,
           'electron/preload.ts',
         ),
+        output: { format: 'cjs', entryFileNames: '[name].cjs' },
       },
     },
   },

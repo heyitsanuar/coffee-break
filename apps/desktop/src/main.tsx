@@ -1,7 +1,12 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { OfficeSceneHost } from './office/OfficeSceneHost';
+import { agentStateStore } from './agentState/runtime';
 import './style.css';
+
+void agentStateStore.start().catch(() => {});
+window.addEventListener('pagehide', () => agentStateStore.stop(), { once: true });
+if (import.meta.hot) import.meta.hot.dispose(() => agentStateStore.stop());
 
 createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

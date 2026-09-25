@@ -5,10 +5,10 @@ export default defineConfig({
   main: {
     build: {
       rollupOptions: {
-        input: resolve(
-          __dirname,
-          'electron/main.ts',
-        ),
+        input: {
+          main: resolve(__dirname, 'electron/main.ts'),
+          simulator: resolve(__dirname, 'electron/simulator/entry.ts'),
+        },
       },
     },
   },

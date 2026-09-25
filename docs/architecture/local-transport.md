@@ -1,12 +1,12 @@
 # EP-03 local transport (US-013)
 
-US-013 adds an Electron-main ingress capability for the fixed three-agent MVP. The capability is not started by ordinary `npm run dev`. US-015 will start it only for the dedicated simulation command and will pass its launch credentials to one owned Connector child. No provider adapter, preload API, renderer store, or Phaser mapping is part of US-013.
+US-013 adds an Electron-main ingress capability for the fixed three-agent MVP. The capability is not started by ordinary `npm run dev`. US-015 starts it only for `npm run dev:simulated` and passes its launch credentials to one owned simulator child over private stdin. No provider adapter, preload API, renderer store, or Phaser mapping is part of US-013.
 
 ## Ownership and trust boundary
 
 Electron main owns the Node `net` server, accepted sockets, per-run secret, validation, recent-event cache, and minimal current-state mirror. It listens on IPv4 `127.0.0.1` with port `0`, then receives the OS-assigned port. A 32-byte `randomBytes` token is generated for each ingress lifetime and represented as 64 lowercase hexadecimal characters. The only token handoff is the main-process-only launch callback intended for US-015's owned child; `start()` returns only host and port. `readCurrent()`, subscriptions, diagnostics, preload, and renderer never receive the token. The endpoint and token are never logged. Main compares a valid-format candidate using `timingSafeEqual`.
 
-At most four unauthenticated sockets can await a hello, each with a five-second timeout. An authenticated socket must send its snapshot within five seconds. Only one authenticated Connector socket may own the session at a time. Rejected input closes its socket. On shutdown, main waits for any pending listen attempt, destroys every owned socket, closes the listener, clears the dedup cache, and zeroes the token buffer. Each ingress instance is single-use: calling `stop()` before or after `start()` permanently prevents another start on that instance. US-015 will wire this lifecycle into the application and child process; US-017 will complete user-visible reconnect behavior.
+At most four unauthenticated sockets can await a hello, each with a five-second timeout. An authenticated socket must send its snapshot within five seconds. Only one authenticated Connector socket may own the session at a time. Rejected input closes its socket. On shutdown, main waits for any pending listen attempt, destroys every owned socket, closes the listener, clears the dedup cache, and zeroes the token buffer. Each ingress instance is single-use: calling `stop()` before or after `start()` permanently prevents another start on that instance. US-015 wires this lifecycle into the simulated development app and child process; US-017 will complete user-visible reconnect behavior.
 
 ## Wire protocol, version 1
 

@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import type { MockAgentId } from './mockAgents';
+import type { OfficeAgentPresentation } from './officePresentation';
 import {
   OFFICE_SCENE_HEIGHT,
   OFFICE_SCENE_WIDTH,
@@ -11,6 +12,7 @@ export type OnAgentSelected = (agentId: MockAgentId) => void;
 export interface OfficeGame {
   destroy(removeCanvas: boolean): void;
   setSelectedAgent(agentId: MockAgentId | null): void;
+  setAgentPresentation(agentId: MockAgentId, presentation: OfficeAgentPresentation): void;
 }
 
 export function createOfficeGame(
@@ -34,5 +36,6 @@ export function createOfficeGame(
   return {
     destroy: (removeCanvas) => game.destroy(removeCanvas),
     setSelectedAgent: (agentId) => scene.setSelectedAgent(agentId),
+    setAgentPresentation: (agentId, presentation) => scene.setAgentPresentation(agentId, presentation),
   };
 }

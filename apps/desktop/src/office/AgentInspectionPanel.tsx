@@ -3,15 +3,19 @@ import {
   getMockAgent,
   type MockAgentId,
 } from './mockAgents';
+import { OFFICE_STATUS_LABELS } from './applyOfficeVisual';
+import type { OfficeAgentPresentation } from './officePresentation';
 
 export interface AgentInspectionPanelProps {
   readonly selectedAgentId: MockAgentId | null;
+  readonly presentation: OfficeAgentPresentation | null;
   readonly onSelectAgent: (agentId: MockAgentId) => void;
   readonly onClearSelection: () => void;
 }
 
 export function AgentInspectionPanel({
   selectedAgentId,
+  presentation,
   onSelectAgent,
   onClearSelection,
 }: AgentInspectionPanelProps): React.JSX.Element {
@@ -24,7 +28,7 @@ export function AgentInspectionPanel({
           <p className="eyebrow">Read-only view</p>
           <h2 id="agent-inspection-title">Agent inspection</h2>
         </div>
-        <span className="simulation-badge">Simulated</span>
+        <span className="simulation-badge">Local simulation</span>
       </div>
 
       <div className="agent-selector" role="group" aria-label="Select an agent">
@@ -60,14 +64,29 @@ export function AgentInspectionPanel({
               <dt>Name</dt>
               <dd>{selectedAgent.displayName}</dd>
             </div>
-            <div>
-              <dt>Current state</dt>
-              <dd>{selectedAgent.state}</dd>
-            </div>
-            <div>
-              <dt>Mock activity</dt>
-              <dd>{selectedAgent.activity}</dd>
-            </div>
+            {presentation?.state === null || !presentation ? (
+              <div>
+                <dt>Status</dt>
+                <dd>No local simulation state yet</dd>
+              </div>
+            ) : (
+              <>
+                <div>
+                  <dt>Current state</dt>
+                  <dd>{OFFICE_STATUS_LABELS[presentation.state]}</dd>
+                </div>
+                <div>
+                  <dt>Activity</dt>
+                  <dd>{presentation.activity}</dd>
+                </div>
+                {presentation.reason && (
+                  <div>
+                    <dt>Reason</dt>
+                    <dd>{presentation.reason === 'approval_required' ? 'Approval required' : 'Capacity exhausted'}</dd>
+                  </div>
+                )}
+              </>
+            )}
           </dl>
         ) : (
           <p>Select an agent to inspect its simulated activity.</p>

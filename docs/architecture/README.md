@@ -2,7 +2,7 @@
 
 Coffee Break is a local-first desktop application. Electron is the trusted desktop host, React renders application UI, and Phaser renders the virtual office. An independent Node.js Connector will translate provider activity into the provider-neutral contracts in `packages/contracts`.
 
-The Electron shell, React office interface, fixed Phaser scene with simulated agents, and shared contract package exist today. US-013 adds an Electron-main local ingress capability; ordinary desktop startup does not activate it. US-014 adds the narrow preload bridge and one renderer application state store. US-015 adds a development-only simulator process; runtime presentation mapping and real-provider Connector work remain planned.
+The Electron shell, React office interface, fixed Phaser scene with simulated agents, and shared contract package exist today. US-013 adds an Electron-main local ingress capability; ordinary desktop startup does not activate it. US-014 adds the narrow preload bridge and one renderer application state store. US-015 adds a development-only simulator process. US-016 derives office presentation from that store; real-provider Connector work remains planned.
 
 ## Responsibilities
 
@@ -10,9 +10,9 @@ The Electron shell, React office interface, fixed Phaser scene with simulated ag
 | --- | --- | --- |
 | Electron main | Implemented shell, ingress, and opt-in simulator ownership | Own the application lifecycle and windows. In simulated development mode, start ingress and one simulator child; authenticate, validate, deduplicate, and mirror its events. |
 | Electron preload | Agent-state bridge implemented | Expose one typed `window.coffeeBreak.agentState.watch` capability through `contextBridge`. It does not expose Electron IPC primitives, filesystem, shell, or general Node.js access. |
-| React UI | Office shell and read-only simulated-agent inspection implemented; live state views planned | Render desktop chrome and accessible controls from application state. It never calls provider APIs or the Connector. |
+| React UI | Office shell and store-derived inspection implemented | Render desktop chrome and accessible controls from application state. It never calls provider APIs or the Connector. |
 | Phaser scene | Fixed EP-02 office and simulated-agent presentation implemented | Render office entities and animations from a presentation model. It does not own integration state and does not call React, providers, or the Connector. |
-| Application events and state | Renderer store and pure reducer implemented; presentation consumers planned | The renderer store owns synchronized agent lifecycle, activity, and connection data. React selectors and a Phaser adapter will read it in US-016. |
+| Application events and state | Renderer store, pure reducer, and office presentation derivation implemented | The renderer store owns synchronized agent lifecycle, activity, and connection data. A pure adapter derives the React and Phaser office view. |
 | Shared contracts | Initial contracts and mandatory activity implemented | Define provider-neutral identities, lifecycle states, and events used on process boundaries. Contracts contain no Electron, React, Phaser, or provider SDK types. |
 | Local Connector | Planned for EP-04 | Observe supported local providers, normalize their payloads, and send validated-shape application events to Electron. It does not know about React, Phaser, UI copy, or animations. |
 
@@ -27,12 +27,12 @@ flowchart LR
   Contracts[Shared contracts] -. types .-> Connector
   Contracts -. types .-> Main
   Contracts -. types .-> Store
-  Store --> React[React UI]
-  Store --> ViewModel[Phaser presentation adapter]
-  ViewModel --> Phaser[Phaser scene]
+  Store --> ViewModel[Pure office presentation adapter]
+  ViewModel --> React[React office host and inspection]
+  React -->|presentation-only game interface| Phaser[Phaser scene]
 ```
 
-Dependencies move toward provider-neutral events and state. React and Phaser may share selectors or presentation types, but neither imports or controls the other. Provider adapters remain inside the Connector. The Connector must not encode visual concepts such as a coffee-machine animation.
+Dependencies move toward provider-neutral events and state. The React office host passes derived presentation through a narrow game interface; Phaser never reads the store or integration state directly. Provider adapters remain inside the Connector. The Connector must not encode visual concepts such as a coffee-machine animation.
 
 ## Shared event contracts
 
@@ -44,7 +44,7 @@ TypeScript types do not validate untrusted runtime data. Electron main validates
 
 ## State ownership, ordering, and deduplication
 
-Electron main owns the accepted-event boundary and a minimal current-state mirror with a monotonic local revision. The renderer application store owns renderer session state. Neither React components nor Phaser objects mutate integration state directly. The pure reducer applies trusted current state and accepted changes; React and Phaser will receive derived views in US-016.
+Electron main owns the accepted-event boundary and a minimal current-state mirror with a monotonic local revision. The renderer application store owns renderer session state. Neither React components nor Phaser objects mutate integration state directly. The pure reducer applies trusted current state and accepted changes. US-016 derives a per-agent office presentation from one trusted store snapshot, then React passes that presentation to inspection and the Phaser scene. Runtime lifecycle and activity remain provider-neutral; visual state is derived and owns no transport or session state. Only Sol's exact local simulation fixture (`waiting` with activity `Taking a coffee break in the simulated office`) maps to the coffee visual. Generic waiting does not imply coffee.
 
 US-014 uses fixed main IPC handlers and a sandboxed preload watch capability. Main subscribes to ingress before reading its current state in the same turn. Preload attaches its listener before opening the watch, buffers notifications until the initial state is delivered, and then drains them in order. Revision orders agent data; same-revision phase notifications remain meaningful. A notification with a revision gap can repair the renderer from its complete trusted mirror. Invalid or incomplete mirrors retain the last valid agents and cause one fresh atomic watch/read attempt. Disconnect changes only connection status. Renderer bootstrap owns the watch outside React component effects and closes it on unload; main also closes it on window navigation or destruction. Ordinary startup composes but does not start ingress.
 
@@ -100,7 +100,7 @@ Decisions in US-004:
 
 Deferred work:
 
-- The fixed Phaser office and simulated-agent animations were implemented in EP-02; live-state presentation adapters and behavior remain future work.
+- The fixed Phaser office and simulated-agent animations were implemented in EP-02; US-016 maps trusted store state to the office. Real-provider integration remains future work.
 - EP-03 implements the minimum authenticated local transport, validation, synchronization, and reconnection-capable protocol. US-014 adds the preload bridge and renderer store; US-015 activates the ingress and simulator; US-016 maps state to presentation; US-017 completes user-visible loss and recovery behavior.
 - Real-provider Connector adapters, production process orchestration, and any broader transport or backpressure policy remain EP-04 work and require their own review.
 - Persistence, replay, telemetry, and broader recovery policies remain future work.

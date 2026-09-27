@@ -2,50 +2,80 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it, vi } from 'vitest';
 import { AgentInspectionPanel } from './AgentInspectionPanel';
 import type { MockAgentId } from './mockAgents';
+import type { OfficeAgentPresentation } from './officePresentation';
 
-const renderPanel = (selectedAgentId: MockAgentId | null): string => renderToStaticMarkup(
+const renderPanel = (
+  selectedAgentId: MockAgentId | null,
+  presentation: OfficeAgentPresentation | null = null,
+): string => renderToStaticMarkup(
   <AgentInspectionPanel
     selectedAgentId={selectedAgentId}
+    presentation={presentation}
     onSelectAgent={vi.fn()}
     onClearSelection={vi.fn()}
   />,
 );
 
 describe('AgentInspectionPanel', () => {
-  it('renders accessible selector buttons linked to the details region', () => {
+  it('retains accessible selection controls and a truthful local-simulation label', () => {
     const markup = renderPanel('mock-agent-ari');
-
     expect(markup).toContain('aria-label="Select Ari"');
     expect(markup).toContain('aria-label="Select Mina"');
     expect(markup).toContain('aria-label="Select Sol"');
     expect(markup.match(/aria-controls="agent-inspection-details"/g)).toHaveLength(3);
     expect(markup.match(/aria-pressed="true"/g)).toHaveLength(1);
     expect(markup.match(/aria-pressed="false"/g)).toHaveLength(2);
+    expect(markup).toContain('Local simulation');
   });
 
-  it.each([
-    ['mock-agent-ari', 'Ari', 'idle', 'Waiting for a task'],
-    ['mock-agent-mina', 'Mina', 'working', 'Reviewing mock changes'],
-    ['mock-agent-sol', 'Sol', 'break', 'Taking a coffee break'],
-  ] as const)(
-    'renders fixture-backed details for %s without stale values',
-    (selectedAgentId, name, state, activity) => {
-      const markup = renderPanel(selectedAgentId);
+  it('shows no invented runtime state before a trusted snapshot', () => {
+    const markup = renderPanel('mock-agent-ari', {
+      id: 'mock-agent-ari', state: null, activity: null, visual: 'placeholder',
+    });
+    expect(markup).toContain('<dd>Ari</dd>');
+    expect(markup).toContain('No local simulation state yet');
+    expect(markup).not.toContain('Waiting for a task');
+    expect(markup).not.toContain('<dt>Activity</dt>');
+  });
 
-      expect(markup).toContain(`<dd>${name}</dd>`);
-      expect(markup).toContain(`<dd>${state}</dd>`);
-      expect(markup).toContain(`<dd>${activity}</dd>`);
-      expect(markup).toContain('Simulated');
+  it('renders selected trusted lifecycle, activity, and optional reason atomically', () => {
+    const markup = renderPanel('mock-agent-mina', {
+      id: 'mock-agent-mina', state: 'waiting', activity: 'Waiting for approval',
+      reason: 'approval_required', visual: 'waiting',
+    });
+    expect(markup).toContain('<dd>Mina</dd>');
+    expect(markup).toContain('<dd>Waiting</dd>');
+    expect(markup).toContain('<dd>Waiting for approval</dd>');
+    expect(markup).toContain('<dd>Approval required</dd>');
+    expect(markup).not.toContain('Reviewing mock changes');
+    expect(markup).not.toContain('<dd>Ari</dd>');
+  });
 
-      for (const otherName of ['Ari', 'Mina', 'Sol'].filter((value) => value !== name)) {
-        expect(markup).not.toContain(`<dd>${otherName}</dd>`);
-      }
-    },
-  );
+  it('keeps Sol lifecycle waiting when its presentation is coffee', () => {
+    const markup = renderPanel('mock-agent-sol', {
+      id: 'mock-agent-sol', state: 'waiting',
+      activity: 'Taking a coffee break in the simulated office', visual: 'coffee',
+    });
+    expect(markup).toContain('<dd>Waiting</dd>');
+    expect(markup).toContain('<dd>Taking a coffee break in the simulated office</dd>');
+    expect(markup).not.toContain('<dd>Coffee break</dd>');
+  });
+
+  it('updates selected details without changing selected identity', () => {
+    const before = renderPanel('mock-agent-ari', {
+      id: 'mock-agent-ari', state: 'idle', activity: 'Ready for a task', visual: 'idle',
+    });
+    const after = renderPanel('mock-agent-ari', {
+      id: 'mock-agent-ari', state: 'working', activity: 'Implementing the change', visual: 'working',
+    });
+    expect(before).toContain('<dd>Ready for a task</dd>');
+    expect(after).toContain('<dd>Implementing the change</dd>');
+    expect(after).toContain('<dd>Ari</dd>');
+    expect(after).not.toContain('<dd>Mina</dd>');
+  });
 
   it('restores the prompt and disables clearing when no agent is selected', () => {
     const markup = renderPanel(null);
-
     expect(markup).toContain('Select an agent to inspect its simulated activity.');
     expect(markup).toContain('disabled=""');
     expect(markup).not.toContain('<dt>Name</dt>');

@@ -20,8 +20,8 @@ createRoot(document.getElementById('root')!).render(
             <p className="welcome-copy">Your AI office, alive.</p>
           </div>
         </header>
-        <OfficeSceneHost />
-        <small>Simulated agent activity · No live connection</small>
+        <OfficeSceneHost store={agentStateStore} />
+        <small>Local simulation · No provider connection</small>
       </section>
     </main>
   </React.StrictMode>,

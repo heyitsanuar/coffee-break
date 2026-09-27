@@ -16,6 +16,8 @@ import {
   OFFICE_SCENE_HEIGHT,
   OFFICE_SCENE_WIDTH,
 } from './officeLayout';
+import { applyOfficeVisual } from './applyOfficeVisual';
+import type { OfficeAgentPresentation } from './officePresentation';
 
 export { OFFICE_SCENE_HEIGHT, OFFICE_SCENE_WIDTH } from './officeLayout';
 
@@ -25,6 +27,8 @@ const MOCK_AGENTS_TEXTURE = 'mock-agents';
 
 export class OfficeScene extends Phaser.Scene {
   private readonly agentSprites = new Map<MockAgentId, Phaser.GameObjects.Sprite>();
+  private readonly statusLabels = new Map<MockAgentId, Phaser.GameObjects.Text>();
+  private readonly presentations = new Map<MockAgentId, OfficeAgentPresentation>();
   private selectionIndicator?: Phaser.GameObjects.Graphics;
   private selectedAgentId: MockAgentId | null = null;
 
@@ -35,6 +39,16 @@ export class OfficeScene extends Phaser.Scene {
   setSelectedAgent(agentId: MockAgentId | null): void {
     this.selectedAgentId = agentId;
     this.updateSelectionIndicator();
+  }
+
+  setAgentPresentation(agentId: MockAgentId, presentation: OfficeAgentPresentation): void {
+    const previous = this.presentations.get(agentId);
+    this.presentations.set(agentId, presentation);
+    if (previous?.visual === presentation.visual) return;
+    const sprite = this.agentSprites.get(agentId);
+    const label = this.statusLabels.get(agentId);
+    const agent = MOCK_AGENTS.find(({ id }) => id === agentId);
+    if (sprite && label && agent) applyOfficeVisual(agent, presentation.visual, sprite, label);
   }
 
   preload(): void {
@@ -86,7 +100,7 @@ export class OfficeScene extends Phaser.Scene {
         continue;
       }
 
-      const animationKey = `mock-agent-${agent.state}`;
+      const animationKey = `office-agent-${agent.id}`;
 
       if (!this.anims.exists(animationKey)) {
         this.anims.create({
@@ -106,14 +120,22 @@ export class OfficeScene extends Phaser.Scene {
         .setScale(MOCK_AGENT_RENDER_SCALE)
         .setDepth(OFFICE_DEPTHS.futureAgents)
         .setInteractive({ useHandCursor: true })
-        .on(Phaser.Input.Events.POINTER_DOWN, () => this.onAgentSelected(agent.id))
-        .play(animationKey);
+        .on(Phaser.Input.Events.POINTER_DOWN, () => this.onAgentSelected(agent.id));
+
+      const label = this.add.text(anchor.x, anchor.y + 8, '', {
+        fontFamily: 'Arial, sans-serif', fontSize: '12px', color: '#302b29',
+        backgroundColor: '#f5f1e9', padding: { x: 4, y: 2 },
+      }).setOrigin(0.5, 0).setDepth(OFFICE_DEPTHS.futureAgents + 2).setVisible(false);
 
       this.agentSprites.set(agent.id, sprite);
+      this.statusLabels.set(agent.id, label);
+      applyOfficeVisual(agent, this.presentations.get(agent.id)?.visual ?? 'placeholder', sprite, label);
     }
 
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
       this.agentSprites.clear();
+      this.statusLabels.clear();
+      this.presentations.clear();
       this.selectionIndicator = undefined;
     });
   }

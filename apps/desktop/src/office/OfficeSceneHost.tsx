@@ -1,7 +1,10 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
+import type { createAgentStateStore } from '../agentState/store';
 import { AgentInspectionPanel } from './AgentInspectionPanel';
+import { OFFICE_STATUS_LABELS } from './applyOfficeVisual';
 import type { OfficeGame, OnAgentSelected } from './createOfficeGame';
-import type { MockAgentId } from './mockAgents';
+import { MOCK_AGENTS, type MockAgentId } from './mockAgents';
+import { deriveOfficePresentation, sameAgentPresentation, type OfficeAgentPresentation } from './officePresentation';
 
 export type { OfficeGame } from './createOfficeGame';
 
@@ -19,6 +22,7 @@ export type LoadOfficeGame = () => Promise<OfficeGameModule>;
 export interface OfficeSceneMount {
   destroy(): void;
   setSelectedAgent(agentId: MockAgentId | null): void;
+  setAgentPresentation(agentId: MockAgentId, presentation: OfficeAgentPresentation): void;
 }
 
 const loadOfficeGame = (): Promise<OfficeGameModule> => import('./createOfficeGame');
@@ -31,6 +35,7 @@ export function mountOfficeScene(
   let disposed = false;
   let game: OfficeGame | undefined;
   let selectedAgentId: MockAgentId | null = null;
+  const presentations = new Map<MockAgentId, OfficeAgentPresentation>();
 
   void loadGame().then(({ createOfficeGame }) => {
     if (!disposed) {
@@ -40,13 +45,22 @@ export function mountOfficeScene(
         }
       });
       game.setSelectedAgent(selectedAgentId);
+      for (const [id, presentation] of presentations) game.setAgentPresentation(id, presentation);
     }
   });
 
   return {
     setSelectedAgent(agentId) {
+      if (disposed) return;
       selectedAgentId = agentId;
       game?.setSelectedAgent(agentId);
+    },
+    setAgentPresentation(agentId, presentation) {
+      if (disposed) return;
+      const previous = presentations.get(agentId);
+      if (previous && sameAgentPresentation(previous, presentation)) return;
+      presentations.set(agentId, presentation);
+      game?.setAgentPresentation(agentId, presentation);
     },
     destroy() {
       disposed = true;
@@ -58,7 +72,11 @@ export function mountOfficeScene(
   };
 }
 
-export function OfficeSceneHost(): React.JSX.Element {
+type OfficeStore = Pick<ReturnType<typeof createAgentStateStore>, 'subscribe' | 'getSnapshot'>;
+
+export function OfficeSceneHost({ store }: { readonly store: OfficeStore }): React.JSX.Element {
+  const snapshot = useSyncExternalStore(store.subscribe, store.getSnapshot, store.getSnapshot);
+  const presentations = useMemo(() => deriveOfficePresentation(snapshot), [snapshot.agentsById, snapshot.synchronized]);
   const hostRef = useRef<HTMLDivElement>(null);
   const mountRef = useRef<OfficeSceneMount | undefined>(undefined);
   const [selectedAgentId, setSelectedAgentId] = useState<MockAgentId | null>(null);
@@ -88,16 +106,26 @@ export function OfficeSceneHost(): React.JSX.Element {
     mountRef.current?.setSelectedAgent(selectedAgentId);
   }, [selectedAgentId]);
 
+  useEffect(() => {
+    for (const agent of MOCK_AGENTS) {
+      mountRef.current?.setAgentPresentation(agent.id, presentations[agent.id]);
+    }
+  }, [presentations]);
+
+  const officeDescription = MOCK_AGENTS.map(({ id, displayName }) =>
+    `${displayName} ${OFFICE_STATUS_LABELS[presentations[id].visual] || 'awaiting simulation'}`).join(', ');
+
   return (
     <>
       <div
         ref={hostRef}
         className="office-scene-host"
         role="img"
-        aria-label="Pixel-art office with three simulated agents: one idle, one working, and one on break"
+        aria-label={`Pixel-art local simulation office: ${officeDescription}`}
       />
       <AgentInspectionPanel
         selectedAgentId={selectedAgentId}
+        presentation={selectedAgentId ? presentations[selectedAgentId] : null}
         onSelectAgent={handleAgentSelected}
         onClearSelection={() => setSelectedAgentId(null)}
       />

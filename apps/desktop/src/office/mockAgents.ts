@@ -5,7 +5,6 @@ export const MOCK_AGENT_FRAME_HEIGHT = 24;
 export const MOCK_AGENT_RENDER_SCALE = 2;
 
 export type MockAgentId = 'mock-agent-ari' | 'mock-agent-mina' | 'mock-agent-sol';
-export type MockAgentState = 'idle' | 'working' | 'break';
 export type MockAgentMode = 'simulated';
 export type MockAgentAnimationCue = 'breathing' | 'typing-tablet' | 'mug-raise';
 
@@ -19,8 +18,6 @@ export interface MockAgentAnimation {
 export interface MockAgentFixture {
   readonly id: MockAgentId;
   readonly displayName: string;
-  readonly state: MockAgentState;
-  readonly activity: string;
   readonly mode: MockAgentMode;
   readonly anchorId: OfficeAgentAnchor['id'];
   readonly animation: Readonly<MockAgentAnimation>;
@@ -40,8 +37,6 @@ export const MOCK_AGENTS: readonly Readonly<MockAgentFixture>[] = Object.freeze(
   createMockAgent({
     id: 'mock-agent-ari',
     displayName: 'Ari',
-    state: 'idle',
-    activity: 'Waiting for a task',
     mode: 'simulated',
     anchorId: 'left-workstation',
     animation: {
@@ -54,8 +49,6 @@ export const MOCK_AGENTS: readonly Readonly<MockAgentFixture>[] = Object.freeze(
   createMockAgent({
     id: 'mock-agent-mina',
     displayName: 'Mina',
-    state: 'working',
-    activity: 'Reviewing mock changes',
     mode: 'simulated',
     anchorId: 'right-workstation',
     animation: {
@@ -68,8 +61,6 @@ export const MOCK_AGENTS: readonly Readonly<MockAgentFixture>[] = Object.freeze(
   createMockAgent({
     id: 'mock-agent-sol',
     displayName: 'Sol',
-    state: 'break',
-    activity: 'Taking a coffee break',
     mode: 'simulated',
     anchorId: 'coffee-break',
     animation: {

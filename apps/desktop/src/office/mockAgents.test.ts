@@ -17,17 +17,10 @@ describe('mock agent fixtures', () => {
     for (const agent of MOCK_AGENTS) {
       expect(agent.id.trim()).not.toBe('');
       expect(agent.displayName.trim()).not.toBe('');
-      expect(agent.activity.trim()).not.toBe('');
       expect(agent.mode).toBe('simulated');
+      expect(agent).not.toHaveProperty('state');
+      expect(agent).not.toHaveProperty('activity');
     }
-  });
-
-  it('starts one agent in each approved presentation state', () => {
-    expect(MOCK_AGENTS.map(({ state }) => state).sort()).toEqual([
-      'break',
-      'idle',
-      'working',
-    ]);
   });
 
   it('resolves each stable ID to its typed fixture', () => {
@@ -38,29 +31,23 @@ describe('mock agent fixtures', () => {
     expect(getMockAgent(null)).toBeUndefined();
   });
 
-  it('keeps the approved identities, activities, anchors, and animation rates', () => {
+  it('keeps the approved identities, anchors, and animation rates without runtime state', () => {
     expect(MOCK_AGENTS).toMatchObject([
       {
         id: 'mock-agent-ari',
         displayName: 'Ari',
-        state: 'idle',
-        activity: 'Waiting for a task',
         anchorId: 'left-workstation',
         animation: { frameRate: 2, cue: 'breathing' },
       },
       {
         id: 'mock-agent-mina',
         displayName: 'Mina',
-        state: 'working',
-        activity: 'Reviewing mock changes',
         anchorId: 'right-workstation',
         animation: { frameRate: 4, cue: 'typing-tablet' },
       },
       {
         id: 'mock-agent-sol',
         displayName: 'Sol',
-        state: 'break',
-        activity: 'Taking a coffee break',
         anchorId: 'coffee-break',
         animation: { frameRate: 2, cue: 'mug-raise' },
       },

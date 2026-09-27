@@ -6,6 +6,7 @@ import {
   type OfficeGameModule,
 } from './OfficeSceneHost';
 import type { MockAgentId } from './mockAgents';
+import type { OfficeAgentPresentation } from './officePresentation';
 
 const flushModuleLoad = async (): Promise<void> => {
   await Promise.resolve();
@@ -18,6 +19,10 @@ const createHost = (): HTMLElement => ({
 const createGame = (): OfficeGame => ({
   destroy: vi.fn(),
   setSelectedAgent: vi.fn(),
+  setAgentPresentation: vi.fn(),
+});
+const presentation = (id: MockAgentId, state: 'idle' | 'working' = 'idle'): OfficeAgentPresentation => ({
+  id, state, activity: state === 'idle' ? 'Ready for a task' : 'Implementing the change', visual: state,
 });
 
 describe('mountOfficeScene', () => {
@@ -128,5 +133,48 @@ describe('mountOfficeScene', () => {
 
     secondMount.destroy();
     expect(games[1].destroy).toHaveBeenCalledOnce();
+  });
+
+  it('keeps only latest values arriving before module load and targets later updates', async () => {
+    let finishLoading!: (module: OfficeGameModule) => void;
+    const game = createGame();
+    const createOfficeGame = vi.fn<CreateOfficeGame>(() => game);
+    const mount = mountOfficeScene(createHost(), vi.fn(),
+      () => new Promise<OfficeGameModule>((resolve) => { finishLoading = resolve; }));
+    mount.setAgentPresentation('mock-agent-ari', presentation('mock-agent-ari'));
+    mount.setAgentPresentation('mock-agent-ari', presentation('mock-agent-ari', 'working'));
+    mount.setAgentPresentation('mock-agent-mina', presentation('mock-agent-mina'));
+    finishLoading({ createOfficeGame });
+    await flushModuleLoad();
+    expect(createOfficeGame).toHaveBeenCalledOnce();
+    expect(game.setAgentPresentation).toHaveBeenCalledTimes(2);
+    expect(game.setAgentPresentation).toHaveBeenCalledWith('mock-agent-ari', presentation('mock-agent-ari', 'working'));
+    expect(game.setAgentPresentation).toHaveBeenCalledWith('mock-agent-mina', presentation('mock-agent-mina'));
+    mount.setAgentPresentation('mock-agent-ari', presentation('mock-agent-ari', 'working'));
+    expect(game.setAgentPresentation).toHaveBeenCalledTimes(2);
+    mount.setAgentPresentation('mock-agent-ari', presentation('mock-agent-ari'));
+    expect(game.setAgentPresentation).toHaveBeenCalledTimes(3);
+    expect(game.setAgentPresentation).toHaveBeenLastCalledWith('mock-agent-ari', presentation('mock-agent-ari'));
+    mount.destroy();
+  });
+
+  it('preserves selection and skips unchanged agents on a disconnected or repeated presentation', async () => {
+    const game = createGame();
+    const mount = mountOfficeScene(createHost(), vi.fn(), async () => ({ createOfficeGame: () => game }));
+    await flushModuleLoad();
+    mount.setSelectedAgent('mock-agent-sol');
+    mount.setAgentPresentation('mock-agent-ari', presentation('mock-agent-ari'));
+    mount.setAgentPresentation('mock-agent-mina', presentation('mock-agent-mina'));
+    mount.setAgentPresentation('mock-agent-sol', presentation('mock-agent-sol'));
+    (game.setAgentPresentation as ReturnType<typeof vi.fn>).mockClear();
+    mount.setAgentPresentation('mock-agent-ari', presentation('mock-agent-ari', 'working'));
+    mount.setAgentPresentation('mock-agent-mina', presentation('mock-agent-mina'));
+    mount.setAgentPresentation('mock-agent-sol', presentation('mock-agent-sol'));
+    expect(game.setAgentPresentation).toHaveBeenCalledOnce();
+    expect(game.setAgentPresentation).toHaveBeenCalledWith('mock-agent-ari', presentation('mock-agent-ari', 'working'));
+    expect(game.setSelectedAgent).toHaveBeenLastCalledWith('mock-agent-sol');
+    mount.destroy();
+    mount.setAgentPresentation('mock-agent-ari', presentation('mock-agent-ari'));
+    expect(game.setAgentPresentation).toHaveBeenCalledOnce();
   });
 });

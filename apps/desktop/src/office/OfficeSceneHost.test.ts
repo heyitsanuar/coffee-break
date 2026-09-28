@@ -5,6 +5,9 @@ import {
   type OfficeGame,
   type OfficeGameModule,
 } from './OfficeSceneHost';
+import { createAgentStateStore } from '../agentState/store';
+import { deriveOfficePresentation } from './officePresentation';
+import type { AgentStateMessage, TrustedAgentState } from '../../shared/agentState';
 import type { MockAgentId } from './mockAgents';
 import type { OfficeAgentPresentation } from './officePresentation';
 
@@ -177,4 +180,41 @@ describe('mountOfficeScene', () => {
     mount.setAgentPresentation('mock-agent-ari', presentation('mock-agent-ari'));
     expect(game.setAgentPresentation).toHaveBeenCalledOnce();
   });
+});
+
+
+it('passes actual store loss and new-session snapshots through one mounted game with stable selection', async () => {
+  let emit!: (message: AgentStateMessage) => void;
+  const store = createAgentStateStore({ watch(listener) { emit = listener; return { ready: Promise.resolve(), close: vi.fn() }; } });
+  const game = createGame();
+  const create = vi.fn(() => game);
+  const mount = mountOfficeScene(createHost(), vi.fn(), async () => ({ createOfficeGame: create }));
+  const update = () => {
+    const presentations = deriveOfficePresentation(store.getSnapshot());
+    for (const id of Object.keys(presentations) as MockAgentId[]) mount.setAgentPresentation(id, presentations[id]);
+  };
+  const unsubscribe = store.subscribe(update);
+  await store.start();
+  await flushModuleLoad();
+  const agents: TrustedAgentState['agents'] = [
+    { agent: { id: 'mock-agent-ari', displayName: 'Ari' }, state: 'completed', activity: 'Change implemented' },
+    { agent: { id: 'mock-agent-mina', displayName: 'Mina' }, state: 'completed', activity: 'Review complete' },
+    { agent: { id: 'mock-agent-sol', displayName: 'Sol' }, state: 'waiting', activity: 'Taking a coffee break in the simulated office' },
+  ];
+  const ready: TrustedAgentState = { revision: 6, sessionId: 'session-1', phase: 'ready', agents };
+  emit({ kind: 'current', state: ready });
+  mount.setSelectedAgent('mock-agent-sol');
+  (game.setAgentPresentation as ReturnType<typeof vi.fn>).mockClear();
+  emit({ kind: 'change', change: { kind: 'connection', state: { ...ready, phase: 'disconnected' } } });
+  emit({ kind: 'change', change: { kind: 'connection', state: { ...ready, phase: 'synchronizing', sessionId: 'session-2' } } });
+  expect(game.setAgentPresentation).not.toHaveBeenCalled();
+  expect(store.getSnapshot().synchronized).toBe(false);
+  const fresh = [...agents.slice(0, 2), { ...agents[2], state: 'working' as const, activity: 'Finishing a task' }];
+  emit({ kind: 'change', change: { kind: 'snapshot', state: { ...ready, revision: 7, sessionId: 'session-2', agents: fresh } } });
+  expect(game.setAgentPresentation).toHaveBeenCalledOnce();
+  expect(game.setAgentPresentation).toHaveBeenCalledWith('mock-agent-sol', expect.objectContaining({ visual: 'working', activity: 'Finishing a task' }));
+  expect(game.setSelectedAgent).toHaveBeenLastCalledWith('mock-agent-sol');
+  expect(create).toHaveBeenCalledOnce();
+  expect(game.destroy).not.toHaveBeenCalled();
+  unsubscribe(); store.stop(); mount.destroy();
 });

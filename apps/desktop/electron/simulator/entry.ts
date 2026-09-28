@@ -23,9 +23,11 @@ lines.on('line', (line) => {
     const message: unknown = JSON.parse(line);
     if (!message || typeof message !== 'object' || Array.isArray(message)) throw new Error('invalid_control');
     const item = message as Record<string, unknown>;
-    if (!launched && Object.keys(item).sort().join(',') === 'credentials,kind' && item.kind === 'launch') {
+    const keys = Object.keys(item).sort().join(',');
+    const delayed = keys === 'credentials,kind,snapshotDelayMs' && item.snapshotDelayMs === 1_000;
+    if (!launched && (keys === 'credentials,kind' || delayed) && item.kind === 'launch') {
       launched = true;
-      client.start(item.credentials);
+      client.start(item.credentials, delayed ? 1_000 : 0);
     } else if (launched && Object.keys(item).join(',') === 'kind' && item.kind === 'shutdown') {
       finish(0);
     } else {

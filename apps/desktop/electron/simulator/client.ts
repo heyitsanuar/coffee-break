@@ -26,6 +26,8 @@ export class SimulatorClient {
   private cancelScenario: (() => void) | null = null;
   private timeout: ReturnType<typeof setTimeout> | null = null;
   private stopped = false;
+  private snapshotDelayMs = 0;
+  private snapshotDelay: ReturnType<typeof setTimeout> | null = null;
 
   constructor(
     private readonly clock: TimerClock = realClock,
@@ -35,9 +37,10 @@ export class SimulatorClient {
     this.source = { kind: 'local-connector', instanceId: `sim-${randomUUID()}` };
   }
 
-  start(value: unknown): void {
+  start(value: unknown, snapshotDelayMs: 0 | 1_000 = 0): void {
     if (this.phase !== 'starting') throw new Error('simulator_already_started');
     const launch = parseLaunch(value);
+    this.snapshotDelayMs = snapshotDelayMs;
     this.phase = 'connecting';
     const socket = this.createSocket({ host: launch.host, port: launch.port });
     this.socket = socket;
@@ -91,8 +94,14 @@ export class SimulatorClient {
       && Object.keys(ack).sort().join(',') === 'kind,version'
       && ack.kind === 'hello-accepted' && ack.version === 1) {
       this.phase = 'synchronizing';
-      this.write({ kind: 'snapshot', version: 1, source: this.source, agents: initialAgents });
+      const sendSnapshot = () => {
+        this.snapshotDelay = null;
+        if (this.stopped) return;
+        this.write({ kind: 'snapshot', version: 1, source: this.source, agents: initialAgents });
+      };
       this.armTimeout();
+      if (this.snapshotDelayMs) this.snapshotDelay = setTimeout(sendSnapshot, this.snapshotDelayMs);
+      else sendSnapshot();
       return;
     }
     if (this.phase === 'synchronizing'
@@ -122,6 +131,8 @@ export class SimulatorClient {
     this.phase = 'shutting-down';
     if (this.timeout) clearTimeout(this.timeout);
     this.timeout = null;
+    if (this.snapshotDelay) clearTimeout(this.snapshotDelay);
+    this.snapshotDelay = null;
     this.cancelScenario?.();
     this.cancelScenario = null;
     this.socket?.destroy();

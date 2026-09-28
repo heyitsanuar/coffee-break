@@ -3,10 +3,11 @@ import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { registerAgentStateIpc } from './agentStateIpc.js';
 import { LocalIngress } from './ingress/localIngress.js';
-import { simulationEnabled, SimulatorController } from './simulatorController.js';
+import { recoverySimulationEnabled, simulationEnabled, SimulatorController } from './simulatorController.js';
 
 const simulated = simulationEnabled(process.env.COFFEE_BREAK_LOCAL_SIMULATION, process.env.ELECTRON_RENDERER_URL, app.isPackaged);
-const controller = simulated ? new SimulatorController() : null;
+const recoveryMode = recoverySimulationEnabled(process.env.COFFEE_BREAK_SIMULATION_RECOVERY, simulated);
+const controller = simulated ? new SimulatorController(undefined, undefined, undefined, undefined, recoveryMode) : null;
 const ingress = controller?.ingress ?? new LocalIngress({ onLaunchCredentials: () => {
   throw new Error('connector_activation_not_configured');
 } });

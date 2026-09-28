@@ -157,3 +157,86 @@ describe('renderer agent-state store ownership', () => {
     store.stop();
   });
 });
+
+
+describe('renderer availability deadline', () => {
+  it('keeps one watch open at five seconds and accepts a late snapshot', async () => {
+    vi.useFakeTimers();
+    const fake = fakeBridge();
+    const store = createAgentStateStore(fake.bridge);
+    try {
+      await Promise.all([store.start(), store.start()]);
+      expect(store.getSnapshot().connection).toBe('connecting');
+      expect(vi.getTimerCount()).toBe(1);
+      vi.advanceTimersByTime(4_999);
+      expect(store.getSnapshot().connection).toBe('connecting');
+      vi.advanceTimersByTime(1);
+      expect(store.getSnapshot()).toMatchObject({ connection: 'disconnected', synchronized: false });
+      expect(fake.watches[0].close).not.toHaveBeenCalled();
+      fake.watches[0].emit({ kind: 'current', state: { revision: 0, phase: 'awaiting-connector', sessionId: null, agents: null } });
+      expect(store.getSnapshot().connection).toBe('disconnected');
+      fake.watches[0].emit({ kind: 'current', state: mirror(1) });
+      expect(store.getSnapshot()).toMatchObject({ connection: 'connected', synchronized: true });
+    } finally { store.stop(); vi.useRealTimers(); }
+  });
+
+  it('cancels the deadline on success and stop; restart gets a fresh deadline', async () => {
+    vi.useFakeTimers();
+    const fake = fakeBridge();
+    const store = createAgentStateStore(fake.bridge);
+    try {
+      await store.start();
+      vi.advanceTimersByTime(5_000);
+      expect(store.getSnapshot().connection).toBe('disconnected');
+      store.stop();
+      expect(vi.getTimerCount()).toBe(0);
+      await store.start();
+      fake.watches[1].emit({ kind: 'current', state: { revision: 0, phase: 'awaiting-connector', sessionId: null, agents: null } });
+      vi.advanceTimersByTime(1_000);
+      expect(store.getSnapshot().connection).toBe('connecting');
+      fake.watches[1].emit({ kind: 'current', state: mirror(1) });
+      expect(vi.getTimerCount()).toBe(0);
+      vi.advanceTimersByTime(10_000);
+      expect(store.getSnapshot().connection).toBe('connected');
+      expect(fake.watches).toHaveLength(2);
+    } finally { store.stop(); vi.useRealTimers(); }
+  });
+
+  it('shows active bounded recovery and becomes unsynchronized after exhaustion', async () => {
+    const fake = fakeBridge();
+    const store = createAgentStateStore(fake.bridge);
+    await store.start();
+    fake.watches[0].emit({ kind: 'current', state: mirror(1) });
+    const retained = store.getSnapshot().agentsById;
+    const invalid = { ...mirror(4), agents: agents().slice(0, 2) };
+    fake.watches[0].emit({ kind: 'change', change: { kind: 'snapshot', state: invalid } });
+    expect(store.getSnapshot()).toMatchObject({ connection: 'connecting', synchronized: false, agentsById: retained });
+    await Promise.resolve();
+    fake.watches[1].emit({ kind: 'current', state: invalid });
+    expect(store.getSnapshot()).toMatchObject({ connection: 'disconnected', synchronized: false, agentsById: retained });
+    fake.watches[0].emit({ kind: 'current', state: mirror(10) });
+    fake.watches[1].emit({ kind: 'current', state: mirror(10) });
+    expect(store.getSnapshot().revision).toBe(1);
+    store.stop();
+  });
+});
+
+
+it('makes a cleared deadline callback inert after restart and after successful synchronization', async () => {
+  vi.useFakeTimers();
+  const set = vi.spyOn(globalThis, 'setTimeout');
+  const fake = fakeBridge();
+  const store = createAgentStateStore(fake.bridge);
+  try {
+    await store.start();
+    const stale = set.mock.calls[0][0] as () => void;
+    store.stop();
+    await store.start();
+    stale();
+    expect(store.getSnapshot().connection).toBe('connecting');
+    const currentDeadline = set.mock.calls.at(-1)![0] as () => void;
+    fake.watches[1].emit({ kind: 'current', state: mirror(1) });
+    currentDeadline();
+    expect(store.getSnapshot()).toMatchObject({ connection: 'connected', synchronized: true });
+  } finally { store.stop(); set.mockRestore(); vi.useRealTimers(); }
+});

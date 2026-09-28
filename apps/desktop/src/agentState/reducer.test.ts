@@ -61,11 +61,13 @@ describe('pure agent-state reducer', () => {
     expect(reduceAgentState(previous, change('snapshot', mirror(1))).state).toBe(previous);
     const disconnected = reduceAgentState(previous, change('connection', mirror(1, { phase: 'disconnected' }))).state;
     expect(disconnected.connection).toBe('disconnected');
+    expect(disconnected.synchronized).toBe(false);
     expect(disconnected.agentsById).toBe(previous.agentsById);
     const synchronizing = reduceAgentState(disconnected, change('connection', mirror(1, {
       phase: 'synchronizing', sessionId: 'session-2',
     }))).state;
     expect(synchronizing.connection).toBe('connecting');
+    expect(synchronizing.synchronized).toBe(false);
     expect(synchronizing.sessionId).toBe('session-2');
     expect(synchronizing.agentsById).toBe(previous.agentsById);
     expect(reduceAgentState(synchronizing, change('connection', mirror(0))).state).toBe(synchronizing);
@@ -99,5 +101,32 @@ describe('pure agent-state reducer', () => {
     })));
     expect(result.resynchronize).toBe(false);
     expect(result.state).toMatchObject({ synchronized: false, agentsById: {}, connection: 'connecting' });
+  });
+});
+
+
+describe('current-session synchronization', () => {
+  it.each(['synchronizing', 'disconnected'] as const)('reloads retained complete state in %s without claiming readiness', (phase) => {
+    const result = reduceAgentState(initialAgentState, current(mirror(6, { phase, sessionId: 'session-2' }))).state;
+    expect(result.synchronized).toBe(false);
+    expect(result.agentsById['mock-agent-mina']?.activity).toBe('Reviewing');
+  });
+
+  it('retains old truth until a complete new snapshot replaces every agent', () => {
+    const old = initialized();
+    const pending = reduceAgentState(old, change('connection', mirror(1, { phase: 'synchronizing', sessionId: 'session-2' }))).state;
+    expect(pending.synchronized).toBe(false);
+    expect(pending.agentsById).toBe(old.agentsById);
+    const fresh = agents().map((agent) => ({ ...agent, activity: `New ${agent.agent.displayName}` }));
+    const next = reduceAgentState(pending, change('snapshot', mirror(2, { sessionId: 'session-2', agents: fresh }))).state;
+    expect(next).toMatchObject({ synchronized: true, connection: 'connected', sessionId: 'session-2' });
+    expect(Object.values(next.agentsById).map((agent) => agent.activity)).toEqual(['New Ari', 'New Mina', 'New Sol']);
+  });
+
+  it.each([3, 20])('ignores an old-session event at revision %s even with a complete mirror', (revision) => {
+    const active = reduceAgentState(initialAgentState, current(mirror(2, { sessionId: 'session-2' }))).state;
+    const stale = { ...agents()[0], activity: 'Stale overwrite' };
+    expect(reduceAgentState(active, event(mirror(revision, { agents: [stale, ...agents().slice(1)] }), stale)))
+      .toEqual({ state: active, resynchronize: false });
   });
 });

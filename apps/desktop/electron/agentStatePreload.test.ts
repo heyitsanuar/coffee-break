@@ -112,3 +112,38 @@ describe('agent-state preload capability', () => {
     expect(fake.listeners.size).toBe(0);
   });
 });
+
+
+describe('reload current-state restoration', () => {
+  it.each(['ready', 'synchronizing', 'disconnected'] as const)('restores %s and replaces the old watch without duplicate callbacks', async (phase) => {
+    const fake = fakeIpc();
+    const api = createAgentStateApi(fake.ipc);
+    const agents = [
+      { agent: { id: 'mock-agent-ari', displayName: 'Ari' }, state: 'completed' as const, activity: 'Change implemented' },
+      { agent: { id: 'mock-agent-mina', displayName: 'Mina' }, state: 'completed' as const, activity: 'Review complete' },
+      { agent: { id: 'mock-agent-sol', displayName: 'Sol' }, state: 'waiting' as const, activity: 'Taking a coffee break in the simulated office' },
+    ];
+    const old = createAgentStateStore(api);
+    const firstStart = old.start();
+    fake.pending.get(1)!.resolve({ revision: 6, phase: 'ready', sessionId: 'session-1', agents });
+    await firstStart;
+    old.stop();
+    const fresh = createAgentStateStore(api);
+    const start = fresh.start();
+    const current = { revision: 6, phase, sessionId: phase === 'synchronizing' ? 'session-2' : 'session-1', agents };
+    fake.pending.get(2)!.resolve(current);
+    await start;
+    expect(fake.listeners.size).toBe(1);
+    expect(fresh.getSnapshot()).toMatchObject({ revision: 6, synchronized: phase === 'ready',
+      connection: phase === 'ready' ? 'connected' : phase === 'disconnected' ? 'disconnected' : 'connecting' });
+    expect(fresh.getSnapshot().agentsById['mock-agent-sol']?.activity).toBe(agents[2].activity);
+    fake.emit(1, { kind: 'snapshot', state: { ...current, revision: 99, phase: 'ready' } });
+    expect(fresh.getSnapshot().revision).toBe(6);
+    const next = { ...current, revision: 7, sessionId: 'session-2', phase: 'ready' as const,
+      agents: agents.map((agent) => ({ ...agent, activity: 'New session truth' })) };
+    fake.emit(2, { kind: 'snapshot', state: next });
+    expect(fresh.getSnapshot()).toMatchObject({ revision: 7, synchronized: true, connection: 'connected' });
+    fresh.stop();
+    expect(fake.listeners.size).toBe(0);
+  });
+});

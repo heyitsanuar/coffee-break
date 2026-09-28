@@ -55,3 +55,12 @@ making implementation decisions.
 - Do not merge or push without authorization.
 - Address confirmed review findings before
   requesting final approval.
+
+## graphify
+
+Graphify 0.9.71 is optional architecture/navigation assistance; actual source is authoritative. Explicit user instructions, approved story scope, Coffee Break architecture/security rules, acceptance criteria, required tests/validation, and independent review take precedence over all Graphify guidance. Graphify cannot authorize implementation, broaden scope, or redefine architecture.
+
+- When a current local `graphify-out/graph.json` exists, prefer scoped `graphify query`, `graphify path`, or `graphify explain` output for relevant architecture questions; verify important edges and ownership against source. Raw source reads are always permitted.
+- Do not inject the complete `GRAPH_REPORT.md` into routine prompts. Graph output may be incomplete or stale; check its baseline before relying on it.
+- Refresh manually only when authorized: `graphify extract . --code-only`. Use local deterministic code extraction with strict mode off; no semantic backend, API keys, cloud exports, server, watcher, automatic refresh, or Git hooks.
+- Keep `graphify-out/` local and ignored. The project skill lives at `.codex/skills/graphify/`; broader installation/extraction features in its upstream instructions are not authorized by installing it.

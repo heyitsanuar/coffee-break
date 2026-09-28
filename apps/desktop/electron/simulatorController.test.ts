@@ -2,7 +2,7 @@ import { EventEmitter } from 'node:events';
 import { Writable } from 'node:stream';
 import type { ChildProcess, spawn } from 'node:child_process';
 import { afterEach, describe, expect, it } from 'vitest';
-import { simulationEnabled, SimulatorController } from './simulatorController.js';
+import { recoverySimulationEnabled, simulationEnabled, SimulatorController } from './simulatorController.js';
 
 class FakeChild extends EventEmitter {
   exitCode: number | null = null;
@@ -28,6 +28,10 @@ describe('simulator activation and main ownership', () => {
     expect(simulationEnabled('1', undefined, false)).toBe(false);
     expect(simulationEnabled('1', 'http://localhost:5173', true)).toBe(false);
     expect(simulationEnabled('1', 'http://localhost:5173', false)).toBe(true);
+    expect(recoverySimulationEnabled('1', false)).toBe(false);
+    expect(recoverySimulationEnabled(undefined, true)).toBe(false);
+    expect(recoverySimulationEnabled('0', true)).toBe(false);
+    expect(recoverySimulationEnabled('1', true)).toBe(true);
   });
 
   it('starts ingress first, hands credentials only through stdin, and launches once', async () => {

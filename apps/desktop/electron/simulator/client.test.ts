@@ -123,3 +123,31 @@ describe('simulator protocol client', () => {
     } finally { vi.useRealTimers(); }
   });
 });
+
+
+it('delays only the replacement snapshot and cancels that delay on shutdown', () => {
+  vi.useFakeTimers();
+  try {
+    for (const shutdown of [false, true]) {
+      const socket = new FakeSocket();
+      const client = new SimulatorClient(undefined, () => {},
+        (() => socket as unknown as Socket) as typeof import('node:net').connect);
+      client.start(launch, 1_000);
+      socket.emit('connect');
+      socket.data(frame({ kind: 'hello-accepted', version: 1 }));
+      vi.advanceTimersByTime(999);
+      expect(socket.written).toHaveLength(1);
+      if (shutdown) client.stop();
+      vi.advanceTimersByTime(1);
+      expect(socket.written).toHaveLength(shutdown ? 1 : 2);
+      if (!shutdown) {
+        expect(socket.written[1]).toMatchObject({ kind: 'snapshot', agents: expect.any(Array) });
+        socket.data(frame({ kind: 'snapshot-accepted', version: 1, revision: 7 }));
+        vi.advanceTimersByTime(5_000);
+        expect(socket.written).toHaveLength(7);
+      }
+      client.stop();
+      expect(vi.getTimerCount()).toBe(0);
+    }
+  } finally { vi.useRealTimers(); }
+});

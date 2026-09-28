@@ -10,11 +10,27 @@ export function createAgentStateStore(bridge: AgentStateApi) {
   let recoveryScheduled = false;
   // One automatic replacement per explicit start-to-stop synchronization episode.
   let recoveryUsed = false;
+  let episode = 0;
+  let deadline: ReturnType<typeof setTimeout> | null = null;
+  let availabilityExpired = false;
+  const clearDeadline = () => {
+    if (deadline !== null) clearTimeout(deadline);
+    deadline = null;
+  };
 
   const apply = (action: Parameters<typeof reduceAgentState>[1]) => {
     const result = reduceAgentState(state, action);
+    const mirror = action.kind === 'current' ? action.state
+      : action.kind === 'change' ? action.change.state : null;
+    if (availabilityExpired && mirror?.phase === 'awaiting-connector') {
+      result.state = reduceAgentState(result.state, { kind: 'failed' }).state;
+    }
     if (result.state !== state) {
       state = result.state;
+      if (state.synchronized) {
+        availabilityExpired = false;
+        clearDeadline();
+      }
       for (const listener of listeners) listener();
     }
     return result.resynchronize;
@@ -31,11 +47,13 @@ export function createAgentStateStore(bridge: AgentStateApi) {
           generation++;
           nextWatch.close();
           watch = null;
+          clearDeadline();
           apply({ kind: 'failed' });
           return;
         }
         recoveryUsed = true;
         recoveryScheduled = true;
+        apply({ kind: 'recovering' });
         queueMicrotask(() => {
           if (currentGeneration !== generation) return;
           recoveryScheduled = false;
@@ -51,6 +69,8 @@ export function createAgentStateStore(bridge: AgentStateApi) {
         recoveryScheduled = false;
         nextWatch.close();
         watch = null;
+        clearDeadline();
+        availabilityExpired = false;
         apply({ kind: 'failed' });
       }
       throw error;
@@ -65,6 +85,18 @@ export function createAgentStateStore(bridge: AgentStateApi) {
     },
     start() {
       if (!startPromise) {
+        const currentEpisode = ++episode;
+        clearDeadline();
+        availabilityExpired = false;
+        apply({ kind: 'recovering' });
+        deadline = setTimeout(() => {
+          if (episode !== currentEpisode) return;
+          deadline = null;
+          if (!state.synchronized) {
+            availabilityExpired = true;
+            apply({ kind: 'failed' });
+          }
+        }, 5_000);
         const pending = connect();
         const tracked = pending.catch((error) => {
           if (startPromise === tracked) startPromise = null;
@@ -75,6 +107,8 @@ export function createAgentStateStore(bridge: AgentStateApi) {
       return startPromise;
     },
     stop() {
+      episode++;
+      clearDeadline();
       generation++;
       watch?.close();
       watch = null;

@@ -20,6 +20,8 @@ npm run build
 
 `npm run dev` leaves the local ingress dormant. To exercise the EP-03 pipeline with one development-only simulator child, use `npm run dev:simulated`. Its fixed Ari/Mina/Sol scenario runs once, then the child and authenticated socket remain connected until the desktop exits. Electron main owns the child; no provider or provider credentials are used. The renderer store drives React inspection and Phaser presentation through a derived office view. See [the simulator architecture](docs/architecture/local-simulator.md) for the exact scenario.
 
+`npm run dev:simulated:recovery` runs an explicit development-only two-session validation scenario: the unchanged simulator sequence, a controlled disconnect, exactly one replacement child, and a delayed complete snapshot followed by the same sequence. It is not production auto-reconnect. Connection status appears above the office; last-known agent state remains visible during loss and synchronization. Ordinary startup displays unavailable after a five-second renderer availability deadline while keeping its watch open. See the simulator architecture for timing and ownership.
+
 The committed `package-lock.json` provides reproducible installs. CI uses `npm ci`.
 
 ## Continuous integration

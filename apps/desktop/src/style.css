@@ -241,3 +241,14 @@ small {
     grid-template-columns: 1fr;
   }
 }
+
+.connection-status {
+  margin: var(--space-6) 0 0;
+  color: var(--color-ink-muted);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.connection-status + .office-scene-host {
+  margin-top: var(--space-3);
+}

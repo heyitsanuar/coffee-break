@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
 import type { createAgentStateStore } from '../agentState/store';
+import { ConnectionStatus } from './ConnectionStatus';
 import { AgentInspectionPanel } from './AgentInspectionPanel';
 import { OFFICE_STATUS_LABELS } from './applyOfficeVisual';
 import type { OfficeGame, OnAgentSelected } from './createOfficeGame';
@@ -76,7 +77,7 @@ type OfficeStore = Pick<ReturnType<typeof createAgentStateStore>, 'subscribe' | 
 
 export function OfficeSceneHost({ store }: { readonly store: OfficeStore }): React.JSX.Element {
   const snapshot = useSyncExternalStore(store.subscribe, store.getSnapshot, store.getSnapshot);
-  const presentations = useMemo(() => deriveOfficePresentation(snapshot), [snapshot.agentsById, snapshot.synchronized]);
+  const presentations = useMemo(() => deriveOfficePresentation(snapshot), [snapshot.agentsById]);
   const hostRef = useRef<HTMLDivElement>(null);
   const mountRef = useRef<OfficeSceneMount | undefined>(undefined);
   const [selectedAgentId, setSelectedAgentId] = useState<MockAgentId | null>(null);
@@ -117,6 +118,7 @@ export function OfficeSceneHost({ store }: { readonly store: OfficeStore }): Rea
 
   return (
     <>
+      <ConnectionStatus snapshot={snapshot} />
       <div
         ref={hostRef}
         className="office-scene-host"

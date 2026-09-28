@@ -76,17 +76,18 @@ function connection(phase: TrustedAgentState['phase']): ConnectionState {
   return 'connecting';
 }
 
-export type AgentAction = AgentStateMessage | { kind: 'failed' };
+export type AgentAction = AgentStateMessage | { kind: 'failed' } | { kind: 'recovering' };
 export interface Reduction {
   state: AgentStoreState;
   resynchronize: boolean;
 }
 
 export function reduceAgentState(previous: AgentStoreState, action: AgentAction): Reduction {
-  if (action.kind === 'failed') {
+  if (action.kind === 'failed' || action.kind === 'recovering') {
+    const nextConnection = action.kind === 'failed' ? 'disconnected' : 'connecting';
     return {
-      state: previous.connection === 'disconnected'
-        ? previous : { ...previous, connection: 'disconnected' },
+      state: previous.connection === nextConnection && !previous.synchronized
+        ? previous : { ...previous, connection: nextConnection, synchronized: false },
       resynchronize: false,
     };
   }
@@ -96,14 +97,19 @@ export function reduceAgentState(previous: AgentStoreState, action: AgentAction)
   if (value.revision < previous.revision) return { state: previous, resynchronize: false };
 
   const changeKind = action.kind === 'change' ? action.change.kind : 'current';
+  // Main owns session validity; renderer must still reject stale event metadata.
+  if (changeKind === 'event' && value.sessionId !== previous.sessionId) {
+    return { state: previous, resynchronize: false };
+  }
   if (changeKind !== 'connection' && changeKind !== 'current' &&
-      value.revision <= previous.revision && previous.synchronized) {
+      value.revision <= previous.revision && previous.revision > 0) {
     return { state: previous, resynchronize: false };
   }
 
   const mirror = value.agents === null ? null : completeAgents(value.agents);
   if (value.agents !== null && !mirror) return { state: previous, resynchronize: true };
-  if ((value.phase === 'ready' || value.revision > previous.revision) && !mirror) {
+  if ((value.phase === 'ready' && (!mirror || value.sessionId === null)) ||
+      (value.revision > previous.revision && !mirror)) {
     return { state: previous, resynchronize: true };
   }
 
@@ -114,10 +120,13 @@ export function reduceAgentState(previous: AgentStoreState, action: AgentAction)
   };
 
   if (changeKind === 'connection' && value.revision === previous.revision) {
-    return { state: { ...previous, ...common }, resynchronize: false };
+    return { state: { ...previous, ...common,
+      synchronized: value.phase === 'ready' && previous.synchronized && value.sessionId === previous.sessionId,
+    }, resynchronize: false };
   }
 
   if (action.kind === 'change' && action.change.kind === 'event') {
+    if (value.phase !== 'ready') return { state: previous, resynchronize: true };
     const agent = action.change.agent;
     if (!validAgent(agent) || !mirror) {
       return { state: previous, resynchronize: true };
@@ -141,7 +150,7 @@ export function reduceAgentState(previous: AgentStoreState, action: AgentAction)
 
   if (mirror) {
     return {
-      state: { ...previous, ...common, synchronized: true, agentsById: mirror },
+      state: { ...previous, ...common, synchronized: value.phase === 'ready', agentsById: mirror },
       resynchronize: false,
     };
   }

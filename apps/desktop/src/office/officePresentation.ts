@@ -18,7 +18,7 @@ const COFFEE_ACTIVITY = 'Taking a coffee break in the simulated office';
 
 export function deriveOfficePresentation(snapshot: AgentStoreState): OfficePresentation {
   return Object.fromEntries(MOCK_AGENTS.map(({ id }) => {
-    const runtime = snapshot.synchronized ? snapshot.agentsById[id] : undefined;
+    const runtime = snapshot.agentsById[id];
     if (!runtime) return [id, { id, state: null, activity: null, visual: 'placeholder' }];
     const visual: OfficeVisual = id === 'mock-agent-sol' && runtime.state === 'waiting'
       && runtime.activity === COFFEE_ACTIVITY ? 'coffee' : runtime.state;

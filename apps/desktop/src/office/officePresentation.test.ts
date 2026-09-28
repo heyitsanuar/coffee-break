@@ -48,8 +48,17 @@ describe('pure office presentation', () => {
       id: 'mock-agent-mina', state: 'waiting', activity: 'Waiting for approval',
       reason: 'approval_required', visual: 'waiting',
     });
-    const disconnected = deriveOfficePresentation({ ...snapshot, connection: 'disconnected' });
+    const disconnected = deriveOfficePresentation({ ...snapshot, connection: 'disconnected', synchronized: false });
     expect(disconnected).toEqual(connected);
     expect(sameAgentPresentation(connected['mock-agent-mina'], disconnected['mock-agent-mina'])).toBe(true);
   });
+});
+
+
+it('retains exact Sol coffee during synchronization and replaces it with the new snapshot truth', () => {
+  const retained = { ...synced('mock-agent-sol', { state: 'waiting', activity: COFFEE }),
+    connection: 'connecting' as const, synchronized: false };
+  expect(deriveOfficePresentation(retained)['mock-agent-sol'].visual).toBe('coffee');
+  const fresh = synced('mock-agent-sol', { state: 'working', activity: 'Finishing a task' });
+  expect(deriveOfficePresentation(fresh)['mock-agent-sol']).toMatchObject({ visual: 'working', activity: 'Finishing a task' });
 });

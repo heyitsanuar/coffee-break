@@ -35,7 +35,7 @@ Meaningful departures must be intentional and recorded in the relevant story spe
 
 ## Current story direction
 
-[EP-04 Living Office — US-019](ep-04-living-office.md) records the resolved design direction, implementation baseline, intentional departures, and later implementation/design-review validation. **The final US-019 specification is ready for explicit Product Owner approval; approval and required review remain pending.** It does not authorize subsequent implementation.
+[EP-04 Living Office — US-019](ep-04-living-office.md) records the resolved design direction, implementation baseline, intentional departures, and later implementation/design-review validation. **The Product Owner has approved the final US-019 specification; it is the approved design source for subsequent EP-04 engineering planning.** Design approval does not itself authorize production implementation; each engineering story requires authorization and the normal implementation/review workflow.
 
 For this increment, the Product Owner + Planner accepted the fixed-room scope and warm cream/ink/coffee/sage foundation rather than reproducing the references' large multi-room dashboard and dark chrome. Exact name artwork, supporting symbols, inspector styling, and selection artwork can be refined during implementation and Designer review within the resolved direction. No label preference is approved.
 

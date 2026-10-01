@@ -1,12 +1,12 @@
 # EP-04 Living Office — US-019
 
-**DESIGN STATUS: FINAL SPECIFICATION READY FOR PRODUCT OWNER APPROVAL**
+**DESIGN STATUS: FINAL SPECIFICATION APPROVED BY THE PRODUCT OWNER**
 
-This specification for [US-019 — Establish the Living Office Design Direction (#44)](https://github.com/heyitsanuar/coffee-break/issues/44) incorporates the Product Owner + Planner's finalization decisions. Product/design direction is resolved at the level required for engineering planning. Exact artwork and execution remain subject to implementation refinement and Designer review; generated artwork is not mandatory. Explicit Product Owner approval of this final specification and required review remain pending. Preparing this document does not approve US-019 or authorize US-020, production implementation, commits, pushes, or GitHub changes.
+This specification for [US-019 — Establish the Living Office Design Direction (#44)](https://github.com/heyitsanuar/coffee-break/issues/44) incorporates the Product Owner + Planner's finalization decisions. Product/design direction is resolved at the level required for engineering planning. Exact artwork and execution remain subject to implementation refinement and Designer review; generated artwork is not mandatory. Product Owner approval is complete, and this specification is the approved design source for subsequent EP-04 engineering planning. Design approval does not itself authorize US-020 or other production implementation; each engineering story requires authorization and the normal implementation/review workflow.
 
 ## References and baseline
 
-The [Design North Star](README.md) identifies the authoritative original Product Owner references and their provenance. All four committed reference images are existing Product Owner artifacts, supplied before this documentation work. This document and the North Star documentation are new US-019 design artifacts; the original images are not.
+The [Design North Star](README.md) identifies the authoritative original Product Owner references and their provenance. All four committed reference images are existing Product Owner artifacts, supplied before this documentation work. This specification and the North Star documentation are US-019 design artifacts committed in `a371366477ff6848d29656eaf0356099422c0b80`; the original images are not new US-019 artifacts.
 
 Documentation preparation began from clean `main` at `243c6c162214759d11d932b3cb3071bdbc51e275`, containing the Product Owner's reference-image commit. The application baseline is the completed EP-03 implementation, not a design authority. The [architecture](../architecture/README.md) and [EP-03 verification](../verification/ep-03-mvp.md) establish technical boundaries and evidence limits.
 
@@ -149,11 +149,11 @@ The Product Owner + Planner decisions define the engineering design direction:
 - Explicit Sol mug/environment/context presentation only for the approved fixture; onomatopoeia is optional polish and not necessary for comprehension.
 - Meaningful static reduced-motion and retained-state equivalents, with availability/freshness separate from lifecycle.
 
-No genuine Product Owner product/design decision remains unresolved in this specification. The Planner can define US-020–US-024 from these requirements once the final specification receives explicit approval. Exact pixel artwork, placement, decorative styling, and frame/cadence choices are implementation refinements within this direction, reviewed by the Designer; they do not require another product-design cycle unless a meaningful departure becomes necessary.
+No genuine Product Owner product/design decision remains unresolved in this specification. With Product Owner approval complete, the Planner can define US-020–US-024 from these approved requirements. Exact pixel artwork, placement, decorative styling, and frame/cadence choices are implementation refinements within this direction, reviewed by the Designer; they do not require another product-design cycle unless a meaningful departure becomes necessary.
 
 ### Implementation / design-review validation still required
 
-Validate exact geometry and minimum-window fit; contrast and readable text; static state/symbol comprehension; animation cadence; coherent pixel-art execution; keyboard behavior and focus visibility; long-content wrapping; reduced-motion behavior; retained-state truthfulness; and actual assistive-technology behavior. Validation of these execution details does not prevent this specification from becoming the approved engineering design source. It also does not establish that the later implementation already satisfies them.
+Validate exact geometry and minimum-window fit; contrast and readable text; static state/symbol comprehension; animation cadence; coherent pixel-art execution; keyboard behavior and focus visibility; long-content wrapping; reduced-motion behavior; retained-state truthfulness; and actual assistive-technology behavior. This specification is the approved engineering design source; execution validation remains required. Design approval does not establish that the later implementation already satisfies these requirements.
 
 ## Acceptance traceability and approval gate — AC-10
 
@@ -168,6 +168,6 @@ Validate exact geometry and minimum-window fit; contrast and readable text; stat
 | AC-07 | Treatment C, restrained selection, compact accessible controls, side/inline inspection, and immediate minimum-window feedback resolved; exact styling is implementation/Designer-review refinement. |
 | AC-08 | Truthful availability and retained-state behavior documented; mechanism belongs to the Planner. |
 | AC-09 | Design requirements for both sizes, scrolling, focus, textual equivalents, and reduced motion resolved; later geometry and accessibility verification remain required. |
-| AC-10 | Final specification ready for explicit Product Owner approval; no blocking product/design decision remains. Approval, authorized artifact commit, and required review remain pending. US-019 is not complete. |
+| AC-10 | The Product Owner approved the final design specification, and the design artifacts are committed. Independent review returned PASS WITH NON-BLOCKING FINDINGS: one LOW approval/commit-status documentation finding, addressed by this status/provenance correction. Maintainer merge and issue closure remain repository workflow actions, not unresolved design decisions. Separate engineering-story authorization and review requirements remain intact. |
 
-Do not begin subsequent design-dependent EP-04 implementation before explicit Product Owner approval of this final specification. The Planner then translates the approved direction into engineering scope. Independent technical review remains separate from design approval.
+The Planner translates the approved direction into engineering scope. Subsequent design-dependent EP-04 implementation requires an authorized engineering story and the normal implementation/review workflow. Independent technical review remains separate from design approval; maintainer merge and issue closure follow the repository workflow.

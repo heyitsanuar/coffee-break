@@ -1,0 +1,249 @@
+{
+  "epic": {
+    "id": "EP-04",
+    "title": "Bring the Office to Life",
+    "objective": "Transform Coffee Break's functional virtual office into an expressive, readable workspace where agents communicate their state and activity primarily through character behavior, workstation feedback, contextual visual language, and environmental interactions.\n\nEP-03 made trusted agent state technically correct.\n\nEP-04 makes that trusted state feel alive while preserving semantic truth.",
+    "scope": [
+      "behavior-led lifecycle presentation;",
+      "restrained comic/symbol reinforcement;",
+      "reactive workstations;",
+      "bounded contextual office interactions;",
+      "integrated selection and inspection;",
+      "truthful availability/freshness presentation;",
+      "responsive Living Office composition;",
+      "reduced-motion equivalents;",
+      "accessibility and integrated visual verification."
+    ],
+    "out_of_scope": [
+      "real Codex/provider integration;",
+      "multi-agent orchestration;",
+      "voice/chat;",
+      "agent-specific personalities;",
+      "multiple themes/rooms;",
+      "GitHub/project integration;",
+      "token/model/cost/productivity/uptime statistics without trusted data;",
+      "autonomous navigation;",
+      "general pathfinding;",
+      "new provider-specific lifecycle semantics;",
+      "major architecture rewrite."
+    ],
+    "design_authority": [
+      "docs/design/references/north-star/",
+      "docs/design/README.md",
+      "docs/design/ep-04-living-office.md"
+    ]
+  },
+  "historical_story": {
+    "id": "US-019",
+    "title": "Establish the Living Office Design Direction",
+    "number": 44
+  },
+  "stories": [
+    {
+      "id": "US-020",
+      "epic": "EP-04",
+      "title": "Express Agent State Through Visual Vocabulary",
+      "user_story": "As a Coffee Break user, I want agents to visibly express their current lifecycle state, so that I can understand what is happening in the office at a glance without depending on developer-like status UI.",
+      "objective": "Implement the approved behavior-led character vocabulary for:\n\n- idle\n- working\n- waiting\n- completed\n- error\n\nCharacter behavior is the primary broad-state signal.\n\nPrecise trusted information remains available through inspection.",
+      "dependencies": [
+        "US-019"
+      ],
+      "dependency_notes": [
+        "US-019"
+      ],
+      "acceptance_criteria": [
+        "Five lifecycle states\n\nAll five trusted lifecycle states have intentional character-level presentation and are meaningfully distinguishable without depending on persistent lifecycle text below each agent.",
+        "Idle semantics\n\nIdle presents a calm/ready agent and must not imply sleeping, coffee, assigned work, completion, or disconnection.",
+        "Working semantics\n\nWorking uses restrained operational character behavior without implying measured progress, coding specifically, successful output, or a particular provider operation.",
+        "Waiting semantics\n\nWaiting stops working behavior and presents an attentive/paused state.\n\nGeneric waiting must not imply coffee, approval, capacity exhaustion, failure, or completion.",
+        "Completed semantics\n\nEntering completed may trigger one brief acknowledgement and then settles into stable completed presentation.\n\nThe transient acknowledgement must not replay merely because of rerender, selection, retained-state restoration, synchronization restoration, or presentation remount without a new meaningful lifecycle transition.",
+        "Error semantics\n\nEntering error may trigger one brief attention reaction and then settles.\n\nIt must not fabricate hardware failure, data loss, a crash, root cause, or provider-specific meaning.",
+        "Supporting cues\n\nSymbols/comic accents are secondary reinforcement.\n\nMeaning must not depend solely on color, animation, hover, or glyph familiarity.",
+        "Live versus retained presentation\n\nOperational repeating character animation runs only while presentation is live.\n\nRetained last-known lifecycle remains visible while operational loops pause.\n\nConnection state must not mutate lifecycle.",
+        "Reduced motion\n\nReduced motion removes unnecessary repeating/transient motion while preserving meaningful static state treatment and precise textual information.",
+        "Runtime authority\n\nTrusted renderer agent state remains runtime authority.\n\nDo not introduce a parallel lifecycle state source inside Phaser.",
+        "Selection independence\n\nSelection, keyboard focus, lifecycle, and availability remain separate.\n\nChanging selection must not mutate or restart lifecycle behavior.",
+        "Verification\n\nAutomated coverage verifies deterministic derivation/transition behavior where practical.\n\nDeveloper demonstrates all five states, retained presentation, and reduced motion.\n\nDesigner review verifies visual meaning against US-019."
+      ],
+      "boundary": "No real providers, new lifecycle states, personalities, voice/chat, autonomous movement/pathfinding, generalized workstation redesign, general contextual interaction system, fake operational data, GitHub features, themes/rooms, or application-shell redesign.",
+      "definition_of_done": [
+        "acceptance criteria implemented;",
+        "focused automated tests added/updated where appropriate;",
+        "existing tests remain green;",
+        "typecheck passes;",
+        "lint passes;",
+        "build passes;",
+        "relevant runtime behavior manually inspected;",
+        "Designer review completed after implementation;",
+        "independent Reviewer review completed after design findings are resolved;",
+        "no unrelated scope introduced."
+      ]
+    },
+    {
+      "id": "US-021",
+      "epic": "EP-04",
+      "title": "Make Agent Workstations Reactive",
+      "user_story": "As a Coffee Break user, I want an agent's immediate workspace to react consistently with the agent's state, so that the office feels inhabited without displaying fabricated operational information.",
+      "objective": "Implement restrained workstation/environment reinforcement for trusted broad lifecycle state.\n\nCharacter behavior from US-020 remains the primary signal.",
+      "dependencies": [
+        "US-020"
+      ],
+      "dependency_notes": [
+        "US-020"
+      ],
+      "acceptance_criteria": [
+        "Idle workstation\n\nIdle has a stable quiet workstation treatment without implying active work, sleep, failure, or completion.",
+        "Working workstation\n\nWorking may use restrained abstract monitor activity.\n\nIt must not resemble or claim readable code, terminal output, logs, messages, progress percentages, token/model information, or productivity metrics.",
+        "Waiting workstation\n\nWaiting stops active working workstation behavior and may retain a stable paused treatment.",
+        "Completed workstation\n\nCompleted may briefly acknowledge the state and settle into a stable completed treatment without claiming measured output or productivity.",
+        "Error workstation\n\nError may use restrained attention treatment without inventing hardware failure, crash, data loss, or root cause.",
+        "Atomic consistency\n\nCharacter and workstation presentation derive from the same trusted broad lifecycle situation.\n\nContradictory combinations such as waiting character + actively working monitor are not permitted.",
+        "Retained state\n\nRepeating workstation activity pauses for retained/non-live presentation while stable last-known treatment remains.\n\nReturning live must not fabricate lifecycle transitions.",
+        "Environmental restraint\n\nPrioritize existing desks, monitors, and immediate work context.\n\nGeneral room decoration remains mostly static.",
+        "Sol semantics\n\nDo not invent a third workstation for Sol.\n\nSol's coffee context belongs to US-022.",
+        "Reduced motion\n\nProvide meaningful static workstation treatment when reduced motion is active.",
+        "Verification\n\nTest lifecycle-to-workstation derivation and contradictory-state prevention where practical.\n\nDesigner verifies that workstation effects reinforce rather than compete with character behavior."
+      ],
+      "boundary": "No fake code/logs, operational metrics, progress indicators, model/token data, generalized environmental simulation, third Sol workstation, new trusted event fields, provider integration, or autonomous movement.",
+      "definition_of_done": [
+        "acceptance criteria implemented;",
+        "focused automated tests added/updated where appropriate;",
+        "existing tests remain green;",
+        "typecheck passes;",
+        "lint passes;",
+        "build passes;",
+        "relevant runtime behavior manually inspected;",
+        "Designer review completed after implementation;",
+        "independent Reviewer review completed after design findings are resolved;",
+        "no unrelated scope introduced."
+      ]
+    },
+    {
+      "id": "US-022",
+      "epic": "EP-04",
+      "title": "Add Contextual Office Interactions",
+      "user_story": "As a Coffee Break user, I want explicit agent context to produce small meaningful interactions with the office, so that trusted activity feels connected to the environment.",
+      "objective": "Introduce the smallest maintainable contextual-presentation mechanism and implement the first canonical contextual interaction: Sol's explicit coffee fixture.",
+      "dependencies": [
+        "US-020",
+        "US-021"
+      ],
+      "dependency_notes": [
+        "US-020",
+        "US-021 where existing environment primitives are reused"
+      ],
+      "acceptance_criteria": [
+        "Explicit context\n\nA context-specific office interaction requires explicit trusted presentation context.\n\nLifecycle alone cannot authorize it.",
+        "Sol coffee fixture\n\nCoffee presentation is authorized only for the existing conjunction:\n\nagent: mock-agent-sol\n\nlifecycle: waiting\n\nactivity: Taking a coffee break in the simulated office",
+        "Generic waiting\n\nGeneric waiting uses neutral waiting presentation and does not produce coffee-specific behavior.",
+        "Generic idle\n\nIdle does not imply coffee or break behavior.",
+        "Trusted inspection\n\nDuring coffee presentation, trusted lifecycle remains waiting and exact activity remains unchanged in inspection.\n\nDo not introduce a break lifecycle state.",
+        "Coffee expression\n\nThe presentation may use mug/cup, coffee-area context, restrained steam, and optional sparse polish such as a brief \"sip\" accent.\n\nSuch polish must not be required for comprehension or permanently shown.",
+        "Bounded mechanism\n\nImplement only the smallest maintainable presentation-level mechanism needed to map explicit trusted context to a micro-interaction.\n\nDo not create a generalized behavior engine or scheduler.",
+        "No autonomous movement\n\nNo pathfinding, general walking, autonomous wandering, meetings, room navigation, or command scheduling.\n\nUse approved existing presentation anchors.",
+        "Freshness and reduced motion\n\nRepeating contextual motion pauses when retained/non-live.\n\nReduced motion provides a stable equivalent.",
+        "Selection semantics\n\nSelection feedback must not imply the agent received an instruction.",
+        "Verification\n\nTests cover the exact Sol fixture and negative cases for generic waiting, idle, and other agents.\n\nDesigner verifies the interaction feels environmental/contextual rather than dashboard-like."
+      ],
+      "boundary": "No new provider events, break lifecycle, navigation/pathfinding, personalities, voice/chat, task assignment, meetings, or generalized interaction scheduler.",
+      "definition_of_done": [
+        "acceptance criteria implemented;",
+        "focused automated tests added/updated where appropriate;",
+        "existing tests remain green;",
+        "typecheck passes;",
+        "lint passes;",
+        "build passes;",
+        "relevant runtime behavior manually inspected;",
+        "Designer review completed after implementation;",
+        "independent Reviewer review completed after design findings are resolved;",
+        "no unrelated scope introduced."
+      ]
+    },
+    {
+      "id": "US-023",
+      "epic": "EP-04",
+      "title": "Integrate Agent Information Into the Office Experience",
+      "user_story": "As a Coffee Break user, I want selection and detailed agent information to feel integrated with the virtual office, so that I can inspect precise trusted information without the application feeling like a monitoring dashboard.",
+      "objective": "Implement approved Treatment C identity hierarchy, selection treatment, compact selector, contextual inspector, availability presentation, and responsive composition.",
+      "dependencies": [
+        "US-020",
+        "US-021",
+        "US-022"
+      ],
+      "dependency_notes": [
+        "US-020",
+        "US-021",
+        "US-022"
+      ],
+      "acceptance_criteria": [
+        "Persistent identity\n\nAri, Mina, and Sol retain compact persistent identity associated with their characters.\n\nDo not restore permanent full lifecycle/activity paragraphs beneath every agent.",
+        "In-world selection\n\nDirect sprite selection remains supported.\n\nSelection is visually distinct from lifecycle, availability, and keyboard focus and does not depend solely on color.",
+        "Compact selector\n\nProvide compact named accessible controls for Ari, Mina, and Sol with accessible names, selected/pressed state, and visible keyboard focus.\n\nDo not use large portrait roster cards as the default treatment.",
+        "Selection consistency\n\nSprite and selector selection address the same identity and inspection state.\n\nLifecycle updates do not unexpectedly clear selection.\n\nSelection does not unexpectedly move keyboard focus.",
+        "Contextual inspector\n\nSelected-agent inspection exposes:\n\n- identity;\n- trusted lifecycle;\n- exact trusted activity;\n- trusted reason when present;\n- freshness/last-known qualification where applicable.\n\nDo not add statistics, history, tabs, task/provider controls, or model/token/cost/productivity information.",
+        "No trusted state\n\nWithout trusted agent state, use explicit unavailable treatment.\n\nDo not fabricate lifecycle or activity.",
+        "Availability hierarchy\n\nAvailability remains separate from lifecycle and truthfully represents:\n\n- connecting without trusted state;\n- connected/synchronized;\n- synchronizing with retained state;\n- disconnected with retained state;\n- disconnected without trusted data.",
+        "Retained information\n\nPreserve and explicitly qualify last-known information.\n\nDisconnection must not map lifecycle to idle, waiting, or error.\n\nOperational loops follow the freshness behavior established by prior stories.",
+        "Normal composition\n\nAt 1100 × 760:\n\n- office remains dominant;\n- availability is concise;\n- contextual inspection uses side placement;\n- selector remains compact;\n- application chrome does not become a dashboard-card grid.",
+        "Minimum composition\n\nAt 760 × 540:\n\n- single-column composition;\n- readable fixed office;\n- no horizontal page scrolling;\n- compact selector remains reachable;\n- immediate selected name + trusted lifecycle feedback is available near\nthe visible office/selection surface;\n- full inspector is reachable below through vertical document scrolling.",
+        "Long content\n\nLong activity, reason, and availability text wraps without overlap or horizontal overflow.",
+        "Accessibility\n\nImportant information remains available without hover, color, or animation.\n\nPreserve named keyboard controls, visible focus, textual lifecycle equivalents, precise trusted inspection, and appropriate polite announcements.\n\nDo not claim screen-reader correctness without actual verification.",
+        "Reduced motion\n\nComposition remains usable with reduced motion and preserves clear live-versus-last-known meaning.",
+        "Verification\n\nValidate actual application behavior at both 1100 × 760 and 760 × 540.\n\nDesigner reviews both sizes."
+      ],
+      "boundary": "No dashboard metrics, model/token/cost/productivity data, GitHub/project board, provider controls, chat/voice, label-preference setting, unapproved keyboard shortcuts, or architecture redesign.",
+      "definition_of_done": [
+        "acceptance criteria implemented;",
+        "focused automated tests added/updated where appropriate;",
+        "existing tests remain green;",
+        "typecheck passes;",
+        "lint passes;",
+        "build passes;",
+        "relevant runtime behavior manually inspected;",
+        "Designer review completed after implementation;",
+        "independent Reviewer review completed after design findings are resolved;",
+        "no unrelated scope introduced."
+      ]
+    },
+    {
+      "id": "US-024",
+      "epic": "EP-04",
+      "title": "Verify and Polish the Living Office Experience",
+      "user_story": "As a Coffee Break user, I want the complete Living Office experience to remain coherent across agent state, selection, availability, window size, and accessibility modes, so that the office feels reliable and finished.",
+      "objective": "Perform integrated EP-04 verification and bounded polish for US-020 through US-023.\n\nThis is not a feature-expansion story.",
+      "dependencies": [
+        "US-020",
+        "US-021",
+        "US-022",
+        "US-023"
+      ],
+      "dependency_notes": [
+        "US-020",
+        "US-021",
+        "US-022",
+        "US-023"
+      ],
+      "acceptance_criteria": [
+        "Integrated lifecycle journey\n\nVerify idle, working, waiting, completed, and error presentation.\n\nBroad state remains understandable in the office while precise trusted information remains available through inspection.",
+        "Workstation consistency\n\nVerify workstation/environment cues remain synchronized with character presentation through transitions.",
+        "Contextual coffee behavior\n\nVerify the canonical Sol fixture produces coffee presentation and negative cases do not.",
+        "Selection journey\n\nVerify sprite selection, selector selection, clear selection, lifecycle updates while selected, and availability changes while selected.",
+        "Connection/retained journey\n\nVerify connecting, synchronized, interruption, retained synchronization, disconnected-retained, unavailable, and return-to-live behavior.\n\nRetained state remains visible and qualified while operational loops pause.\n\nNo connection transition fabricates lifecycle.",
+        "One-shot effects\n\nVerify completed/error acknowledgements do not replay due solely to selection, rerender, remount/restoration, or resynchronization without a new meaningful lifecycle transition.",
+        "Normal window\n\nVerify actual behavior at 1100 × 760 including office dominance, side inspection, selector weight, availability hierarchy, long content, pixel rendering, and focus.",
+        "Minimum window\n\nVerify actual behavior at 760 × 540 including no horizontal overflow, readable office, immediate selected identity/lifecycle feedback, vertical access to full inspector, reachable controls, wrapping, and no clipped essential content.",
+        "Reduced motion\n\nVerify representative lifecycle, workstation, contextual, and retained situations under reduced motion.",
+        "Keyboard/focus\n\nVerify selector reachability, visible focus, selection/focus distinction, clear-selection behavior, and that updates do not unexpectedly move focus or pan the document.",
+        "Accessibility evidence\n\nVerify textual equivalents and appropriate live/status announcements in the actual application.\n\nRecord exact environment and observed behavior for any screen-reader test.\n\nDo not claim unperformed assistive-technology verification.",
+        "Design review\n\nDesigner reviews integrated implementation against the North Star and approved US-019 design documentation.",
+        "Regression\n\nExisting EP-03 trusted-event, synchronization, deduplication, security, connection, and simulator behavior remains intact.\n\nRun repository typecheck, lint, tests, build, and appropriate integration checks.",
+        "Verification record\n\nRecord EP-04 verification evidence and distinguish automated evidence, Developer observations, Designer review, Product Owner/user-assisted observations, and unverified behavior.",
+        "Scope discipline\n\nPolish may fix implementation defects and small approved-design inconsistencies only.\n\nMaterial new product/design/architecture requirements return to the appropriate planning workflow."
+      ],
+      "boundary": "No real providers, new lifecycle semantics, personalities, voice/chat, task assignment, general movement/pathfinding, rooms/themes, GitHub integration, operational statistics, or major architecture redesign.",
+      "definition_of_done": [
+        "US-024 uses its own integrated verification criteria as the final EP-04 acceptance story."
+      ]
+    }
+  ]
+}

@@ -1,12 +1,13 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { OfficeSceneHost } from './office/OfficeSceneHost';
-import { agentStateStore } from './agentState/runtime';
+import { agentStateStore, officePresentationRuntime } from './agentState/runtime';
 import './style.css';
 
 void agentStateStore.start().catch(() => {});
-window.addEventListener('pagehide', () => agentStateStore.stop(), { once: true });
-if (import.meta.hot) import.meta.hot.dispose(() => agentStateStore.stop());
+const dispose = () => { officePresentationRuntime.dispose(); agentStateStore.stop(); };
+window.addEventListener('pagehide', dispose, { once: true });
+if (import.meta.hot) import.meta.hot.dispose(() => { window.removeEventListener('pagehide', dispose); dispose(); });
 
 createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
@@ -20,7 +21,7 @@ createRoot(document.getElementById('root')!).render(
             <p className="welcome-copy">Your AI office, alive.</p>
           </div>
         </header>
-        <OfficeSceneHost store={agentStateStore} />
+        <OfficeSceneHost store={agentStateStore} runtime={officePresentationRuntime} />
         <small>Local simulation · No provider connection</small>
       </section>
     </main>

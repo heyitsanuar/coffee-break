@@ -13,7 +13,7 @@ describe('pure office presentation', () => {
   it('uses neutral placeholders with no invented lifecycle or activity before synchronization', () => {
     const result = deriveOfficePresentation(initialAgentState);
     for (const agent of Object.values(result)) {
-      expect(agent).toEqual({ id: agent.id, state: null, activity: null, visual: 'placeholder' });
+      expect(agent).toEqual({ id: agent.id, state: null, activity: null, visual: 'placeholder', live: false, reducedMotion: false });
     }
   });
 
@@ -21,14 +21,14 @@ describe('pure office presentation', () => {
     'maps %s without changing the trusted lifecycle or activity', (state) => {
       const result = deriveOfficePresentation(synced('mock-agent-ari', { state, activity: `Activity ${state}` }));
       expect(result['mock-agent-ari']).toEqual({
-        id: 'mock-agent-ari', state, activity: `Activity ${state}`, visual: state,
+        id: 'mock-agent-ari', state, activity: `Activity ${state}`, visual: state, live: true, reducedMotion: false,
       });
     },
   );
 
   it('maps only the complete exact Sol waiting fixture to coffee presentation', () => {
     expect(deriveOfficePresentation(synced('mock-agent-sol', { state: 'waiting', activity: COFFEE }))['mock-agent-sol'])
-      .toEqual({ id: 'mock-agent-sol', state: 'waiting', activity: COFFEE, visual: 'coffee' });
+      .toEqual({ id: 'mock-agent-sol', state: 'waiting', activity: COFFEE, visual: 'coffee', live: true, reducedMotion: false });
     for (const [id, state, activity] of [
       ['mock-agent-ari', 'waiting', COFFEE],
       ['mock-agent-mina', 'waiting', COFFEE],
@@ -46,11 +46,11 @@ describe('pure office presentation', () => {
     const connected = deriveOfficePresentation(snapshot);
     expect(connected['mock-agent-mina']).toEqual({
       id: 'mock-agent-mina', state: 'waiting', activity: 'Waiting for approval',
-      reason: 'approval_required', visual: 'waiting',
+      reason: 'approval_required', visual: 'waiting', live: true, reducedMotion: false,
     });
     const disconnected = deriveOfficePresentation({ ...snapshot, connection: 'disconnected', synchronized: false });
-    expect(disconnected).toEqual(connected);
-    expect(sameAgentPresentation(connected['mock-agent-mina'], disconnected['mock-agent-mina'])).toBe(true);
+    expect(disconnected['mock-agent-mina']).toEqual({ ...connected['mock-agent-mina'], live: false });
+    expect(sameAgentPresentation(connected['mock-agent-mina'], disconnected['mock-agent-mina'])).toBe(false);
   });
 });
 

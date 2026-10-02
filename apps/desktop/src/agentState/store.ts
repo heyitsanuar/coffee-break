@@ -1,9 +1,16 @@
 import type { AgentStateApi } from '../../shared/agentState.js';
-import { initialAgentState, reduceAgentState } from './reducer.js';
+import { initialAgentState, reduceAgentState, type AgentStoreState, type AgentAction } from './reducer.js';
+
+export interface AcceptedAgentUpdate {
+  readonly previous: AgentStoreState;
+  readonly next: AgentStoreState;
+  readonly action: AgentAction;
+}
 
 export function createAgentStateStore(bridge: AgentStateApi) {
   let state = initialAgentState;
   const listeners = new Set<() => void>();
+  const acceptedListeners = new Set<(update: AcceptedAgentUpdate) => void>();
   let generation = 0;
   let watch: ReturnType<AgentStateApi['watch']> | null = null;
   let startPromise: Promise<void> | null = null;
@@ -26,11 +33,13 @@ export function createAgentStateStore(bridge: AgentStateApi) {
       result.state = reduceAgentState(result.state, { kind: 'failed' }).state;
     }
     if (result.state !== state) {
+      const previous = state;
       state = result.state;
       if (state.synchronized) {
         availabilityExpired = false;
         clearDeadline();
       }
+      for (const listener of acceptedListeners) listener({ previous, next: state, action });
       for (const listener of listeners) listener();
     }
     return result.resynchronize;
@@ -82,6 +91,10 @@ export function createAgentStateStore(bridge: AgentStateApi) {
     subscribe(listener: () => void) {
       listeners.add(listener);
       return () => { listeners.delete(listener); };
+    },
+    subscribeAcceptedUpdates(listener: (update: AcceptedAgentUpdate) => void) {
+      acceptedListeners.add(listener);
+      return () => { acceptedListeners.delete(listener); };
     },
     start() {
       if (!startPromise) {

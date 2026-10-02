@@ -30,7 +30,7 @@ describe('AgentInspectionPanel', () => {
 
   it('shows no invented runtime state before a trusted snapshot', () => {
     const markup = renderPanel('mock-agent-ari', {
-      id: 'mock-agent-ari', state: null, activity: null, visual: 'placeholder',
+      id: 'mock-agent-ari', state: null, activity: null, live: true, reducedMotion: false, visual: 'placeholder',
     });
     expect(markup).toContain('<dd>Ari</dd>');
     expect(markup).toContain('No local simulation state yet');
@@ -41,7 +41,7 @@ describe('AgentInspectionPanel', () => {
   it('renders selected trusted lifecycle, activity, and optional reason atomically', () => {
     const markup = renderPanel('mock-agent-mina', {
       id: 'mock-agent-mina', state: 'waiting', activity: 'Waiting for approval',
-      reason: 'approval_required', visual: 'waiting',
+      reason: 'approval_required', live: true, reducedMotion: false, visual: 'waiting',
     });
     expect(markup).toContain('<dd>Mina</dd>');
     expect(markup).toContain('<dd>Waiting</dd>');
@@ -54,7 +54,7 @@ describe('AgentInspectionPanel', () => {
   it('keeps Sol lifecycle waiting when its presentation is coffee', () => {
     const markup = renderPanel('mock-agent-sol', {
       id: 'mock-agent-sol', state: 'waiting',
-      activity: 'Taking a coffee break in the simulated office', visual: 'coffee',
+      activity: 'Taking a coffee break in the simulated office', live: true, reducedMotion: false, visual: 'coffee',
     });
     expect(markup).toContain('<dd>Waiting</dd>');
     expect(markup).toContain('<dd>Taking a coffee break in the simulated office</dd>');
@@ -63,10 +63,10 @@ describe('AgentInspectionPanel', () => {
 
   it('updates selected details without changing selected identity', () => {
     const before = renderPanel('mock-agent-ari', {
-      id: 'mock-agent-ari', state: 'idle', activity: 'Ready for a task', visual: 'idle',
+      id: 'mock-agent-ari', state: 'idle', activity: 'Ready for a task', live: true, reducedMotion: false, visual: 'idle',
     });
     const after = renderPanel('mock-agent-ari', {
-      id: 'mock-agent-ari', state: 'working', activity: 'Implementing the change', visual: 'working',
+      id: 'mock-agent-ari', state: 'working', activity: 'Implementing the change', live: true, reducedMotion: false, visual: 'working',
     });
     expect(before).toContain('<dd>Ready for a task</dd>');
     expect(after).toContain('<dd>Implementing the change</dd>');

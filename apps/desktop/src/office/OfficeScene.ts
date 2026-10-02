@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import agentLifecycleUrl from './assets/agent-lifecycle.png';
 import mockAgentsUrl from './assets/mock-agents.png';
 import officeRoomBackgroundUrl from './assets/office-room-background.png';
 import officeRoomForegroundUrl from './assets/office-room-foreground.png';
@@ -16,7 +17,9 @@ import {
   OFFICE_SCENE_HEIGHT,
   OFFICE_SCENE_WIDTH,
 } from './officeLayout';
-import { applyOfficeVisual } from './applyOfficeVisual';
+import { createCharacterMotion } from './applyOfficeVisual';
+import { AGENT_LIFECYCLE_TEXTURE, WORKING_FRAME_RATE, workingFrames } from './agentLifecycleFrames';
+import type { OfficeAcknowledgement } from './officePresentationRuntime';
 import type { OfficeAgentPresentation } from './officePresentation';
 
 export { OFFICE_SCENE_HEIGHT, OFFICE_SCENE_WIDTH } from './officeLayout';
@@ -29,6 +32,7 @@ export class OfficeScene extends Phaser.Scene {
   private readonly agentSprites = new Map<MockAgentId, Phaser.GameObjects.Sprite>();
   private readonly statusLabels = new Map<MockAgentId, Phaser.GameObjects.Text>();
   private readonly presentations = new Map<MockAgentId, OfficeAgentPresentation>();
+  private readonly motions = new Map<MockAgentId, ReturnType<typeof createCharacterMotion>>();
   private selectionIndicator?: Phaser.GameObjects.Graphics;
   private selectedAgentId: MockAgentId | null = null;
 
@@ -42,18 +46,20 @@ export class OfficeScene extends Phaser.Scene {
   }
 
   setAgentPresentation(agentId: MockAgentId, presentation: OfficeAgentPresentation): void {
-    const previous = this.presentations.get(agentId);
     this.presentations.set(agentId, presentation);
-    if (previous?.visual === presentation.visual) return;
-    const sprite = this.agentSprites.get(agentId);
-    const label = this.statusLabels.get(agentId);
-    const agent = MOCK_AGENTS.find(({ id }) => id === agentId);
-    if (sprite && label && agent) applyOfficeVisual(agent, presentation.visual, sprite, label);
+    this.motions.get(agentId)?.apply(presentation);
+  }
+
+  acknowledge(value: OfficeAcknowledgement): void {
+    this.motions.get(value.id)?.acknowledge(value);
   }
 
   preload(): void {
     this.load.image(OFFICE_BACKGROUND_TEXTURE, officeRoomBackgroundUrl);
     this.load.image(OFFICE_FOREGROUND_TEXTURE, officeRoomForegroundUrl);
+    this.load.spritesheet(AGENT_LIFECYCLE_TEXTURE, agentLifecycleUrl, {
+      frameWidth: MOCK_AGENT_FRAME_WIDTH, frameHeight: MOCK_AGENT_FRAME_HEIGHT,
+    });
     this.load.spritesheet(MOCK_AGENTS_TEXTURE, mockAgentsUrl, {
       frameWidth: MOCK_AGENT_FRAME_WIDTH,
       frameHeight: MOCK_AGENT_FRAME_HEIGHT,
@@ -87,7 +93,7 @@ export class OfficeScene extends Phaser.Scene {
   }
 
   private createMockAgents(): void {
-    if (!this.textures.exists(MOCK_AGENTS_TEXTURE)) {
+    if (!this.textures.exists(MOCK_AGENTS_TEXTURE) || !this.textures.exists(AGENT_LIFECYCLE_TEXTURE)) {
       console.error('Mock agent spritesheet failed to load.');
       return;
     }
@@ -114,6 +120,12 @@ export class OfficeScene extends Phaser.Scene {
         });
       }
 
+      const workingKey = `office-agent-${agent.id}-working`;
+      if (!this.anims.exists(workingKey)) this.anims.create({
+        key: workingKey, frames: workingFrames(agent.id).map(frame => ({ key: AGENT_LIFECYCLE_TEXTURE, frame })),
+        frameRate: WORKING_FRAME_RATE, repeat: -1,
+      });
+
       const sprite = this.add.sprite(anchor.x, anchor.y, MOCK_AGENTS_TEXTURE)
         .setName(agent.id)
         .setOrigin(0.5, 1)
@@ -129,10 +141,17 @@ export class OfficeScene extends Phaser.Scene {
 
       this.agentSprites.set(agent.id, sprite);
       this.statusLabels.set(agent.id, label);
-      applyOfficeVisual(agent, this.presentations.get(agent.id)?.visual ?? 'placeholder', sprite, label);
+      const motion = createCharacterMotion(agent, sprite, label,
+        (delay, callback) => this.time.delayedCall(delay, callback));
+      this.motions.set(agent.id, motion);
+      motion.apply(this.presentations.get(agent.id) ?? {
+        id: agent.id, state: null, activity: null, visual: 'placeholder', live: false, reducedMotion: true,
+      });
     }
 
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
+      for (const motion of this.motions.values()) motion.dispose();
+      this.motions.clear();
       this.agentSprites.clear();
       this.statusLabels.clear();
       this.presentations.clear();

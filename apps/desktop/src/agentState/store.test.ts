@@ -240,3 +240,15 @@ it('makes a cleared deadline callback inert after restart and after successful s
     expect(store.getSnapshot()).toMatchObject({ connection: 'connected', synchronized: true });
   } finally { store.stop(); set.mockRestore(); vi.useRealTimers(); }
 });
+
+it('accepted-update seam observes previous/next/provenance before ordinary subscribers, and excludes stale input', async () => {
+  const fake = fakeBridge(); const store = createAgentStateStore(fake.bridge);
+  await store.start();
+  const observed = vi.fn(); const ordinary = vi.fn(() => expect(observed).toHaveBeenCalled());
+  const detach = store.subscribeAcceptedUpdates(observed); const unsubscribe = store.subscribe(ordinary);
+  fake.watches[0].emit({ kind: 'current', state: mirror(1) });
+  expect(observed.mock.calls[0][0]).toMatchObject({ previous: { revision: 0, synchronized: false }, next: { revision: 1, synchronized: true }, action: { kind: 'current' } });
+  fake.watches[0].emit({ kind: 'current', state: mirror(0) }); expect(observed).toHaveBeenCalledOnce();
+  detach(); unsubscribe(); fake.watches[0].emit({ kind: 'current', state: mirror(2) });
+  expect(observed).toHaveBeenCalledOnce(); store.stop();
+});

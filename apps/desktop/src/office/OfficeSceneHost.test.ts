@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import {
   mountOfficeScene,
+  bindOfficePresentation,
   type CreateOfficeGame,
   type OfficeGame,
   type OfficeGameModule,
@@ -20,12 +21,13 @@ const createHost = (): HTMLElement => ({
 }) as unknown as HTMLElement;
 
 const createGame = (): OfficeGame => ({
+  acknowledge: vi.fn(),
   destroy: vi.fn(),
   setSelectedAgent: vi.fn(),
   setAgentPresentation: vi.fn(),
 });
 const presentation = (id: MockAgentId, state: 'idle' | 'working' = 'idle'): OfficeAgentPresentation => ({
-  id, state, activity: state === 'idle' ? 'Ready for a task' : 'Implementing the change', visual: state,
+  id, state, activity: state === 'idle' ? 'Ready for a task' : 'Implementing the change', visual: state, live: true, reducedMotion: false,
 });
 
 describe('mountOfficeScene', () => {
@@ -207,14 +209,49 @@ it('passes actual store loss and new-session snapshots through one mounted game 
   (game.setAgentPresentation as ReturnType<typeof vi.fn>).mockClear();
   emit({ kind: 'change', change: { kind: 'connection', state: { ...ready, phase: 'disconnected' } } });
   emit({ kind: 'change', change: { kind: 'connection', state: { ...ready, phase: 'synchronizing', sessionId: 'session-2' } } });
-  expect(game.setAgentPresentation).not.toHaveBeenCalled();
+  expect(game.setAgentPresentation).toHaveBeenCalledTimes(3);
+  (game.setAgentPresentation as ReturnType<typeof vi.fn>).mockClear();
   expect(store.getSnapshot().synchronized).toBe(false);
   const fresh = [...agents.slice(0, 2), { ...agents[2], state: 'working' as const, activity: 'Finishing a task' }];
   emit({ kind: 'change', change: { kind: 'snapshot', state: { ...ready, revision: 7, sessionId: 'session-2', agents: fresh } } });
-  expect(game.setAgentPresentation).toHaveBeenCalledOnce();
+  expect(game.setAgentPresentation).toHaveBeenCalledTimes(3);
   expect(game.setAgentPresentation).toHaveBeenCalledWith('mock-agent-sol', expect.objectContaining({ visual: 'working', activity: 'Finishing a task' }));
   expect(game.setSelectedAgent).toHaveBeenLastCalledWith('mock-agent-sol');
   expect(create).toHaveBeenCalledOnce();
   expect(game.destroy).not.toHaveBeenCalled();
   unsubscribe(); store.stop(); mount.destroy();
+});
+
+it('drops pre-load reactions, never replays on remount/rerender/selection, and detaches runtime subscriptions', async () => {
+  const { createOfficePresentationRuntime } = await import('./officePresentationRuntime');
+  let emit!: (message: AgentStateMessage) => void;
+  const store = createAgentStateStore({ watch(fn) { emit = fn; return { ready: Promise.resolve(), close() {} }; } });
+  const runtime = createOfficePresentationRuntime(store, { matches: false, addEventListener() {}, removeEventListener() {} });
+  await store.start();
+  const agents: NonNullable<TrustedAgentState['agents']> = ['Ari', 'Mina', 'Sol'].map(name => ({ agent: { id: `mock-agent-${name.toLowerCase()}`, displayName: name }, state: 'working', activity: 'Work' }));
+  let revision = 1;
+  const state = () => ({ revision, phase: 'ready' as const, sessionId: 'session-1', agents: structuredClone(agents) });
+  const event = (next: 'working' | 'completed' | 'error') => {
+    agents[0].state = next; revision++;
+    emit({ kind: 'change', change: { kind: 'event', state: state(), agent: agents[0] } });
+  };
+  emit({ kind: 'current', state: state() });
+  let finish!: (module: OfficeGameModule) => void;
+  const game = createGame();
+  const mount = mountOfficeScene(createHost(), vi.fn(), () => new Promise(resolve => { finish = resolve; }));
+  const unbind = bindOfficePresentation(runtime, mount);
+  event('completed'); finish({ createOfficeGame: () => game }); await flushModuleLoad();
+  expect(game.acknowledge).not.toHaveBeenCalled();
+  expect(game.setAgentPresentation).toHaveBeenCalledWith('mock-agent-ari', expect.objectContaining({ state: 'completed' }));
+  mount.setSelectedAgent('mock-agent-ari'); mount.setSelectedAgent('mock-agent-sol');
+  mount.setAgentPresentation('mock-agent-ari', runtime.getSnapshot()['mock-agent-ari']);
+  expect(game.acknowledge).not.toHaveBeenCalled();
+  event('working'); event('error'); expect(game.acknowledge).toHaveBeenCalledOnce();
+  unbind(); mount.destroy();
+  const secondGame = createGame(); const second = mountOfficeScene(createHost(), vi.fn(), async () => ({ createOfficeGame: () => secondGame }));
+  const unbindSecond = bindOfficePresentation(runtime, second); await flushModuleLoad();
+  expect(secondGame.acknowledge).not.toHaveBeenCalled();
+  unbindSecond(); second.destroy(); event('working'); event('completed');
+  expect(secondGame.acknowledge).not.toHaveBeenCalled(); expect(game.acknowledge).toHaveBeenCalledOnce();
+  runtime.dispose(); store.stop();
 });

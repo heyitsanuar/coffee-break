@@ -1,4 +1,9 @@
 import { createAgentStateStore } from './store.js';
 
-// Renderer bootstrap owns this one transport/store instance; US-016 will add consumers.
+import { createOfficePresentationRuntime } from '../office/officePresentationRuntime';
+
+// Renderer bootstrap owns transport, trusted state, and its derived presentation lifetime.
 export const agentStateStore = createAgentStateStore(window.coffeeBreak.agentState);
+export const officePresentationRuntime = createOfficePresentationRuntime(
+  agentStateStore, window.matchMedia('(prefers-reduced-motion: reduce)'),
+);

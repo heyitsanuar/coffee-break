@@ -21,6 +21,7 @@ import { createCharacterMotion } from './applyOfficeVisual';
 import { AGENT_LIFECYCLE_TEXTURE, WORKING_FRAME_RATE, workingFrames } from './agentLifecycleFrames';
 import type { OfficeAcknowledgement } from './officePresentationRuntime';
 import type { OfficeAgentPresentation } from './officePresentation';
+import { createWorkstationMotion, getWorkstationGeometry } from './workstationPresentation';
 
 export { OFFICE_SCENE_HEIGHT, OFFICE_SCENE_WIDTH } from './officeLayout';
 
@@ -33,6 +34,7 @@ export class OfficeScene extends Phaser.Scene {
   private readonly statusLabels = new Map<MockAgentId, Phaser.GameObjects.Text>();
   private readonly presentations = new Map<MockAgentId, OfficeAgentPresentation>();
   private readonly motions = new Map<MockAgentId, ReturnType<typeof createCharacterMotion>>();
+  private readonly workstations = new Map<MockAgentId, ReturnType<typeof createWorkstationMotion>>();
   private selectionIndicator?: Phaser.GameObjects.Graphics;
   private selectedAgentId: MockAgentId | null = null;
 
@@ -48,10 +50,12 @@ export class OfficeScene extends Phaser.Scene {
   setAgentPresentation(agentId: MockAgentId, presentation: OfficeAgentPresentation): void {
     this.presentations.set(agentId, presentation);
     this.motions.get(agentId)?.apply(presentation);
+    this.workstations.get(agentId)?.apply(presentation);
   }
 
   acknowledge(value: OfficeAcknowledgement): void {
     this.motions.get(value.id)?.acknowledge(value);
+    this.workstations.get(value.id)?.acknowledge(value);
   }
 
   preload(): void {
@@ -79,7 +83,7 @@ export class OfficeScene extends Phaser.Scene {
       this.createFallbackRoom();
     }
 
-    this.createMockAgents();
+    this.createMockAgents(roomTexturesAvailable);
     this.selectionIndicator = this.add.graphics()
       .setDepth(OFFICE_DEPTHS.futureAgents + 1);
     this.updateSelectionIndicator();
@@ -92,7 +96,7 @@ export class OfficeScene extends Phaser.Scene {
     }
   }
 
-  private createMockAgents(): void {
+  private createMockAgents(roomArtwork = true): void {
     if (!this.textures.exists(MOCK_AGENTS_TEXTURE) || !this.textures.exists(AGENT_LIFECYCLE_TEXTURE)) {
       console.error('Mock agent spritesheet failed to load.');
       return;
@@ -144,12 +148,25 @@ export class OfficeScene extends Phaser.Scene {
       const motion = createCharacterMotion(agent, sprite, label,
         (delay, callback) => this.time.delayedCall(delay, callback));
       this.motions.set(agent.id, motion);
-      motion.apply(this.presentations.get(agent.id) ?? {
+      const presentation: OfficeAgentPresentation = this.presentations.get(agent.id) ?? {
         id: agent.id, state: null, activity: null, visual: 'placeholder', live: false, reducedMotion: true,
-      });
+      };
+      motion.apply(presentation);
+
+      const inset = getWorkstationGeometry(agent.id, roomArtwork);
+      if (inset) {
+        const graphics = this.add.graphics().setPosition(inset.x, inset.y)
+          .setScale(OFFICE_ART_SCALE).setDepth(OFFICE_DEPTHS.background + 1);
+        const workstation = createWorkstationMotion(agent.id, graphics,
+          (delay, callback, loop = false) => this.time.addEvent({ delay, callback, loop }));
+        this.workstations.set(agent.id, workstation);
+        workstation.apply(presentation);
+      }
     }
 
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
+      for (const workstation of this.workstations.values()) workstation.dispose();
+      this.workstations.clear();
       for (const motion of this.motions.values()) motion.dispose();
       this.motions.clear();
       this.agentSprites.clear();

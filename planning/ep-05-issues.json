@@ -1,0 +1,366 @@
+{
+  "epic": {
+    "id": "EP-05",
+    "title": "North Star UI Evolution",
+    "objective": "Transform Coffee Break's existing Living Office into a cohesive, top-down virtual workplace that materially reflects the approved North Star visual identity while preserving the trusted behavioral foundation established in EP-03 and EP-04.\n\nEP-05 is a visual/product-shell evolution. Real provider integration is reserved for EP-06.",
+    "scope": [
+      "North Star application shell with one primary Office surface;",
+      "coordinated high-angle/top-down single-office environment;",
+      "compact, simple, recognizable Ari/Mina/Sol character redesign and existing lifecycle behavior;",
+      "persistent agent identity and quiet persistent lifecycle text;",
+      "contextual desktop inspection and compact inline inspection;",
+      "responsive supported-size composition, keyboard/focus, reduced motion and truthful retained state;",
+      "integrated North Star fidelity acceptance and bounded polish."
+    ],
+    "out_of_scope": [
+      "real providers;",
+      "provider-specific controls/UI;",
+      "GitHub functionality;",
+      "repository/project boards;",
+      "model information;",
+      "token information;",
+      "cost;",
+      "productivity;",
+      "analytics;",
+      "operational history;",
+      "voice;",
+      "chat;",
+      "task assignment;",
+      "orchestration;",
+      "autonomous movement;",
+      "pathfinding;",
+      "generalized navigation;",
+      "multiple functional rooms;",
+      "themes/world marketplace;",
+      "additional agents;",
+      "personalities/biographies;",
+      "new lifecycle semantics."
+    ],
+    "design_authority": [
+      "1. Original approved North Star references: docs/design/references/north-star/coffee-break-north-star-01.png through coffee-break-north-star-04.png. These establish the visual product family, not authorization for every depicted feature.",
+      "2. Product Owner-approved corrected EP-05 top-down composition direction, recorded in this epic: high-angle/top-down game world, compact simple pixel-game inhabitants, richness through coordinated simple objects, ink shell around a warm office, one primary Office surface, persistent identity, quiet lifecycle text, contextual desktop inspection and compact inline inspection. The rejected upper-corner/illustrative composition is not an approved target. No separate corrected-composition image is currently committed; its visual reference/provenance must be supplied before the side-by-side comparison required by US-030.",
+      "3. EP-05 story-specific Product Owner-approved Designer specification, required before that story’s engineering planning/implementation.",
+      "4. Existing implementation where it does not conflict with the higher approved sources."
+    ],
+    "architectural_constraints": [
+      "Preserve provider-neutral shared contracts and Connector/main/preload/renderer trust boundaries.",
+      "Preserve renderer store authority over trusted state; presentation derivation does not become a parallel lifecycle source.",
+      "React owns application shell, roster/selector, inspector, availability, focus and accessibility semantics.",
+      "Phaser owns office world, furniture, characters, workstation visuals, coffee context and world selection presentation.",
+      "Preserve existing lifecycle, connection/retained-state, exact canonical Sol coffee and reduced-motion semantics.",
+      "Retain a 16:9 logical office class. Current 320×180 source + 2× display is the default starting point. 352×198 or another size requires concrete design/fit justification; do not increase logical resolution merely for more detailed artwork.",
+      "Prefer approximately the existing 20×24 character class. Consider approximately 24×28 only when a concrete approved identity/pose requirement cannot fit.",
+      "Preserve integer scaling and nearest-neighbor rendering. The complete office remains understandable at 760×540; no camera navigation is required for the basic office.",
+      "Treat the office as an authored scene graph. Explicit agent/furniture relationships are permitted: Ari → chair → desk → monitor → occlusion layers; Mina → chair → desk → monitor → occlusion layers; Sol → authored normal presentation / coffee-context presentation.",
+      "Do not introduce generalized movement, seating, navigation, pathfinding or furniture interaction.",
+      "Small world sprites may have accessible interaction/hit regions larger than their visible pixels. Existing React roster remains the keyboard-accessible selection equivalent.",
+      "Do not add persistent application state unless a story proves it necessary."
+    ],
+    "visual_principles": [
+      "Office first: the first impression is “I am looking into my AI office.” The office is the primary surface rather than a conventional page containing a pixel-art box.",
+      "North Star perspective fidelity: high-angle/top-down game-world composition prioritizes visible floor, desk tops, chair placement, circulation, workplace zones and small inhabitants in a larger environment. Avoid eye-level/cinematic interiors, upper-corner illustration views and large wall-dominant scenes.",
+      "North Star sprite simplicity: compact stylized pixel-game characters. Improve identity, silhouette, pose readability, animation and environmental integration; do not pursue realistic anatomy, large in-world characters, portrait-like rendering or substantially increased sprite complexity.",
+      "Environmental richness through composition: coordinate simple desks, chairs, monitors, shelves, plants, coffee equipment, rugs, lamps, storage, decoration and flooring/material variation. Do not pursue complexity for its own sake.",
+      "Truthful UI: never fabricate operational information merely to resemble a mockup."
+    ],
+    "design_workflow": [
+      "Product intent",
+      "Planner boundaries",
+      "Designer story-specific proposal",
+      "Product Owner approval",
+      "Planner engineering specification",
+      "Developer implementation",
+      "Designer implementation review",
+      "independent Reviewer",
+      "Product Owner acceptance",
+      "finalization/merge",
+      "US-030 additionally requires explicit integrated North Star fidelity review."
+    ]
+  },
+  "historical_context": [
+    {
+      "id": "EP-04",
+      "number": 46,
+      "title": "Bring the Office to Life"
+    },
+    {
+      "id": "US-024",
+      "number": 51,
+      "title": "Verify and Polish the Living Office Experience"
+    }
+  ],
+  "stories": [
+    {
+      "id": "US-025",
+      "epic": "EP-05",
+      "title": "Establish the North Star Application Shell",
+      "user_story": "As a Coffee Break user, I want the application shell to frame the office as the primary product surface, so that opening Coffee Break feels like entering my AI workplace rather than viewing a conventional page containing a pixel-art scene.",
+      "objective": "Establish the approved ink-toned, office-first application shell while preserving current production office behavior.\n\nScope intent:\n\n- establish approved ink-toned application shell;\n- compact Coffee Break identity/header;\n- truthful global availability treatment;\n- office-first spatial hierarchy;\n- foundational typography/surface/control visual system;\n- prepare desktop contextual-dock geometry;\n- prepare compact room-first composition;\n- preserve current production office behavior while shell changes;\n- no office/character redraw in this story unless a minimal compatibility adjustment is necessary.",
+      "dependencies": [
+        "US-024"
+      ],
+      "dependency_notes": [
+        "US-024 is the merged EP-04 baseline. EP-05 preserves its trusted behavioral foundation.",
+        "Each visual implementation requires the story-specific design/engineering/approval workflow recorded by EP-05; backlog creation does not authorize implementation."
+      ],
+      "acceptance_criteria": [
+        "At 1100×760, the office is the dominant application surface.",
+        "Oversized introductory/page-like chrome is removed/recomposed.",
+        "Global availability remains truthful and discoverable.",
+        "Shell uses approved ink/dark framing with warm-world compatibility.",
+        "Current agent selection and inspection remain functional.",
+        "Current trusted lifecycle/activity/reason semantics are unchanged.",
+        "Keyboard focus remains distinguishable from selection/state.",
+        "At 760×540 there is no horizontal scrolling.",
+        "Compact composition prioritizes office visibility.",
+        "No fake navigation destinations, metrics, provider controls, or data.",
+        "Reduced-motion behavior is not regressed.",
+        "Designer reviews implementation against approved EP-05 direction.",
+        "Regression suite passes."
+      ],
+      "boundary": "Explicitly out of this story: new room artwork, final character redesign, real providers, GitHub, analytics, voice/chat, orchestration.",
+      "definition_of_done": [
+        "acceptance criteria implemented within the approved story scope;",
+        "story-specific Designer proposal approved by the Product Owner before Planner engineering specification and Developer implementation;",
+        "focused automated tests added/updated where appropriate and existing regression suite remains green;",
+        "typecheck, lint and build pass;",
+        "relevant runtime behavior manually inspected at supported sizes, including keyboard/focus and reduced motion where applicable;",
+        "Designer implementation review completed against the approved EP-05 direction;",
+        "independent Reviewer review completed after design findings are resolved;",
+        "Product Owner acceptance obtained before finalization/merge;",
+        "verification evidence distinguishes automated results, Developer observations, user-assisted observations and unverified behavior;",
+        "no unrelated scope introduced."
+      ]
+    },
+    {
+      "id": "US-026",
+      "epic": "EP-05",
+      "title": "Rebuild the Office Environment in the North Star Style",
+      "user_story": "As a Coffee Break user, I want the office itself to use the approved top-down North Star visual language, so that the workspace feels like a small inhabited simulation rather than a sparse room illustration.",
+      "objective": "Rebuild the single office environment in the approved high-angle/top-down North Star language with authored anchors and truthful workstation context.\n\nScope intent:\n\n- coordinated redraw of the single office;\n- high-angle/top-down perspective;\n- warm floor + restrained boundaries;\n- visible desk tops/chairs/circulation;\n- richer work areas;\n- richer coffee/break area;\n- bounded simple environmental props;\n- authored anchors;\n- foreground/background/occlusion layers;\n- reactive Ari/Mina workstation visuals remain truthful;\n- no character redesign beyond temporary compatibility if necessary.",
+      "dependencies": [
+        "US-025"
+      ],
+      "dependency_notes": [
+        "US-025 establishes the visual/interaction foundation for this story; the approved normal implementation order is sequential.",
+        "Each visual implementation requires the story-specific design/engineering/approval workflow recorded by EP-05; backlog creation does not authorize implementation."
+      ],
+      "acceptance_criteria": [
+        "Room composition materially matches approved high-angle/top-down direction.",
+        "Complete room remains a single office.",
+        "Floor/layout is visually dominant over tall walls.",
+        "Ari/Mina workstation locations are spatially clear.",
+        "Sol coffee/break zone is spatially clear.",
+        "Environment richness comes from coordinated simple objects.",
+        "No prop implies unsupported operational state.",
+        "Existing workstation-state semantics remain correct.",
+        "Generic Waiting does not imply coffee.",
+        "Canonical Sol coffee rule remains exact.",
+        "Integer/crisp pixel rendering is preserved.",
+        "Layering supports authored character/furniture relationships.",
+        "Complete office remains understandable at supported sizes.",
+        "Designer performs dedicated environment/art review.",
+        "Regression suite passes."
+      ],
+      "boundary": "Explicitly out of this story: generalized navigation/pathfinding, multiple rooms, themes, final character redesign, provider functionality.",
+      "definition_of_done": [
+        "acceptance criteria implemented within the approved story scope;",
+        "story-specific Designer proposal approved by the Product Owner before Planner engineering specification and Developer implementation;",
+        "focused automated tests added/updated where appropriate and existing regression suite remains green;",
+        "typecheck, lint and build pass;",
+        "relevant runtime behavior manually inspected at supported sizes, including keyboard/focus and reduced motion where applicable;",
+        "Designer implementation review completed against the approved EP-05 direction;",
+        "independent Reviewer review completed after design findings are resolved;",
+        "Product Owner acceptance obtained before finalization/merge;",
+        "verification evidence distinguishes automated results, Developer observations, user-assisted observations and unverified behavior;",
+        "no unrelated scope introduced."
+      ]
+    },
+    {
+      "id": "US-027",
+      "epic": "EP-05",
+      "title": "Redesign Ari, Mina, and Sol as North Star Agents",
+      "user_story": "As a Coffee Break user, I want Ari, Mina, and Sol to look like simple, recognizable inhabitants of the office, so that agent identity and lifecycle behavior are readable without turning the characters into detailed illustrations.",
+      "objective": "Redesign Ari, Mina, and Sol as compact recognizable North Star agents while preserving trusted lifecycle and contextual presentation.\n\nScope intent:\n\n- redesign all three agents in approved compact pixel-game language;\n- preserve Ari/Mina/Sol identity;\n- target existing ~20×24 class first;\n- only justify a modest increase if approved requirements cannot fit;\n- all five lifecycle states;\n- workstation inhabitation;\n- bounded Completed/Error acknowledgement;\n- exact Sol coffee presentation;\n- static reduced-motion equivalents;\n- selection artwork compatible with small sprites.",
+      "dependencies": [
+        "US-026"
+      ],
+      "dependency_notes": [
+        "US-026 establishes the visual/interaction foundation for this story; the approved normal implementation order is sequential.",
+        "Each visual implementation requires the story-specific design/engineering/approval workflow recorded by EP-05; backlog creation does not authorize implementation."
+      ],
+      "acceptance_criteria": [
+        "Characters use compact North-Star-like proportions.",
+        "Character/world scale remains in the approved small-inhabitant range.",
+        "Ari/Mina/Sol remain distinguishable without relying solely on labels.",
+        "Idle is readable and calm.",
+        "Working communicates workstation engagement.",
+        "Waiting communicates stopped/attentive behavior.",
+        "Completed has a bounded acknowledgement and stable settled presentation.",
+        "Error has a bounded acknowledgement and stable settled presentation.",
+        "Acknowledgements do not replay on snapshot/repair/remount/selection.",
+        "Reduced motion suppresses nonessential motion without losing meaning.",
+        "Ari and Mina visibly belong to authored workstations.",
+        "Generic Sol Waiting remains non-coffee.",
+        "Exact canonical Sol coffee state receives the coffee-specific presentation.",
+        "Persistent name + quiet lifecycle text remain available.",
+        "Selection remains distinct from lifecycle and focus.",
+        "Designer reviews all identities/states at actual intended scale.",
+        "Regression suite passes."
+      ],
+      "boundary": "Explicitly out of this story: realistic/illustrative characters, personalities/biographies, additional agents, movement/pathfinding, provider-specific state.",
+      "definition_of_done": [
+        "acceptance criteria implemented within the approved story scope;",
+        "story-specific Designer proposal approved by the Product Owner before Planner engineering specification and Developer implementation;",
+        "focused automated tests added/updated where appropriate and existing regression suite remains green;",
+        "typecheck, lint and build pass;",
+        "relevant runtime behavior manually inspected at supported sizes, including keyboard/focus and reduced motion where applicable;",
+        "Designer implementation review completed against the approved EP-05 direction;",
+        "independent Reviewer review completed after design findings are resolved;",
+        "Product Owner acceptance obtained before finalization/merge;",
+        "verification evidence distinguishes automated results, Developer observations, user-assisted observations and unverified behavior;",
+        "no unrelated scope introduced."
+      ]
+    },
+    {
+      "id": "US-028",
+      "epic": "EP-05",
+      "title": "Integrate Selection and Agent Information Into the New Office",
+      "user_story": "As a Coffee Break user, I want selecting an inhabitant to reveal precise trusted information in a contextual way, so that I can inspect an agent without the office becoming a dashboard.",
+      "objective": "Integrate existing selection and precise trusted agent information into the new office through contextual desktop and compact inline inspection.\n\nScope intent:\n\n- recompose existing roster/selector;\n- integrate world selection with new sprites/workstations;\n- desktop contextual side dock;\n- compact inline inspection;\n- matching selected identity artwork;\n- hierarchy: identity → lifecycle → freshness → exact activity → optional reason;\n- larger accessible world hit regions where necessary;\n- keyboard selection equivalent through React controls;\n- preserve retained-state qualification.",
+      "dependencies": [
+        "US-027"
+      ],
+      "dependency_notes": [
+        "US-027 establishes the visual/interaction foundation for this story; the approved normal implementation order is sequential.",
+        "Each visual implementation requires the story-specific design/engineering/approval workflow recorded by EP-05; backlog creation does not authorize implementation."
+      ],
+      "acceptance_criteria": [
+        "Sprite/world selection and roster selection resolve to the same agent.",
+        "Selection survives lifecycle/activity updates.",
+        "Selection does not move keyboard focus.",
+        "Keyboard focus is visually distinct from selection.",
+        "Small visible sprites have practical pointer hit regions.",
+        "Desktop inspection uses the approved contextual side dock.",
+        "Inspector leads with selected identity and lifecycle.",
+        "Exact trusted activity is displayed without fabrication.",
+        "Optional trusted reason is displayed when present.",
+        "Freshness/retained qualification remains explicit.",
+        "Disconnection does not rewrite lifecycle to Offline.",
+        "No-selection presentation is intentional and non-dashboard-like.",
+        "Long trusted content wraps without destructive truncation/horizontal overflow.",
+        "No model/token/cost/productivity/history/provider data is invented.",
+        "Semantic keyboard controls remain available.",
+        "Designer performs interaction/information-hierarchy review.",
+        "Regression suite passes."
+      ],
+      "boundary": "Bounded to the scope intent above; all EP-05 epic-level exclusions apply. No new trusted state, provider data, or generalized interaction/navigation system.",
+      "definition_of_done": [
+        "acceptance criteria implemented within the approved story scope;",
+        "story-specific Designer proposal approved by the Product Owner before Planner engineering specification and Developer implementation;",
+        "focused automated tests added/updated where appropriate and existing regression suite remains green;",
+        "typecheck, lint and build pass;",
+        "relevant runtime behavior manually inspected at supported sizes, including keyboard/focus and reduced motion where applicable;",
+        "Designer implementation review completed against the approved EP-05 direction;",
+        "independent Reviewer review completed after design findings are resolved;",
+        "Product Owner acceptance obtained before finalization/merge;",
+        "verification evidence distinguishes automated results, Developer observations, user-assisted observations and unverified behavior;",
+        "no unrelated scope introduced."
+      ]
+    },
+    {
+      "id": "US-029",
+      "epic": "EP-05",
+      "title": "Complete the Responsive North Star Experience",
+      "user_story": "As a Coffee Break user, I want the redesigned office to remain coherent at both supported desktop sizes and accessibility modes, so that the North Star experience remains usable rather than being limited to one showcase viewport.",
+      "objective": "Complete the coherent responsive North Star experience across both supported sizes and accessibility modes.\n\nScope intent:\n\n- integrate shell, office, agents, selection and inspection;\n- 1100×760 composition;\n- 760×540 composition;\n- room-first compact flow;\n- inline compact inspection below office;\n- long content;\n- practical hit regions;\n- keyboard/focus;\n- retained state;\n- reduced motion;\n- overflow/reflow polish.",
+      "dependencies": [
+        "US-028"
+      ],
+      "dependency_notes": [
+        "US-028 establishes the visual/interaction foundation for this story; the approved normal implementation order is sequential.",
+        "Each visual implementation requires the story-specific design/engineering/approval workflow recorded by EP-05; backlog creation does not authorize implementation."
+      ],
+      "acceptance_criteria": [
+        "1100×760 matches approved desktop composition hierarchy.",
+        "760×540 preserves the complete understandable office overview.",
+        "No horizontal page scrolling at supported minimum.",
+        "Compact layout does not enlarge characters into a different visual language.",
+        "Selected identity/lifecycle remains immediately available at minimum size.",
+        "Precise inspection remains reachable through vertical flow.",
+        "Long trusted activity/reason content remains readable.",
+        "Pointer targets remain practical for compact world sprites.",
+        "All selection controls remain keyboard reachable.",
+        "Focus remains visible and distinct.",
+        "Retained/disconnected state remains truthful.",
+        "Reduced-motion mode preserves static state meaning.",
+        "No essential meaning depends only on color or animation.",
+        "Actual supported-size evidence is captured.",
+        "Designer reviews both actual target sizes.",
+        "Regression suite passes."
+      ],
+      "boundary": "Bounded to the scope intent above; all EP-05 epic-level exclusions apply. No new trusted state, provider data, or generalized interaction/navigation system.",
+      "definition_of_done": [
+        "acceptance criteria implemented within the approved story scope;",
+        "story-specific Designer proposal approved by the Product Owner before Planner engineering specification and Developer implementation;",
+        "focused automated tests added/updated where appropriate and existing regression suite remains green;",
+        "typecheck, lint and build pass;",
+        "relevant runtime behavior manually inspected at supported sizes, including keyboard/focus and reduced motion where applicable;",
+        "Designer implementation review completed against the approved EP-05 direction;",
+        "independent Reviewer review completed after design findings are resolved;",
+        "Product Owner acceptance obtained before finalization/merge;",
+        "verification evidence distinguishes automated results, Developer observations, user-assisted observations and unverified behavior;",
+        "no unrelated scope introduced."
+      ]
+    },
+    {
+      "id": "US-030",
+      "epic": "EP-05",
+      "title": "Verify and Polish North Star Fidelity",
+      "user_story": "As a Coffee Break user, I want the completed redesign to remain faithful to the approved North Star and trusted Living Office behavior, so that Coffee Break feels like the product we designed rather than a set of individually completed UI changes.",
+      "objective": "Perform integrated EP-05 acceptance and bounded polish, comparing the completed product against both the original North Star and the approved corrected composition. This is not a feature-expansion story.\n\nScope intent:\n\n- integrated EP-05 visual acceptance;\n- explicit original-North-Star comparison;\n- explicit corrected-composition comparison;\n- integrated lifecycle journey;\n- workstation behavior;\n- canonical and negative coffee cases;\n- selection;\n- connection/retained state;\n- acknowledgement non-replay;\n- desktop;\n- compact;\n- reduced motion;\n- keyboard/focus;\n- accessibility evidence;\n- bounded polish only.",
+      "dependencies": [
+        "US-029"
+      ],
+      "dependency_notes": [
+        "US-029 establishes the visual/interaction foundation for this story; the approved normal implementation order is sequential.",
+        "Each visual implementation requires the story-specific design/engineering/approval workflow recorded by EP-05; backlog creation does not authorize implementation."
+      ],
+      "acceptance_criteria": [
+        "Integrated Idle/Working/Waiting/Completed/Error journey is coherent.",
+        "Ari/Mina workstation presentation agrees with trusted lifecycle.",
+        "Canonical Sol coffee case is correct.",
+        "Generic Sol Waiting does not receive coffee presentation.",
+        "Selection remains coherent across world, roster and inspector.",
+        "Connection/retained behavior remains truthful.",
+        "Completed/Error acknowledgements do not replay incorrectly.",
+        "Actual 1100×760 composition is verified.",
+        "Actual 760×540 composition is verified.",
+        "Reduced-motion behavior is verified.",
+        "Keyboard/focus behavior is verified.",
+        "Textual equivalents and accessibility semantics are evidenced without unsupported screen-reader claims.",
+        "Side-by-side evidence compares completed product with original North Star.",
+        "Side-by-side evidence compares completed product with the approved corrected EP-05 composition.",
+        "Perspective is demonstrably high-angle/top-down rather than illustrative upper-corner.",
+        "Character scale/simplicity remains materially consistent with approved direction.",
+        "Environmental richness comes from composition/simple objects rather than illustrative complexity.",
+        "Office remains the dominant product surface.",
+        "No unsupported North Star functionality was introduced.",
+        "Designer performs final integrated fidelity review.",
+        "Independent Reviewer verifies acceptance evidence and regressions.",
+        "Full regression/typecheck/lint/build gates pass.",
+        "Verification record documents evidence and remaining limitations.",
+        "Scope remains bounded to EP-05 acceptance/polish."
+      ],
+      "boundary": "Explicitly out of this story: new product features, real providers, GitHub, voice/chat, analytics, orchestration, navigation/pathfinding, additional rooms/agents/themes.",
+      "definition_of_done": [
+        "all US-030 integrated acceptance criteria verified with source-grounded evidence and remaining limitations recorded;",
+        "explicit integrated original-North-Star and corrected-composition fidelity review completed by the Designer;",
+        "independent Reviewer verifies acceptance evidence and regressions;",
+        "full regression, typecheck, lint and build gates pass;",
+        "Product Owner accepts integrated EP-05 before finalization/merge;",
+        "polish remains bounded to EP-05 acceptance; material new scope returns to planning."
+      ]
+    }
+  ]
+}

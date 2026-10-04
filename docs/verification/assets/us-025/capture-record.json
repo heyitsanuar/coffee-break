@@ -1,0 +1,561 @@
+{
+  "base": "697654144d1630d72d4a1011f0ed8b001b2c50be",
+  "capturedAt": "2026-10-04T17:29:16.892Z",
+  "provenance": "Unedited offscreen Electron capturePage of production Application, store, runtime, host and Phaser; development-only synthetic accepted inputs; no native keyboard, provider or authenticated transport claim",
+  "electron": "37.10.3",
+  "platform": "darwin",
+  "captures": [
+    {
+      "name": "1100-unselected",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "ddecaf9b684c11b423471360c9271a563029c3e32a8f8a2b3ba024115db25517"
+    },
+    {
+      "name": "1100-selected",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "d1503ceb87862a766c573d6913fc1e516953c903ce4673ae2c98e73b12ffe9e7"
+    },
+    {
+      "name": "760-unselected",
+      "viewport": [
+        760,
+        540
+      ],
+      "scrollY": 0,
+      "size": {
+        "width": 1520,
+        "height": 1080
+      },
+      "pngSha256": "5bfb75bd1d616228e3eb569f9d8e05ee7007791e1f3e6c7e3b5cd38b186f79ae"
+    },
+    {
+      "name": "760-selected",
+      "viewport": [
+        760,
+        540
+      ],
+      "scrollY": 0,
+      "size": {
+        "width": 1520,
+        "height": 1080
+      },
+      "pngSha256": "aeb087272cbe5f641fd57e528885b2825d720470bdf865410acecb8b9edd779d"
+    },
+    {
+      "name": "760-inspector-scroll",
+      "viewport": [
+        760,
+        540
+      ],
+      "scrollY": 357.5,
+      "size": {
+        "width": 1520,
+        "height": 1080
+      },
+      "pngSha256": "0b388b74660af7f138ca3fab08c8490a768e7244533679be8b13687f834fd390"
+    },
+    {
+      "name": "1100-focus-mina-selected-ari",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "2f9ee58642379ea9caf0a8c3fe70f340f155770de91c75923dbb0af6f87f1ee7"
+    },
+    {
+      "name": "1100-retained",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "112712d432a61d41ba98dcf1005bc2d0c5ca30f9b02708de72c859fb215dc2aa"
+    },
+    {
+      "name": "1100-long-activity-reason",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "d203b2bbdc3c5f85a0918caa2b1a781c40a459911a74161b59fc45e7fc304319"
+    },
+    {
+      "name": "760-long-activity-reason",
+      "viewport": [
+        760,
+        540
+      ],
+      "scrollY": 490.5,
+      "size": {
+        "width": 1520,
+        "height": 1080
+      },
+      "pngSha256": "c0f424a5385f105a91a72888862e0fb8b8ed697b7640d6d2fc679bdfa781d086"
+    },
+    {
+      "name": "760-unavailable",
+      "viewport": [
+        760,
+        540
+      ],
+      "scrollY": 0,
+      "size": {
+        "width": 1520,
+        "height": 1080
+      },
+      "pngSha256": "005a483d8dbb5ffe2d9efd71c0b897d4c670556970d6e8314636d5c5da4e0805"
+    },
+    {
+      "name": "760-reduced-motion",
+      "viewport": [
+        760,
+        540
+      ],
+      "scrollY": 0,
+      "size": {
+        "width": 1520,
+        "height": 1080
+      },
+      "pngSha256": "b0855d61f6f3e6168bbc67aa56eed39e578384f63fcf8fe00e2264465b729fdb"
+    }
+  ],
+  "observations": {
+    "760": {
+      "unselected": {
+        "viewport": [
+          760,
+          540
+        ],
+        "dpr": 2,
+        "canvases": 1,
+        "horizontalOverflow": false,
+        "documentHeight": 739,
+        "canvas": {
+          "x": 60,
+          "y": 77,
+          "width": 640,
+          "height": 360,
+          "bottom": 437
+        },
+        "inspector": {
+          "x": 59,
+          "y": 520,
+          "width": 642,
+          "height": 195.5,
+          "bottom": 715.5
+        },
+        "selector": {
+          "x": 59,
+          "y": 468,
+          "width": 642,
+          "height": 36,
+          "bottom": 504
+        },
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 760,
+          "height": 56,
+          "bottom": 56
+        },
+        "columns": "642px"
+      },
+      "selected": {
+        "viewport": [
+          760,
+          540
+        ],
+        "dpr": 2,
+        "canvases": 1,
+        "horizontalOverflow": false,
+        "documentHeight": 897,
+        "canvas": {
+          "x": 60,
+          "y": 77,
+          "width": 640,
+          "height": 360,
+          "bottom": 437
+        },
+        "inspector": {
+          "x": 59,
+          "y": 550,
+          "width": 642,
+          "height": 323.5,
+          "bottom": 873.5
+        },
+        "selector": {
+          "x": 59,
+          "y": 468,
+          "width": 642,
+          "height": 36,
+          "bottom": 504
+        },
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 760,
+          "height": 56,
+          "bottom": 56
+        },
+        "columns": "642px"
+      }
+    },
+    "1100": {
+      "unselected": {
+        "viewport": [
+          1100,
+          760
+        ],
+        "dpr": 2,
+        "canvases": 1,
+        "horizontalOverflow": false,
+        "documentHeight": 760,
+        "canvas": {
+          "x": 25,
+          "y": 77,
+          "width": 640,
+          "height": 360,
+          "bottom": 437
+        },
+        "inspector": {
+          "x": 684,
+          "y": 76,
+          "width": 304,
+          "height": 362,
+          "bottom": 438
+        },
+        "selector": {
+          "x": 24,
+          "y": 480,
+          "width": 642,
+          "height": 36,
+          "bottom": 516
+        },
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 1100,
+          "height": 56,
+          "bottom": 56
+        },
+        "columns": "642px 304px"
+      },
+      "selected": {
+        "viewport": [
+          1100,
+          760
+        ],
+        "dpr": 2,
+        "canvases": 1,
+        "horizontalOverflow": false,
+        "documentHeight": 760,
+        "canvas": {
+          "x": 25,
+          "y": 77,
+          "width": 640,
+          "height": 360,
+          "bottom": 437
+        },
+        "inspector": {
+          "x": 684,
+          "y": 76,
+          "width": 304,
+          "height": 362,
+          "bottom": 438
+        },
+        "selector": {
+          "x": 24,
+          "y": 480,
+          "width": 642,
+          "height": 36,
+          "bottom": 516
+        },
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 1100,
+          "height": 56,
+          "bottom": 56
+        },
+        "columns": "642px 304px"
+      }
+    },
+    "intermediateWidths": [
+      {
+        "viewport": [
+          800,
+          760
+        ],
+        "dpr": 2,
+        "canvases": 1,
+        "horizontalOverflow": false,
+        "documentHeight": 897,
+        "canvas": {
+          "x": 80,
+          "y": 77,
+          "width": 640,
+          "height": 360,
+          "bottom": 437
+        },
+        "inspector": {
+          "x": 79,
+          "y": 550,
+          "width": 642,
+          "height": 323.5,
+          "bottom": 873.5
+        },
+        "selector": {
+          "x": 79,
+          "y": 468,
+          "width": 642,
+          "height": 36,
+          "bottom": 504
+        },
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 800,
+          "height": 56,
+          "bottom": 56
+        },
+        "columns": "642px"
+      },
+      {
+        "viewport": [
+          960,
+          760
+        ],
+        "dpr": 2,
+        "canvases": 1,
+        "horizontalOverflow": false,
+        "documentHeight": 897,
+        "canvas": {
+          "x": 160,
+          "y": 77,
+          "width": 640,
+          "height": 360,
+          "bottom": 437
+        },
+        "inspector": {
+          "x": 159,
+          "y": 550,
+          "width": 642,
+          "height": 323.5,
+          "bottom": 873.5
+        },
+        "selector": {
+          "x": 159,
+          "y": 468,
+          "width": 642,
+          "height": 36,
+          "bottom": 504
+        },
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 960,
+          "height": 56,
+          "bottom": 56
+        },
+        "columns": "642px"
+      },
+      {
+        "viewport": [
+          1011,
+          760
+        ],
+        "dpr": 2,
+        "canvases": 1,
+        "horizontalOverflow": false,
+        "documentHeight": 897,
+        "canvas": {
+          "x": 185.5,
+          "y": 77,
+          "width": 640,
+          "height": 360,
+          "bottom": 437
+        },
+        "inspector": {
+          "x": 184.5,
+          "y": 550,
+          "width": 642,
+          "height": 323.5,
+          "bottom": 873.5
+        },
+        "selector": {
+          "x": 184.5,
+          "y": 468,
+          "width": 642,
+          "height": 36,
+          "bottom": 504
+        },
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 1011,
+          "height": 56,
+          "bottom": 56
+        },
+        "columns": "642px"
+      },
+      {
+        "viewport": [
+          1012,
+          760
+        ],
+        "dpr": 2,
+        "canvases": 1,
+        "horizontalOverflow": false,
+        "documentHeight": 760,
+        "canvas": {
+          "x": 25,
+          "y": 77,
+          "width": 640,
+          "height": 360,
+          "bottom": 437
+        },
+        "inspector": {
+          "x": 684,
+          "y": 76,
+          "width": 304,
+          "height": 362,
+          "bottom": 438
+        },
+        "selector": {
+          "x": 24,
+          "y": 480,
+          "width": 642,
+          "height": 36,
+          "bottom": 516
+        },
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 1012,
+          "height": 56,
+          "bottom": 56
+        },
+        "columns": "642px 304px"
+      },
+      {
+        "viewport": [
+          1024,
+          760
+        ],
+        "dpr": 2,
+        "canvases": 1,
+        "horizontalOverflow": false,
+        "documentHeight": 760,
+        "canvas": {
+          "x": 25,
+          "y": 77,
+          "width": 640,
+          "height": 360,
+          "bottom": 437
+        },
+        "inspector": {
+          "x": 684,
+          "y": 76,
+          "width": 304,
+          "height": 362,
+          "bottom": 438
+        },
+        "selector": {
+          "x": 24,
+          "y": 480,
+          "width": 642,
+          "height": 36,
+          "bottom": 516
+        },
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 1024,
+          "height": 56,
+          "bottom": 56
+        },
+        "columns": "642px 304px"
+      },
+      {
+        "viewport": [
+          1200,
+          760
+        ],
+        "dpr": 2,
+        "canvases": 1,
+        "horizontalOverflow": false,
+        "documentHeight": 760,
+        "canvas": {
+          "x": 25,
+          "y": 77,
+          "width": 640,
+          "height": 360,
+          "bottom": 437
+        },
+        "inspector": {
+          "x": 684,
+          "y": 76,
+          "width": 304,
+          "height": 362,
+          "bottom": 438
+        },
+        "selector": {
+          "x": 24,
+          "y": 480,
+          "width": 642,
+          "height": 36,
+          "bottom": 516
+        },
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 1200,
+          "height": 56,
+          "bottom": 56
+        },
+        "columns": "642px 304px"
+      }
+    ],
+    "spriteSelectorAgreement": true,
+    "focus": {
+      "method": "programmatic initial focus followed by Chromium debugger Input.dispatchKeyEvent Tab; not native observation",
+      "focused": "Select Mina",
+      "selection": "Ari",
+      "outline": "rgb(151, 220, 229) solid 3px",
+      "selectedBorder": "rgb(216, 173, 133)"
+    },
+    "reducedMotion": "Renderer media emulation; full office PNG crop unchanged over 1700ms with working Ari and canonical Sol coffee. Native OS setting not tested.",
+    "reloadOneCanvas": true,
+    "rendererErrors": []
+  }
+}

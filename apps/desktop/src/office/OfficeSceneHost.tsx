@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import type { OfficeAcknowledgement, OfficePresentationRuntime } from './officePresentationRuntime';
 import type { createAgentStateStore } from '../agentState/store';
-import { ConnectionStatus } from './ConnectionStatus';
 import { AgentInspectionPanel } from './AgentInspectionPanel';
 import { AgentSelector } from './AgentSelector';
 import { SelectedAgentSummary, selectedAgentFeedback } from './SelectedAgentSummary';
@@ -95,7 +94,6 @@ export function bindOfficePresentation(runtime: OfficePresentationRuntime, mount
 type OfficeStore = Pick<ReturnType<typeof createAgentStateStore>, 'subscribe' | 'getSnapshot'>;
 
 export function OfficeSceneHost({ store, runtime }: { readonly store: OfficeStore; readonly runtime: OfficePresentationRuntime }): React.JSX.Element {
-  const snapshot = useSyncExternalStore(store.subscribe, store.getSnapshot, store.getSnapshot);
   const presentations = useSyncExternalStore(runtime.subscribe, runtime.getSnapshot, runtime.getSnapshot);
   const hostRef = useRef<HTMLDivElement>(null);
   const mountRef = useRef<OfficeSceneMount | undefined>(undefined);
@@ -139,18 +137,18 @@ export function OfficeSceneHost({ store, runtime }: { readonly store: OfficeStor
 
   return (
     <>
-      <ConnectionStatus snapshot={snapshot} />
       <p className="sr-only" aria-live="polite" aria-atomic="true">{selectedAgentFeedback(selected)}</p>
       <div className="office-composition">
         <div className="office-world">
-          <AgentSelector selectedAgentId={selectedAgentId} onSelectAgent={handleAgentSelected} />
-          <SelectedAgentSummary {...selected} />
           <div
             ref={hostRef}
             className="office-scene-host"
             role="img"
             aria-label={`Pixel-art local simulation office: ${officeDescription}`}
           />
+          <small className="office-context">Local simulation · No provider connection</small>
+          <AgentSelector selectedAgentId={selectedAgentId} onSelectAgent={handleAgentSelected} />
+          <SelectedAgentSummary {...selected} />
         </div>
         <AgentInspectionPanel
           {...selected}

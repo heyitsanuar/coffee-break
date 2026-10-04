@@ -14,7 +14,8 @@ export function connectionStatusCopy(snapshot: AgentStoreState): string {
 }
 
 export function ConnectionStatus({ snapshot }: { readonly snapshot: AgentStoreState }): React.JSX.Element {
-  return <p className="connection-status" role="status" aria-live="polite" aria-atomic="true">
+  return <p className="connection-status" data-live={snapshot.connection === 'connected' && snapshot.synchronized}
+    role="status" aria-live="polite" aria-atomic="true">
     {connectionStatusCopy(snapshot)}
   </p>;
 }

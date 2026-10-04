@@ -1,0 +1,454 @@
+{
+  "provenance": "Direct unedited offscreen Electron captures of synthetic accepted US-024 fixture inputs through production store, runtime, React host and Phaser scene",
+  "capturedAt": "2026-10-04T06:02:39.956Z",
+  "electron": "37.10.3",
+  "platform": "darwin",
+  "arch": "arm64",
+  "captures": [
+    {
+      "name": "journey-idle",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "rect": {
+        "x": 59,
+        "y": 160,
+        "width": 640,
+        "height": 360
+      },
+      "size": {
+        "width": 1280,
+        "height": 720
+      },
+      "pngSha256": "dbc2fb5c5b35d789d255605f4d0772b6af7b367b6eb05165ac81de71019dca11"
+    },
+    {
+      "name": "journey-working",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "rect": {
+        "x": 59,
+        "y": 160,
+        "width": 640,
+        "height": 360
+      },
+      "size": {
+        "width": 1280,
+        "height": 720
+      },
+      "pngSha256": "037348fea040062c3628b0d1d498cab9a7480c592605556f0dbd75eb1270e7ff"
+    },
+    {
+      "name": "journey-waiting",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "rect": {
+        "x": 59,
+        "y": 160,
+        "width": 640,
+        "height": 360
+      },
+      "size": {
+        "width": 1280,
+        "height": 720
+      },
+      "pngSha256": "2519f146a7372f1b29d6121414db0cc4fcaab3f40ae206078d4af2a1d35540d6"
+    },
+    {
+      "name": "journey-completed",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "rect": {
+        "x": 59,
+        "y": 160,
+        "width": 640,
+        "height": 360
+      },
+      "size": {
+        "width": 1280,
+        "height": 720
+      },
+      "pngSha256": "31862753cdfa86ed5758610302fe3d2adbe7a1632766501e76a772853beaba74"
+    },
+    {
+      "name": "journey-completed-settled",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "rect": {
+        "x": 59,
+        "y": 160,
+        "width": 640,
+        "height": 360
+      },
+      "size": {
+        "width": 1280,
+        "height": 720
+      },
+      "pngSha256": "5de8235a123a3efb59b54133b6129e8596998f39947e1f98d219466e7f8213eb"
+    },
+    {
+      "name": "journey-error",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "rect": {
+        "x": 59,
+        "y": 160,
+        "width": 640,
+        "height": 360
+      },
+      "size": {
+        "width": 1280,
+        "height": 720
+      },
+      "pngSha256": "68d182b81c45fb14d12792eb62d72af1924e51535824f23c6fb29ca1b79d1b77"
+    },
+    {
+      "name": "journey-error-settled",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "rect": {
+        "x": 59,
+        "y": 160,
+        "width": 640,
+        "height": 360
+      },
+      "size": {
+        "width": 1280,
+        "height": 720
+      },
+      "pngSha256": "b1efbc9a6d55bcd7c0905dcbf41c8fedef07ca4c169a10f866b8d12b7384834c"
+    },
+    {
+      "name": "normal-coffee",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "rect": null,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "20436ff8574608585a842d793b733081438b1071720d09de625ecebd17c6c695"
+    },
+    {
+      "name": "coffee-negative",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "rect": null,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "4b3002962065a5b8639adae6b8cf211b41275735ceaa71f8dc2e751eb7f80517"
+    },
+    {
+      "name": "desktop-1100x760",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "rect": null,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "d31c92aeee6a8a964ea9565e73ea780c26d2fa8995d85034665fb2063498b7a2"
+    },
+    {
+      "name": "desktop-long",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "rect": null,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "08fadeda9158295fb5309ac6770a82c6cd42500264b2409bfe190fff7619574d"
+    },
+    {
+      "name": "desktop-clear-selection",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "rect": null,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "2d444ecca4e2716c1aa286fd3de761641289ce532e236087f1ec18adff6140f7"
+    },
+    {
+      "name": "desktop-retained",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "rect": null,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "3b6e22d1fbf178dbd90ce083928cbeff841bb68ae45a7713a9d582f068e8ad0c"
+    },
+    {
+      "name": "desktop-synchronizing",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "rect": null,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "34531e7ed887256d6d6f422286e6db8ce29b766da63197123f338b9ae2befe67"
+    },
+    {
+      "name": "desktop-return-live",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "rect": null,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "43064eb3030a061ed8da5a9c8b0ccbee61dd5f3eb2c417d10d4b6585e3c02a0f"
+    },
+    {
+      "name": "desktop-connecting",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "rect": null,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "264b513ca2d787990a9be130043631b24b95ff8ebfd11b5c6832a5149d2c8f7b"
+    },
+    {
+      "name": "desktop-unavailable",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "rect": null,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "9e5d7f10058f9afa3f632dff98a2a2aa20ee676bfefbb690a0752c617b40f4e7"
+    },
+    {
+      "name": "desktop-unavailable-return-live",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "rect": null,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "9fcab7aac42899daf791d01ca6492da3ebf9ed0642290d7636956c9b90be7dc9"
+    },
+    {
+      "name": "minimum-760x540",
+      "viewport": [
+        760,
+        540
+      ],
+      "scrollY": 0,
+      "rect": null,
+      "size": {
+        "width": 1520,
+        "height": 1080
+      },
+      "pngSha256": "b4b2af69091d92bf4fdae351116c3e27879e4f53a1b2f4a4b3c43814aaa885e6"
+    },
+    {
+      "name": "minimum-inspector",
+      "viewport": [
+        760,
+        540
+      ],
+      "scrollY": 397.5,
+      "rect": null,
+      "size": {
+        "width": 1520,
+        "height": 1080
+      },
+      "pngSha256": "cbd0699d0f39ca20b3b485f8e41b819d05f8469180c355145e07fa2458580ac9"
+    },
+    {
+      "name": "minimum-reduced-motion",
+      "viewport": [
+        760,
+        540
+      ],
+      "scrollY": 344.5,
+      "rect": null,
+      "size": {
+        "width": 1520,
+        "height": 1080
+      },
+      "pngSha256": "892093195ba652d2a6f6b567d18d8456fbb6b3381e6ddfcb4ad6212a0cf3a029"
+    }
+  ],
+  "observations": {
+    "lifecycleJourney": [
+      {
+        "state": "idle",
+        "exactInspector": true
+      },
+      {
+        "state": "working",
+        "exactInspector": true
+      },
+      {
+        "state": "waiting",
+        "exactInspector": true
+      },
+      {
+        "state": "completed",
+        "exactInspector": true
+      },
+      {
+        "state": "error",
+        "exactInspector": true
+      }
+    ],
+    "completedAcknowledgementSettled": true,
+    "exactCoffeeOnlySol": true,
+    "genericSolWaitingRemainsNeutral": true,
+    "desktop": {
+      "viewport": [
+        1100,
+        760
+      ],
+      "dpr": 2,
+      "canvases": 1,
+      "horizontalOverflow": false,
+      "documentHeight": 760,
+      "canvas": {
+        "x": 59,
+        "y": 160,
+        "width": 640,
+        "height": 360,
+        "bottom": 520
+      },
+      "inspector": {
+        "x": 741,
+        "y": 100,
+        "width": 320,
+        "height": 281.5,
+        "bottom": 381.5
+      },
+      "selector": {
+        "x": 39,
+        "y": 100,
+        "width": 680,
+        "height": 37,
+        "bottom": 137
+      },
+      "summary": "none",
+      "columns": "680px 320px"
+    },
+    "focusAndSelection": {
+      "programmaticFocusDoesNotSelect": true,
+      "selectorActivationSelects": true,
+      "updatePreservesFocus": true,
+      "nativeKeyboardCheck": "pending user observation"
+    },
+    "clearSelectionFocus": "not assessed by programmatic focus; native keyboard check requested",
+    "clearSelection": true,
+    "interruptionJourney": [
+      "connected",
+      "disconnected-retained",
+      "synchronizing-retained",
+      "ready-snapshot-restored"
+    ],
+    "unavailableToLive": [
+      "disconnected-unavailable",
+      "complete-ready-snapshot-restored"
+    ],
+    "minimum": {
+      "viewport": [
+        760,
+        540
+      ],
+      "dpr": 2,
+      "canvases": 1,
+      "horizontalOverflow": false,
+      "documentHeight": 937,
+      "canvas": {
+        "x": 60,
+        "y": 170,
+        "width": 640,
+        "height": 360,
+        "bottom": 530
+      },
+      "inspector": {
+        "x": 16,
+        "y": 547,
+        "width": 728,
+        "height": 334.5,
+        "bottom": 881.5
+      },
+      "selector": {
+        "x": 16,
+        "y": 92,
+        "width": 728,
+        "height": 37,
+        "bottom": 129
+      },
+      "summary": "block",
+      "columns": "728px"
+    },
+    "inspectorReachableByVerticalScroll": true,
+    "reducedMotion": "Chromium/Electron renderer media emulation; working character/monitor and coffee canvas stayed pixel-identical over samples; native macOS preference not claimed",
+    "reducedMotionRetained": true,
+    "reloadOneCanvas": true,
+    "rendererConsoleErrors": []
+  }
+}

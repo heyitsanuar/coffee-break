@@ -16,9 +16,7 @@ createRoot(document.getElementById('root')!).render(
         <header className="office-heading">
           <span className="brand-mark" aria-hidden="true">☕</span>
           <div>
-            <p className="eyebrow">Local-first desktop office</p>
             <h1 id="office-title">Coffee Break</h1>
-            <p className="welcome-copy">Your AI office, alive.</p>
           </div>
         </header>
         <OfficeSceneHost store={agentStateStore} runtime={officePresentationRuntime} />

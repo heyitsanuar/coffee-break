@@ -141,9 +141,16 @@ export class OfficeScene extends Phaser.Scene {
         .setInteractive({ useHandCursor: true })
         .on(Phaser.Input.Events.POINTER_DOWN, () => this.onAgentSelected(agent.id));
 
-      const label = this.add.text(anchor.x, anchor.y + 8, '', {
+      // Ordinary scene-owned objects: identity stays visible independently of lifecycle/freshness.
+      this.add.rectangle(anchor.x, anchor.y - 66, 44, 18, 0xf5e7c8)
+        .setStrokeStyle(1, 0x5b3a2e).setDepth(OFFICE_DEPTHS.futureAgents + 2);
+      this.add.text(anchor.x, anchor.y - 66, agent.displayName, {
         fontFamily: 'Arial, sans-serif', fontSize: '12px', color: '#302b29',
-        backgroundColor: '#f5f1e9', padding: { x: 4, y: 2 },
+      }).setOrigin(0.5).setDepth(OFFICE_DEPTHS.futureAgents + 2);
+
+      const label = this.add.text(anchor.x, anchor.y + 8, '', {
+        fontFamily: 'Arial, sans-serif', fontSize: '11px', color: '#625a56',
+        backgroundColor: '#f5f1e9', padding: { x: 3, y: 1 },
       }).setOrigin(0.5, 0).setDepth(OFFICE_DEPTHS.futureAgents + 2).setVisible(false);
 
       this.agentSprites.set(agent.id, sprite);

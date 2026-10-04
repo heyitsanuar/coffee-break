@@ -11,29 +11,17 @@ const renderPanel = (
   <AgentInspectionPanel
     selectedAgentId={selectedAgentId}
     presentation={presentation}
-    onSelectAgent={vi.fn()}
     onClearSelection={vi.fn()}
   />,
 );
 
 describe('AgentInspectionPanel', () => {
-  it('retains accessible selection controls and a truthful local-simulation label', () => {
-    const markup = renderPanel('mock-agent-ari');
-    expect(markup).toContain('aria-label="Select Ari"');
-    expect(markup).toContain('aria-label="Select Mina"');
-    expect(markup).toContain('aria-label="Select Sol"');
-    expect(markup.match(/aria-controls="agent-inspection-details"/g)).toHaveLength(3);
-    expect(markup.match(/aria-pressed="true"/g)).toHaveLength(1);
-    expect(markup.match(/aria-pressed="false"/g)).toHaveLength(2);
-    expect(markup).toContain('Local simulation');
-  });
-
   it('shows no invented runtime state before a trusted snapshot', () => {
     const markup = renderPanel('mock-agent-ari', {
       id: 'mock-agent-ari', state: null, activity: null, live: true, reducedMotion: false, visual: 'placeholder',
     });
     expect(markup).toContain('<dd>Ari</dd>');
-    expect(markup).toContain('No local simulation state yet');
+    expect(markup).toContain('No trusted agent state available yet.');
     expect(markup).not.toContain('Waiting for a task');
     expect(markup).not.toContain('<dt>Activity</dt>');
   });
@@ -80,4 +68,27 @@ describe('AgentInspectionPanel', () => {
     expect(markup).toContain('disabled=""');
     expect(markup).not.toContain('<dt>Name</dt>');
   });
+});
+
+it('preserves exact retained fields, qualifies once, and does not announce full details', () => {
+  const markup = renderPanel('mock-agent-mina', {
+    id: 'mock-agent-mina', state: 'waiting', activity: 'A long trusted activity / literal & text',
+    reason: 'capacity_exhausted', live: false, reducedMotion: true, visual: 'waiting',
+  });
+  expect(markup).toContain('<dd>Waiting</dd>');
+  expect(markup).toContain('A long trusted activity / literal &amp; text');
+  expect(markup).toContain('Capacity exhausted');
+  expect(markup.match(/Last known/g)).toHaveLength(1);
+  expect(markup).not.toContain('aria-live');
+  expect(markup).not.toContain('aria-atomic');
+});
+
+it('omits absent reason and live freshness without truncating long content', () => {
+  const activity = 'unbroken'.repeat(64);
+  const markup = renderPanel('mock-agent-ari', {
+    id: 'mock-agent-ari', state: 'error', activity, live: true, reducedMotion: false, visual: 'error',
+  });
+  expect(markup).toContain(activity);
+  expect(markup).not.toContain('<dt>Reason</dt>');
+  expect(markup).not.toContain('Last known');
 });

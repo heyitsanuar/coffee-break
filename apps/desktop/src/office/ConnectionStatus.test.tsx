@@ -14,7 +14,7 @@ describe('global connection status', () => {
     [initialAgentState, 'Connecting to local simulation…'],
     [{ ...initialAgentState, connection: 'disconnected' }, 'Disconnected · Local simulation unavailable'],
     [{ ...initialAgentState, connection: 'disconnected', agentsById: retained }, 'Disconnected · Showing last known agent state'],
-    [{ ...initialAgentState, agentsById: retained }, 'Synchronizing local simulation · Showing last known agent state'],
+    [{ ...initialAgentState, agentsById: retained }, 'Synchronizing · Showing last known agent state'],
     [{ ...initialAgentState, connection: 'connected', synchronized: true, agentsById: retained }, 'Connected · Local simulation active'],
   ] as Array<[AgentStoreState, string]>)('reports truthful availability with a polite live region', (snapshot, copy) => {
     const markup = renderToStaticMarkup(<ConnectionStatus snapshot={snapshot} />);

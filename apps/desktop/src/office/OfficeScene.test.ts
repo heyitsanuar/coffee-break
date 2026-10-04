@@ -12,7 +12,7 @@ vi.mock('phaser', () => ({
       anims = { exists: vi.fn(() => false), create: vi.fn() };
       events = { once: vi.fn() };
       time = { delayedCall: vi.fn(() => ({ remove: vi.fn() })), addEvent: vi.fn(() => ({ remove: vi.fn() })) };
-      add = { sprite: vi.fn(), text: vi.fn(), graphics: vi.fn(() => graphics()) };
+      add = { sprite: vi.fn(), text: vi.fn(), rectangle: vi.fn(() => ({ setStrokeStyle: vi.fn().mockReturnThis(), setDepth: vi.fn().mockReturnThis() })), graphics: vi.fn(() => graphics()) };
     },
     Input: { Events: { POINTER_DOWN: 'pointerdown' } },
     Scenes: { Events: { SHUTDOWN: 'shutdown' } },
@@ -70,7 +70,7 @@ function monitorScene(roomArtwork = true) {
   };
   const sprites = [sprite(), sprite(), sprite()];
   sprites.forEach(item => internals.add.sprite.mockReturnValueOnce(item));
-  sprites.forEach(() => internals.add.text.mockReturnValueOnce(label()));
+  sprites.forEach(() => { internals.add.text.mockReturnValueOnce(label()).mockReturnValueOnce(label()); });
   internals.createMockAgents(roomArtwork);
   const monitors = internals.add.graphics.mock.results.map(({ value }) => value as ReturnType<typeof graphics>);
   return { scene, internals, monitors: monitors.slice(0, 2), steam: monitors[2], sprites };
@@ -96,7 +96,7 @@ describe('OfficeScene presentation handoff', () => {
     let complete!: () => void;
     internals.time.delayedCall.mockImplementation((_delay, callback) => { complete = callback; return { remove }; });
     sprites.forEach(item => internals.add.sprite.mockReturnValueOnce(item));
-    sprites.forEach(() => internals.add.text.mockReturnValueOnce(label()));
+    sprites.forEach(() => { internals.add.text.mockReturnValueOnce(label()).mockReturnValueOnce(label()); });
     internals.createMockAgents();
     scene.setAgentPresentation('mock-agent-ari', presentation('mock-agent-ari', 'completed'));
     scene.acknowledge({ id: 'mock-agent-ari', state: 'completed', sequence: 1 });
@@ -135,14 +135,14 @@ describe('OfficeScene presentation handoff', () => {
     const sprites = [sprite(), sprite(), sprite()];
     const labels = [label(), label(), label()];
     sprites.forEach((item) => internals.add.sprite.mockReturnValueOnce(item));
-    labels.forEach((item) => internals.add.text.mockReturnValueOnce(item));
+    labels.forEach((item) => internals.add.text.mockReturnValueOnce(label()).mockReturnValueOnce(item));
 
     scene.setAgentPresentation('mock-agent-sol', presentation('mock-agent-sol', 'working'));
     scene.setAgentPresentation('mock-agent-sol', presentation('mock-agent-sol', 'coffee'));
     internals.createMockAgents();
 
     expect(internals.add.sprite).toHaveBeenCalledTimes(3);
-    expect(internals.add.text).toHaveBeenCalledTimes(3);
+    expect(internals.add.text).toHaveBeenCalledTimes(6);
     expect(sprites[2].play).toHaveBeenCalledExactlyOnceWith('office-agent-mock-agent-sol', true);
     expect(labels[2].setText).toHaveBeenLastCalledWith('Coffee break');
     expect(labels[2].setText).not.toHaveBeenCalledWith('Working');
@@ -335,4 +335,43 @@ describe('OfficeScene contextual mug integration', () => {
     expect(remount.internals.time.addEvent).toHaveBeenCalledExactlyOnceWith(expect.objectContaining({ delay: 1600, loop: true }));
     detach(); detachRemount(); runtime.dispose(); store.stop();
   });
+});
+
+it('keeps all persistent nameplates independent of lifecycle, freshness and reduced motion', () => {
+  const f = monitorScene();
+  const calls = f.internals.add.text.mock.calls;
+  expect(calls.filter(([, , text]) => ['Ari', 'Mina', 'Sol'].includes(text)).map(([, , text]) => text)).toEqual(['Ari', 'Mina', 'Sol']);
+  const names = [0, 2, 4].map(index => f.internals.add.text.mock.results[index].value as ReturnType<typeof label>);
+  for (const visual of ['idle', 'working', 'waiting', 'completed', 'error', 'coffee'] as const) {
+    f.scene.setAgentPresentation('mock-agent-sol', { ...presentation('mock-agent-sol', visual), live: false, reducedMotion: true });
+  }
+  for (const name of names) {
+    expect(name.setText).not.toHaveBeenCalled();
+    expect(name.setVisible).not.toHaveBeenCalled();
+  }
+  const solLabel = f.internals.add.text.mock.results[5].value as ReturnType<typeof label>;
+  expect(solLabel.setText).toHaveBeenLastCalledWith('Coffee break');
+});
+
+it('forwards direct sprite identity and draws only the existing static double outline', () => {
+  const callback = vi.fn();
+  const scene = new OfficeScene(callback);
+  const internal = scene as unknown as {
+    add: { sprite: ReturnType<typeof vi.fn>; text: ReturnType<typeof vi.fn> };
+    createMockAgents(): void;
+    selectionIndicator: { clear: ReturnType<typeof vi.fn>; lineStyle: ReturnType<typeof vi.fn>; strokeRect: ReturnType<typeof vi.fn> };
+  };
+  const sprites = [sprite(), sprite(), sprite()];
+  Object.assign(sprites[0], { x: 136, y: 248 });
+  for (const item of sprites) internal.add.sprite.mockReturnValueOnce(item);
+  sprites.forEach(() => internal.add.text.mockReturnValueOnce(label()).mockReturnValueOnce(label()));
+  internal.createMockAgents();
+  const pointer = sprites[0].on.mock.calls.find(([event]) => event === 'pointerdown')![1] as () => void;
+  pointer();
+  expect(callback).toHaveBeenCalledExactlyOnceWith('mock-agent-ari');
+  internal.selectionIndicator = { clear: vi.fn(), lineStyle: vi.fn(), strokeRect: vi.fn() };
+  scene.setSelectedAgent('mock-agent-ari');
+  expect(internal.selectionIndicator.strokeRect.mock.calls).toEqual([[113, 193, 46, 54], [115, 195, 42, 50]]);
+  scene.setSelectedAgent(null);
+  expect(internal.selectionIndicator.clear).toHaveBeenCalledTimes(2);
 });

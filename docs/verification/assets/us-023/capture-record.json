@@ -1,0 +1,425 @@
+{
+  "provenance": "Direct unedited offscreen Electron renderer captures of synthetic accepted US-023 fixture inputs",
+  "capturedAt": "2026-10-04T04:30:54.353Z",
+  "electron": "37.10.3",
+  "platform": "darwin",
+  "captures": [
+    {
+      "name": "normal-ari",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "rect": null,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "1d81440eb95b7626ece5fa531728e22c550731796e4f323ee697ca5513077277"
+    },
+    {
+      "name": "normal-mina",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "rect": null,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "e1ac5a47268fb4237acd0c429da8f3c2dd6cd3d9463cccd0975b65add725bd48"
+    },
+    {
+      "name": "normal-sol",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "rect": null,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "056539ea615ac3ed2c0652dc5980a46ed9e5a3aef17173c056e2de8c3d3efb6d"
+    },
+    {
+      "name": "normal-office",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "rect": {
+        "x": 59,
+        "y": 160,
+        "width": 640,
+        "height": 360
+      },
+      "size": {
+        "width": 1280,
+        "height": 720
+      },
+      "pngSha256": "a050fa8149ae72b44cdbf4a6194401d333956eafc58a2a01640edbb0bbb010df"
+    },
+    {
+      "name": "normal-long",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "rect": null,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "f6fb70b137d8427bfeb3c0231e63ace31785a8ffe159c497c4a6063a47ddafa0"
+    },
+    {
+      "name": "normal-retained",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "rect": null,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "a1018f06c7ca4a7ae5a67d192ad11698f1cf0f4166851e7e8e711fe97db87d84"
+    },
+    {
+      "name": "normal-synchronizing",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "rect": null,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "6168ebc0c042d39f7e189ce254b07f31a27718f70bcd2d0a1de0675c3505784a"
+    },
+    {
+      "name": "normal-unavailable",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "rect": null,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "9d1e8ddf6efeddf568d1a34f511f155c48ef98de2fb030e5f29030340d17eaab"
+    },
+    {
+      "name": "normal-connecting",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "rect": null,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "b769a4f621216d0560640ce8ba9457523faaa875670084f1283f9a6e6bb90b5c"
+    },
+    {
+      "name": "minimum-ari",
+      "viewport": [
+        760,
+        540
+      ],
+      "scrollY": 0,
+      "rect": null,
+      "size": {
+        "width": 1520,
+        "height": 1080
+      },
+      "pngSha256": "266006c2c7a4bf22957f6d97bcac2374d928fd04475ad6e35113502b54eba271"
+    },
+    {
+      "name": "minimum-mina",
+      "viewport": [
+        760,
+        540
+      ],
+      "scrollY": 0,
+      "rect": null,
+      "size": {
+        "width": 1520,
+        "height": 1080
+      },
+      "pngSha256": "32950f109527d13daa61dc09bcef4d9b9d68c58f7ef8cc46e181ab5bc3c3cebf"
+    },
+    {
+      "name": "minimum-sol",
+      "viewport": [
+        760,
+        540
+      ],
+      "scrollY": 0,
+      "rect": null,
+      "size": {
+        "width": 1520,
+        "height": 1080
+      },
+      "pngSha256": "de9556a879908f79bc43aef708b15bb03dde1c33f8c5dcd87ce0255100ba45f1"
+    },
+    {
+      "name": "minimum-office",
+      "viewport": [
+        760,
+        540
+      ],
+      "scrollY": 80,
+      "rect": {
+        "x": 60,
+        "y": 90,
+        "width": 640,
+        "height": 360
+      },
+      "size": {
+        "width": 1280,
+        "height": 720
+      },
+      "pngSha256": "85eeb9038f280463f09dc3cd4659f1965a1afb56c1ad7420e41c7721004ce7f8"
+    },
+    {
+      "name": "minimum-inspector",
+      "viewport": [
+        760,
+        540
+      ],
+      "scrollY": 344.5,
+      "rect": null,
+      "size": {
+        "width": 1520,
+        "height": 1080
+      },
+      "pngSha256": "7f4b0c2689613a6b9d0e8356e7ad9448ef68db1b0d40cb9ff9d4830fd8d5d6f3"
+    },
+    {
+      "name": "minimum-retained",
+      "viewport": [
+        760,
+        540
+      ],
+      "scrollY": 0,
+      "rect": null,
+      "size": {
+        "width": 1520,
+        "height": 1080
+      },
+      "pngSha256": "ae35a780628790fadebf50c9ebb8cad37f1a0ca16b5c3cb5f2f7eb89456db47d"
+    },
+    {
+      "name": "minimum-unavailable",
+      "viewport": [
+        760,
+        540
+      ],
+      "scrollY": 0,
+      "rect": null,
+      "size": {
+        "width": 1520,
+        "height": 1080
+      },
+      "pngSha256": "4069c58d4d08cc1d2a09d245ae9ff92e6e7b6816950a9ddd9d97cab9e7e911f6"
+    },
+    {
+      "name": "minimum-long",
+      "viewport": [
+        760,
+        540
+      ],
+      "scrollY": 0,
+      "rect": null,
+      "size": {
+        "width": 1520,
+        "height": 1080
+      },
+      "pngSha256": "cd213a644e1077555f86c78a884d919a088fd06d2c97448033f50601820b4e7f"
+    },
+    {
+      "name": "minimum-long-inspector",
+      "viewport": [
+        760,
+        540
+      ],
+      "scrollY": 477.5,
+      "rect": null,
+      "size": {
+        "width": 1520,
+        "height": 1080
+      },
+      "pngSha256": "e69e54632897d5521d3ca8a7fc3087224f6cb33dcc7fb4c0eda0d5885be69695"
+    },
+    {
+      "name": "minimum-reduced",
+      "viewport": [
+        760,
+        540
+      ],
+      "scrollY": 0,
+      "rect": null,
+      "size": {
+        "width": 1520,
+        "height": 1080
+      },
+      "pngSha256": "5d1211c6a28aca21a81674821d3df620085100bea5bcca1fa7b29c3869816a54"
+    }
+  ],
+  "observations": {
+    "normal": {
+      "viewport": [
+        1100,
+        760
+      ],
+      "dpr": 2,
+      "canvases": 1,
+      "horizontalOverflow": false,
+      "documentHeight": 760,
+      "grid": "680px 320px",
+      "canvas": {
+        "x": 59,
+        "y": 160,
+        "width": 640,
+        "height": 360,
+        "bottom": 520
+      },
+      "inspector": {
+        "x": 741,
+        "y": 100,
+        "width": 320,
+        "height": 300.5,
+        "bottom": 400.5
+      },
+      "selector": {
+        "x": 39,
+        "y": 100,
+        "width": 680,
+        "height": 37,
+        "bottom": 137
+      },
+      "summaryDisplay": "none"
+    },
+    "focusAloneDoesNotSelect": true,
+    "lifecyclePreservesSelectionAndFocus": true,
+    "sameHostGameRemountRetainsSelection": true,
+    "actualSpritePointerSelectsSol": true,
+    "breakpointDesktop": {
+      "viewport": [
+        1024,
+        760
+      ],
+      "dpr": 2,
+      "canvases": 1,
+      "horizontalOverflow": false,
+      "documentHeight": 760,
+      "grid": "660.523px 300.523px",
+      "canvas": {
+        "x": 30.734375,
+        "y": 160,
+        "width": 640,
+        "height": 360,
+        "bottom": 520
+      },
+      "inspector": {
+        "x": 703,
+        "y": 100,
+        "width": 300.5234375,
+        "height": 334.5,
+        "bottom": 434.5
+      },
+      "selector": {
+        "x": 20.4765625,
+        "y": 100,
+        "width": 660.5234375,
+        "height": 37,
+        "bottom": 137
+      },
+      "summaryDisplay": "none"
+    },
+    "breakpointCompact": {
+      "viewport": [
+        1023,
+        760
+      ],
+      "dpr": 2,
+      "canvases": 1,
+      "horizontalOverflow": false,
+      "documentHeight": 937,
+      "grid": "991px",
+      "canvas": {
+        "x": 191.5,
+        "y": 170,
+        "width": 640,
+        "height": 360,
+        "bottom": 530
+      },
+      "inspector": {
+        "x": 16,
+        "y": 547,
+        "width": 991,
+        "height": 334.5,
+        "bottom": 881.5
+      },
+      "selector": {
+        "x": 16,
+        "y": 92,
+        "width": 991,
+        "height": 37,
+        "bottom": 129
+      },
+      "summaryDisplay": "block"
+    },
+    "minimum": {
+      "viewport": [
+        760,
+        540
+      ],
+      "dpr": 2,
+      "canvases": 1,
+      "horizontalOverflow": false,
+      "documentHeight": 884,
+      "grid": "728px",
+      "canvas": {
+        "x": 60,
+        "y": 170,
+        "width": 640,
+        "height": 360,
+        "bottom": 530
+      },
+      "inspector": {
+        "x": 16,
+        "y": 547,
+        "width": 728,
+        "height": 281.5,
+        "bottom": 828.5
+      },
+      "selector": {
+        "x": 16,
+        "y": 92,
+        "width": 728,
+        "height": 37,
+        "bottom": 129
+      },
+      "summaryDisplay": "block"
+    },
+    "reducedMotion": "actual renderer media emulation; no native OS or screen-reader claim",
+    "inspectorReachableByDocumentScroll": true,
+    "reloadOneCanvas": true
+  }
+}

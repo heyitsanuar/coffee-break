@@ -3,6 +3,8 @@ import type { OfficeAcknowledgement, OfficePresentationRuntime } from './officeP
 import type { createAgentStateStore } from '../agentState/store';
 import { ConnectionStatus } from './ConnectionStatus';
 import { AgentInspectionPanel } from './AgentInspectionPanel';
+import { AgentSelector } from './AgentSelector';
+import { SelectedAgentSummary, selectedAgentFeedback } from './SelectedAgentSummary';
 import { OFFICE_STATUS_LABELS } from './applyOfficeVisual';
 import type { OfficeGame, OnAgentSelected } from './createOfficeGame';
 import { MOCK_AGENTS, type MockAgentId } from './mockAgents';
@@ -98,6 +100,8 @@ export function OfficeSceneHost({ store, runtime }: { readonly store: OfficeStor
   const hostRef = useRef<HTMLDivElement>(null);
   const mountRef = useRef<OfficeSceneMount | undefined>(undefined);
   const [selectedAgentId, setSelectedAgentId] = useState<MockAgentId | null>(null);
+  const selectionRef = useRef(selectedAgentId);
+  selectionRef.current = selectedAgentId; // Latest host authority for a game remount, not persistent selection state.
   const handleAgentSelected = useCallback((agentId: MockAgentId): void => {
     setSelectedAgentId(agentId);
   }, []);
@@ -111,6 +115,7 @@ export function OfficeSceneHost({ store, runtime }: { readonly store: OfficeStor
 
     const mount = mountOfficeScene(host, handleAgentSelected);
     mountRef.current = mount;
+    mount.setSelectedAgent(selectionRef.current);
     const unbind = bindOfficePresentation(runtime, mount);
 
     return () => {
@@ -130,21 +135,28 @@ export function OfficeSceneHost({ store, runtime }: { readonly store: OfficeStor
   const officeDescription = MOCK_AGENTS.map(({ id, displayName }) =>
     `${displayName} ${OFFICE_STATUS_LABELS[presentations[id].visual] || 'awaiting simulation'}`).join(', ');
 
+  const selected = { selectedAgentId, presentation: selectedAgentId ? presentations[selectedAgentId] : null };
+
   return (
     <>
       <ConnectionStatus snapshot={snapshot} />
-      <div
-        ref={hostRef}
-        className="office-scene-host"
-        role="img"
-        aria-label={`Pixel-art local simulation office: ${officeDescription}`}
-      />
-      <AgentInspectionPanel
-        selectedAgentId={selectedAgentId}
-        presentation={selectedAgentId ? presentations[selectedAgentId] : null}
-        onSelectAgent={handleAgentSelected}
-        onClearSelection={() => setSelectedAgentId(null)}
-      />
+      <p className="sr-only" aria-live="polite" aria-atomic="true">{selectedAgentFeedback(selected)}</p>
+      <div className="office-composition">
+        <div className="office-world">
+          <AgentSelector selectedAgentId={selectedAgentId} onSelectAgent={handleAgentSelected} />
+          <SelectedAgentSummary {...selected} />
+          <div
+            ref={hostRef}
+            className="office-scene-host"
+            role="img"
+            aria-label={`Pixel-art local simulation office: ${officeDescription}`}
+          />
+        </div>
+        <AgentInspectionPanel
+          {...selected}
+          onClearSelection={() => setSelectedAgentId(null)}
+        />
+      </div>
     </>
   );
 }

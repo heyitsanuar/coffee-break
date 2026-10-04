@@ -9,7 +9,7 @@ export function connectionStatusCopy(snapshot: AgentStoreState): string {
     return retained ? 'Disconnected · Showing last known agent state'
       : 'Disconnected · Local simulation unavailable';
   }
-  return retained ? 'Synchronizing local simulation · Showing last known agent state'
+  return retained ? 'Synchronizing · Showing last known agent state'
     : 'Connecting to local simulation…';
 }
 

@@ -62,3 +62,20 @@ it('retains exact Sol coffee during synchronization and replaces it with the new
   const fresh = synced('mock-agent-sol', { state: 'working', activity: 'Finishing a task' });
   expect(deriveOfficePresentation(fresh)['mock-agent-sol']).toMatchObject({ visual: 'working', activity: 'Finishing a task' });
 });
+
+// US-022 keeps semantic matching at this existing presentation boundary.
+it.each(['idle', 'working', 'completed', 'error'] as const)('Sol %s with the exact coffee activity is not coffee', state => {
+  expect(deriveOfficePresentation(synced('mock-agent-sol', { state, activity: COFFEE }))['mock-agent-sol'].visual).toBe(state);
+});
+it.each(['Taking a coffee break', `${COFFEE}!`, `Now ${COFFEE}`, COFFEE.toLowerCase(), ''])('near/missing activity %j stays neutral Waiting', activity => {
+  expect(deriveOfficePresentation(synced('mock-agent-sol', { state: 'waiting', activity }))['mock-agent-sol'].visual).toBe('waiting');
+});
+it('absent trusted agent data never invents coffee', () => {
+  expect(deriveOfficePresentation(initialAgentState)['mock-agent-sol'].visual).toBe('placeholder');
+});
+
+it('missing activity cannot match the exact coffee fixture', () => {
+  // Defensive adapter check only; runtime validation rejects this incomplete trusted value upstream.
+  const incomplete = { state: 'waiting' } as RuntimeAgent;
+  expect(deriveOfficePresentation(synced('mock-agent-sol', incomplete))['mock-agent-sol'].visual).toBe('waiting');
+});

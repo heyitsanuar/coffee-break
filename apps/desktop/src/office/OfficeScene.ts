@@ -22,6 +22,7 @@ import { AGENT_LIFECYCLE_TEXTURE, WORKING_FRAME_RATE, workingFrames } from './ag
 import type { OfficeAcknowledgement } from './officePresentationRuntime';
 import type { OfficeAgentPresentation } from './officePresentation';
 import { createWorkstationMotion, getWorkstationGeometry } from './workstationPresentation';
+import { createCoffeeSteamMotion } from './coffeeSteamPresentation';
 
 export { OFFICE_SCENE_HEIGHT, OFFICE_SCENE_WIDTH } from './officeLayout';
 
@@ -35,6 +36,7 @@ export class OfficeScene extends Phaser.Scene {
   private readonly presentations = new Map<MockAgentId, OfficeAgentPresentation>();
   private readonly motions = new Map<MockAgentId, ReturnType<typeof createCharacterMotion>>();
   private readonly workstations = new Map<MockAgentId, ReturnType<typeof createWorkstationMotion>>();
+  private coffeeSteam?: ReturnType<typeof createCoffeeSteamMotion>;
   private selectionIndicator?: Phaser.GameObjects.Graphics;
   private selectedAgentId: MockAgentId | null = null;
 
@@ -51,6 +53,7 @@ export class OfficeScene extends Phaser.Scene {
     this.presentations.set(agentId, presentation);
     this.motions.get(agentId)?.apply(presentation);
     this.workstations.get(agentId)?.apply(presentation);
+    if (agentId === 'mock-agent-sol') this.coffeeSteam?.apply(presentation);
   }
 
   acknowledge(value: OfficeAcknowledgement): void {
@@ -153,6 +156,14 @@ export class OfficeScene extends Phaser.Scene {
       };
       motion.apply(presentation);
 
+      if (roomArtwork && agent.id === 'mock-agent-sol') {
+        const steam = this.add.graphics().setPosition(574, 192)
+          .setScale(OFFICE_ART_SCALE).setDepth(OFFICE_DEPTHS.background + 1).setVisible(false);
+        this.coffeeSteam = createCoffeeSteamMotion(steam,
+          (delay, callback) => this.time.addEvent({ delay, callback, loop: true }));
+        this.coffeeSteam.apply(presentation);
+      }
+
       const inset = getWorkstationGeometry(agent.id, roomArtwork);
       if (inset) {
         const graphics = this.add.graphics().setPosition(inset.x, inset.y)
@@ -165,6 +176,8 @@ export class OfficeScene extends Phaser.Scene {
     }
 
     this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => {
+      this.coffeeSteam?.dispose();
+      this.coffeeSteam = undefined;
       for (const workstation of this.workstations.values()) workstation.dispose();
       this.workstations.clear();
       for (const motion of this.motions.values()) motion.dispose();

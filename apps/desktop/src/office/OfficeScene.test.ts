@@ -48,11 +48,11 @@ function label() {
 
 function graphics() {
   const instance = { scene: {} as object | undefined, commandBuffer: [] as number[],
-    clear: vi.fn(), fillStyle: vi.fn(), fillRect: vi.fn(), setPosition: vi.fn(), setScale: vi.fn(), setDepth: vi.fn(),
+    clear: vi.fn(), fillStyle: vi.fn(), fillRect: vi.fn(), setVisible: vi.fn(), setPosition: vi.fn(), setScale: vi.fn(), setDepth: vi.fn(),
     preDestroy() { this.commandBuffer = []; }, emit: vi.fn(), removeAllListeners: vi.fn(),
     removeFromDisplayList: vi.fn(), removeFromUpdateList: vi.fn(),
   };
-  for (const key of ['clear', 'fillStyle', 'fillRect', 'setPosition', 'setScale', 'setDepth'] as const) instance[key].mockReturnValue(instance);
+  for (const key of ['clear', 'fillStyle', 'fillRect', 'setVisible', 'setPosition', 'setScale', 'setDepth'] as const) instance[key].mockReturnValue(instance);
   return instance;
 }
 
@@ -63,6 +63,7 @@ function monitorScene(roomArtwork = true) {
     time: { addEvent: ReturnType<typeof vi.fn>; delayedCall: ReturnType<typeof vi.fn> };
     events: { once: ReturnType<typeof vi.fn> };
     workstations: Map<MockAgentId, { dispose(): void }>;
+    coffeeSteam?: { dispose(): void };
     presentations: Map<MockAgentId, unknown>; motions: Map<MockAgentId, unknown>;
     agentSprites: Map<MockAgentId, unknown>; statusLabels: Map<MockAgentId, unknown>;
     createMockAgents(artwork: boolean): void;
@@ -72,7 +73,7 @@ function monitorScene(roomArtwork = true) {
   sprites.forEach(() => internals.add.text.mockReturnValueOnce(label()));
   internals.createMockAgents(roomArtwork);
   const monitors = internals.add.graphics.mock.results.map(({ value }) => value as ReturnType<typeof graphics>);
-  return { scene, internals, monitors, sprites };
+  return { scene, internals, monitors: monitors.slice(0, 2), steam: monitors[2], sprites };
 }
 
 describe('OfficeScene presentation handoff', () => {
@@ -164,7 +165,7 @@ describe('OfficeScene presentation handoff', () => {
 describe('OfficeScene workstation integration', () => {
   it.each([true, false])('creates exactly two pixel-scaled overlays at the correct artwork=%s positions', artwork => {
     const { internals, monitors } = monitorScene(artwork);
-    expect(internals.add.graphics).toHaveBeenCalledTimes(2);
+    expect(internals.add.graphics).toHaveBeenCalledTimes(artwork ? 3 : 2);
     expect([...internals.workstations.keys()]).toEqual(['mock-agent-ari', 'mock-agent-mina']);
     expect(monitors[0].setPosition).toHaveBeenCalledWith(88, artwork ? 80 : 100);
     expect(monitors[1].setPosition).toHaveBeenCalledWith(272, artwork ? 80 : 100);
@@ -187,7 +188,7 @@ describe('OfficeScene workstation integration', () => {
     scene.setAgentPresentation('mock-agent-sol', presentation('mock-agent-sol', 'error'));
     scene.acknowledge({ id: 'mock-agent-sol', state: 'completed', sequence: 2 });
     expect(monitors.map(monitor => monitor.clear.mock.calls.length)).toEqual(counts);
-    expect(internals.add.graphics).toHaveBeenCalledTimes(2);
+    expect(internals.add.graphics).toHaveBeenCalledTimes(3);
   });
   it('finishes every cleanup after actual GameObject destruction precedes the scene listener', () => {
     const GameObject = createRequire(import.meta.url)('phaser/src/gameobjects/GameObject') as typeof import('phaser').GameObjects.GameObject;
@@ -242,5 +243,96 @@ describe('OfficeScene workstation integration', () => {
     expect(remount.internals.time.addEvent).not.toHaveBeenCalled();
     expect(remount.monitors[0].fillRect).toHaveBeenLastCalledWith(7, 6, 6, 1);
     unbind(); detach(); runtime.dispose(); store.stop();
+  });
+});
+
+// Steam receives only the existing presentation discriminant, never a second activity matcher.
+describe('OfficeScene contextual mug integration', () => {
+  it('creates exactly one artwork steam overlay at measured source-scaled coordinates, reused across episodes', () => {
+    const f = monitorScene();
+    expect(f.steam.setPosition).toHaveBeenCalledWith(574, 192);
+    expect(f.steam.setScale).toHaveBeenCalledWith(2); expect(f.steam.setDepth).toHaveBeenCalledWith(1);
+    expect(f.steam.setVisible).toHaveBeenLastCalledWith(false);
+    f.scene.setAgentPresentation('mock-agent-sol', presentation('mock-agent-sol', 'coffee'));
+    expect(f.steam.setVisible).toHaveBeenLastCalledWith(true);
+    expect(f.sprites[2].play).toHaveBeenLastCalledWith('office-agent-mock-agent-sol', true);
+    expect(f.internals.time.addEvent).toHaveBeenCalledWith(expect.objectContaining({ delay: 1600, loop: true }));
+    f.scene.setAgentPresentation('mock-agent-sol', presentation('mock-agent-sol', 'working'));
+    expect(f.steam.setVisible).toHaveBeenLastCalledWith(false);
+    expect(f.sprites[2].play).toHaveBeenLastCalledWith('office-agent-mock-agent-sol-working', true);
+    f.scene.setAgentPresentation('mock-agent-sol', presentation('mock-agent-sol', 'coffee'));
+    expect(f.internals.add.graphics).toHaveBeenCalledTimes(3);
+  });
+  it('fallback creates no steam controller/object, even with coffee presentation', () => {
+    const f = monitorScene(false);
+    f.scene.setAgentPresentation('mock-agent-sol', presentation('mock-agent-sol', 'coffee'));
+    expect(f.steam).toBeUndefined(); expect(f.internals.coffeeSteam).toBeUndefined();
+    expect(f.internals.add.graphics).toHaveBeenCalledTimes(2); expect(f.internals.time.addEvent).not.toHaveBeenCalled();
+    expect(f.sprites[2].play).toHaveBeenLastCalledWith('office-agent-mock-agent-sol', true);
+  });
+  it('ignores selection, acknowledgements, redundant Sol updates and other identities without restarting', () => {
+    const f = monitorScene();
+    f.scene.setAgentPresentation('mock-agent-sol', presentation('mock-agent-sol', 'coffee'));
+    const count = f.steam.clear.mock.calls.length;
+    f.scene.setSelectedAgent('mock-agent-sol');
+    f.scene.acknowledge({ id: 'mock-agent-sol', state: 'completed', sequence: 1 });
+    f.scene.setAgentPresentation('mock-agent-sol', presentation('mock-agent-sol', 'coffee'));
+    f.scene.setAgentPresentation('mock-agent-ari', presentation('mock-agent-ari', 'waiting'));
+    f.scene.setAgentPresentation('mock-agent-mina', presentation('mock-agent-mina', 'error'));
+    expect(f.steam.clear).toHaveBeenCalledTimes(count); expect(f.internals.time.addEvent).toHaveBeenCalledOnce();
+  });
+  it('rapid coffee supersession removes steam in the same update and rejects late callbacks', () => {
+    const f = monitorScene(); const remove = vi.fn(); let stale!: () => void;
+    f.internals.time.addEvent.mockImplementation(({ callback }) => { stale = callback; return { remove }; });
+    f.scene.setAgentPresentation('mock-agent-sol', presentation('mock-agent-sol', 'coffee'));
+    f.scene.setAgentPresentation('mock-agent-sol', presentation('mock-agent-sol', 'waiting'));
+    expect(f.sprites[2].stop).toHaveBeenCalled(); expect(f.steam.setVisible).toHaveBeenLastCalledWith(false);
+    const count = f.steam.clear.mock.calls.length; stale();
+    expect(f.steam.clear).toHaveBeenCalledTimes(count); expect(remove).toHaveBeenCalledOnce();
+  });
+  it('clears ownership/timer without Graphics mutation after installed Phaser destroys the steam object', () => {
+    const GameObject = createRequire(import.meta.url)('phaser/src/gameobjects/GameObject') as typeof import('phaser').GameObjects.GameObject;
+    const f = monitorScene(); const remove = vi.fn(); let stale!: () => void;
+    f.internals.time.addEvent.mockImplementation(({ callback }) => { stale = callback; return { remove }; });
+    f.scene.setAgentPresentation('mock-agent-sol', presentation('mock-agent-sol', 'coffee'));
+    const controller = f.internals.coffeeSteam!;
+    GameObject.prototype.destroy.call(f.steam as unknown as import('phaser').GameObjects.GameObject, true);
+    expect(f.steam.scene).toBeUndefined();
+    f.steam.clear.mockImplementation(() => { throw new Error('draw after destroyed'); });
+    f.steam.setVisible.mockImplementation(() => { throw new Error('visibility after destroyed'); });
+    const shutdown = f.internals.events.once.mock.calls.find(([event]) => event === 'shutdown')![1];
+    expect(() => { shutdown(); shutdown(); controller.dispose(); stale(); }).not.toThrow();
+    expect(remove).toHaveBeenCalledOnce(); expect(f.internals.coffeeSteam).toBeUndefined();
+    for (const map of [f.internals.workstations, f.internals.motions, f.internals.presentations, f.internals.agentSprites, f.internals.statusLabels]) expect(map.size).toBe(0);
+  });
+  it('real store/runtime/host delivery preserves live phase, retains static coffee, restores and remounts from A', async () => {
+    let emit!: (message: AgentStateMessage) => void;
+    const store = createAgentStateStore({ watch(fn) { emit = fn; return { ready: Promise.resolve(), close() {} }; } });
+    const runtime = createOfficePresentationRuntime(store, { matches: false, addEventListener() {}, removeEventListener() {} });
+    const f = monitorScene();
+    const bind = (scene: OfficeScene) => bindOfficePresentation(runtime, {
+      setAgentPresentation: (id, value) => scene.setAgentPresentation(id, value), acknowledge: value => scene.acknowledge(value),
+      setSelectedAgent: id => scene.setSelectedAgent(id), destroy() {},
+    });
+    const detach = bind(f.scene); await store.start();
+    const value: TrustedAgentState = { revision: 1, sessionId: 'coffee-session', phase: 'ready', agents: [
+      { agent: { id: 'mock-agent-ari', displayName: 'Ari' }, state: 'idle', activity: 'Ready' },
+      { agent: { id: 'mock-agent-mina', displayName: 'Mina' }, state: 'idle', activity: 'Ready' },
+      { agent: { id: 'mock-agent-sol', displayName: 'Sol' }, state: 'waiting', activity: 'Taking a coffee break in the simulated office' },
+    ] };
+    emit({ kind: 'current', state: value });
+    const initial = f.steam.fillRect.mock.calls.slice(-4);
+    const [config] = f.internals.time.addEvent.mock.calls[0]; config.callback();
+    const b = f.steam.fillRect.mock.calls.slice(-4); expect(b).not.toEqual(initial);
+    emit({ kind: 'change', change: { kind: 'snapshot', state: value } });
+    expect(f.steam.fillRect.mock.calls.slice(-4)).toEqual(b); expect(f.internals.time.addEvent).toHaveBeenCalledOnce();
+    emit({ kind: 'change', change: { kind: 'connection', state: { ...value, phase: 'disconnected' } } });
+    expect(f.steam.fillRect.mock.calls.slice(-4)).toEqual(initial);
+    emit({ kind: 'change', change: { kind: 'snapshot', state: { ...value, revision: 2, sessionId: 'restored-session' } } });
+    expect(f.steam.fillRect.mock.calls.slice(-4)).toEqual(initial); expect(f.internals.time.addEvent).toHaveBeenCalledTimes(2);
+    const remount = monitorScene(); const detachRemount = bind(remount.scene);
+    expect(remount.steam.fillRect.mock.calls.slice(-4)).toEqual(initial);
+    expect(remount.internals.time.addEvent).toHaveBeenCalledExactlyOnceWith(expect.objectContaining({ delay: 1600, loop: true }));
+    detach(); detachRemount(); runtime.dispose(); store.stop();
   });
 });

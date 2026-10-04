@@ -1,0 +1,418 @@
+{
+  "provenance": "Direct offscreen Electron captures of synthetic US-022 development fixture",
+  "capturedAt": "2026-10-03T17:08:05.479Z",
+  "electron": "37.10.3",
+  "platform": "darwin",
+  "arch": "arm64",
+  "captures": [
+    {
+      "name": "generic-waiting",
+      "area": "mug",
+      "rect": {
+        "x": 800,
+        "y": 390,
+        "width": 22,
+        "height": 30
+      },
+      "size": {
+        "width": 44,
+        "height": 60
+      },
+      "at": 1075.27725,
+      "elapsedMs": null,
+      "pngSha256": "415f2dbff1d5e4db5f41a351304cf3322fccc923e9a672263d44e69142d9b0b7"
+    },
+    {
+      "name": "generic-waiting-office",
+      "area": "office",
+      "rect": {
+        "x": 230,
+        "y": 202,
+        "width": 640,
+        "height": 360
+      },
+      "size": {
+        "width": 1280,
+        "height": 720
+      },
+      "at": 1112.506709,
+      "elapsedMs": null,
+      "pngSha256": "9bdebe2dabdb545928029a7cb804ac799da14faaab67105ec0b87f779aa895d4"
+    },
+    {
+      "name": "coffee-a",
+      "area": "mug",
+      "rect": {
+        "x": 800,
+        "y": 390,
+        "width": 22,
+        "height": 30
+      },
+      "size": {
+        "width": 44,
+        "height": 60
+      },
+      "at": 1239.248667,
+      "elapsedMs": 121.734375,
+      "pngSha256": "7ca6e708dc3e6ae83e999bed1d72a818b5c1fd84e26fcfc0e3caaeb69eb0e1b1"
+    },
+    {
+      "name": "coffee-b",
+      "area": "mug",
+      "rect": {
+        "x": 800,
+        "y": 390,
+        "width": 22,
+        "height": 30
+      },
+      "size": {
+        "width": 44,
+        "height": 60
+      },
+      "at": 2891.792375,
+      "elapsedMs": 1774.2789579999999,
+      "pngSha256": "6fe3a14fdac2c9cae10d20a025f43ce0532ab8b8279ebd30c5379a61b643cb86"
+    },
+    {
+      "name": "coffee-return-a",
+      "area": "mug",
+      "rect": {
+        "x": 800,
+        "y": 390,
+        "width": 22,
+        "height": 30
+      },
+      "size": {
+        "width": 44,
+        "height": 60
+      },
+      "at": 4540.141917,
+      "elapsedMs": 3422.6284170000004,
+      "pngSha256": "7ca6e708dc3e6ae83e999bed1d72a818b5c1fd84e26fcfc0e3caaeb69eb0e1b1"
+    },
+    {
+      "name": "coffee-later-a",
+      "area": "mug",
+      "rect": {
+        "x": 800,
+        "y": 390,
+        "width": 22,
+        "height": 30
+      },
+      "size": {
+        "width": 44,
+        "height": 60
+      },
+      "at": 5140.223209,
+      "elapsedMs": 4022.7097500000004,
+      "pngSha256": "7ca6e708dc3e6ae83e999bed1d72a818b5c1fd84e26fcfc0e3caaeb69eb0e1b1"
+    },
+    {
+      "name": "coffee-office",
+      "area": "office",
+      "rect": {
+        "x": 230,
+        "y": 202,
+        "width": 640,
+        "height": 360
+      },
+      "size": {
+        "width": 1280,
+        "height": 720
+      },
+      "at": 5179.125084,
+      "elapsedMs": null,
+      "pngSha256": "d4e547a7930409162b2351878465fba1d9a745e5ecfb56642603ffbc246e85c5"
+    },
+    {
+      "name": "coffee-normal",
+      "area": "page",
+      "rect": null,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "at": 5367.251334,
+      "elapsedMs": null,
+      "pngSha256": "7b47c3c9d8757c56447f85e38b008efeec6138c021568fa5a50abd7bf4e7beaf"
+    },
+    {
+      "name": "coffee-normal-inspection",
+      "area": "page",
+      "rect": null,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "at": 5559.856834,
+      "elapsedMs": null,
+      "pngSha256": "23f01619aa7d8f92ceae341a5193a20dcb4122920a530f307e7b9622ed4a9395"
+    },
+    {
+      "name": "exit-waiting",
+      "area": "mug",
+      "rect": {
+        "x": 800,
+        "y": 390,
+        "width": 22,
+        "height": 30
+      },
+      "size": {
+        "width": 44,
+        "height": 60
+      },
+      "at": 5673.552959,
+      "elapsedMs": null,
+      "pngSha256": "415f2dbff1d5e4db5f41a351304cf3322fccc923e9a672263d44e69142d9b0b7"
+    },
+    {
+      "name": "exit-working",
+      "area": "mug",
+      "rect": {
+        "x": 800,
+        "y": 390,
+        "width": 22,
+        "height": 30
+      },
+      "size": {
+        "width": 44,
+        "height": 60
+      },
+      "at": 5772.269292,
+      "elapsedMs": null,
+      "pngSha256": "415f2dbff1d5e4db5f41a351304cf3322fccc923e9a672263d44e69142d9b0b7"
+    },
+    {
+      "name": "retained-a",
+      "area": "mug",
+      "rect": {
+        "x": 800,
+        "y": 390,
+        "width": 22,
+        "height": 30
+      },
+      "size": {
+        "width": 44,
+        "height": 60
+      },
+      "at": 5872.144417,
+      "elapsedMs": null,
+      "pngSha256": "7ca6e708dc3e6ae83e999bed1d72a818b5c1fd84e26fcfc0e3caaeb69eb0e1b1"
+    },
+    {
+      "name": "retained-later-a",
+      "area": "mug",
+      "rect": {
+        "x": 800,
+        "y": 390,
+        "width": 22,
+        "height": 30
+      },
+      "size": {
+        "width": 44,
+        "height": 60
+      },
+      "at": 9293.248375,
+      "elapsedMs": null,
+      "pngSha256": "7ca6e708dc3e6ae83e999bed1d72a818b5c1fd84e26fcfc0e3caaeb69eb0e1b1"
+    },
+    {
+      "name": "retained-normal",
+      "area": "page",
+      "rect": null,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "at": 9384.879375,
+      "elapsedMs": null,
+      "pngSha256": "a6b141b842eeaa65f8c40cf68fe9a5d56250653274cef921bd33b3c46fdc018e"
+    },
+    {
+      "name": "restored-a",
+      "area": "mug",
+      "rect": {
+        "x": 800,
+        "y": 390,
+        "width": 22,
+        "height": 30
+      },
+      "size": {
+        "width": 44,
+        "height": 60
+      },
+      "at": 9489.749834,
+      "elapsedMs": null,
+      "pngSha256": "7ca6e708dc3e6ae83e999bed1d72a818b5c1fd84e26fcfc0e3caaeb69eb0e1b1"
+    },
+    {
+      "name": "reduced-a",
+      "area": "mug",
+      "rect": {
+        "x": 800,
+        "y": 390,
+        "width": 22,
+        "height": 30
+      },
+      "size": {
+        "width": 44,
+        "height": 60
+      },
+      "at": 9588.521125,
+      "elapsedMs": null,
+      "pngSha256": "7ca6e708dc3e6ae83e999bed1d72a818b5c1fd84e26fcfc0e3caaeb69eb0e1b1"
+    },
+    {
+      "name": "reduced-later-a",
+      "area": "mug",
+      "rect": {
+        "x": 800,
+        "y": 390,
+        "width": 22,
+        "height": 30
+      },
+      "size": {
+        "width": 44,
+        "height": 60
+      },
+      "at": 13005.706084,
+      "elapsedMs": null,
+      "pngSha256": "7ca6e708dc3e6ae83e999bed1d72a818b5c1fd84e26fcfc0e3caaeb69eb0e1b1"
+    },
+    {
+      "name": "ari-negative",
+      "area": "mug",
+      "rect": {
+        "x": 800,
+        "y": 390,
+        "width": 22,
+        "height": 30
+      },
+      "size": {
+        "width": 44,
+        "height": 60
+      },
+      "at": 13105.889084,
+      "elapsedMs": null,
+      "pngSha256": "415f2dbff1d5e4db5f41a351304cf3322fccc923e9a672263d44e69142d9b0b7"
+    },
+    {
+      "name": "mina-negative",
+      "area": "mug",
+      "rect": {
+        "x": 800,
+        "y": 390,
+        "width": 22,
+        "height": 30
+      },
+      "size": {
+        "width": 44,
+        "height": 60
+      },
+      "at": 13205.45475,
+      "elapsedMs": null,
+      "pngSha256": "415f2dbff1d5e4db5f41a351304cf3322fccc923e9a672263d44e69142d9b0b7"
+    },
+    {
+      "name": "initialized-a",
+      "area": "mug",
+      "rect": {
+        "x": 800,
+        "y": 390,
+        "width": 22,
+        "height": 30
+      },
+      "size": {
+        "width": 44,
+        "height": 60
+      },
+      "at": 14006.30525,
+      "elapsedMs": null,
+      "pngSha256": "7ca6e708dc3e6ae83e999bed1d72a818b5c1fd84e26fcfc0e3caaeb69eb0e1b1"
+    },
+    {
+      "name": "coffee-minimum",
+      "area": "page",
+      "rect": null,
+      "size": {
+        "width": 1520,
+        "height": 1080
+      },
+      "at": 14274.405917,
+      "elapsedMs": null,
+      "pngSha256": "0f1239b06e0a37b63adbcf849a809082400c917ab7766b33492e5809c5618945"
+    },
+    {
+      "name": "coffee-minimum-inspection",
+      "area": "page",
+      "rect": null,
+      "size": {
+        "width": 1520,
+        "height": 1080
+      },
+      "at": 14425.123917,
+      "elapsedMs": null,
+      "pngSha256": "6f84c346ca3d34704d05ed565527fe4db67df22953323fda81ce76bfb56b7eff"
+    },
+    {
+      "name": "fallback-coffee-office",
+      "area": "office",
+      "rect": {
+        "x": 230,
+        "y": 202,
+        "width": 640,
+        "height": 360
+      },
+      "size": {
+        "width": 1280,
+        "height": 720
+      },
+      "at": 15644.781917,
+      "elapsedMs": null,
+      "pngSha256": "8dbcef717fd63981c65405221a8190c73814243d513b432e8a510e82dedd51a1"
+    },
+    {
+      "name": "fallback-coffee-normal",
+      "area": "page",
+      "rect": null,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "at": 15829.869625,
+      "elapsedMs": null,
+      "pngSha256": "7ba8d2092385e8ce8a3d904b33425287a4f4337b6ee2831a22728545b755af75"
+    }
+  ],
+  "observations": {
+    "normal": {
+      "viewport": [
+        1100,
+        760
+      ],
+      "scale": 2,
+      "canvas": 1,
+      "horizontalOverflow": false
+    },
+    "minimum": {
+      "viewport": [
+        760,
+        540
+      ],
+      "scale": 2,
+      "canvas": 1,
+      "horizontalOverflow": false
+    },
+    "artworkErrors": [],
+    "fallbackBlockedRequests": [
+      "http://localhost:5173/src/office/assets/office-room-background.png",
+      "http://localhost:5173/src/office/assets/office-room-foreground.png",
+      "http://localhost:5173/src/office/assets/office-room-background.png",
+      "http://localhost:5173/src/office/assets/office-room-foreground.png",
+      "http://localhost:5173/src/office/assets/office-room-background.png",
+      "http://localhost:5173/src/office/assets/office-room-foreground.png"
+    ],
+    "fallbackErrors": [],
+    "remountAndReload": "one canvas; zero renderer console errors"
+  }
+}

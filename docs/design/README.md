@@ -43,6 +43,10 @@ For this increment, the Product Owner + Planner accepted the fixed-room scope an
 
 [US-026 — Approved North Star office environment reference](references/us-026/README.md) records the Product Owner-approved corrected environment direction, durable visual targets, study coordinates and source-discovery constraints. The clean corrected office is the primary environment implementation composition; the North Star comparison is the primary fidelity/provenance reference. These generated studies are design references, not production assets or runtime evidence. The original North Star remains the permanent higher-level authority; US-027 owns character redesign and the merged US-025 shell remains unchanged.
 
+### EP-05 — US-027 approved agent references
+
+[US-027 — Approved North Star Agent References](references/us-027/README.md) records the Product Owner-approved character direction, identity/lifecycle/world-fit targets, exact coffee distinction and approval provenance. The package preserves 20×24 frames, existing US-026 environment geometry and trusted presentation semantics. These are design references, not production character assets, implemented runtime evidence or story acceptance.
+
 ## Application tokens
 
 Exact hex colors, spacing values, typography sizing, and radius values in this section document the **current EP-04/application direction**, not immutable Coffee Break North Star requirements. The permanent North Star is the product/experience hierarchy and visual principles above. Future approved design-system evolution may change exact token values without constituting a North Star departure; the authority and provenance rules still apply.

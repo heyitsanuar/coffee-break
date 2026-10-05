@@ -1,0 +1,514 @@
+{
+  "baseline": "d155d4099a4efa45e24564d4f74a8cc389de7d75",
+  "capturedAt": "2026-10-05T20:24:51.245Z",
+  "provenance": "Direct unedited Electron capturePage of production Application/store/runtime/host/Phaser; development-only synthetic accepted inputs; labeled boards are derivatives, not direct captures. No native keyboard, OS preference, screen-reader, provider or transport claim.",
+  "electron": "37.10.3",
+  "platform": "darwin",
+  "assets": {
+    "agent-lifecycle": {
+      "size": {
+        "width": 160,
+        "height": 72
+      },
+      "pngSha256": "4a8e6dcbf464df9de35aead2902f5c4f4bba86691f354fc1894f68e24af78d12"
+    },
+    "mock-agents": {
+      "size": {
+        "width": 120,
+        "height": 24
+      },
+      "pngSha256": "b5b4f27771fbd70c1c0df691435821a6c1ed43a0d37a91d47cfa3c1d3f82a876"
+    },
+    "office-room-background": {
+      "size": {
+        "width": 320,
+        "height": 180
+      },
+      "pngSha256": "dc9b313fbbdc8bfc8f9f47e16dd26b4910734f886657b1643a0383b56e83563e"
+    },
+    "office-room-foreground": {
+      "size": {
+        "width": 320,
+        "height": 180
+      },
+      "pngSha256": "72d03f4ff0d97dd33602fa1acfadf6c6338f39ce4276d4b30500ecc141f9b9ec"
+    }
+  },
+  "captures": [
+    {
+      "name": "historical-before-ac11-working",
+      "kind": "historical-direct-runtime",
+      "provenance": "Unchanged working-a capture from the initial Designer-reviewed implementation; BEFORE AC11 correction, not current implementation.",
+      "size": {
+        "width": 1280,
+        "height": 720
+      },
+      "pngSha256": "950d598c5c1769736377a663d200a0f30296c7f102e17a0275c7a227fe7befb7"
+    },
+    {
+      "name": "idle",
+      "kind": "direct-runtime",
+      "sampledAt": "2026-10-05T20:24:51.890Z",
+      "viewport": [
+        1100,
+        760
+      ],
+      "dpr": 2,
+      "size": {
+        "width": 1280,
+        "height": 720
+      },
+      "pngSha256": "3f1875ffffa79994928389208a27be1216e5b144355b728f9313009e1f8c428e"
+    },
+    {
+      "name": "working-a",
+      "kind": "direct-runtime",
+      "sampledAt": "2026-10-05T20:24:52.006Z",
+      "viewport": [
+        1100,
+        760
+      ],
+      "dpr": 2,
+      "size": {
+        "width": 1280,
+        "height": 720
+      },
+      "pngSha256": "26ee91fef87f0b42564f4b66cba45ba799670f2f71952d3099c60e91a27c112d"
+    },
+    {
+      "name": "working-b",
+      "kind": "direct-runtime",
+      "sampledAt": "2026-10-05T20:24:52.669Z",
+      "viewport": [
+        1100,
+        760
+      ],
+      "dpr": 2,
+      "size": {
+        "width": 1280,
+        "height": 720
+      },
+      "pngSha256": "4daea049ec2bb71c07cc141fb5a037a26b147251e8f27713b72f2a173f8cffcc"
+    },
+    {
+      "name": "waiting",
+      "kind": "direct-runtime",
+      "sampledAt": "2026-10-05T20:24:52.786Z",
+      "viewport": [
+        1100,
+        760
+      ],
+      "dpr": 2,
+      "size": {
+        "width": 1280,
+        "height": 720
+      },
+      "pngSha256": "47c7b3e26539f8bdf760410c994019e49da57b50030e53c8d646a1151fb8d1e9"
+    },
+    {
+      "name": "completed-acknowledgement",
+      "kind": "direct-runtime",
+      "sampledAt": "2026-10-05T20:24:52.919Z",
+      "viewport": [
+        1100,
+        760
+      ],
+      "dpr": 2,
+      "size": {
+        "width": 1280,
+        "height": 720
+      },
+      "pngSha256": "0c3e1833a0a9d030548bf8604a8da28e7dd32d99e5beb2a51291a78881fcae07"
+    },
+    {
+      "name": "completed-settled",
+      "kind": "direct-runtime",
+      "sampledAt": "2026-10-05T20:24:53.619Z",
+      "viewport": [
+        1100,
+        760
+      ],
+      "dpr": 2,
+      "size": {
+        "width": 1280,
+        "height": 720
+      },
+      "pngSha256": "c11e348e05a0d2a43af1da2efe6cc31e05cd76d76166d89d5bc272359a1a4d39"
+    },
+    {
+      "name": "error-acknowledgement",
+      "kind": "direct-runtime",
+      "sampledAt": "2026-10-05T20:24:53.733Z",
+      "viewport": [
+        1100,
+        760
+      ],
+      "dpr": 2,
+      "size": {
+        "width": 1280,
+        "height": 720
+      },
+      "pngSha256": "66130bf14cf906b2d7d662df823a2e9134e3451914d7be3373f79c5af217c824"
+    },
+    {
+      "name": "error-settled",
+      "kind": "direct-runtime",
+      "sampledAt": "2026-10-05T20:24:54.373Z",
+      "viewport": [
+        1100,
+        760
+      ],
+      "dpr": 2,
+      "size": {
+        "width": 1280,
+        "height": 720
+      },
+      "pngSha256": "751e360c1409e864d10c1468139167ccce34381a2c76b9c7e110c0769835a92c"
+    },
+    {
+      "name": "sol-generic-waiting",
+      "kind": "direct-runtime",
+      "sampledAt": "2026-10-05T20:24:54.503Z",
+      "viewport": [
+        1100,
+        760
+      ],
+      "dpr": 2,
+      "size": {
+        "width": 1280,
+        "height": 720
+      },
+      "pngSha256": "47c7b3e26539f8bdf760410c994019e49da57b50030e53c8d646a1151fb8d1e9"
+    },
+    {
+      "name": "coffee-a",
+      "kind": "direct-runtime",
+      "sampledAt": "2026-10-05T20:24:54.620Z",
+      "viewport": [
+        1100,
+        760
+      ],
+      "dpr": 2,
+      "size": {
+        "width": 1280,
+        "height": 720
+      },
+      "pngSha256": "5f27256cf862b5df109f3491abd599156e04b56e43b32a408c5aa0372d4d1439"
+    },
+    {
+      "name": "coffee-b",
+      "kind": "direct-runtime",
+      "sampledAt": "2026-10-05T20:24:55.193Z",
+      "viewport": [
+        1100,
+        760
+      ],
+      "dpr": 2,
+      "size": {
+        "width": 1280,
+        "height": 720
+      },
+      "pngSha256": "50a60f87fd04fff99a25a4297d3ebd1b8d4c6fb0a980ed9d047171e0e3f70dca"
+    },
+    {
+      "name": "retained-a",
+      "kind": "direct-runtime",
+      "sampledAt": "2026-10-05T20:24:55.322Z",
+      "viewport": [
+        1100,
+        760
+      ],
+      "dpr": 2,
+      "size": {
+        "width": 1280,
+        "height": 720
+      },
+      "pngSha256": "101f0ffa38aa2eb88e5bcb725114dde7c297c9c8d2a1076e21761269ba74298f"
+    },
+    {
+      "name": "retained-b",
+      "kind": "direct-runtime",
+      "sampledAt": "2026-10-05T20:24:57.079Z",
+      "viewport": [
+        1100,
+        760
+      ],
+      "dpr": 2,
+      "size": {
+        "width": 1280,
+        "height": 720
+      },
+      "pngSha256": "101f0ffa38aa2eb88e5bcb725114dde7c297c9c8d2a1076e21761269ba74298f"
+    },
+    {
+      "name": "reduced-working-coffee-a",
+      "kind": "direct-runtime",
+      "sampledAt": "2026-10-05T20:24:57.187Z",
+      "viewport": [
+        1100,
+        760
+      ],
+      "dpr": 2,
+      "size": {
+        "width": 1280,
+        "height": 720
+      },
+      "pngSha256": "101f0ffa38aa2eb88e5bcb725114dde7c297c9c8d2a1076e21761269ba74298f"
+    },
+    {
+      "name": "reduced-working-coffee-b",
+      "kind": "direct-runtime",
+      "sampledAt": "2026-10-05T20:24:58.945Z",
+      "viewport": [
+        1100,
+        760
+      ],
+      "dpr": 2,
+      "size": {
+        "width": 1280,
+        "height": 720
+      },
+      "pngSha256": "101f0ffa38aa2eb88e5bcb725114dde7c297c9c8d2a1076e21761269ba74298f"
+    },
+    {
+      "name": "reduced-completed",
+      "kind": "direct-runtime",
+      "sampledAt": "2026-10-05T20:24:59.070Z",
+      "viewport": [
+        1100,
+        760
+      ],
+      "dpr": 2,
+      "size": {
+        "width": 1280,
+        "height": 720
+      },
+      "pngSha256": "c11e348e05a0d2a43af1da2efe6cc31e05cd76d76166d89d5bc272359a1a4d39"
+    },
+    {
+      "name": "reduced-error",
+      "kind": "direct-runtime",
+      "sampledAt": "2026-10-05T20:24:59.186Z",
+      "viewport": [
+        1100,
+        760
+      ],
+      "dpr": 2,
+      "size": {
+        "width": 1280,
+        "height": 720
+      },
+      "pngSha256": "751e360c1409e864d10c1468139167ccce34381a2c76b9c7e110c0769835a92c"
+    },
+    {
+      "name": "motion-restored-error",
+      "kind": "direct-runtime",
+      "sampledAt": "2026-10-05T20:24:59.286Z",
+      "viewport": [
+        1100,
+        760
+      ],
+      "dpr": 2,
+      "size": {
+        "width": 1280,
+        "height": 720
+      },
+      "pngSha256": "751e360c1409e864d10c1468139167ccce34381a2c76b9c7e110c0769835a92c"
+    },
+    {
+      "name": "selected-ari",
+      "kind": "direct-runtime",
+      "sampledAt": "2026-10-05T20:24:59.448Z",
+      "viewport": [
+        1100,
+        760
+      ],
+      "dpr": 2,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "0036adc7b1bacbb89a2547bcd28fb786addb327216cc6b7140ae6192253708ac"
+    },
+    {
+      "name": "selected-mina",
+      "kind": "direct-runtime",
+      "sampledAt": "2026-10-05T20:24:59.619Z",
+      "viewport": [
+        1100,
+        760
+      ],
+      "dpr": 2,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "daad1ff057e941f9bf7e891d4c04713b0dd942e288603b8a7b34ce72411d9d49"
+    },
+    {
+      "name": "selected-sol",
+      "kind": "direct-runtime",
+      "sampledAt": "2026-10-05T20:24:59.782Z",
+      "viewport": [
+        1100,
+        760
+      ],
+      "dpr": 2,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "7eeb964f4793ad1390f2d1a76c181cdc2e520c2572b73d0158dc9c2a6032a5ac"
+    },
+    {
+      "name": "desktop-1100x760",
+      "kind": "direct-runtime",
+      "sampledAt": "2026-10-05T20:25:00.133Z",
+      "viewport": [
+        1100,
+        760
+      ],
+      "dpr": 2,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "d25adb65d2bfb938a908198400188f7b0720663d91db85b6129511327bcca214"
+    },
+    {
+      "name": "compact-760x540",
+      "kind": "direct-runtime",
+      "sampledAt": "2026-10-05T20:25:00.317Z",
+      "viewport": [
+        760,
+        540
+      ],
+      "dpr": 2,
+      "size": {
+        "width": 1520,
+        "height": 1080
+      },
+      "pngSha256": "8579ca501dfc71573ac6626e24c3dca23ba721367f9797fedcbae74626a7666b"
+    },
+    {
+      "name": "compact-inspector-scroll",
+      "kind": "direct-runtime",
+      "sampledAt": "2026-10-05T20:25:00.447Z",
+      "viewport": [
+        760,
+        540
+      ],
+      "dpr": 2,
+      "size": {
+        "width": 1520,
+        "height": 1080
+      },
+      "pngSha256": "f287fb7babbba8fdfb463ba08a4f42e6a174e75004192da850d3db8eeb9559e4"
+    },
+    {
+      "name": "focus-mina-selected-ari",
+      "kind": "direct-runtime",
+      "sampledAt": "2026-10-05T20:25:00.768Z",
+      "viewport": [
+        1100,
+        760
+      ],
+      "dpr": 2,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "04c8f54d231f330378f8c26967b1871ffce91143e7b6456bd95b285ca5bc2a38"
+    },
+    {
+      "name": "lifecycle-matrix",
+      "kind": "labeled-derivative",
+      "size": {
+        "width": 2400,
+        "height": 1700
+      },
+      "pngSha256": "74bb5c5d4c6ab01e467a59a04bd3c518766a7bc7cb4544fa31c190187ee7413f"
+    },
+    {
+      "name": "ari-workstation-comparison",
+      "kind": "labeled-derivative",
+      "size": {
+        "width": 1600,
+        "height": 1640
+      },
+      "pngSha256": "0128d43ae7797887285b03e6fa7b0fec9c41fcda191daed93d57bf9e805fd8f3"
+    },
+    {
+      "name": "mina-workstation-comparison",
+      "kind": "labeled-derivative",
+      "size": {
+        "width": 1600,
+        "height": 1640
+      },
+      "pngSha256": "81ce9333ed39291ce2db4bb3cf6b9788114ed9dccc48c0551b0144bbc483882f"
+    },
+    {
+      "name": "approved-vs-runtime",
+      "kind": "labeled-derivative",
+      "size": {
+        "width": 2320,
+        "height": 1200
+      },
+      "pngSha256": "2754d61b487275df84222ed9dbe32c5379fd5e3331fef38514e46a1d25792d8c"
+    },
+    {
+      "name": "source-grid-inspection",
+      "kind": "labeled-derivative",
+      "size": {
+        "width": 2200,
+        "height": 1900
+      },
+      "pngSha256": "06432482ed4f2c07dd95b93ab2b50876bf2c946b782715c804ae0a3ecc2a6412"
+    }
+  ],
+  "observations": {
+    "poseComparisons": {
+      "Ari": {
+        "working": 160,
+        "completed": 672,
+        "error": 832
+      },
+      "Mina": {
+        "working": 160,
+        "completed": 528,
+        "error": 656
+      },
+      "Sol": {
+        "working": 160,
+        "completed": 736,
+        "error": 864
+      }
+    },
+    "coffeeChangedDecodedPixels": 208,
+    "staticRetainedReducedAndNoReactionReplay": true,
+    "rendererPointerSelectionAllThree": true,
+    "desktop": {
+      "viewport": [
+        1100,
+        760
+      ],
+      "dpr": 2,
+      "canvases": 1,
+      "horizontalOverflow": false,
+      "selected": "Select Mina"
+    },
+    "compact": {
+      "viewport": [
+        760,
+        540
+      ],
+      "dpr": 2,
+      "canvases": 1,
+      "horizontalOverflow": false,
+      "selected": "Select Mina"
+    },
+    "keyboard": "Programmatic initial focus then Chromium Tab/Space emulation: focus distinct from selection, activation selects Mina, state updates preserve focus. Clear used DOM click. Native keyboard/assistive technology unverified.",
+    "reloadOneCanvas": true,
+    "rendererErrors": []
+  }
+}

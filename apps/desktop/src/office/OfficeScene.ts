@@ -164,7 +164,7 @@ export class OfficeScene extends Phaser.Scene {
       motion.apply(presentation);
 
       if (roomArtwork && agent.id === 'mock-agent-sol') {
-        const steam = this.add.graphics().setPosition(574, 192)
+        const steam = this.add.graphics().setPosition(230, 248)
           .setScale(OFFICE_ART_SCALE).setDepth(OFFICE_DEPTHS.background + 1).setVisible(false);
         this.coffeeSteam = createCoffeeSteamMotion(steam,
           (delay, callback) => this.time.addEvent({ delay, callback, loop: true }));
@@ -224,28 +224,30 @@ export class OfficeScene extends Phaser.Scene {
   private createFallbackRoom(): void {
     const room = this.add.graphics();
 
-    room.fillStyle(0xf5e7c8);
-    room.fillRect(0, 0, OFFICE_SCENE_WIDTH, 92);
-    room.fillStyle(0xb77a4e);
-    room.fillRect(0, 92, OFFICE_SCENE_WIDTH, OFFICE_SCENE_HEIGHT - 92);
-    room.fillStyle(0x5b3a2e);
-    room.fillRect(0, 84, OFFICE_SCENE_WIDTH, 8);
-
-    room.fillStyle(0x8b5a3c);
-    room.fillRect(28, 120, 160, 48);
-    room.fillRect(212, 120, 160, 48);
-    room.fillStyle(0x41576c);
-    room.fillRect(80, 92, 56, 32);
-    room.fillRect(264, 92, 56, 32);
-
-    room.fillStyle(0xbf6b4c);
-    room.fillRect(436, 184, 176, 140);
-    room.fillStyle(0x516757);
-    room.fillRect(448, 104, 156, 64);
-    room.fillStyle(0x2d3036);
-    room.fillRect(466, 72, 44, 40);
-
-    room.lineStyle(4, 0x4b403a);
+    // Simple geometry only: same zones, anchors and monitor insets as the authored sheets.
+    room.fillStyle(0xcc894f);
+    room.fillRect(0, 0, OFFICE_SCENE_WIDTH, OFFICE_SCENE_HEIGHT);
+    room.fillStyle(0x626b94);
+    room.fillRect(0, 0, OFFICE_SCENE_WIDTH, 54);
+    room.fillRect(0, 0, 16, OFFICE_SCENE_HEIGHT);
+    room.fillRect(624, 0, 16, OFFICE_SCENE_HEIGHT);
+    room.fillRect(0, 336, OFFICE_SCENE_WIDTH, 24);
+    room.fillStyle(0x4b576e);
+    room.fillRect(24, 94, 184, 100);
+    room.fillStyle(0xb74f82);
+    room.fillRect(80, 84, 96, 40);
+    room.fillStyle(0x8590b0);
+    room.fillRect(16, 198, 226, 132);
+    room.fillStyle(0x4b576e);
+    room.fillRect(20, 216, 180, 72);
+    for (const deskX of [260, 448]) {
+      room.fillStyle(0xe4ad65);
+      room.fillRect(deskX, 116, 104, 36);
+      room.fillStyle(0x283044);
+      room.fillRect(deskX + 52, 98, 48, 28);
+      room.fillRect(deskX + 18, 140, 30, 34);
+    }
+    room.lineStyle(4, 0x283044);
     room.strokeRect(8, 8, OFFICE_SCENE_WIDTH - 16, OFFICE_SCENE_HEIGHT - 16);
   }
 }

@@ -26,12 +26,12 @@ export function workstationMarks(state: AgentLifecycleState | null, frame: Monit
   return forms[state];
 }
 
-export function getWorkstationGeometry(id: MockAgentId, roomArtwork: boolean): PixelRect | undefined {
+export function getWorkstationGeometry(id: MockAgentId, _roomArtwork: boolean): PixelRect | undefined {
   const anchor = getMockAgent(id)?.anchorId;
   if (anchor !== 'left-workstation' && anchor !== 'right-workstation') return undefined;
-  // Scene coordinates: retain the PNG's 20 × 8 source inset; fallback monitors sit lower.
-  return rect((anchor === 'left-workstation' ? 44 : 136) * OFFICE_ART_SCALE,
-    roomArtwork ? 80 : 100, 20 * OFFICE_ART_SCALE, 8 * OFFICE_ART_SCALE);
+  // Both authored and fallback monitors share the approved 20 × 8 logical inset.
+  return rect((anchor === 'left-workstation' ? 158 : 252) * OFFICE_ART_SCALE,
+    51 * OFFICE_ART_SCALE, 20 * OFFICE_ART_SCALE, 8 * OFFICE_ART_SCALE);
 }
 
 interface MonitorGraphics {

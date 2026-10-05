@@ -21,9 +21,9 @@ describe('office layout', () => {
 
   it('defines the three approved unique agent anchors', () => {
     expect(OFFICE_AGENT_ANCHORS.map(({ x, y }) => [x, y])).toEqual([
-      [136, 248],
-      [320, 248],
-      [520, 248],
+      [292, 174],
+      [480, 174],
+      [220, 282],
     ]);
 
     const coordinates = new Set(

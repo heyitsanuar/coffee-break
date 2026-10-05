@@ -1,0 +1,732 @@
+{
+  "base": "42b26a61b3d22a919e809e1ef9bda35440b420f2",
+  "capturedAt": "2026-10-04T19:15:53.414Z",
+  "provenance": "Unedited offscreen Electron capturePage of production Application, store, runtime, host and Phaser; development-only synthetic accepted inputs; no native keyboard, provider or authenticated transport claim",
+  "electron": "37.10.3",
+  "platform": "darwin",
+  "captures": [
+    {
+      "name": "1100-unselected",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "eb398b7b9759431538bde3aaf7d2d9937e75bc1bd54dbea0788dda7cbd5fe473"
+    },
+    {
+      "name": "1100-selected",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "b0c3a1581cf9ccf0ba7cc0daec53a987fc17d7b0793763e62152b413b55b615f"
+    },
+    {
+      "name": "760-unselected",
+      "viewport": [
+        760,
+        540
+      ],
+      "scrollY": 0,
+      "size": {
+        "width": 1520,
+        "height": 1080
+      },
+      "pngSha256": "5f1f151e61df9ac2c02f3aae6227a85f4e271abc1fd3f25b8d4a7ab0132c1c2b"
+    },
+    {
+      "name": "760-selected",
+      "viewport": [
+        760,
+        540
+      ],
+      "scrollY": 0,
+      "size": {
+        "width": 1520,
+        "height": 1080
+      },
+      "pngSha256": "7a848ea3d6ddd646e72a24c11a6525bb34e2c75d1a577d9982e36a717054f953"
+    },
+    {
+      "name": "760-inspector-scroll",
+      "viewport": [
+        760,
+        540
+      ],
+      "scrollY": 357.5,
+      "size": {
+        "width": 1520,
+        "height": 1080
+      },
+      "pngSha256": "bf76f16fdfaf9492b32dee3b0b16adec0f82b750a665fa1427eb6c421e80a7cb"
+    },
+    {
+      "name": "complete-office",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "size": {
+        "width": 1280,
+        "height": 720
+      },
+      "pngSha256": "d681e9bea6951eea48079aba8daabb2c6fecc90caa0c689323418b1399e744cb"
+    },
+    {
+      "name": "ari-workstation",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "size": {
+        "width": 300,
+        "height": 232
+      },
+      "pngSha256": "314a5786d6a24e8dc893fa0e0732b8db5af28f6593c35cdda16dab1d3773936c"
+    },
+    {
+      "name": "mina-workstation",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "size": {
+        "width": 300,
+        "height": 232
+      },
+      "pngSha256": "edeb9b270787595c0d03842b3ab21e67417e790400895eccc3d6f6181fbe1a59"
+    },
+    {
+      "name": "sol-canonical-coffee",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "size": {
+        "width": 200,
+        "height": 196
+      },
+      "pngSha256": "6fc55eaa73148514eaa9cc1a11e1190c91d6d3837835be0a08152f0b2acddfe8"
+    },
+    {
+      "name": "sol-generic-waiting",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "size": {
+        "width": 200,
+        "height": 196
+      },
+      "pngSha256": "1af23946cb86612042c85a9dc3acdfe2faf3329a23ff3c92d82863e7cbe36916"
+    },
+    {
+      "name": "1100-focus-mina-selected-ari",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "a82c0fe73c5cab88589cc7fd6b9b774ecd63890efaa6cca0c364d3b70cdc8a7a"
+    },
+    {
+      "name": "ari-idle",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "size": {
+        "width": 300,
+        "height": 232
+      },
+      "pngSha256": "74bee64d082526a23356261c00bd7b8a7d47bc12df486379207b76a0c9687649"
+    },
+    {
+      "name": "ari-working",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "size": {
+        "width": 300,
+        "height": 232
+      },
+      "pngSha256": "fec89e62e58b07028ee824c79c5dd2d8097462f53cddfb6989cf5199015e5d85"
+    },
+    {
+      "name": "ari-waiting",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "size": {
+        "width": 300,
+        "height": 232
+      },
+      "pngSha256": "6c22f9fa2e9374613e72af452e04914b7eb7fabde9df49a70743439dd38a5c7e"
+    },
+    {
+      "name": "ari-completed",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "size": {
+        "width": 300,
+        "height": 232
+      },
+      "pngSha256": "4316c60c4edeeb18bc10a220d6a57c9e2289730b5d0b7241fe40e923e6cabbd1"
+    },
+    {
+      "name": "ari-error",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "size": {
+        "width": 300,
+        "height": 232
+      },
+      "pngSha256": "935540f696be0751a0e4575ab86202654c0e565918abd91f33f97df8888c7e71"
+    },
+    {
+      "name": "1100-retained",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "133fda597d16b6d6252dbd4ba8815bdb834971b6907bc6e5dfbe1566d4ca92fc"
+    },
+    {
+      "name": "1100-long-activity-reason",
+      "viewport": [
+        1100,
+        760
+      ],
+      "scrollY": 0,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "282444cedd49cd0828a21537c54b8277d9c1555cb2163c73255105be228215a1"
+    },
+    {
+      "name": "760-long-activity-reason",
+      "viewport": [
+        760,
+        540
+      ],
+      "scrollY": 490.5,
+      "size": {
+        "width": 1520,
+        "height": 1080
+      },
+      "pngSha256": "c0f424a5385f105a91a72888862e0fb8b8ed697b7640d6d2fc679bdfa781d086"
+    },
+    {
+      "name": "760-unavailable",
+      "viewport": [
+        760,
+        540
+      ],
+      "scrollY": 0,
+      "size": {
+        "width": 1520,
+        "height": 1080
+      },
+      "pngSha256": "52315ed39171283b5611f6da6db6a7fc7b7ba3a67b771fdf0e602e1e5c311327"
+    },
+    {
+      "name": "760-reduced-motion",
+      "viewport": [
+        760,
+        540
+      ],
+      "scrollY": 0,
+      "size": {
+        "width": 1520,
+        "height": 1080
+      },
+      "pngSha256": "5c8dd16819befa08bce60754a7856e9c0a0f58cfa6d37af938488a5f878cbd2e"
+    }
+  ],
+  "observations": {
+    "760": {
+      "unselected": {
+        "viewport": [
+          760,
+          540
+        ],
+        "dpr": 2,
+        "canvases": 1,
+        "horizontalOverflow": false,
+        "documentHeight": 739,
+        "canvas": {
+          "x": 60,
+          "y": 77,
+          "width": 640,
+          "height": 360,
+          "bottom": 437
+        },
+        "inspector": {
+          "x": 59,
+          "y": 520,
+          "width": 642,
+          "height": 195.5,
+          "bottom": 715.5
+        },
+        "selector": {
+          "x": 59,
+          "y": 468,
+          "width": 642,
+          "height": 36,
+          "bottom": 504
+        },
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 760,
+          "height": 56,
+          "bottom": 56
+        },
+        "columns": "642px"
+      },
+      "selected": {
+        "viewport": [
+          760,
+          540
+        ],
+        "dpr": 2,
+        "canvases": 1,
+        "horizontalOverflow": false,
+        "documentHeight": 897,
+        "canvas": {
+          "x": 60,
+          "y": 77,
+          "width": 640,
+          "height": 360,
+          "bottom": 437
+        },
+        "inspector": {
+          "x": 59,
+          "y": 550,
+          "width": 642,
+          "height": 323.5,
+          "bottom": 873.5
+        },
+        "selector": {
+          "x": 59,
+          "y": 468,
+          "width": 642,
+          "height": 36,
+          "bottom": 504
+        },
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 760,
+          "height": 56,
+          "bottom": 56
+        },
+        "columns": "642px"
+      }
+    },
+    "1100": {
+      "unselected": {
+        "viewport": [
+          1100,
+          760
+        ],
+        "dpr": 2,
+        "canvases": 1,
+        "horizontalOverflow": false,
+        "documentHeight": 760,
+        "canvas": {
+          "x": 25,
+          "y": 77,
+          "width": 640,
+          "height": 360,
+          "bottom": 437
+        },
+        "inspector": {
+          "x": 684,
+          "y": 76,
+          "width": 304,
+          "height": 362,
+          "bottom": 438
+        },
+        "selector": {
+          "x": 24,
+          "y": 480,
+          "width": 642,
+          "height": 36,
+          "bottom": 516
+        },
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 1100,
+          "height": 56,
+          "bottom": 56
+        },
+        "columns": "642px 304px"
+      },
+      "selected": {
+        "viewport": [
+          1100,
+          760
+        ],
+        "dpr": 2,
+        "canvases": 1,
+        "horizontalOverflow": false,
+        "documentHeight": 760,
+        "canvas": {
+          "x": 25,
+          "y": 77,
+          "width": 640,
+          "height": 360,
+          "bottom": 437
+        },
+        "inspector": {
+          "x": 684,
+          "y": 76,
+          "width": 304,
+          "height": 362,
+          "bottom": 438
+        },
+        "selector": {
+          "x": 24,
+          "y": 480,
+          "width": 642,
+          "height": 36,
+          "bottom": 516
+        },
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 1100,
+          "height": 56,
+          "bottom": 56
+        },
+        "columns": "642px 304px"
+      }
+    },
+    "artwork": {
+      "logicalSize": [
+        320,
+        180
+      ],
+      "foregroundOpaquePixels": 40,
+      "foregroundStrips": [
+        [
+          141,
+          83,
+          10,
+          2
+        ],
+        [
+          235,
+          83,
+          10,
+          2
+        ]
+      ],
+      "method": "Electron nativeImage decoded RGBA PNGs; toBitmap alpha checked across all 57600 pixels",
+      "pngSha256": {
+        "background": "dc9b313fbbdc8bfc8f9f47e16dd26b4910734f886657b1643a0383b56e83563e",
+        "foreground": "72d03f4ff0d97dd33602fa1acfadf6c6338f39ce4276d4b30500ecc141f9b9ec"
+      }
+    },
+    "intermediateWidths": [
+      {
+        "viewport": [
+          800,
+          760
+        ],
+        "dpr": 2,
+        "canvases": 1,
+        "horizontalOverflow": false,
+        "documentHeight": 897,
+        "canvas": {
+          "x": 80,
+          "y": 77,
+          "width": 640,
+          "height": 360,
+          "bottom": 437
+        },
+        "inspector": {
+          "x": 79,
+          "y": 550,
+          "width": 642,
+          "height": 323.5,
+          "bottom": 873.5
+        },
+        "selector": {
+          "x": 79,
+          "y": 468,
+          "width": 642,
+          "height": 36,
+          "bottom": 504
+        },
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 800,
+          "height": 56,
+          "bottom": 56
+        },
+        "columns": "642px"
+      },
+      {
+        "viewport": [
+          960,
+          760
+        ],
+        "dpr": 2,
+        "canvases": 1,
+        "horizontalOverflow": false,
+        "documentHeight": 897,
+        "canvas": {
+          "x": 160,
+          "y": 77,
+          "width": 640,
+          "height": 360,
+          "bottom": 437
+        },
+        "inspector": {
+          "x": 159,
+          "y": 550,
+          "width": 642,
+          "height": 323.5,
+          "bottom": 873.5
+        },
+        "selector": {
+          "x": 159,
+          "y": 468,
+          "width": 642,
+          "height": 36,
+          "bottom": 504
+        },
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 960,
+          "height": 56,
+          "bottom": 56
+        },
+        "columns": "642px"
+      },
+      {
+        "viewport": [
+          1011,
+          760
+        ],
+        "dpr": 2,
+        "canvases": 1,
+        "horizontalOverflow": false,
+        "documentHeight": 897,
+        "canvas": {
+          "x": 185.5,
+          "y": 77,
+          "width": 640,
+          "height": 360,
+          "bottom": 437
+        },
+        "inspector": {
+          "x": 184.5,
+          "y": 550,
+          "width": 642,
+          "height": 323.5,
+          "bottom": 873.5
+        },
+        "selector": {
+          "x": 184.5,
+          "y": 468,
+          "width": 642,
+          "height": 36,
+          "bottom": 504
+        },
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 1011,
+          "height": 56,
+          "bottom": 56
+        },
+        "columns": "642px"
+      },
+      {
+        "viewport": [
+          1012,
+          760
+        ],
+        "dpr": 2,
+        "canvases": 1,
+        "horizontalOverflow": false,
+        "documentHeight": 760,
+        "canvas": {
+          "x": 25,
+          "y": 77,
+          "width": 640,
+          "height": 360,
+          "bottom": 437
+        },
+        "inspector": {
+          "x": 684,
+          "y": 76,
+          "width": 304,
+          "height": 362,
+          "bottom": 438
+        },
+        "selector": {
+          "x": 24,
+          "y": 480,
+          "width": 642,
+          "height": 36,
+          "bottom": 516
+        },
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 1012,
+          "height": 56,
+          "bottom": 56
+        },
+        "columns": "642px 304px"
+      },
+      {
+        "viewport": [
+          1024,
+          760
+        ],
+        "dpr": 2,
+        "canvases": 1,
+        "horizontalOverflow": false,
+        "documentHeight": 760,
+        "canvas": {
+          "x": 25,
+          "y": 77,
+          "width": 640,
+          "height": 360,
+          "bottom": 437
+        },
+        "inspector": {
+          "x": 684,
+          "y": 76,
+          "width": 304,
+          "height": 362,
+          "bottom": 438
+        },
+        "selector": {
+          "x": 24,
+          "y": 480,
+          "width": 642,
+          "height": 36,
+          "bottom": 516
+        },
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 1024,
+          "height": 56,
+          "bottom": 56
+        },
+        "columns": "642px 304px"
+      },
+      {
+        "viewport": [
+          1200,
+          760
+        ],
+        "dpr": 2,
+        "canvases": 1,
+        "horizontalOverflow": false,
+        "documentHeight": 760,
+        "canvas": {
+          "x": 25,
+          "y": 77,
+          "width": 640,
+          "height": 360,
+          "bottom": 437
+        },
+        "inspector": {
+          "x": 684,
+          "y": 76,
+          "width": 304,
+          "height": 362,
+          "bottom": 438
+        },
+        "selector": {
+          "x": 24,
+          "y": 480,
+          "width": 642,
+          "height": 36,
+          "bottom": 516
+        },
+        "header": {
+          "x": 0,
+          "y": 0,
+          "width": 1200,
+          "height": 56,
+          "bottom": 56
+        },
+        "columns": "642px 304px"
+      }
+    ],
+    "coffeeComparison": "Same room/agent anchor. Canonical vs generic Waiting supplied through production derivation; direct runtime crops.",
+    "allThreeRelocatedSpriteSelection": true,
+    "spriteSelectorAgreement": true,
+    "focus": {
+      "method": "programmatic initial focus followed by Chromium debugger Input.dispatchKeyEvent Tab; not native observation",
+      "focused": "Select Mina",
+      "selection": "Ari",
+      "outline": "rgb(151, 220, 229) solid 3px",
+      "selectedBorder": "rgb(216, 173, 133)"
+    },
+    "fiveLifecycleStates": true,
+    "retainedStatic": true,
+    "reducedMotion": "Renderer media emulation; full office PNG crop unchanged over 1700ms with working Ari and canonical Sol coffee. Native OS setting not tested.",
+    "reloadOneCanvas": true,
+    "rendererErrors": []
+  },
+  "comparison": {
+    "file": "approved-vs-runtime.png",
+    "derivative": true,
+    "designReference": "docs/design/references/us-026/corrected-clean-office.png",
+    "runtimeSource": "complete-office.png",
+    "size": {
+      "width": 2656,
+      "height": 860
+    },
+    "pngSha256": "bf5ae571a0525a4f31e0ee63a8a7beafb63464e83927148438b4df5b0f1392c6"
+  }
+}

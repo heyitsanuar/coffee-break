@@ -12,7 +12,7 @@ vi.mock('phaser', () => ({
       anims = { exists: vi.fn(() => false), create: vi.fn() };
       events = { once: vi.fn() };
       time = { delayedCall: vi.fn(() => ({ remove: vi.fn() })), addEvent: vi.fn(() => ({ remove: vi.fn() })) };
-      add = { sprite: vi.fn(), text: vi.fn(), rectangle: vi.fn(() => ({ setStrokeStyle: vi.fn().mockReturnThis(), setDepth: vi.fn().mockReturnThis() })), graphics: vi.fn(() => graphics()) };
+      add = { image: vi.fn(() => ({ setOrigin: vi.fn().mockReturnThis(), setScale: vi.fn().mockReturnThis(), setDepth: vi.fn().mockReturnThis() })), sprite: vi.fn(), text: vi.fn(), rectangle: vi.fn(() => ({ setStrokeStyle: vi.fn().mockReturnThis(), setDepth: vi.fn().mockReturnThis() })), graphics: vi.fn(() => graphics()) };
     },
     Input: { Events: { POINTER_DOWN: 'pointerdown' } },
     Scenes: { Events: { SHUTDOWN: 'shutdown' } },
@@ -48,7 +48,7 @@ function label() {
 
 function graphics() {
   const instance = { scene: {} as object | undefined, commandBuffer: [] as number[],
-    clear: vi.fn(), fillStyle: vi.fn(), fillRect: vi.fn(), setVisible: vi.fn(), setPosition: vi.fn(), setScale: vi.fn(), setDepth: vi.fn(),
+    lineStyle: vi.fn(), strokeRect: vi.fn(), clear: vi.fn(), fillStyle: vi.fn(), fillRect: vi.fn(), setVisible: vi.fn(), setPosition: vi.fn(), setScale: vi.fn(), setDepth: vi.fn(),
     preDestroy() { this.commandBuffer = []; }, emit: vi.fn(), removeAllListeners: vi.fn(),
     removeFromDisplayList: vi.fn(), removeFromUpdateList: vi.fn(),
   };
@@ -167,8 +167,8 @@ describe('OfficeScene workstation integration', () => {
     const { internals, monitors } = monitorScene(artwork);
     expect(internals.add.graphics).toHaveBeenCalledTimes(artwork ? 3 : 2);
     expect([...internals.workstations.keys()]).toEqual(['mock-agent-ari', 'mock-agent-mina']);
-    expect(monitors[0].setPosition).toHaveBeenCalledWith(88, artwork ? 80 : 100);
-    expect(monitors[1].setPosition).toHaveBeenCalledWith(272, artwork ? 80 : 100);
+    expect(monitors[0].setPosition).toHaveBeenCalledWith(316, 102);
+    expect(monitors[1].setPosition).toHaveBeenCalledWith(504, 102);
     for (const monitor of monitors) { expect(monitor.setScale).toHaveBeenCalledWith(2); expect(monitor.setDepth).toHaveBeenCalledWith(1); }
   });
   it('updates only the matching monitor, reuses objects, and sends the same Completed transition to character and monitor', () => {
@@ -250,7 +250,7 @@ describe('OfficeScene workstation integration', () => {
 describe('OfficeScene contextual mug integration', () => {
   it('creates exactly one artwork steam overlay at measured source-scaled coordinates, reused across episodes', () => {
     const f = monitorScene();
-    expect(f.steam.setPosition).toHaveBeenCalledWith(574, 192);
+    expect(f.steam.setPosition).toHaveBeenCalledWith(230, 248);
     expect(f.steam.setScale).toHaveBeenCalledWith(2); expect(f.steam.setDepth).toHaveBeenCalledWith(1);
     expect(f.steam.setVisible).toHaveBeenLastCalledWith(false);
     f.scene.setAgentPresentation('mock-agent-sol', presentation('mock-agent-sol', 'coffee'));
@@ -353,7 +353,7 @@ it('keeps all persistent nameplates independent of lifecycle, freshness and redu
   expect(solLabel.setText).toHaveBeenLastCalledWith('Coffee break');
 });
 
-it('forwards direct sprite identity and draws only the existing static double outline', () => {
+it.each([['mock-agent-ari', 292, 174, 0], ['mock-agent-mina', 480, 174, 1], ['mock-agent-sol', 220, 282, 2]] as const)('forwards relocated sprite identity and draws the unchanged outline for %s', (id, x, y, index) => {
   const callback = vi.fn();
   const scene = new OfficeScene(callback);
   const internal = scene as unknown as {
@@ -362,16 +362,51 @@ it('forwards direct sprite identity and draws only the existing static double ou
     selectionIndicator: { clear: ReturnType<typeof vi.fn>; lineStyle: ReturnType<typeof vi.fn>; strokeRect: ReturnType<typeof vi.fn> };
   };
   const sprites = [sprite(), sprite(), sprite()];
-  Object.assign(sprites[0], { x: 136, y: 248 });
+  Object.assign(sprites[index], { x, y });
   for (const item of sprites) internal.add.sprite.mockReturnValueOnce(item);
   sprites.forEach(() => internal.add.text.mockReturnValueOnce(label()).mockReturnValueOnce(label()));
   internal.createMockAgents();
-  const pointer = sprites[0].on.mock.calls.find(([event]) => event === 'pointerdown')![1] as () => void;
+  const pointer = sprites[index].on.mock.calls.find(([event]) => event === 'pointerdown')![1] as () => void;
   pointer();
-  expect(callback).toHaveBeenCalledExactlyOnceWith('mock-agent-ari');
+  expect(callback).toHaveBeenCalledExactlyOnceWith(id);
+  expect(internal.add.sprite.mock.calls[index].slice(0, 2)).toEqual([x, y]);
+  expect(sprites[index].setInteractive).toHaveBeenCalledExactlyOnceWith({ useHandCursor: true });
   internal.selectionIndicator = { clear: vi.fn(), lineStyle: vi.fn(), strokeRect: vi.fn() };
-  scene.setSelectedAgent('mock-agent-ari');
-  expect(internal.selectionIndicator.strokeRect.mock.calls).toEqual([[113, 193, 46, 54], [115, 195, 42, 50]]);
+  scene.setSelectedAgent(id);
+  expect(internal.selectionIndicator.strokeRect.mock.calls).toEqual([[x - 23, y - 55, 46, 54], [x - 21, y - 53, 42, 50]]);
   scene.setSelectedAgent(null);
   expect(internal.selectionIndicator.clear).toHaveBeenCalledTimes(2);
+});
+
+
+it.each([true, false])('keeps textured/fallback room geometry and stable noninteractive layers aligned (artwork=%s)', artwork => {
+  const scene = new OfficeScene();
+  const internal = scene as unknown as {
+    textures: { exists: ReturnType<typeof vi.fn> };
+    add: { image: ReturnType<typeof vi.fn>; sprite: ReturnType<typeof vi.fn>; text: ReturnType<typeof vi.fn>; graphics: ReturnType<typeof vi.fn> };
+  };
+  internal.textures.exists.mockImplementation((key: string) => artwork || !key.startsWith('office-room-'));
+  const sprites = [sprite(), sprite(), sprite()];
+  sprites.forEach(item => internal.add.sprite.mockReturnValueOnce(item));
+  sprites.forEach(() => internal.add.text.mockReturnValueOnce(label()).mockReturnValueOnce(label()));
+  scene.create();
+  expect(internal.add.sprite.mock.calls.map(args => args.slice(0, 2))).toEqual([[292, 174], [480, 174], [220, 282]]);
+  if (artwork) {
+    const images = internal.add.image.mock.results.map(result => result.value);
+    expect(images).toHaveLength(2);
+    expect(images[0].setDepth).toHaveBeenCalledWith(0);
+    expect(images[1].setDepth).toHaveBeenCalledWith(20);
+    for (const image of images) {
+      expect(image.setScale).toHaveBeenCalledWith(2);
+      expect(image).not.toHaveProperty('setInteractive');
+    }
+  } else {
+    expect(internal.add.image).not.toHaveBeenCalled();
+    const room = internal.add.graphics.mock.results[0].value as ReturnType<typeof graphics>;
+    expect(room.fillRect).toHaveBeenCalledWith(260, 116, 104, 36);
+    expect(room.fillRect).toHaveBeenCalledWith(448, 116, 104, 36);
+    expect(room.fillRect).toHaveBeenCalledWith(312, 98, 48, 28);
+    expect(room.fillRect).toHaveBeenCalledWith(500, 98, 48, 28);
+    expect(room.fillRect).toHaveBeenCalledWith(20, 216, 180, 72);
+  }
 });

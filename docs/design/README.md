@@ -39,6 +39,10 @@ Meaningful departures must be intentional and recorded in the relevant story spe
 
 For this increment, the Product Owner + Planner accepted the fixed-room scope and warm cream/ink/coffee/sage foundation rather than reproducing the references' large multi-room dashboard and dark chrome. Exact name artwork, supporting symbols, inspector styling, and selection artwork can be refined during implementation and Designer review within the resolved direction. No label preference is approved.
 
+### EP-05 — US-026 approved environment reference
+
+[US-026 — Approved North Star office environment reference](references/us-026/README.md) records the Product Owner-approved corrected environment direction, durable visual targets, study coordinates and source-discovery constraints. The clean corrected office is the primary environment implementation composition; the North Star comparison is the primary fidelity/provenance reference. These generated studies are design references, not production assets or runtime evidence. The original North Star remains the permanent higher-level authority; US-027 owns character redesign and the merged US-025 shell remains unchanged.
+
 ## Application tokens
 
 Exact hex colors, spacing values, typography sizing, and radius values in this section document the **current EP-04/application direction**, not immutable Coffee Break North Star requirements. The permanent North Star is the product/experience hierarchy and visual principles above. Future approved design-system evolution may change exact token values without constituting a North Star departure; the authority and provenance rules still apply.

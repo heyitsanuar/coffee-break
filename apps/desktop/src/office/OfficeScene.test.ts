@@ -5,7 +5,7 @@ import { createOfficePresentationRuntime } from './officePresentationRuntime';
 import { bindOfficePresentation } from './OfficeSceneHost';
 import type { AgentStateMessage, TrustedAgentState } from '../../shared/agentState';
 
-vi.mock('phaser', () => ({
+vi.mock('phaser', async () => ({
   default: {
     Scene: class {
       textures = { exists: vi.fn(() => true) };
@@ -14,6 +14,7 @@ vi.mock('phaser', () => ({
       time = { delayedCall: vi.fn(() => ({ remove: vi.fn() })), addEvent: vi.fn(() => ({ remove: vi.fn() })) };
       add = { image: vi.fn(() => ({ setOrigin: vi.fn().mockReturnThis(), setScale: vi.fn().mockReturnThis(), setDepth: vi.fn().mockReturnThis() })), sprite: vi.fn(), text: vi.fn(), rectangle: vi.fn(() => ({ setStrokeStyle: vi.fn().mockReturnThis(), setDepth: vi.fn().mockReturnThis() })), graphics: vi.fn(() => graphics()) };
     },
+    Geom: { Rectangle: (await import('node:module')).createRequire(import.meta.url)('phaser/src/geom/rectangle') },
     Input: { Events: { POINTER_DOWN: 'pointerdown' } },
     Scenes: { Events: { SHUTDOWN: 'shutdown' } },
   },
@@ -370,7 +371,7 @@ it.each([['mock-agent-ari', 292, 174, 0], ['mock-agent-mina', 480, 174, 1], ['mo
   pointer();
   expect(callback).toHaveBeenCalledExactlyOnceWith(id);
   expect(internal.add.sprite.mock.calls[index].slice(0, 2)).toEqual([x, y]);
-  expect(sprites[index].setInteractive).toHaveBeenCalledExactlyOnceWith({ useHandCursor: true });
+  expect(sprites[index].setInteractive).toHaveBeenCalledExactlyOnceWith(expect.objectContaining({ useHandCursor: true, hitArea: expect.objectContaining({ x: -2, y: -4, width: 24, height: 32 }), hitAreaCallback: expect.any(Function) }));
   internal.selectionIndicator = { clear: vi.fn(), lineStyle: vi.fn(), strokeRect: vi.fn() };
   scene.setSelectedAgent(id);
   expect(internal.selectionIndicator.strokeRect.mock.calls).toEqual([[x - 23, y - 55, 46, 54], [x - 21, y - 53, 42, 50]]);
@@ -408,5 +409,34 @@ it.each([true, false])('keeps textured/fallback room geometry and stable noninte
     expect(room.fillRect).toHaveBeenCalledWith(312, 98, 48, 28);
     expect(room.fillRect).toHaveBeenCalledWith(500, 98, 48, 28);
     expect(room.fillRect).toHaveBeenCalledWith(20, 216, 180, 72);
+  }
+});
+
+it('registers non-overlapping 48×64 world targets using actual Phaser geometry, stable across texture/frame updates', () => {
+  const f = monitorScene();
+  const Size = createRequire(import.meta.url)('phaser/src/gameobjects/components/Size');
+  const rectangles = f.sprites.map((item, index) => {
+    const config = item.setInteractive.mock.calls[0][0];
+    const hitArea = config.hitArea as { x: number; y: number; width: number; height: number };
+    const [x, y] = [[292,174], [480,174], [220,282]][index];
+    const bounds = { x: x + (hitArea.x - 10) * 2, y: y + (hitArea.y - 24) * 2, width: hitArea.width * 2, height: hitArea.height * 2 };
+    expect(bounds).toEqual({ x: x - 24, y: y - 56, width: 48, height: 64 });
+    expect(config.hitAreaCallback(hitArea, -1, -3)).toBe(true); // Outside the visible frame, inside approved target.
+    expect(config.hitAreaCallback(hitArea, -3, -3)).toBe(false);
+    const target = { input: { customHitArea: true, hitArea }, frame: { realWidth: 20, realHeight: 24 }, width: 20, height: 24 };
+    // Installed Phaser sizing is what normally overwrites default hit areas on texture/frame changes.
+    const id = ['mock-agent-ari', 'mock-agent-mina', 'mock-agent-sol'][index] as MockAgentId;
+    for (const visual of ['idle', 'working', 'waiting', 'completed', 'error', ...(index === 2 ? ['coffee' as const] : [])] as const) {
+      f.scene.setAgentPresentation(id, presentation(id, visual));
+      Size.setSizeToFrame.call(target);
+      expect(target.input.hitArea).toBe(hitArea);
+      expect(hitArea).toMatchObject({ x: -2, y: -4, width: 24, height: 32 });
+    }
+    expect(item.setInteractive).toHaveBeenCalledOnce();
+    return bounds;
+  });
+  for (let i = 0; i < rectangles.length; i++) for (let j = i + 1; j < rectangles.length; j++) {
+    const a = rectangles[i], b = rectangles[j];
+    expect(a.x + a.width <= b.x || b.x + b.width <= a.x || a.y + a.height <= b.y || b.y + b.height <= a.y).toBe(true);
   }
 });

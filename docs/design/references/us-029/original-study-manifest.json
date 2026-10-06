@@ -1,0 +1,1321 @@
+{
+  "status": "PROPOSAL — NOT APPROVED",
+  "baseline": "6f54c86c1d9a1b0677c21ac77d37dfb73b5b407e",
+  "basis": "Reconstructed Designer prototype using unchanged canonical art; not US-029 production implementation or runtime evidence",
+  "nativeCalibration": {
+    "electron": "37.10.3",
+    "platform": "darwin",
+    "useContentSize": false,
+    "outerToContent": [
+      {
+        "outer": [
+          1100,
+          760
+        ],
+        "content": [
+          1100,
+          732
+        ]
+      },
+      {
+        "outer": [
+          760,
+          540
+        ],
+        "content": [
+          760,
+          512
+        ]
+      }
+    ],
+    "frameHeight": 28,
+    "scope": "Temporary BrowserWindow with matching production geometry flags; no production renderer loaded"
+  },
+  "prototypeChecks": {
+    "errors": [],
+    "thresholdKeepsSameFocusedControl": true,
+    "thresholdKeepsSelection": true,
+    "keyboardActivation": true,
+    "clearKeepsFocus": true
+  },
+  "studies": [
+    {
+      "name": "a-desktop-native-1100x760",
+      "kind": "DESIGN STUDY — NOT RUNTIME EVIDENCE",
+      "assumption": "Native outer-window bounds; measured 28px frame represented by annotation band",
+      "requested": [
+        1100,
+        760
+      ],
+      "selected": "Select Mina",
+      "lifecycle": "Waiting",
+      "freshness": "Current information",
+      "activityType": "Representative existing-field fixture",
+      "reasonPresent": true,
+      "focusTarget": null,
+      "reducedMotion": "Static canonical pose illustration; no animation runtime claim",
+      "alignment": "Anchored",
+      "text": "Standard",
+      "viewport": [
+        1100,
+        732
+      ],
+      "dpr": 1,
+      "scrollY": 0,
+      "documentHeight": 732,
+      "horizontalOverflow": false,
+      "room": {
+        "x": 24,
+        "y": 76,
+        "width": 642,
+        "height": 362,
+        "bottom": 438,
+        "display": "block"
+      },
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1100,
+        "height": 56,
+        "bottom": 56,
+        "display": "flex"
+      },
+      "roster": {
+        "x": 24,
+        "y": 478,
+        "width": 642,
+        "height": 44,
+        "bottom": 522,
+        "display": "flex"
+      },
+      "summary": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "bottom": 0,
+        "display": "none"
+      },
+      "dock": {
+        "x": 684,
+        "y": 76,
+        "width": 304,
+        "height": 362,
+        "bottom": 438,
+        "display": "block"
+      },
+      "activity": "Waiting for approval.",
+      "reason": true,
+      "focus": null
+    },
+    {
+      "name": "a-desktop-content-1100x760",
+      "kind": "DESIGN STUDY — NOT RUNTIME EVIDENCE",
+      "assumption": "CSS content viewport bounds",
+      "requested": [
+        1100,
+        760
+      ],
+      "selected": "Select Mina",
+      "lifecycle": "Waiting",
+      "freshness": "Current information",
+      "activityType": "Representative existing-field fixture",
+      "reasonPresent": true,
+      "focusTarget": null,
+      "reducedMotion": "Static canonical pose illustration; no animation runtime claim",
+      "alignment": "Anchored",
+      "text": "Standard",
+      "viewport": [
+        1100,
+        760
+      ],
+      "dpr": 1,
+      "scrollY": 0,
+      "documentHeight": 760,
+      "horizontalOverflow": false,
+      "room": {
+        "x": 24,
+        "y": 76,
+        "width": 642,
+        "height": 362,
+        "bottom": 438,
+        "display": "block"
+      },
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1100,
+        "height": 56,
+        "bottom": 56,
+        "display": "flex"
+      },
+      "roster": {
+        "x": 24,
+        "y": 478,
+        "width": 642,
+        "height": 44,
+        "bottom": 522,
+        "display": "flex"
+      },
+      "summary": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "bottom": 0,
+        "display": "none"
+      },
+      "dock": {
+        "x": 684,
+        "y": 76,
+        "width": 304,
+        "height": 362,
+        "bottom": 438,
+        "display": "block"
+      },
+      "activity": "Waiting for approval.",
+      "reason": true,
+      "focus": null
+    },
+    {
+      "name": "b-minimum-native-760x540",
+      "kind": "DESIGN STUDY — NOT RUNTIME EVIDENCE",
+      "assumption": "Native outer-window bounds; measured 28px frame represented by annotation band",
+      "requested": [
+        760,
+        540
+      ],
+      "selected": "Select Mina",
+      "lifecycle": "Waiting",
+      "freshness": "Current information",
+      "activityType": "Representative existing-field fixture",
+      "reasonPresent": true,
+      "focusTarget": null,
+      "reducedMotion": "Static canonical pose illustration; no animation runtime claim",
+      "alignment": "Anchored",
+      "text": "Standard",
+      "viewport": [
+        760,
+        512
+      ],
+      "dpr": 1,
+      "scrollY": 0,
+      "documentHeight": 858,
+      "horizontalOverflow": false,
+      "room": {
+        "x": 24,
+        "y": 44,
+        "width": 642,
+        "height": 362,
+        "bottom": 406,
+        "display": "block"
+      },
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 760,
+        "height": 40,
+        "bottom": 40,
+        "display": "flex"
+      },
+      "roster": {
+        "x": 24,
+        "y": 434,
+        "width": 642,
+        "height": 44,
+        "bottom": 478,
+        "display": "flex"
+      },
+      "summary": {
+        "x": 24,
+        "y": 484,
+        "width": 642,
+        "height": 20,
+        "bottom": 504,
+        "display": "block"
+      },
+      "dock": {
+        "x": 24,
+        "y": 520,
+        "width": 642,
+        "height": 313,
+        "bottom": 833,
+        "display": "block"
+      },
+      "activity": "Waiting for approval.",
+      "reason": true,
+      "focus": null
+    },
+    {
+      "name": "b-minimum-content-760x540",
+      "kind": "DESIGN STUDY — NOT RUNTIME EVIDENCE",
+      "assumption": "CSS content viewport bounds",
+      "requested": [
+        760,
+        540
+      ],
+      "selected": "Select Mina",
+      "lifecycle": "Waiting",
+      "freshness": "Current information",
+      "activityType": "Representative existing-field fixture",
+      "reasonPresent": true,
+      "focusTarget": null,
+      "reducedMotion": "Static canonical pose illustration; no animation runtime claim",
+      "alignment": "Anchored",
+      "text": "Standard",
+      "viewport": [
+        760,
+        540
+      ],
+      "dpr": 1,
+      "scrollY": 0,
+      "documentHeight": 858,
+      "horizontalOverflow": false,
+      "room": {
+        "x": 24,
+        "y": 44,
+        "width": 642,
+        "height": 362,
+        "bottom": 406,
+        "display": "block"
+      },
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 760,
+        "height": 40,
+        "bottom": 40,
+        "display": "flex"
+      },
+      "roster": {
+        "x": 24,
+        "y": 434,
+        "width": 642,
+        "height": 44,
+        "bottom": 478,
+        "display": "flex"
+      },
+      "summary": {
+        "x": 24,
+        "y": 484,
+        "width": 642,
+        "height": 20,
+        "bottom": 504,
+        "display": "block"
+      },
+      "dock": {
+        "x": 24,
+        "y": 520,
+        "width": 642,
+        "height": 313,
+        "bottom": 833,
+        "display": "block"
+      },
+      "activity": "Waiting for approval.",
+      "reason": true,
+      "focus": null
+    },
+    {
+      "name": "b-minimum-full-flow",
+      "kind": "DESIGN STUDY — NOT RUNTIME EVIDENCE",
+      "assumption": "CSS content viewport bounds",
+      "requested": [
+        760,
+        512
+      ],
+      "selected": "Select Mina",
+      "lifecycle": "Waiting",
+      "freshness": "Current information",
+      "activityType": "Representative existing-field fixture",
+      "reasonPresent": true,
+      "focusTarget": null,
+      "reducedMotion": "Static canonical pose illustration; no animation runtime claim",
+      "alignment": "Anchored",
+      "text": "Standard",
+      "viewport": [
+        760,
+        512
+      ],
+      "dpr": 1,
+      "scrollY": 0,
+      "documentHeight": 858,
+      "horizontalOverflow": false,
+      "room": {
+        "x": 24,
+        "y": 44,
+        "width": 642,
+        "height": 362,
+        "bottom": 406,
+        "display": "block"
+      },
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 760,
+        "height": 40,
+        "bottom": 40,
+        "display": "flex"
+      },
+      "roster": {
+        "x": 24,
+        "y": 434,
+        "width": 642,
+        "height": 44,
+        "bottom": 478,
+        "display": "flex"
+      },
+      "summary": {
+        "x": 24,
+        "y": 484,
+        "width": 642,
+        "height": 20,
+        "bottom": 504,
+        "display": "block"
+      },
+      "dock": {
+        "x": 24,
+        "y": 520,
+        "width": 642,
+        "height": 313,
+        "bottom": 833,
+        "display": "block"
+      },
+      "activity": "Waiting for approval.",
+      "reason": true,
+      "focus": null
+    },
+    {
+      "name": "c-transition-side-1012",
+      "kind": "DESIGN STUDY — NOT RUNTIME EVIDENCE",
+      "assumption": "Native outer-window bounds; measured 28px frame represented by annotation band",
+      "requested": [
+        1012,
+        700
+      ],
+      "selected": "Select Mina",
+      "lifecycle": "Waiting",
+      "freshness": "Current information",
+      "activityType": "Representative existing-field fixture",
+      "reasonPresent": true,
+      "focusTarget": null,
+      "reducedMotion": "Static canonical pose illustration; no animation runtime claim",
+      "alignment": "Anchored",
+      "text": "Standard",
+      "viewport": [
+        1012,
+        672
+      ],
+      "dpr": 1,
+      "scrollY": 0,
+      "documentHeight": 672,
+      "horizontalOverflow": false,
+      "room": {
+        "x": 24,
+        "y": 76,
+        "width": 642,
+        "height": 362,
+        "bottom": 438,
+        "display": "block"
+      },
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1012,
+        "height": 56,
+        "bottom": 56,
+        "display": "flex"
+      },
+      "roster": {
+        "x": 24,
+        "y": 478,
+        "width": 642,
+        "height": 44,
+        "bottom": 522,
+        "display": "flex"
+      },
+      "summary": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "bottom": 0,
+        "display": "none"
+      },
+      "dock": {
+        "x": 684,
+        "y": 76,
+        "width": 304,
+        "height": 362,
+        "bottom": 438,
+        "display": "block"
+      },
+      "activity": "Waiting for approval.",
+      "reason": true,
+      "focus": null
+    },
+    {
+      "name": "c-transition-inline-1011",
+      "kind": "DESIGN STUDY — NOT RUNTIME EVIDENCE",
+      "assumption": "Native outer-window bounds; measured 28px frame represented by annotation band",
+      "requested": [
+        1011,
+        700
+      ],
+      "selected": "Select Mina",
+      "lifecycle": "Waiting",
+      "freshness": "Current information",
+      "activityType": "Representative existing-field fixture",
+      "reasonPresent": true,
+      "focusTarget": null,
+      "reducedMotion": "Static canonical pose illustration; no animation runtime claim",
+      "alignment": "Anchored",
+      "text": "Standard",
+      "viewport": [
+        1011,
+        672
+      ],
+      "dpr": 1,
+      "scrollY": 0,
+      "documentHeight": 894,
+      "horizontalOverflow": false,
+      "room": {
+        "x": 24,
+        "y": 76,
+        "width": 642,
+        "height": 362,
+        "bottom": 438,
+        "display": "block"
+      },
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1011,
+        "height": 56,
+        "bottom": 56,
+        "display": "flex"
+      },
+      "roster": {
+        "x": 24,
+        "y": 466,
+        "width": 642,
+        "height": 44,
+        "bottom": 510,
+        "display": "flex"
+      },
+      "summary": {
+        "x": 24,
+        "y": 516,
+        "width": 642,
+        "height": 24,
+        "bottom": 540,
+        "display": "block"
+      },
+      "dock": {
+        "x": 24,
+        "y": 556,
+        "width": 642,
+        "height": 313,
+        "bottom": 869,
+        "display": "block"
+      },
+      "activity": "Waiting for approval.",
+      "reason": true,
+      "focus": null
+    },
+    {
+      "name": "c-intermediate-native-900x700",
+      "kind": "DESIGN STUDY — NOT RUNTIME EVIDENCE",
+      "assumption": "Native outer-window bounds; measured 28px frame represented by annotation band",
+      "requested": [
+        900,
+        700
+      ],
+      "selected": "Select Mina",
+      "lifecycle": "Waiting",
+      "freshness": "Current information",
+      "activityType": "Representative existing-field fixture",
+      "reasonPresent": true,
+      "focusTarget": null,
+      "reducedMotion": "Static canonical pose illustration; no animation runtime claim",
+      "alignment": "Anchored",
+      "text": "Standard",
+      "viewport": [
+        900,
+        672
+      ],
+      "dpr": 1,
+      "scrollY": 0,
+      "documentHeight": 894,
+      "horizontalOverflow": false,
+      "room": {
+        "x": 24,
+        "y": 76,
+        "width": 642,
+        "height": 362,
+        "bottom": 438,
+        "display": "block"
+      },
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 900,
+        "height": 56,
+        "bottom": 56,
+        "display": "flex"
+      },
+      "roster": {
+        "x": 24,
+        "y": 466,
+        "width": 642,
+        "height": 44,
+        "bottom": 510,
+        "display": "flex"
+      },
+      "summary": {
+        "x": 24,
+        "y": 516,
+        "width": 642,
+        "height": 24,
+        "bottom": 540,
+        "display": "block"
+      },
+      "dock": {
+        "x": 24,
+        "y": 556,
+        "width": 642,
+        "height": 313,
+        "bottom": 869,
+        "display": "block"
+      },
+      "activity": "Waiting for approval.",
+      "reason": true,
+      "focus": null
+    },
+    {
+      "name": "c-centered-alternative-900x700",
+      "kind": "DESIGN STUDY — NOT RUNTIME EVIDENCE",
+      "assumption": "Native outer-window bounds; measured 28px frame represented by annotation band",
+      "requested": [
+        900,
+        700
+      ],
+      "selected": "Select Mina",
+      "lifecycle": "Waiting",
+      "freshness": "Current information",
+      "activityType": "Representative existing-field fixture",
+      "reasonPresent": true,
+      "focusTarget": null,
+      "reducedMotion": "Static canonical pose illustration; no animation runtime claim",
+      "alignment": "Centered",
+      "text": "Standard",
+      "viewport": [
+        900,
+        672
+      ],
+      "dpr": 1,
+      "scrollY": 0,
+      "documentHeight": 894,
+      "horizontalOverflow": false,
+      "room": {
+        "x": 129,
+        "y": 76,
+        "width": 642,
+        "height": 362,
+        "bottom": 438,
+        "display": "block"
+      },
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 900,
+        "height": 56,
+        "bottom": 56,
+        "display": "flex"
+      },
+      "roster": {
+        "x": 129,
+        "y": 466,
+        "width": 642,
+        "height": 44,
+        "bottom": 510,
+        "display": "flex"
+      },
+      "summary": {
+        "x": 129,
+        "y": 516,
+        "width": 642,
+        "height": 24,
+        "bottom": 540,
+        "display": "block"
+      },
+      "dock": {
+        "x": 129,
+        "y": 556,
+        "width": 642,
+        "height": 313,
+        "bottom": 869,
+        "display": "block"
+      },
+      "activity": "Waiting for approval.",
+      "reason": true,
+      "focus": null
+    },
+    {
+      "name": "d-long-desktop-retained",
+      "kind": "DESIGN STUDY — NOT RUNTIME EVIDENCE",
+      "assumption": "Native outer-window bounds; measured 28px frame represented by annotation band",
+      "requested": [
+        1100,
+        760
+      ],
+      "selected": "Select Mina",
+      "lifecycle": "Waiting",
+      "freshness": "Last known · Not live",
+      "activityType": "496-character synthetic activity with long unbroken reference",
+      "reasonPresent": true,
+      "focusTarget": null,
+      "reducedMotion": "Static canonical pose illustration; no animation runtime claim",
+      "alignment": "Anchored",
+      "text": "Standard",
+      "viewport": [
+        1100,
+        732
+      ],
+      "dpr": 1,
+      "scrollY": 0,
+      "documentHeight": 774,
+      "horizontalOverflow": false,
+      "room": {
+        "x": 24,
+        "y": 76,
+        "width": 642,
+        "height": 362,
+        "bottom": 438,
+        "display": "block"
+      },
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1100,
+        "height": 56,
+        "bottom": 56,
+        "display": "flex"
+      },
+      "roster": {
+        "x": 24,
+        "y": 478,
+        "width": 642,
+        "height": 44,
+        "bottom": 522,
+        "display": "flex"
+      },
+      "summary": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "bottom": 0,
+        "display": "none"
+      },
+      "dock": {
+        "x": 684,
+        "y": 76,
+        "width": 304,
+        "height": 673,
+        "bottom": 749,
+        "display": "block"
+      },
+      "activity": "Waiting for approval to continue the local change after reviewing the updated selection behavior, keyboard focus, retained information, and the compact inspector. The remaining verification must preserve the exact activity supplied by the trusted input, including this uninterrupted reference: selection_context_selection_context_selection_context_selection_context_selection_context_selection_context_selection_context_selection_context_selection_context_selection_context_selection_context_end.",
+      "reason": true,
+      "focus": null
+    },
+    {
+      "name": "d-long-desktop-full-flow",
+      "kind": "DESIGN STUDY — NOT RUNTIME EVIDENCE",
+      "assumption": "CSS content viewport bounds",
+      "requested": [
+        1100,
+        732
+      ],
+      "selected": "Select Mina",
+      "lifecycle": "Waiting",
+      "freshness": "Last known · Not live",
+      "activityType": "496-character synthetic activity with long unbroken reference",
+      "reasonPresent": true,
+      "focusTarget": null,
+      "reducedMotion": "Static canonical pose illustration; no animation runtime claim",
+      "alignment": "Anchored",
+      "text": "Standard",
+      "viewport": [
+        1100,
+        732
+      ],
+      "dpr": 1,
+      "scrollY": 0,
+      "documentHeight": 774,
+      "horizontalOverflow": false,
+      "room": {
+        "x": 24,
+        "y": 76,
+        "width": 642,
+        "height": 362,
+        "bottom": 438,
+        "display": "block"
+      },
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1100,
+        "height": 56,
+        "bottom": 56,
+        "display": "flex"
+      },
+      "roster": {
+        "x": 24,
+        "y": 478,
+        "width": 642,
+        "height": 44,
+        "bottom": 522,
+        "display": "flex"
+      },
+      "summary": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "bottom": 0,
+        "display": "none"
+      },
+      "dock": {
+        "x": 684,
+        "y": 76,
+        "width": 304,
+        "height": 673,
+        "bottom": 749,
+        "display": "block"
+      },
+      "activity": "Waiting for approval to continue the local change after reviewing the updated selection behavior, keyboard focus, retained information, and the compact inspector. The remaining verification must preserve the exact activity supplied by the trusted input, including this uninterrupted reference: selection_context_selection_context_selection_context_selection_context_selection_context_selection_context_selection_context_selection_context_selection_context_selection_context_selection_context_end.",
+      "reason": true,
+      "focus": null
+    },
+    {
+      "name": "d-long-minimum-inspector",
+      "kind": "DESIGN STUDY — NOT RUNTIME EVIDENCE",
+      "assumption": "Native outer-window bounds; measured 28px frame represented by annotation band",
+      "requested": [
+        760,
+        540
+      ],
+      "selected": "Select Mina",
+      "lifecycle": "Waiting",
+      "freshness": "Last known · Not live",
+      "activityType": "496-character synthetic activity with long unbroken reference",
+      "reasonPresent": true,
+      "focusTarget": null,
+      "reducedMotion": "Static canonical pose illustration; no animation runtime claim",
+      "alignment": "Anchored",
+      "text": "Standard",
+      "viewport": [
+        760,
+        512
+      ],
+      "dpr": 1,
+      "scrollY": 490,
+      "documentHeight": 1002,
+      "horizontalOverflow": false,
+      "room": {
+        "x": 24,
+        "y": -446,
+        "width": 642,
+        "height": 362,
+        "bottom": -84,
+        "display": "block"
+      },
+      "header": {
+        "x": 0,
+        "y": -490,
+        "width": 760,
+        "height": 40,
+        "bottom": -450,
+        "display": "flex"
+      },
+      "roster": {
+        "x": 24,
+        "y": -56,
+        "width": 642,
+        "height": 44,
+        "bottom": -12,
+        "display": "flex"
+      },
+      "summary": {
+        "x": 24,
+        "y": -6,
+        "width": 642,
+        "height": 20,
+        "bottom": 14,
+        "display": "block"
+      },
+      "dock": {
+        "x": 24,
+        "y": 30,
+        "width": 642,
+        "height": 457,
+        "bottom": 487,
+        "display": "block"
+      },
+      "activity": "Waiting for approval to continue the local change after reviewing the updated selection behavior, keyboard focus, retained information, and the compact inspector. The remaining verification must preserve the exact activity supplied by the trusted input, including this uninterrupted reference: selection_context_selection_context_selection_context_selection_context_selection_context_selection_context_selection_context_selection_context_selection_context_selection_context_selection_context_end.",
+      "reason": true,
+      "focus": null
+    },
+    {
+      "name": "e-focus-sol-selected-mina",
+      "kind": "DESIGN STUDY — NOT RUNTIME EVIDENCE",
+      "assumption": "Native outer-window bounds; measured 28px frame represented by annotation band",
+      "requested": [
+        760,
+        540
+      ],
+      "selected": "Select Mina",
+      "lifecycle": "Waiting",
+      "freshness": "Current information",
+      "activityType": "Representative existing-field fixture",
+      "reasonPresent": true,
+      "focusTarget": "Sol",
+      "reducedMotion": "Static canonical pose illustration; no animation runtime claim",
+      "alignment": "Anchored",
+      "text": "Standard",
+      "viewport": [
+        760,
+        512
+      ],
+      "dpr": 1,
+      "scrollY": 0,
+      "documentHeight": 858,
+      "horizontalOverflow": false,
+      "room": {
+        "x": 24,
+        "y": 44,
+        "width": 642,
+        "height": 362,
+        "bottom": 406,
+        "display": "block"
+      },
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 760,
+        "height": 40,
+        "bottom": 40,
+        "display": "flex"
+      },
+      "roster": {
+        "x": 24,
+        "y": 434,
+        "width": 642,
+        "height": 44,
+        "bottom": 478,
+        "display": "flex"
+      },
+      "summary": {
+        "x": 24,
+        "y": 484,
+        "width": 642,
+        "height": 20,
+        "bottom": 504,
+        "display": "block"
+      },
+      "dock": {
+        "x": 24,
+        "y": 520,
+        "width": 642,
+        "height": 313,
+        "bottom": 833,
+        "display": "block"
+      },
+      "activity": "Waiting for approval.",
+      "reason": true,
+      "focus": "Select Sol"
+    },
+    {
+      "name": "f-minimum-retained",
+      "kind": "DESIGN STUDY — NOT RUNTIME EVIDENCE",
+      "assumption": "Native outer-window bounds; measured 28px frame represented by annotation band",
+      "requested": [
+        760,
+        540
+      ],
+      "selected": "Select Mina",
+      "lifecycle": "Waiting",
+      "freshness": "Last known · Not live",
+      "activityType": "Representative existing-field fixture",
+      "reasonPresent": true,
+      "focusTarget": null,
+      "reducedMotion": "Static canonical pose illustration; no animation runtime claim",
+      "alignment": "Anchored",
+      "text": "Standard",
+      "viewport": [
+        760,
+        512
+      ],
+      "dpr": 1,
+      "scrollY": 0,
+      "documentHeight": 858,
+      "horizontalOverflow": false,
+      "room": {
+        "x": 24,
+        "y": 44,
+        "width": 642,
+        "height": 362,
+        "bottom": 406,
+        "display": "block"
+      },
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 760,
+        "height": 40,
+        "bottom": 40,
+        "display": "flex"
+      },
+      "roster": {
+        "x": 24,
+        "y": 434,
+        "width": 642,
+        "height": 44,
+        "bottom": 478,
+        "display": "flex"
+      },
+      "summary": {
+        "x": 24,
+        "y": 484,
+        "width": 642,
+        "height": 20,
+        "bottom": 504,
+        "display": "block"
+      },
+      "dock": {
+        "x": 24,
+        "y": 520,
+        "width": 642,
+        "height": 313,
+        "bottom": 833,
+        "display": "block"
+      },
+      "activity": "Waiting for approval.",
+      "reason": true,
+      "focus": null
+    },
+    {
+      "name": "f-minimum-synchronizing",
+      "kind": "DESIGN STUDY — NOT RUNTIME EVIDENCE",
+      "assumption": "Native outer-window bounds; measured 28px frame represented by annotation band",
+      "requested": [
+        760,
+        540
+      ],
+      "selected": "Select Mina",
+      "lifecycle": "Waiting",
+      "freshness": "Last known · Not live",
+      "activityType": "Representative existing-field fixture",
+      "reasonPresent": true,
+      "focusTarget": null,
+      "reducedMotion": "Static canonical pose illustration; no animation runtime claim",
+      "alignment": "Anchored",
+      "text": "Standard",
+      "viewport": [
+        760,
+        512
+      ],
+      "dpr": 1,
+      "scrollY": 0,
+      "documentHeight": 858,
+      "horizontalOverflow": false,
+      "room": {
+        "x": 24,
+        "y": 44,
+        "width": 642,
+        "height": 362,
+        "bottom": 406,
+        "display": "block"
+      },
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 760,
+        "height": 40,
+        "bottom": 40,
+        "display": "flex"
+      },
+      "roster": {
+        "x": 24,
+        "y": 434,
+        "width": 642,
+        "height": 44,
+        "bottom": 478,
+        "display": "flex"
+      },
+      "summary": {
+        "x": 24,
+        "y": 484,
+        "width": 642,
+        "height": 20,
+        "bottom": 504,
+        "display": "block"
+      },
+      "dock": {
+        "x": 24,
+        "y": 520,
+        "width": 642,
+        "height": 313,
+        "bottom": 833,
+        "display": "block"
+      },
+      "activity": "Waiting for approval.",
+      "reason": true,
+      "focus": null
+    },
+    {
+      "name": "h-enlarged-text-minimum",
+      "kind": "DESIGN STUDY — NOT RUNTIME EVIDENCE",
+      "assumption": "Native outer-window bounds; measured 28px frame represented by annotation band",
+      "requested": [
+        760,
+        540
+      ],
+      "selected": "Select Mina",
+      "lifecycle": "Waiting",
+      "freshness": "Current information",
+      "activityType": "Representative existing-field fixture",
+      "reasonPresent": true,
+      "focusTarget": null,
+      "reducedMotion": "Static canonical pose illustration; no animation runtime claim",
+      "alignment": "Anchored",
+      "text": "200% text-only study, not page zoom",
+      "viewport": [
+        760,
+        512
+      ],
+      "dpr": 1,
+      "scrollY": 0,
+      "documentHeight": 1091,
+      "horizontalOverflow": false,
+      "room": {
+        "x": 24,
+        "y": 62,
+        "width": 642,
+        "height": 362,
+        "bottom": 424,
+        "display": "block"
+      },
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 760,
+        "height": 58,
+        "bottom": 58,
+        "display": "flex"
+      },
+      "roster": {
+        "x": 24,
+        "y": 469.59375,
+        "width": 642,
+        "height": 50.390625,
+        "bottom": 519.984375,
+        "display": "flex"
+      },
+      "summary": {
+        "x": 24,
+        "y": 525.984375,
+        "width": 642,
+        "height": 40,
+        "bottom": 565.984375,
+        "display": "block"
+      },
+      "dock": {
+        "x": 24,
+        "y": 581.984375,
+        "width": 642,
+        "height": 484.1875,
+        "bottom": 1066.171875,
+        "display": "block"
+      },
+      "activity": "Waiting for approval.",
+      "reason": true,
+      "focus": null
+    },
+    {
+      "name": "h-enlarged-text-full-flow",
+      "kind": "DESIGN STUDY — NOT RUNTIME EVIDENCE",
+      "assumption": "CSS content viewport bounds",
+      "requested": [
+        760,
+        512
+      ],
+      "selected": "Select Mina",
+      "lifecycle": "Waiting",
+      "freshness": "Current information",
+      "activityType": "Representative existing-field fixture",
+      "reasonPresent": true,
+      "focusTarget": null,
+      "reducedMotion": "Static canonical pose illustration; no animation runtime claim",
+      "alignment": "Anchored",
+      "text": "200% text-only study, not page zoom",
+      "viewport": [
+        760,
+        512
+      ],
+      "dpr": 1,
+      "scrollY": 0,
+      "documentHeight": 1091,
+      "horizontalOverflow": false,
+      "room": {
+        "x": 24,
+        "y": 62,
+        "width": 642,
+        "height": 362,
+        "bottom": 424,
+        "display": "block"
+      },
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 760,
+        "height": 58,
+        "bottom": 58,
+        "display": "flex"
+      },
+      "roster": {
+        "x": 24,
+        "y": 469.59375,
+        "width": 642,
+        "height": 50.390625,
+        "bottom": 519.984375,
+        "display": "flex"
+      },
+      "summary": {
+        "x": 24,
+        "y": 525.984375,
+        "width": 642,
+        "height": 40,
+        "bottom": 565.984375,
+        "display": "block"
+      },
+      "dock": {
+        "x": 24,
+        "y": 581.984375,
+        "width": 642,
+        "height": 484.1875,
+        "bottom": 1066.171875,
+        "display": "block"
+      },
+      "activity": "Waiting for approval.",
+      "reason": true,
+      "focus": null
+    },
+    {
+      "name": "i-minimum-no-state",
+      "kind": "DESIGN STUDY — NOT RUNTIME EVIDENCE",
+      "assumption": "Native outer-window bounds; measured 28px frame represented by annotation band",
+      "requested": [
+        760,
+        540
+      ],
+      "selected": "Select Mina",
+      "lifecycle": "",
+      "freshness": "Current information",
+      "activityType": "Representative existing-field fixture",
+      "reasonPresent": true,
+      "focusTarget": null,
+      "reducedMotion": "Static canonical pose illustration; no animation runtime claim",
+      "alignment": "Anchored",
+      "text": "Standard",
+      "viewport": [
+        760,
+        512
+      ],
+      "dpr": 1,
+      "scrollY": 0,
+      "documentHeight": 719,
+      "horizontalOverflow": false,
+      "room": {
+        "x": 24,
+        "y": 44,
+        "width": 642,
+        "height": 362,
+        "bottom": 406,
+        "display": "block"
+      },
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 760,
+        "height": 40,
+        "bottom": 40,
+        "display": "flex"
+      },
+      "roster": {
+        "x": 24,
+        "y": 434,
+        "width": 642,
+        "height": 44,
+        "bottom": 478,
+        "display": "flex"
+      },
+      "summary": {
+        "x": 24,
+        "y": 484,
+        "width": 642,
+        "height": 20,
+        "bottom": 504,
+        "display": "block"
+      },
+      "dock": {
+        "x": 24,
+        "y": 520,
+        "width": 642,
+        "height": 174,
+        "bottom": 694,
+        "display": "block"
+      },
+      "activity": "Waiting for approval.",
+      "reason": true,
+      "focus": null
+    },
+    {
+      "name": "g-reduced-motion-static-vocabulary",
+      "kind": "DERIVED DESIGN BOARD — NOT RUNTIME EVIDENCE",
+      "assumption": "642×1110 comparison board, world crops at actual 2×",
+      "selected": "Mina in five lifecycle rows; Sol in coffee row",
+      "lifecycle": "Idle / Working / Waiting / Completed / Error / Waiting with exact coffee",
+      "freshness": "Live static-equivalent studies",
+      "activityType": "Representative existing-field fixtures; exact Sol coffee in last row",
+      "reasonPresent": "Waiting rows only",
+      "focusTarget": null,
+      "reducedMotion": true
+    },
+    {
+      "name": "j-page-zoom-pressure-125",
+      "kind": "DERIVED GEOMETRY DESIGN STUDY — NOT NATIVE ZOOM OR RUNTIME EVIDENCE",
+      "assumption": "760×540 outer assumption / 760×512 content, illustrated at 125% page zoom using a transformed 608px iframe; counterexample, not recommended display treatment",
+      "requested": [
+        760,
+        540
+      ],
+      "selected": "Mina",
+      "lifecycle": "Waiting",
+      "freshness": "Current information",
+      "activityType": "Representative existing-field fixture",
+      "reasonPresent": true,
+      "focusTarget": null,
+      "reducedMotion": "Static illustration",
+      "cssViewport": [
+        608,
+        410
+      ],
+      "scrollWidth": 666,
+      "horizontalOverflow": true,
+      "roomWidth": 642
+    }
+  ],
+  "zoomConstraint": "200% text-only enlargement is separately illustrated. Whole-page zoom below a 760 CSS-pixel content width is not covered by the fixed 640×360 primary proposal. Product Owner must settle the supported zoom envelope before engineering specification; no Electron configuration or fractional canvas treatment authorized."
+}

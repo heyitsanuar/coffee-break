@@ -1,0 +1,384 @@
+{
+  "baseline": "6f54c86c1d9a1b0677c21ac77d37dfb73b5b407e",
+  "branch": "feature/us-029-responsive-north-star",
+  "staging": "unstaged/uncommitted",
+  "fingerprintMethod": "SHA-256 over UTF-8 compact JSON (no trailing newline), sorted [repository-relative path, full SHA-256] pairs from files; exclude report and inventory itself. Individual report hash is included in files.",
+  "excludedFromCombinedFingerprint": [
+    "docs/verification/us-029-responsive-north-star.md",
+    "docs/verification/assets/us-029/review-files.json"
+  ],
+  "combinedSha256": "99e140386bc6e73ff70ca6153ef8b58ab64c8274e480bae9ead7f40a6e3add96",
+  "files": [
+    {
+      "path": "apps/desktop/src/style.css",
+      "status": "modified",
+      "bytes": 7011,
+      "sha256": "08113ed29a163e420490e203fa5468fd24c501416d8ec9787272c38cb972e41e"
+    },
+    {
+      "path": "apps/desktop/verification/capture-us-029.cjs",
+      "status": "new",
+      "bytes": 20452,
+      "sha256": "abbacaf52d0fd37f4de58e5674ae609a9d1cdb39cc73553fcb25beb5b0854a7b"
+    },
+    {
+      "path": "apps/desktop/verification/us-029.html",
+      "status": "new",
+      "bytes": 289,
+      "sha256": "564ff9af7d7f63cd9334ea76fa178864177bb74e0e838688200ffe481a936b15"
+    },
+    {
+      "path": "apps/desktop/verification/us-029.tsx",
+      "status": "new",
+      "bytes": 3846,
+      "sha256": "ecd1ffb039d5ad8afae43943481598caec8ccf2a16ef34b74df9f38f2b111831"
+    },
+    {
+      "path": "docs/design/README.md",
+      "status": "modified",
+      "bytes": 9968,
+      "sha256": "1bc3ed6ac65a731919084c18a60aa5d12a03fa984aad0e113d2a1cd0f56dde78"
+    },
+    {
+      "path": "docs/design/references/us-029/README.md",
+      "status": "new",
+      "bytes": 7315,
+      "sha256": "bc39e0d0416ffce26e11ed5f0203213b2938c2e054dddf55d5e3c6ac2cadba13"
+    },
+    {
+      "path": "docs/design/references/us-029/a-desktop-content-1100x760.png",
+      "status": "new",
+      "bytes": 54304,
+      "sha256": "a434c691ff192999690653bf45045e5f81aa8dd9d0af35d8bc1eca2e98a0d244"
+    },
+    {
+      "path": "docs/design/references/us-029/a-desktop-native-1100x760.png",
+      "status": "new",
+      "bytes": 60094,
+      "sha256": "00464ea5166cac88162ea79a0d827c3ae04ef61547ed81ab782612167db4be4d"
+    },
+    {
+      "path": "docs/design/references/us-029/b-minimum-content-760x540.png",
+      "status": "new",
+      "bytes": 38006,
+      "sha256": "85c5e697a6a2bc6d4f0bed1e906e03bf6000fa9f7d6256ff68fce24cfd787933"
+    },
+    {
+      "path": "docs/design/references/us-029/b-minimum-full-flow.png",
+      "status": "new",
+      "bytes": 54375,
+      "sha256": "5ba69d8a514e500000fee720296acb4e8f1d3251c02d139775c6959baea88e4a"
+    },
+    {
+      "path": "docs/design/references/us-029/b-minimum-native-760x540.png",
+      "status": "new",
+      "bytes": 43607,
+      "sha256": "3c451233502da5f9b76b763df687d86e90e4ddfe4803048d0d0a1fc66005de52"
+    },
+    {
+      "path": "docs/design/references/us-029/c-intermediate-native-900x700.png",
+      "status": "new",
+      "bytes": 50033,
+      "sha256": "8675ef106b5e6539f1cc72273834f4d8e75a9a96fff1fc6f05c5e929b0e69d09"
+    },
+    {
+      "path": "docs/design/references/us-029/c-transition-inline-1011.png",
+      "status": "new",
+      "bytes": 50647,
+      "sha256": "640b9d8ca602be04b8ef7383d1f60a2a19f3a043052cf6789adfcb1520b347b0"
+    },
+    {
+      "path": "docs/design/references/us-029/c-transition-side-1012.png",
+      "status": "new",
+      "bytes": 59012,
+      "sha256": "f336e2ee2fe2fe9268cee31244feebff92d50174b82144ce6c307e6f0625ee9f"
+    },
+    {
+      "path": "docs/design/references/us-029/d-long-desktop-full-flow.png",
+      "status": "new",
+      "bytes": 114680,
+      "sha256": "a57ea8e5c7b4327ae0cf4ca5712c69f38d239aeb1dea6a9d6a9086eeaf887210"
+    },
+    {
+      "path": "docs/design/references/us-029/d-long-desktop-retained.png",
+      "status": "new",
+      "bytes": 119962,
+      "sha256": "6321f8222be1cb638bc3d631fbad4551b5653e3b90e0fd07bfb6805436cdfe7a"
+    },
+    {
+      "path": "docs/design/references/us-029/d-long-minimum-inspector.png",
+      "status": "new",
+      "bytes": 68191,
+      "sha256": "061a448b9a91d8ba1ab0235aa17a9362102de40a8d68147511b9a2cf9ddb54c4"
+    },
+    {
+      "path": "docs/design/references/us-029/e-focus-sol-selected-mina.png",
+      "status": "new",
+      "bytes": 44259,
+      "sha256": "986eb4bd2f19b50cd69dfd35d15bb668e17335a70600c30c7d71b0815b51c8e0"
+    },
+    {
+      "path": "docs/design/references/us-029/f-minimum-retained.png",
+      "status": "new",
+      "bytes": 46471,
+      "sha256": "ca06a8ea592718335837881d55e27b74ce0726ae34b4e602db52cfb3ae7b5d8f"
+    },
+    {
+      "path": "docs/design/references/us-029/f-minimum-synchronizing.png",
+      "status": "new",
+      "bytes": 46264,
+      "sha256": "53bbdcd423a59e294adf02fb5b2544d6777992debf0c6d2bb8adc3bace176441"
+    },
+    {
+      "path": "docs/design/references/us-029/g-reduced-motion-static-vocabulary.png",
+      "status": "new",
+      "bytes": 64746,
+      "sha256": "0b1ea8fd2bcfdd2c9ec2048613d96bcf92b0b9446914a79e2cebf7a7dc208f02"
+    },
+    {
+      "path": "docs/design/references/us-029/h-enlarged-text-full-flow.png",
+      "status": "new",
+      "bytes": 81929,
+      "sha256": "fdda17e532c8248106fc58408f8961e2273a19d802f98497b6d86ed13a698c72"
+    },
+    {
+      "path": "docs/design/references/us-029/h-enlarged-text-minimum.png",
+      "status": "new",
+      "bytes": 52019,
+      "sha256": "d1748484b41c5bb672a474fe1b09bb15e49e915f0d50b59683ca4053be5390fa"
+    },
+    {
+      "path": "docs/design/references/us-029/i-minimum-no-state.png",
+      "status": "new",
+      "bytes": 43322,
+      "sha256": "a1ff520a27c38727c6ed88649f61db5c688b60231d7c2bfa8bf97cea61e1c4b1"
+    },
+    {
+      "path": "docs/design/references/us-029/original-design-proposal.md",
+      "status": "new",
+      "bytes": 25328,
+      "sha256": "0c78cbcda13d81f179d466cb8c9c9342f285e17af990b53f6749f8c40879932b"
+    },
+    {
+      "path": "docs/design/references/us-029/original-study-manifest.json",
+      "status": "new",
+      "bytes": 33797,
+      "sha256": "37e6548dd1841af43a7472d87d84be9562c74c8de7035185d03b66c6f3012dc5"
+    },
+    {
+      "path": "docs/verification/assets/us-029/a-production-native-desktop.png",
+      "status": "new",
+      "bytes": 94649,
+      "sha256": "9a0aed3d6c1a962e6c0637d7fda313877a1e0b7972e84bc6cb9ff121dfe4879b"
+    },
+    {
+      "path": "docs/verification/assets/us-029/b-production-native-minimum.png",
+      "status": "new",
+      "bytes": 65371,
+      "sha256": "d7b39576d3741d196f556f663d0b0b1ed4766d361eba87402486a1607698f0d5"
+    },
+    {
+      "path": "docs/verification/assets/us-029/c-fixture-native-minimum.png",
+      "status": "new",
+      "bytes": 65675,
+      "sha256": "e8fc4db7770d969b80aa7baa76610794f2ddebe394f74c8d350914325a97cb08"
+    },
+    {
+      "path": "docs/verification/assets/us-029/capture-record.json",
+      "status": "new",
+      "bytes": 264793,
+      "sha256": "a95e9c78d971f0e1df2d604e451c1c71ec69bb8cae58bd832b92821c2e77e11d"
+    },
+    {
+      "path": "docs/verification/assets/us-029/d-fixture-native-desktop.png",
+      "status": "new",
+      "bytes": 102393,
+      "sha256": "80a8d0fe0928f9c11abae4d6a8578573ac1f141881757f104b475362b2f4a5d5"
+    },
+    {
+      "path": "docs/verification/assets/us-029/e-desktop-pointer-ari.png",
+      "status": "new",
+      "bytes": 94606,
+      "sha256": "bc72b3ab7e15451a3e1414c34606fe3f07218bc6abde63135486125799ec878b"
+    },
+    {
+      "path": "docs/verification/assets/us-029/e-minimum-pointer-mina.png",
+      "status": "new",
+      "bytes": 65673,
+      "sha256": "50331fb6247aa55d4304bb5000f5f25218582ffbda63bb23b761ccfd8be80a0c"
+    },
+    {
+      "path": "docs/verification/assets/us-029/f-focused-sol-selected-mina.png",
+      "status": "new",
+      "bytes": 66944,
+      "sha256": "435e8fbe10f47abcc1252d437d91f749a4a8147c4ac5e8cd45b9342769734d4c"
+    },
+    {
+      "path": "docs/verification/assets/us-029/g-width-1000.png",
+      "status": "new",
+      "bytes": 83126,
+      "sha256": "0c715c8431eb234f36e6a84734e614ba9289005336642fb5bb2e021fe8607855"
+    },
+    {
+      "path": "docs/verification/assets/us-029/g-width-1011.png",
+      "status": "new",
+      "bytes": 83313,
+      "sha256": "70abc7056f6707d52d699ef28b06962c76a0efb5850f3977c79da25082cf59d7"
+    },
+    {
+      "path": "docs/verification/assets/us-029/g-width-1012.png",
+      "status": "new",
+      "bytes": 101572,
+      "sha256": "121d6688ab1afb6b3863a496237ac8fb4c04a94f0b0d434b251324d7735d0ed9"
+    },
+    {
+      "path": "docs/verification/assets/us-029/g-width-760.png",
+      "status": "new",
+      "bytes": 81054,
+      "sha256": "01cfed106927e0f3800dadae755a4ee0c4a81e109292ad706ffee7c5b3259e2e"
+    },
+    {
+      "path": "docs/verification/assets/us-029/g-width-800.png",
+      "status": "new",
+      "bytes": 81562,
+      "sha256": "db4ec458c395de28c72cfaeb54e983a59e3d5db9dd764e0065d2913fb565eef8"
+    },
+    {
+      "path": "docs/verification/assets/us-029/g-width-900.png",
+      "status": "new",
+      "bytes": 82313,
+      "sha256": "e9df85406931ff6a8eb467d8ab432835dec40ab6dc141adc9cf5fdf21bfe5afd"
+    },
+    {
+      "path": "docs/verification/assets/us-029/h-keyboard-clear.png",
+      "status": "new",
+      "bytes": 59031,
+      "sha256": "216913fb96e27995c4fd2c55caa0d5c43bdb5e0fd2bdb518c47061f8c8203d84"
+    },
+    {
+      "path": "docs/verification/assets/us-029/i-retained-minimum.png",
+      "status": "new",
+      "bytes": 73082,
+      "sha256": "d4298877cecb49e9fc90abb137e0788022e4bd54b7dd7a64d2956f7d81b3cc33"
+    },
+    {
+      "path": "docs/verification/assets/us-029/i-synchronizing-minimum.png",
+      "status": "new",
+      "bytes": 72975,
+      "sha256": "d987006f3574a989e271e1aaa9cf4c78d495f22d28faacedc29028a0b54b5659"
+    },
+    {
+      "path": "docs/verification/assets/us-029/j-multiline-1100-inspection.png",
+      "status": "new",
+      "bytes": 197473,
+      "sha256": "102bb4178a93f7f5ccc59917cc7e9aa0f64955759bfaa40f89d161cfeeb1537b"
+    },
+    {
+      "path": "docs/verification/assets/us-029/j-multiline-760-inspection.png",
+      "status": "new",
+      "bytes": 108279,
+      "sha256": "4f710cd0f88b85f3aa54bc6a2de0cd84dff9831abb1ba1835e3a6e1f3dd609cf"
+    },
+    {
+      "path": "docs/verification/assets/us-029/j-prose-1100-inspection.png",
+      "status": "new",
+      "bytes": 183768,
+      "sha256": "c6e28349aeab1205d6d13758c406c66579d20726289541bb42f99b3c7f491810"
+    },
+    {
+      "path": "docs/verification/assets/us-029/j-prose-760-inspection.png",
+      "status": "new",
+      "bytes": 107162,
+      "sha256": "e136711058d848fc92a058be41a122bda3732fdb1122fb58116b94a7888edaec"
+    },
+    {
+      "path": "docs/verification/assets/us-029/j-unbroken-1100-inspection.png",
+      "status": "new",
+      "bytes": 198209,
+      "sha256": "4983bdd2920bbde20fecf26f7615ad8fc01da190278146248c0e75e97af592f8"
+    },
+    {
+      "path": "docs/verification/assets/us-029/j-unbroken-760-inspection.png",
+      "status": "new",
+      "bytes": 108939,
+      "sha256": "ed638d19bf84a654a4fd3860e76bd670fd225875c6b9b76eb88ae44f03323507"
+    },
+    {
+      "path": "docs/verification/assets/us-029/k-text-200-desktop-inspection.png",
+      "status": "new",
+      "bytes": 149099,
+      "sha256": "5db79821c832601b4f4efe58eddfb11a5fc18f52094b53f825d8a819cbb8ad8c"
+    },
+    {
+      "path": "docs/verification/assets/us-029/k-text-200-minimum-inspection.png",
+      "status": "new",
+      "bytes": 120808,
+      "sha256": "b6e5af8a1cf2928ab866e94c3fb1abb2ea7455e8f3727873bb0311a1de967dec"
+    },
+    {
+      "path": "docs/verification/assets/us-029/k-text-200-minimum-top.png",
+      "status": "new",
+      "bytes": 81188,
+      "sha256": "d61714d5266de2e9090662c2ca94a5a8f840fa2cecb784a6b15b397bc261516f"
+    },
+    {
+      "path": "docs/verification/assets/us-029/l-no-trusted-state.png",
+      "status": "new",
+      "bytes": 71098,
+      "sha256": "e8163d06eeb631b538a230bb8b3d5b1c9016efa2f6b9728bbc1dfa30e9dbad18"
+    },
+    {
+      "path": "docs/verification/assets/us-029/m-reduced-coffee.png",
+      "status": "new",
+      "bytes": 66284,
+      "sha256": "48cb79115e1cb20a4646e821ba6eb44d30b9a74a84e336b3d6ffdf93329ec093"
+    },
+    {
+      "path": "docs/verification/assets/us-029/m-reduced-completed.png",
+      "status": "new",
+      "bytes": 67752,
+      "sha256": "985de4f31f4904cc5969f4baa99dbe5c19c313e84386e4906a8835ed4afdef6f"
+    },
+    {
+      "path": "docs/verification/assets/us-029/m-reduced-error.png",
+      "status": "new",
+      "bytes": 63261,
+      "sha256": "4128352e6a445341089696264e00bde26e0572932fbf8614fcdd1ab848d64cb1"
+    },
+    {
+      "path": "docs/verification/assets/us-029/m-reduced-generic-waiting.png",
+      "status": "new",
+      "bytes": 65919,
+      "sha256": "89c847835c1e7b308e6734f2e288502fb49360a412ecd9891c303067935b9872"
+    },
+    {
+      "path": "docs/verification/assets/us-029/m-reduced-idle.png",
+      "status": "new",
+      "bytes": 63074,
+      "sha256": "311a863e6e399405228ffbd215792904ecbb99a73ba351742609e38c17685fee"
+    },
+    {
+      "path": "docs/verification/assets/us-029/m-reduced-waiting.png",
+      "status": "new",
+      "bytes": 65882,
+      "sha256": "7464c70351311e339074133ef12cd51008edf12072c8a9df077ddc903532961b"
+    },
+    {
+      "path": "docs/verification/assets/us-029/m-reduced-working.png",
+      "status": "new",
+      "bytes": 66549,
+      "sha256": "5e73588a8cca38eda30a942fffad38e7fbbd08147cf60d3c0dd8e530ee1647fc"
+    },
+    {
+      "path": "docs/verification/us-029-responsive-north-star.md",
+      "status": "new",
+      "bytes": 26783,
+      "sha256": "615de98ae94413cc9a15586a8d2a185dfa495a0a73895c594d792b1ec748654f"
+    }
+  ],
+  "reviewedImplementationSha256": "99e140386bc6e73ff70ca6153ef8b58ab64c8274e480bae9ead7f40a6e3add96",
+  "reviewedReportSha256": "aeb54fcb81a2aacc072370d44daa9df9270f8b1b2b6f5830594bc8062ac8738f",
+  "finalizedTreeFingerprintMethod": "SHA-256 over UTF-8 compact JSON (no trailing newline), sorted [repository-relative path, full SHA-256] pairs from files; includes finalized report, excludes inventory itself.",
+  "finalizedTreeSha256": "8a93da5c0bdf99aa4e01d149a9475d2b98ca8a262753182e882f186fe18ad1c0",
+  "finalization": "Designer PASS; independent Reviewer PASS; Product Owner APPROVED. Only report status bookkeeping and derived inventory metadata changed after review. Staging field describes the original review target."
+}

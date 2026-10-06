@@ -81,3 +81,7 @@ Character and workstation behavior carry the primary state meaning. Symbols rein
 ## Phaser boundary
 
 These CSS tokens belong to React application UI. Phaser scenes and art assets keep their own palette and rendering rules; do not import application CSS into Phaser or treat these tokens as game-state contracts. Existing architecture and trusted-state constraints remain authoritative technical boundaries.
+
+### EP-05 — US-029 approved responsive references
+
+[US-029 — Approved responsive North Star references](references/us-029/README.md) preserves the Designer studies and subsequent Product Owner approval of recommendations 1–15, with the Planner’s explicit text-enlargement/page-zoom clarification. Native-window assumptions in these studies are separate from actual implementation measurements; the studies are not runtime evidence or final acceptance.

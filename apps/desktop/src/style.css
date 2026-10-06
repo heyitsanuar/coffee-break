@@ -194,7 +194,7 @@ small {
 }
 
 .agent-selector-button {
-  height: 44px;
+  min-height: 44px;
   min-width: 116px;
   padding: 5px 8px;
   font-weight: 600;
@@ -268,13 +268,12 @@ small {
   overflow-wrap: anywhere;
 }
 .connection-status[data-live="true"] { color: var(--color-sage); }
-.office-context { font-size: 0.75rem; line-height: 16px; }
+.office-context { font-size: 0.75rem; line-height: 1.3333333333; }
 
 /* Stack before the fixed room + dock + gap + gutters can collide. */
 @media (max-width: 1011px) {
   .office-composition {
     grid-template-columns: minmax(0, 642px);
-    justify-content: center;
     row-gap: 16px;
   }
   .office-world { gap: 6px; }
@@ -304,4 +303,18 @@ small {
   margin-top: 16px;
   padding-top: 16px;
   border-top: 1px solid color-mix(in srgb, var(--color-boundary) 35%, transparent);
+}
+
+/* Actual content height drives density; native frame dimensions are not assumed. */
+@media (max-height: 560px) {
+  .application-header {
+    min-height: 40px;
+    padding-block: 7px;
+    row-gap: 6px;
+  }
+  .brand-mark { width: 24px; height: 24px; font-size: 18px; }
+  .connection-status { line-height: 1.4285714286; }
+  .office-panel { padding-top: 4px; }
+  .office-world { gap: 6px; }
+  .selected-agent-summary { line-height: 1.25; }
 }

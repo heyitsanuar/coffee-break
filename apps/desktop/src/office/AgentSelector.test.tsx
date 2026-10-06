@@ -19,7 +19,7 @@ describe('compact native selector', () => {
     const children = (element.props as { children: ReactElement<{ onClick(): void; onFocus?: () => void }>[] }).children;
     expect(onSelectAgent).not.toHaveBeenCalled();
     for (const child of children) expect(child.props.onFocus).toBeUndefined();
-    children[1].props.onClick();
-    expect(onSelectAgent).toHaveBeenCalledExactlyOnceWith('mock-agent-mina');
+    children.forEach(child => child.props.onClick());
+    expect(onSelectAgent.mock.calls).toEqual([['mock-agent-ari'], ['mock-agent-mina'], ['mock-agent-sol']]);
   });
 });

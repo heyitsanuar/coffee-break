@@ -154,13 +154,13 @@ small {
 .agent-inspection-heading {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: var(--space-3);
 }
 
 .agent-inspection h2 {
   margin: 0;
-  font-size: 1.125rem;
+  font-size: 1.25rem;
+  font-weight: 600;
 }
 
 .simulation-badge {
@@ -194,7 +194,10 @@ small {
 }
 
 .agent-selector-button {
-  min-width: 80px;
+  height: 44px;
+  min-width: 116px;
+  padding: 5px 8px;
+  font-weight: 600;
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
@@ -203,11 +206,10 @@ small {
 .agent-selector-button[aria-pressed="true"] {
   border-color: var(--color-coffee);
   box-shadow: inset 0 0 0 2px var(--color-coffee);
-  font-weight: 700;
 }
 
 .agent-selector-button:hover,
-.clear-selection-button:hover:not(:disabled) {
+.clear-selection-button:hover:not([aria-disabled="true"]) {
   background: color-mix(in srgb, var(--color-coffee) 10%, var(--color-surface));
 }
 
@@ -218,7 +220,6 @@ small {
 }
 
 .agent-inspection-details {
-  min-height: 4.5rem;
   margin-top: var(--space-3);
   color: var(--color-ink-muted);
 }
@@ -243,6 +244,8 @@ small {
 
 .agent-inspection-details dd {
   overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  line-height: 1.5;
   margin: var(--space-2) 0 0;
   color: var(--color-ink);
 }
@@ -251,7 +254,7 @@ small {
   margin-top: var(--space-3);
 }
 
-.clear-selection-button:disabled {
+.clear-selection-button[aria-disabled="true"] {
   cursor: not-allowed;
   opacity: 0.5;
 }
@@ -265,7 +268,7 @@ small {
   overflow-wrap: anywhere;
 }
 .connection-status[data-live="true"] { color: var(--color-sage); }
-.office-context { font-size: 0.75rem; line-height: 1.5; }
+.office-context { font-size: 0.75rem; line-height: 16px; }
 
 /* Stack before the fixed room + dock + gap + gutters can collide. */
 @media (max-width: 1011px) {
@@ -282,4 +285,23 @@ small {
     overflow-wrap: anywhere;
   }
   .agent-inspection { min-height: 0; }
+}
+
+/* Canonical Idle identity crops at integer 2×/3×; no independent portrait artwork. */
+.agent-portrait {
+  display: inline-block;
+  flex: 0 0 auto;
+  background-repeat: no-repeat;
+  image-rendering: pixelated;
+}
+.agent-selector-check { flex: 0 0 12px; }
+.agent-selector-button[aria-pressed="false"] .agent-selector-check { visibility: hidden; }
+.agent-inspection[data-selected="false"] { background: transparent; border-color: transparent; }
+.agent-inspection-lifecycle { margin: 4px 0 0; line-height: 1.5; }
+.agent-inspection-freshness { font-size: 0.875rem; line-height: 1.5; color: var(--color-coffee); }
+.agent-inspection-freshness[data-live="true"] { color: var(--color-sage); }
+.agent-inspection-freshness + dl {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid color-mix(in srgb, var(--color-boundary) 35%, transparent);
 }

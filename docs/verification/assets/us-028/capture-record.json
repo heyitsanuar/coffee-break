@@ -1,0 +1,707 @@
+{
+  "baseline": "951574dfd7a668e31a31ee55c6451e9ea0c9ff6e",
+  "capturedAt": "2026-10-06T15:38:12.051Z",
+  "provenance": "Direct unedited Electron capturePage of production Application/store/runtime/host/Phaser. Synthetic accepted renderer inputs, not authenticated transport evidence. Chromium input emulation, not native keyboard/OS preference/screen-reader verification. Multiline fixture tests rendering only; ingress control-character validation is unchanged.",
+  "electron": "37.10.3",
+  "sourceSha256": {
+    "src/office/AgentPortrait.tsx": "be3f8b784ea0aa4f57edf619e623ae27d1f152dd3f90fe36c3834ed556a1f1a0",
+    "src/office/AgentSelector.tsx": "78a6430d8b99b523fc3ae69d1d0195cfead16a9069caf696ded3ec214c6e13fd",
+    "src/office/AgentInspectionPanel.tsx": "a7f111481c696e5030e1fb7903d2f6b106245fbd9c9c209a66f51df08e7cf910",
+    "src/office/OfficeScene.ts": "3892c03370363db71fbb60df733dfef5313c82f462ddce816dfa38ca1ea84236",
+    "src/office/OfficeSceneHost.tsx": "26d362a754384114915d902d017b370251dc244191e6d8cc341fdd2647e62f43",
+    "src/office/SelectedAgentSummary.tsx": "459c944182eafd490018cd1dfea52a9f9dca8228a1ee38dcf561b30eb555486e",
+    "src/office/officePresentationRuntime.ts": "11b9646f39f8b6f9d3da3be0c30bb7f99b84500f88b0ea770f91a529e2b683d1",
+    "src/style.css": "55a348e109424ddb91eb1616810e5eb9ed8eb872ed78c397c6ed4ac9b9870bf7",
+    "verification/us-028.tsx": "c372ca518de597e25f884f6d643dcf0dcf57847379d633d77950238b9bfb2955",
+    "verification/us-028.html": "9fdaa52109e5b028d4c98f2484b9359a0a72706f0f2e5e137fce388438d51d9b",
+    "verification/capture-us-028.cjs": "fc6f3b35cd4f85d6b6136df7b03a0b83d7a3e4068a21549f49c1f2587d9a13dc"
+  },
+  "assets": {
+    "agent-lifecycle": {
+      "size": {
+        "width": 160,
+        "height": 72
+      },
+      "pngSha256": "4a8e6dcbf464df9de35aead2902f5c4f4bba86691f354fc1894f68e24af78d12"
+    },
+    "mock-agents": {
+      "size": {
+        "width": 120,
+        "height": 24
+      },
+      "pngSha256": "b5b4f27771fbd70c1c0df691435821a6c1ed43a0d37a91d47cfa3c1d3f82a876"
+    },
+    "office-room-background": {
+      "size": {
+        "width": 320,
+        "height": 180
+      },
+      "pngSha256": "dc9b313fbbdc8bfc8f9f47e16dd26b4910734f886657b1643a0383b56e83563e"
+    },
+    "office-room-foreground": {
+      "size": {
+        "width": 320,
+        "height": 180
+      },
+      "pngSha256": "72d03f4ff0d97dd33602fa1acfadf6c6338f39ce4276d4b30500ecc141f9b9ec"
+    }
+  },
+  "captures": [
+    {
+      "name": "a-desktop-no-selection",
+      "kind": "direct-runtime",
+      "sampledAt": "2026-10-06T15:38:13.158Z",
+      "viewport": [
+        1100,
+        760
+      ],
+      "dpr": 2,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "73afecce81d8b1c099ad836654328a17f7bd518964636a188a65e573a1b0ac17"
+    },
+    {
+      "name": "b-desktop-ari-selected",
+      "kind": "direct-runtime",
+      "sampledAt": "2026-10-06T15:38:13.706Z",
+      "viewport": [
+        1100,
+        760
+      ],
+      "dpr": 2,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "0aefc22e6c56846a2d10be3580ef85e202ff50a794324d2260078a3cad28d047"
+    },
+    {
+      "name": "c-desktop-mina-selected",
+      "kind": "direct-runtime",
+      "sampledAt": "2026-10-06T15:38:14.122Z",
+      "viewport": [
+        1100,
+        760
+      ],
+      "dpr": 2,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "4859d0f052228db71c53dbfdf0d299e767c1642ec26e60f9857535b42c984711"
+    },
+    {
+      "name": "d-desktop-sol-selected",
+      "kind": "direct-runtime",
+      "sampledAt": "2026-10-06T15:38:14.529Z",
+      "viewport": [
+        1100,
+        760
+      ],
+      "dpr": 2,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "208ca7af6af69ba5eda5dc649b4151a485ffd2a7ddee79f54d8fe9ec970f30a6"
+    },
+    {
+      "name": "f-focus-only-mina-selected-ari",
+      "kind": "direct-runtime",
+      "sampledAt": "2026-10-06T15:38:15.077Z",
+      "viewport": [
+        1100,
+        760
+      ],
+      "dpr": 2,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "0f15cc6fc178f1d57901b5bd57fe30c6cf83693a0123b4d7998c16e1a0e8b280"
+    },
+    {
+      "name": "f-focus-and-selected-mina",
+      "kind": "direct-runtime",
+      "sampledAt": "2026-10-06T15:38:15.284Z",
+      "viewport": [
+        1100,
+        760
+      ],
+      "dpr": 2,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "bad133d36c8a696f378169ad4883d7bf009d661f783c0e8fb34d84718dfc33d1"
+    },
+    {
+      "name": "g-inspector-live",
+      "kind": "direct-runtime",
+      "sampledAt": "2026-10-06T15:38:18.126Z",
+      "viewport": [
+        1100,
+        760
+      ],
+      "dpr": 2,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "54cd75ee101094aeee898dbb81dc0e3af23c59e5dd1a1ffae32673348ec984e3"
+    },
+    {
+      "name": "j-inspector-retained",
+      "kind": "direct-runtime",
+      "sampledAt": "2026-10-06T15:38:18.331Z",
+      "viewport": [
+        1100,
+        760
+      ],
+      "dpr": 2,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "b795519c9038ea3bd56d16c0c1b13a6cc4310b4a1c50ed907820c463c49531d5"
+    },
+    {
+      "name": "f-clear-focus-after-clearing",
+      "kind": "direct-runtime",
+      "sampledAt": "2026-10-06T15:38:18.976Z",
+      "viewport": [
+        1100,
+        760
+      ],
+      "dpr": 2,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "4912ec94196b58b89d8a630e3fa6ffcdd840ef90105db42863277ef0db5ee59b"
+    },
+    {
+      "name": "f-default-roster",
+      "kind": "direct-runtime",
+      "sampledAt": "2026-10-06T15:38:19.182Z",
+      "viewport": [
+        1100,
+        760
+      ],
+      "dpr": 2,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "da387a237b6b63ee546873991b59f11b6a2dcbfea044d0529757b5f0b6d504f7"
+    },
+    {
+      "name": "f-hover-mina",
+      "kind": "direct-runtime",
+      "sampledAt": "2026-10-06T15:38:19.378Z",
+      "viewport": [
+        1100,
+        760
+      ],
+      "dpr": 2,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "db188494d857bdf8518592932e409d59d1a86f7e67433b026376bbfe349a6958"
+    },
+    {
+      "name": "f-selected-only-mina",
+      "kind": "direct-runtime",
+      "sampledAt": "2026-10-06T15:38:19.688Z",
+      "viewport": [
+        1100,
+        760
+      ],
+      "dpr": 2,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "4859d0f052228db71c53dbfdf0d299e767c1642ec26e60f9857535b42c984711"
+    },
+    {
+      "name": "e-compact-selected",
+      "kind": "direct-runtime",
+      "sampledAt": "2026-10-06T15:38:19.870Z",
+      "viewport": [
+        760,
+        540
+      ],
+      "dpr": 2,
+      "size": {
+        "width": 1520,
+        "height": 1080
+      },
+      "pngSha256": "f95877ab56740f9f68301de5c146e30b43f2d340262404eee27541a36785adc0"
+    },
+    {
+      "name": "e-compact-inspector-scroll",
+      "kind": "direct-runtime",
+      "sampledAt": "2026-10-06T15:38:20.037Z",
+      "viewport": [
+        760,
+        540
+      ],
+      "dpr": 2,
+      "size": {
+        "width": 1520,
+        "height": 1080
+      },
+      "pngSha256": "acc030a960e02b565d91c2dbee4c25713bdc806ca65a81ff0b9938f026dfea96"
+    },
+    {
+      "name": "k-compact-long-top",
+      "kind": "direct-runtime",
+      "sampledAt": "2026-10-06T15:38:20.206Z",
+      "viewport": [
+        760,
+        540
+      ],
+      "dpr": 2,
+      "size": {
+        "width": 1520,
+        "height": 1080
+      },
+      "pngSha256": "2ab13cf305d4c5beaaf53aa3dc8570ac9e453dbd248f70fe768b4aaff4943902"
+    },
+    {
+      "name": "k-compact-long-inspector",
+      "kind": "direct-runtime",
+      "sampledAt": "2026-10-06T15:38:20.361Z",
+      "viewport": [
+        760,
+        540
+      ],
+      "dpr": 2,
+      "size": {
+        "width": 1520,
+        "height": 1080
+      },
+      "pngSha256": "921c3b4689a35591a7d904becd03feb4c94d93b688f26a387559efbaf2b3676f"
+    },
+    {
+      "name": "k-desktop-long",
+      "kind": "direct-runtime",
+      "sampledAt": "2026-10-06T15:38:20.553Z",
+      "viewport": [
+        1100,
+        760
+      ],
+      "dpr": 2,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "6eff692e3818d10472d3ed5a41846a8b28d222f64d085c15f197aac249a4f233"
+    },
+    {
+      "name": "l-selected-no-trusted-state",
+      "kind": "direct-runtime",
+      "sampledAt": "2026-10-06T15:38:20.777Z",
+      "viewport": [
+        1100,
+        760
+      ],
+      "dpr": 2,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "d03133353829682073ec209a33fe3754059d24434610061732bea676ba8b5459"
+    },
+    {
+      "name": "m-generic-sol-waiting",
+      "kind": "direct-runtime",
+      "sampledAt": "2026-10-06T15:38:21.241Z",
+      "viewport": [
+        1100,
+        760
+      ],
+      "dpr": 2,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "5caa27a1c766b69534f486abdf27e99448cbcea8661895b9674ef7fd6bda86f3"
+    },
+    {
+      "name": "n-emulated-reduced-motion-coffee",
+      "kind": "direct-runtime",
+      "sampledAt": "2026-10-06T15:38:22.647Z",
+      "viewport": [
+        1100,
+        760
+      ],
+      "dpr": 2,
+      "size": {
+        "width": 2200,
+        "height": 1520
+      },
+      "pngSha256": "614591240a51d0859dfc41e6f3ab24db5397c7f04d9f54756b88b7065ffa0711"
+    }
+  ],
+  "observations": {
+    "emptyClearNonoperative": true,
+    "selectionRoutes": [
+      {
+        "name": "Ari",
+        "roster": "Select Ari",
+        "world": "Select Ari",
+        "pointer": {
+          "x": 269,
+          "y": 119
+        },
+        "lifecycle": "Working"
+      },
+      {
+        "name": "Mina",
+        "roster": "Select Mina",
+        "world": "Select Mina",
+        "pointer": {
+          "x": 457,
+          "y": 119
+        },
+        "lifecycle": "Waiting"
+      },
+      {
+        "name": "Sol",
+        "roster": "Select Sol",
+        "world": "Select Sol",
+        "pointer": {
+          "x": 197,
+          "y": 227
+        },
+        "lifecycle": "Waiting"
+      }
+    ],
+    "outsideTargetDoesNotSelect": true,
+    "selectionNoProgrammaticFocus": true,
+    "selectedUpdateJourney": [
+      {
+        "state": "idle",
+        "activity": "Ready",
+        "lifecycle": "Idle",
+        "focus": "Select Mina"
+      },
+      {
+        "state": "working",
+        "activity": "Reviewing exact text",
+        "lifecycle": "Working",
+        "focus": "Select Mina"
+      },
+      {
+        "state": "waiting",
+        "activity": "Need approval",
+        "lifecycle": "Waiting",
+        "focus": "Select Mina"
+      },
+      {
+        "state": "waiting",
+        "activity": "Capacity required",
+        "lifecycle": "Waiting",
+        "focus": "Select Mina"
+      },
+      {
+        "state": "completed",
+        "activity": "Review complete",
+        "lifecycle": "Completed",
+        "focus": "Select Mina"
+      },
+      {
+        "state": "error",
+        "activity": "Review failed",
+        "lifecycle": "Error",
+        "focus": "Select Mina"
+      }
+    ],
+    "focusAndSelectionPreservedAcrossUpdatesAndAvailability": true,
+    "chromiumKeyboardClearKeepsFocus": true,
+    "desktop": {
+      "viewport": [
+        1100,
+        760
+      ],
+      "horizontalOverflow": false,
+      "documentHeight": 760,
+      "room": {
+        "x": 25,
+        "y": 77,
+        "width": 640,
+        "height": 360,
+        "bottom": 437
+      },
+      "dock": {
+        "x": 684,
+        "y": 76,
+        "width": 304,
+        "height": 362,
+        "bottom": 438
+      },
+      "roster": {
+        "x": 24,
+        "y": 478,
+        "width": 642,
+        "height": 44,
+        "bottom": 522
+      },
+      "summary": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "bottom": 0
+      },
+      "inspectorOverflow": "visible",
+      "activityWhiteSpace": "pre-wrap",
+      "portraits": [
+        {
+          "width": 32,
+          "height": 32,
+          "pixelated": "pixelated",
+          "position": "-4px 0px"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "pixelated": "pixelated",
+          "position": "-4px -48px"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "pixelated": "pixelated",
+          "position": "-4px -96px"
+        },
+        {
+          "width": 48,
+          "height": 48,
+          "pixelated": "pixelated",
+          "position": "-6px -72px"
+        }
+      ],
+      "controlHeights": [
+        44,
+        44,
+        44
+      ]
+    },
+    "compact": {
+      "viewport": [
+        760,
+        540
+      ],
+      "horizontalOverflow": false,
+      "documentHeight": 891,
+      "room": {
+        "x": 60,
+        "y": 77,
+        "width": 640,
+        "height": 360,
+        "bottom": 437
+      },
+      "dock": {
+        "x": 59,
+        "y": 556,
+        "width": 642,
+        "height": 311.5,
+        "bottom": 867.5
+      },
+      "roster": {
+        "x": 59,
+        "y": 466,
+        "width": 642,
+        "height": 44,
+        "bottom": 510
+      },
+      "summary": {
+        "x": 59,
+        "y": 516,
+        "width": 642,
+        "height": 24,
+        "bottom": 540
+      },
+      "inspectorOverflow": "visible",
+      "activityWhiteSpace": "pre-wrap",
+      "portraits": [
+        {
+          "width": 32,
+          "height": 32,
+          "pixelated": "pixelated",
+          "position": "-4px 0px"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "pixelated": "pixelated",
+          "position": "-4px -48px"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "pixelated": "pixelated",
+          "position": "-4px -96px"
+        },
+        {
+          "width": 48,
+          "height": 48,
+          "pixelated": "pixelated",
+          "position": "-6px -72px"
+        }
+      ],
+      "controlHeights": [
+        44,
+        44,
+        44
+      ]
+    },
+    "longCompact": {
+      "viewport": [
+        760,
+        540
+      ],
+      "horizontalOverflow": false,
+      "documentHeight": 1059,
+      "room": {
+        "x": 60,
+        "y": 77,
+        "width": 640,
+        "height": 360,
+        "bottom": 437
+      },
+      "dock": {
+        "x": 59,
+        "y": 556,
+        "width": 642,
+        "height": 479.5,
+        "bottom": 1035.5
+      },
+      "roster": {
+        "x": 59,
+        "y": 466,
+        "width": 642,
+        "height": 44,
+        "bottom": 510
+      },
+      "summary": {
+        "x": 59,
+        "y": 516,
+        "width": 642,
+        "height": 24,
+        "bottom": 540
+      },
+      "inspectorOverflow": "visible",
+      "activityWhiteSpace": "pre-wrap",
+      "portraits": [
+        {
+          "width": 32,
+          "height": 32,
+          "pixelated": "pixelated",
+          "position": "-4px 0px"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "pixelated": "pixelated",
+          "position": "-4px -48px"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "pixelated": "pixelated",
+          "position": "-4px -96px"
+        },
+        {
+          "width": 48,
+          "height": 48,
+          "pixelated": "pixelated",
+          "position": "-6px -72px"
+        }
+      ],
+      "controlHeights": [
+        44,
+        44,
+        44
+      ]
+    },
+    "longDesktop": {
+      "viewport": [
+        1100,
+        760
+      ],
+      "horizontalOverflow": false,
+      "documentHeight": 771,
+      "room": {
+        "x": 25,
+        "y": 77,
+        "width": 640,
+        "height": 360,
+        "bottom": 437
+      },
+      "dock": {
+        "x": 684,
+        "y": 76,
+        "width": 304,
+        "height": 671.5,
+        "bottom": 747.5
+      },
+      "roster": {
+        "x": 24,
+        "y": 478,
+        "width": 642,
+        "height": 44,
+        "bottom": 522
+      },
+      "summary": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "bottom": 0
+      },
+      "inspectorOverflow": "visible",
+      "activityWhiteSpace": "pre-wrap",
+      "portraits": [
+        {
+          "width": 32,
+          "height": 32,
+          "pixelated": "pixelated",
+          "position": "-4px 0px"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "pixelated": "pixelated",
+          "position": "-4px -48px"
+        },
+        {
+          "width": 32,
+          "height": 32,
+          "pixelated": "pixelated",
+          "position": "-4px -96px"
+        },
+        {
+          "width": 48,
+          "height": 48,
+          "pixelated": "pixelated",
+          "position": "-6px -72px"
+        }
+      ],
+      "controlHeights": [
+        44,
+        44,
+        44
+      ]
+    },
+    "reducedMotion": "Chromium emulation only; no new UI motion or native OS preference claim.",
+    "reloadOneCanvas": true,
+    "rendererErrors": []
+  }
+}

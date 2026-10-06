@@ -47,6 +47,10 @@ For this increment, the Product Owner + Planner accepted the fixed-room scope an
 
 [US-027 — Approved North Star Agent References](references/us-027/README.md) records the Product Owner-approved character direction, identity/lifecycle/world-fit targets, exact coffee distinction and approval provenance. The package preserves 20×24 frames, existing US-026 environment geometry and trusted presentation semantics. These are design references, not production character assets, implemented runtime evidence or story acceptance.
 
+### EP-05 — US-028 approved selection and inspection references
+
+[US-028 — Approved selection and agent information studies](references/us-028/README.md) preserves the exact Designer proposal images. The proposal was initially unapproved; the Product Owner subsequently said “I approve”, approving recommendations 1–25. The canonical Idle portraits, identity-led contextual inspection and invisible pointer envelopes integrate the unchanged US-025/026/027 foundation. These studies are design references, not runtime evidence or final story acceptance. US-029 retains broader responsive refinement; US-030 retains final integrated fidelity/polish.
+
 ## Application tokens
 
 Exact hex colors, spacing values, typography sizing, and radius values in this section document the **current EP-04/application direction**, not immutable Coffee Break North Star requirements. The permanent North Star is the product/experience hierarchy and visual principles above. Future approved design-system evolution may change exact token values without constituting a North Star departure; the authority and provenance rules still apply.

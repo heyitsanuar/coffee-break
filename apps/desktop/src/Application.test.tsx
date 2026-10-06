@@ -23,9 +23,9 @@ describe('North Star application composition', () => {
     expect(markup.indexOf('class="office-scene-host"')).toBeLessThan(markup.indexOf('class="agent-selector"'));
     expect(markup.indexOf('class="agent-selector"')).toBeLessThan(markup.indexOf('class="agent-inspection"'));
     expect(markup).toContain('Local simulation · No provider connection');
-    expect(markup).toContain('Select an agent to inspect its simulated activity.');
+    expect(markup).toContain('Choose someone in the office or below.');
     expect(markup.match(/aria-pressed="false"/g)).toHaveLength(3);
-    expect(markup).toContain('disabled=""');
+    expect(markup).toContain('aria-disabled="true"');
     expect(markup).not.toContain('tabindex');
     runtime.dispose();
   });

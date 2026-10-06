@@ -20,6 +20,7 @@ describe('selected concise feedback', () => {
     expect(markup).toContain(expected);
     expect(markup).toContain('class="selected-agent-summary"');
     expect(markup).not.toContain('aria-live');
+    expect(markup).not.toContain('agent-portrait');
     expect(markup).not.toContain(presentation.activity!);
     expect(markup).not.toContain('Approval required');
   });

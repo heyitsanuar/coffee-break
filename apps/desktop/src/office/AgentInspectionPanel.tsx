@@ -1,9 +1,7 @@
-import {
-  getMockAgent,
-  type MockAgentId,
-} from './mockAgents';
+import { getMockAgent, type MockAgentId } from './mockAgents';
 import { OFFICE_STATUS_LABELS } from './applyOfficeVisual';
 import type { OfficeAgentPresentation } from './officePresentation';
+import { AgentPortrait } from './AgentPortrait';
 
 export interface AgentInspectionPanelProps {
   readonly selectedAgentId: MockAgentId | null;
@@ -11,67 +9,37 @@ export interface AgentInspectionPanelProps {
   readonly onClearSelection: () => void;
 }
 
-export function AgentInspectionPanel({
-  selectedAgentId,
-  presentation,
-  onClearSelection,
-}: AgentInspectionPanelProps): React.JSX.Element {
+export function AgentInspectionPanel({ selectedAgentId, presentation, onClearSelection }: AgentInspectionPanelProps): React.JSX.Element {
   const selectedAgent = getMockAgent(selectedAgentId);
+  const hasState = presentation && presentation.state !== null;
 
   return (
-    <section className="agent-inspection" aria-labelledby="agent-inspection-title">
+    <section className="agent-inspection" data-selected={!!selectedAgent} aria-labelledby="agent-inspection-title">
       <div className="agent-inspection-heading">
+        {selectedAgent && <AgentPortrait id={selectedAgent.id} size={48} />}
         <div>
-          <h2 id="agent-inspection-title">Agent inspection</h2>
+          <h2 id="agent-inspection-title">{selectedAgent?.displayName ?? 'Select an inhabitant'}</h2>
+          {selectedAgent && hasState && <p className="agent-inspection-lifecycle">{OFFICE_STATUS_LABELS[presentation.state!]}</p>}
         </div>
       </div>
 
-      <div
-        id="agent-inspection-details"
-        className="agent-inspection-details"
-      >
-        {selectedAgent ? (
-          <dl>
-            <div>
-              <dt>Name</dt>
-              <dd>{selectedAgent.displayName}</dd>
-            </div>
-            {presentation?.state === null || !presentation ? (
-              <div>
-                <dt>Status</dt>
-                <dd>No trusted agent state available yet.</dd>
-              </div>
-            ) : (
-              <>
-                <div>
-                  <dt>Current state</dt>
-                  <dd>{OFFICE_STATUS_LABELS[presentation.state]}</dd>
-                </div>
-                <div>
-                  <dt>Activity</dt>
-                  <dd>{presentation.activity}</dd>
-                </div>
-                {presentation.reason && (
-                  <div>
-                    <dt>Reason</dt>
-                    <dd>{presentation.reason === 'approval_required' ? 'Approval required' : 'Capacity exhausted'}</dd>
-                  </div>
-                )}
-                {!presentation.live && <div><dt>Freshness</dt><dd>Last known</dd></div>}
-              </>
-            )}
-          </dl>
-        ) : (
-          <p>Select an agent to inspect its simulated activity.</p>
-        )}
+      <div id="agent-inspection-details" className="agent-inspection-details">
+        {selectedAgent ? hasState ? (
+          <>
+            <p className="agent-inspection-freshness" data-live={presentation.live}>
+              {presentation.live ? 'Current information' : 'Last known · Not live'}
+            </p>
+            <dl>
+              <div><dt>Activity</dt><dd>{presentation.activity}</dd></div>
+              {presentation.reason && <div><dt>Reason</dt><dd>{presentation.reason === 'approval_required' ? 'Approval required' : 'Capacity exhausted'}</dd></div>}
+            </dl>
+          </>
+        ) : <p>No trusted agent state available yet.</p>
+          : <p>Choose someone in the office or below.</p>}
       </div>
 
-      <button
-        type="button"
-        className="clear-selection-button"
-        disabled={!selectedAgent}
-        onClick={onClearSelection}
-      >
+      <button type="button" className="clear-selection-button" aria-disabled={!selectedAgent}
+        onClick={() => { if (selectedAgent) onClearSelection(); }}>
         Clear selection
       </button>
     </section>

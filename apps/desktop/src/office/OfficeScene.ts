@@ -138,7 +138,17 @@ export class OfficeScene extends Phaser.Scene {
         .setOrigin(0.5, 1)
         .setScale(MOCK_AGENT_RENDER_SCALE)
         .setDepth(OFFICE_DEPTHS.futureAgents)
-        .setInteractive({ useHandCursor: true })
+        .setInteractive({
+          useHandCursor: true,
+          // Input is frame-local before bottom-center origin and integer display scale.
+          hitArea: new Phaser.Geom.Rectangle(
+            MOCK_AGENT_FRAME_WIDTH / 2 + (anchor.clearance.x - anchor.x) / MOCK_AGENT_RENDER_SCALE,
+            MOCK_AGENT_FRAME_HEIGHT + (anchor.clearance.y - anchor.y) / MOCK_AGENT_RENDER_SCALE,
+            anchor.clearance.width / MOCK_AGENT_RENDER_SCALE,
+            anchor.clearance.height / MOCK_AGENT_RENDER_SCALE,
+          ),
+          hitAreaCallback: Phaser.Geom.Rectangle.Contains,
+        })
         .on(Phaser.Input.Events.POINTER_DOWN, () => this.onAgentSelected(agent.id));
 
       // Ordinary scene-owned objects: identity stays visible independently of lifecycle/freshness.

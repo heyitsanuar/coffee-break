@@ -1,0 +1,75 @@
+{
+  "baseline": "b129c806326a7a784eeb493f21b18b2dc19ed1e3",
+  "generatedAt": "2026-10-06T22:25:47.739Z",
+  "boards": [
+    {
+      "name": "board-1-original-vs-product",
+      "classification": "DERIVED COMPARISON MATERIAL",
+      "sourceCommit": "b129c806326a7a784eeb493f21b18b2dc19ed1e3",
+      "tool": "apps/desktop/verification/compare-us-030.cjs",
+      "toolSha256": "b0e4bd3767c96d0b53c2c793febbf5dfadb8515f79a78497eb56190442b5f988",
+      "outputSize": {
+        "width": 2680,
+        "height": 1420
+      },
+      "pngSha256": "7d06295f40243352ab26522dc470264c7493c343714929ed25e46c1e98d018cc",
+      "sources": [
+        {
+          "path": "docs/design/references/north-star/coffee-break-north-star-01.png",
+          "sha256": "e7e6c563a0c33204c8ea540e50ee483eb88773b03deecd4b1fb71fcf96ea344b"
+        },
+        {
+          "path": "docs/verification/assets/us-030/01-desktop-final.png",
+          "sha256": "9a0aed3d6c1a962e6c0637d7fda313877a1e0b7972e84bc6cb9ff121dfe4879b"
+        }
+      ],
+      "crops": null,
+      "displayedWidth": 640,
+      "scaling": "Nearest-neighbor CSS display, aspect ratio preserved; original 1536×1024 → 640×426.667; runtime 2200×1464 → 640×425.891. Board capture DPR measured separately.",
+      "boardDpr": 2
+    },
+    {
+      "name": "board-2-corrected-vs-product",
+      "classification": "DERIVED COMPARISON MATERIAL",
+      "sourceCommit": "b129c806326a7a784eeb493f21b18b2dc19ed1e3",
+      "tool": "apps/desktop/verification/compare-us-030.cjs",
+      "toolSha256": "b0e4bd3767c96d0b53c2c793febbf5dfadb8515f79a78497eb56190442b5f988",
+      "outputSize": {
+        "width": 2680,
+        "height": 1180
+      },
+      "pngSha256": "d2012a044eaf8d0319c5fb228409aee4990537fd79b25beb08c4d1e78d627f44",
+      "sources": [
+        {
+          "path": "docs/design/references/us-026/corrected-clean-office.png",
+          "sha256": "4cdb984d1906320fbae011c5693da7d2f0a23cd1ddf7c8b568a5136c18d12119"
+        },
+        {
+          "path": "docs/verification/assets/us-030/01-desktop-final.png",
+          "sha256": "9a0aed3d6c1a962e6c0637d7fda313877a1e0b7972e84bc6cb9ff121dfe4879b"
+        }
+      ],
+      "crops": {
+        "runtimeCss": {
+          "x": 25,
+          "y": 77,
+          "width": 640,
+          "height": 360
+        },
+        "runtimeDecoded": {
+          "x": 50,
+          "y": 154,
+          "width": 1280,
+          "height": 720
+        },
+        "reference": null
+      },
+      "displayedDimensions": [
+        640,
+        360
+      ],
+      "scaling": "Corrected reference unchanged at 640×360; DPR2 runtime crop reduced exactly 2:1 with nearest-neighbor CSS rendering.",
+      "boardDpr": 2
+    }
+  ]
+}

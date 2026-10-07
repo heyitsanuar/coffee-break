@@ -190,7 +190,7 @@ Harness-only attempts: initial Vite direct launch selected unsupported Node20 (`
 
 Production fingerprint: **`2da131ef90f9d77a1aa7418514c0189252f79b4bded32c1f0cb92e8c054d0680`**, over77 tracked production/shared/contract/manifest files. The capture record lists every path/hash. Calculation: SHA-256 of UTF-8 `JSON.stringify(Object.entries(productionSourceSha256).sort())` (compact sorted `[path,sha256]` pairs, no newline). This fingerprints source, not an approval or new commit. Built main and capture-tool hashes are separately recorded.
 
-[Source/evidence inventory](assets/us-030/source-and-evidence-inventory.json) records the complete new-file list, each file's SHA-256 and the uncommitted package fingerprint. Its own bytes are excluded from that fingerprint to avoid a recursive hash; the report is included. Original sources/design images and US-029 reused source hashes are independently checked by the integrity runner. NativeImage decoding validates all18 final PNGs; board reference/runtime source hashes remain exact.
+[Source/evidence inventory](assets/us-030/source-and-evidence-inventory.json) records the complete verification-package file list, each file's SHA-256 and the package fingerprint. Its own bytes are excluded from that fingerprint to avoid a recursive hash; the report is included. Original sources/design images and US-029 reused source hashes are independently checked by the integrity runner. NativeImage decoding validates all18 final PNGs; board reference/runtime source hashes remain exact.
 
 ## Product Owner native observations — GENERAL FEEDBACK RECORDED
 

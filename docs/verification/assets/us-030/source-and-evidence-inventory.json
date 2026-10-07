@@ -28,9 +28,9 @@
     "docs/verification/assets/us-030/reduced-idle.png": "a5aac4452eb30f06bb95b455a1714b53329e92df49f1d79f07c813232074bb8b",
     "docs/verification/assets/us-030/reduced-waiting.png": "91c830c2e93bf79b5eada891da1db15f1630de954f56a8ca6993dd877a99bad4",
     "docs/verification/assets/us-030/reduced-working.png": "6b203c361c4c2545765fb4d855a99d02adb5628804f3f7e04d70c750168cecd3",
-    "docs/verification/us-030-north-star-fidelity.md": "aeb8200146a509a77b60fec27623a9d4b8be9a9e65f89c7dae88b837bad45d6f"
+    "docs/verification/us-030-north-star-fidelity.md": "f1fedbce3a3aa3615abe21eea12811052b7c4e1cec111626ba97987293364d09"
   },
-  "packageTreeSha256": "a49c9d7bfc5b24b335787e96bc6cca33efc395a892f2b890ad9c5036914bec49",
+  "packageTreeSha256": "0ae47b2c4d44d8b894eb368dd9f388b3255b34f81f1e4a7e8d47f21eb5a4956e",
   "procedure": "SHA-256 over UTF-8 compact JSON of sorted [relativePath,fileByteSHA256] pairs; no newline. Inventory itself excluded to avoid recursion; report included.",
   "excludedSelf": "docs/verification/assets/us-030/source-and-evidence-inventory.json",
   "productionChanges": false,

@@ -26,7 +26,31 @@ describe('North Star application composition', () => {
     expect(markup).toContain('Choose someone in the office or below.');
     expect(markup.match(/aria-pressed="false"/g)).toHaveLength(3);
     expect(markup).toContain('aria-disabled="true"');
-    expect(markup).not.toContain('tabindex');
+    const destinations = [...markup.matchAll(/<h2[^>]*id="([^"]+)"[^>]*tabindex="(-?\d+)"/g)];
+    expect(destinations.map(match => [match[1], match[2]])).toEqual([
+      ['office-section-title', '-1'], ['agents-section-title', '-1'], ['projects-section-title', '-1'],
+    ]);
+    expect(markup.match(/tabindex=/g)).toHaveLength(3);
+    runtime.dispose();
+  });
+
+  it('provides real named destinations and an honest disabled Expand affordance', () => {
+    const store = { getSnapshot: () => initialAgentState, subscribe: () => () => {}, subscribeAcceptedUpdates: () => () => {} };
+    const runtime = createOfficePresentationRuntime(store, { matches: false, addEventListener() {}, removeEventListener() {} });
+    const markup = renderToStaticMarkup(<Application store={store} runtime={runtime} />);
+    const navigation = markup.match(/<nav[^>]*>(.*?)<\/nav>/)?.[0] ?? '';
+    expect(navigation).toContain('aria-label="Homepage sections"');
+    expect([...navigation.matchAll(/<button[^>]*>(.*?)<\/button>/g)].map(match => match[1])).toEqual(['Office', 'Agents', 'Projects']);
+    expect(navigation).toContain('aria-current="location"');
+    expect(navigation).not.toContain('href=');
+    expect(markup).toContain('Office — </span>Studio');
+    expect(markup).toContain('Current authored world');
+    expect(markup).toContain('3 inhabitants');
+    expect(markup).toMatch(/<button[^>]*disabled=""[^>]*aria-describedby="expand-unavailable"[^>]*>Expand<\/button>/);
+    expect(markup).toContain('id="expand-unavailable">Available in a future update.');
+    expect(markup).toContain('Project context is reserved for Sample content.');
+    expect(markup).toContain('No repository is connected.');
+    expect(markup.match(/<h1/g)).toHaveLength(1);
     runtime.dispose();
   });
 });

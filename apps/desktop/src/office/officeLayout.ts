@@ -42,6 +42,6 @@ const createAgentAnchor = (
 
 export const OFFICE_AGENT_ANCHORS: readonly Readonly<OfficeAgentAnchor>[] = Object.freeze([
   createAgentAnchor('left-workstation', 292, 174),
-  createAgentAnchor('right-workstation', 480, 174),
+  createAgentAnchor('right-workstation', 360, 240),
   createAgentAnchor('coffee-break', 220, 282),
 ]);

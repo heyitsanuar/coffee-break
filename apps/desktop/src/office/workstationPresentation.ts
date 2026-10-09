@@ -30,8 +30,8 @@ export function getWorkstationGeometry(id: MockAgentId, _roomArtwork: boolean): 
   const anchor = getMockAgent(id)?.anchorId;
   if (anchor !== 'left-workstation' && anchor !== 'right-workstation') return undefined;
   // Both authored and fallback monitors share the approved 20 × 8 logical inset.
-  return rect((anchor === 'left-workstation' ? 158 : 252) * OFFICE_ART_SCALE,
-    51 * OFFICE_ART_SCALE, 20 * OFFICE_ART_SCALE, 8 * OFFICE_ART_SCALE);
+  return rect((anchor === 'left-workstation' ? 158 : 192) * OFFICE_ART_SCALE,
+    (anchor === 'left-workstation' ? 51 : 84) * OFFICE_ART_SCALE, 20 * OFFICE_ART_SCALE, 8 * OFFICE_ART_SCALE);
 }
 
 interface MonitorGraphics {

@@ -1,4 +1,4 @@
-"""Author the fixed US-026 room at 320×180. Stdlib only; no design image is read.
+"""Author the US-032 five-zone room at 320×180. Stdlib only; no design image is read.
 
 Run from any directory with Python 3. Output is the two production RGBA sheets.
 Shapes are deliberately placed on the native pixel grid; no resampling or random art.
@@ -108,6 +108,27 @@ def shelf(x, y, w, h):
     rect(x + 2, y + h - 3, w - 4, 1, '513d35')
 
 
+def bounded_plant(x, y, w, h):
+    cx = x + w // 2
+    polygon([(x + 2, y + h - 6), (x + w - 2, y + h - 6),
+             (x + w - 3, y + h - 1), (x + 3, y + h - 1)], 'ba7642')
+    rect(x + 1, y + h - 7, w - 2, 2, '283044')
+    line(cx, y + 2, cx, y + h - 7, '244e3b')
+    for dx, dy in [(-w // 2 + 1, 4), (w // 2 - 2, 6), (-w // 2 + 2, 9)]:
+        polygon([(cx, y + h - 7), (x + w // 2 + dx, y + dy),
+                 (cx, y + dy + 2)], '5d9e38')
+    rect(cx, y + 1, 1, h - 8, '82b646')
+
+
+def empty_chair(x, y, w, h):
+    rect(x, y, w, h - 2, '283044')
+    rect(x + 2, y + 1, w - 4, h // 2 - 1, '42587c')
+    rect(x + 2, y + 2, w - 4, 1, '697d9d')
+    rect(x + 2, y + h // 2 + 1, w - 4, h // 2 - 3, '546b88')
+    rect(x + 2, y + h - 2, 2, 2, '283044')
+    rect(x + w - 4, y + h - 2, 2, 2, '283044')
+
+
 # Continuous amber planks. Quiet staggered joints/grain, never operational data.
 rect(0, 0, WIDTH, HEIGHT, '283044')
 rect(7, 26, 306, 145, 'cc894f')
@@ -155,21 +176,10 @@ for x in (139, 165):
     line(x + 12, 22, x + 17, 17, '71b2cf')
 rect(160, 10, 3, 16, '364f73')
 rect(134, 27, 54, 2, '9e744d')
-shelf(206, 15, 32, 22)
-rect(241, 24, 16, 13, 'a5663b')
-rect(241, 24, 16, 2, 'd39b5b')
-rect(244, 30, 10, 5, 'bf8450')
-rect(248, 31, 2, 1, 'f0cf8b')
-rect(245, 18, 8, 7, 'c2c7cf')
-rect(246, 19, 6, 4, 'e4dfd2')
-rect(248, 20, 2, 2, '8997aa')
+shelf(198, 12, 27, 22)
 plant(19, 35, 2)
 plant(120, 35)
 plant(196, 34)
-plant(279, 35, 2)
-small_plant(228, 17)
-shelf(293, 32, 18, 21)
-small_plant(302, 31)
 
 # Upper-left support/lounge: bounded slate rug, magenta sofa, compact table.
 rect(12, 47, 93, 49, '4b5265')
@@ -211,45 +221,44 @@ plant(97, 63)
 plant(97, 94)
 
 # Two honey tops, short aprons/legs, dark chair backs/arms and caster bases.
-for shift in (0, 94):
-    x = 130 + shift
-    rect(x + 1, 61, 53, 19, 'ac6a38')
-    rect(x, 58, 52, 19, '654932')
-    rect(x + 1, 59, 50, 15, 'dfa35c')
-    rect(x + 2, 59, 48, 2, 'efbe77')
-    rect(x + 2, 73, 48, 1, 'c58341')
-    rect(x + 1, 75, 50, 2, 'ac6a38')
+for offset_x, dy in ((0, 0), (34, 33)):
+    x = 130 + offset_x
+    rect(x + 1, 61 + dy, 53, 19, 'ac6a38')
+    rect(x, 58 + dy, 52, 19, '654932')
+    rect(x + 1, 59 + dy, 50, 15, 'dfa35c')
+    rect(x + 2, 59 + dy, 48, 2, 'efbe77')
+    rect(x + 2, 73 + dy, 48, 1, 'c58341')
+    rect(x + 1, 75 + dy, 50, 2, 'ac6a38')
     for dx in (2, 48):
-        rect(x + dx, 77, 2, 8, '283044')
-        rect(x + dx, 77, 1, 6, '54637c')
-    cx = 146 + shift
-    rect(cx - 8, 70, 16, 11, '283044')
-    rect(cx - 7, 70, 14, 8, '42587c')
-    rect(cx - 6, 71, 12, 1, '697d9d')
-    rect(cx - 9, 77, 2, 6, '283044')
-    rect(cx + 7, 77, 2, 6, '283044')
-    rect(cx - 6, 79, 12, 5, '364a6c')
-    rect(cx - 1, 84, 2, 3, '283044')
-    line(cx, 86, cx - 6, 89, '283044')
-    line(cx, 86, cx + 6, 89, '283044')
-    rect(cx - 7, 89, 2, 2, '283044')
-    rect(cx + 5, 89, 2, 2, '283044')
-    mx = 158 + shift
-    rect(mx - 2, 49, 24, 14, '283044')
-    rect(mx - 1, 50, 22, 1, '7c83a0')
-    rect(mx, 51, 20, 8, '66839b')
-    rect(mx + 9, 63, 3, 2, '283044')
-    rect(mx + 6, 65, 9, 1, '3d4b60')
-    rect(mx, 67, 15, 3, '283044')
-    rect(mx + 1, 67, 13, 1, '526582')
+        rect(x + dx, 77 + dy, 2, 8, '283044')
+        rect(x + dx, 77 + dy, 1, 6, '54637c')
+    cx = 146 + offset_x
+    rect(cx - 8, 70 + dy, 16, 11, '283044')
+    rect(cx - 7, 70 + dy, 14, 8, '42587c')
+    rect(cx - 6, 71 + dy, 12, 1, '697d9d')
+    rect(cx - 9, 77 + dy, 2, 6, '283044')
+    rect(cx + 7, 77 + dy, 2, 6, '283044')
+    rect(cx - 6, 79 + dy, 12, 5, '364a6c')
+    rect(cx - 1, 84 + dy, 2, 3, '283044')
+    line(cx, 86 + dy, cx - 6, 89 + dy, '283044')
+    line(cx, 86 + dy, cx + 6, 89 + dy, '283044')
+    rect(cx - 7, 89 + dy, 2, 2, '283044')
+    rect(cx + 5, 89 + dy, 2, 2, '283044')
+    mx = 158 + offset_x
+    rect(mx - 2, 49 + dy, 24, 14, '283044')
+    rect(mx - 1, 50 + dy, 22, 1, '7c83a0')
+    rect(mx, 51 + dy, 20, 8, '66839b')
+    rect(mx + 9, 63 + dy, 3, 2, '283044')
+    rect(mx + 6, 65 + dy, 9, 1, '3d4b60')
+    rect(mx, 67 + dy, 15, 3, '283044')
+    rect(mx + 1, 67 + dy, 13, 1, '526582')
     for dx in (2, 5, 8, 11):
-        rect(mx + dx, 68, 2, 1, '7c89a2')
-    small_plant(x + 9, 59)
-    cup(x + 7, 64)
-    rect(x + 44, 67, 5, 5, '576a49')
-    rect(x + 45, 68, 1, 3, 'd8a34c')
+        rect(mx + dx, 68 + dy, 2, 1, '7c89a2')
+    bounded_plant(x - 2, 48 + dy, 6, 14)
+    rect(x + 44, 67 + dy, 5, 5, '576a49')
+    rect(x + 45, 68 + dy, 1, 3, 'd8a34c')
 plant(197, 77, 2)
-plant(283, 77)
+bounded_plant(207, 125, 14, 19)
 
 # Lower-left cool coffee tile with cabinet, distinct appliances, cups and stools.
 rect(8, 99, 113, 67, '8991b0')
@@ -258,11 +267,11 @@ for y in range(100, 166, 9):
     rect(8, y, 113 if y < 115 else 127, 1, '737e9f')
     for x in range(9 + (y // 9 % 2) * 5, 133 if y >= 115 else 119, 10):
         rect(x, y + 1, 1, 8, '7c87a6')
-rect(10, 108, 90, 36, '283044')
-rect(11, 110, 88, 19, 'b3b7c1')
-rect(12, 110, 86, 2, 'd3d4d5')
-rect(11, 131, 88, 12, '455675')
-rect(12, 132, 86, 1, '617391')
+rect(10, 108, 86, 36, '283044')
+rect(11, 110, 84, 19, 'b3b7c1')
+rect(12, 110, 82, 2, 'd3d4d5')
+rect(11, 131, 84, 12, '455675')
+rect(12, 132, 82, 1, '617391')
 for x in (38, 68):
     rect(x, 133, 1, 10, '344762')
     rect(x - 2, 134, 1, 2, '9ba6b7')
@@ -293,7 +302,7 @@ rect(68, 117, 3, 2, 'ecd6a8')
 cup(78, 118)
 cup(84, 117, 'd7dbe0')
 small_plant(18, 116)
-small_plant(94, 118)
+bounded_plant(88, 104, 8, 15)
 for x in (39, 62):
     rect(x - 4, 148, 8, 3, '283044')
     rect(x - 1, 150, 2, 6, '283044')
@@ -311,10 +320,69 @@ cup(117, 130, '8ca57b')
 # mug and both unchanged steam frames clear of leaves and Sol's hand envelope.
 plant(129, 143)
 
-# Perimeter props and a low decorative glass entry, not a functional second room.
-shelf(295, 126, 16, 25)
-small_plant(303, 124)
-plant(299, 163, 2)
+# Empty decorative Meeting/Focus zones. Glass stays below all presentation objects.
+for top, bottom in ((10, 90), (98, 166)):
+    rect(232, top, 80, bottom - top, '8991b0')
+    for y in range(top + 2, bottom, 9):
+        rect(233, y, 78, 1, '737e9f')
+        for x in range(234, 312, 10):
+            rect(x, y + 1, 1, min(8, bottom - y - 1), '7c87a6')
+rect(228, 10, 4, 156, '364f73')
+rect(229, 11, 2, 155, '518bb3')
+for top, bottom in ((74, 86), (140, 152)):
+    rect(228, top, 4, bottom - top, 'cc894f')
+rect(232, 90, 80, 8, '4c5877')
+rect(232, 90, 80, 2, '9196bc')
+# Rear picture, rug, four unmistakably empty chairs and honey-wood table.
+rect(245, 39, 55, 47, '636b7b')
+rect(246, 40, 53, 45, '697d9d')
+rect(265, 29, 24, 10, '283044')
+rect(267, 31, 20, 6, 'efbe77')
+rect(269, 32, 7, 4, '518bb3')
+rect(280, 33, 5, 3, 'ca5688')
+for x in (253, 277):
+    empty_chair(x, 34, 14, 13)
+rect(249, 45, 46, 20, '283044')
+rect(250, 46, 44, 16, 'dfa35c')
+rect(251, 47, 42, 1, 'efbe77')
+rect(250, 63, 44, 2, 'ac6a38')
+for x in (253, 277):
+    empty_chair(x, 64, 14, 19)
+bounded_plant(269, 48, 6, 11)
+rect(279, 52, 8, 5, '668aa1')
+rect(280, 53, 6, 1, 'e8edf6')
+shelf(302, 31, 7, 26)
+rect(297, 39, 2, 14, '283044')
+rect(294, 53, 8, 2, '283044')
+rect(294, 29, 8, 10, 'efbe77')
+rect(295, 30, 6, 7, 'fbebc9')
+bounded_plant(235, 67, 13, 20)
+bounded_plant(297, 65, 13, 22)
+# Focus monitor is unlit decoration, never a third trusted state field.
+rect(244, 128, 57, 37, '636b7b')
+rect(245, 129, 55, 35, '697d9d')
+rect(265, 115, 23, 6, '283044')
+rect(267, 116, 19, 4, 'ca5688')
+rect(256, 132, 39, 18, '283044')
+rect(257, 133, 37, 14, 'dfa35c')
+rect(258, 134, 35, 1, 'efbe77')
+rect(257, 148, 37, 2, 'ac6a38')
+rect(262, 122, 20, 12, '283044')
+rect(263, 123, 18, 10, '54637c')
+rect(264, 124, 16, 6, '283044')
+rect(271, 130, 2, 4, '283044')
+rect(263, 138, 16, 3, '283044')
+rect(264, 138, 14, 1, '697d9d')
+empty_chair(265, 148, 14, 15)
+rect(235, 139, 10, 19, '283044')
+rect(236, 140, 8, 17, 'ac6a38')
+for y in (145, 151):
+    rect(237, y, 6, 1, 'efbe77')
+shelf(302, 119, 7, 37)
+bounded_plant(240, 116, 12, 23)
+bounded_plant(290, 146, 12, 18)
+
+# Existing central entry, entirely decorative.
 rect(145, 144, 9, 26, '56617f')
 rect(194, 144, 9, 26, '56617f')
 rect(145, 144, 9, 3, '9099b7')
@@ -329,17 +397,15 @@ line(178, 163, 188, 153, '81bfd7')
 rect(172, 151, 1, 14, '364f73')
 rect(174, 153, 1, 10, '9ac4d7')
 rect(154, 167, 40, 2, 'a77148')
-rect(133, 158, 9, 11, '283044')
 rect(207, 158, 9, 11, '283044')
-plant(137, 164)
 plant(211, 164)
 
 # Foreground is ONLY two native 10×2 chair-seat strips. Two pixels above the
 # study strips keeps both existing selection strokes unobstructed at depth 20.
 pixels = foreground
-for x in (141, 235):
-    rect(x, 83, 10, 1, '53688b')
-    rect(x, 84, 10, 1, '283044')
+for x, y in ((141, 83), (175, 116)):
+    rect(x, y, 10, 1, '53688b')
+    rect(x, y + 1, 10, 1, '283044')
 
 
 def png(data):

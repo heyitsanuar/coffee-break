@@ -86,6 +86,13 @@ export class OfficeScene extends Phaser.Scene {
       this.createFallbackRoom();
     }
 
+    for (const [text, y, width] of [['Meeting Room', 40, 120], ['Focus Room', 212, 104]] as const) {
+      this.add.rectangle(544, y, width, 24, 0x101d2b).setDepth(12);
+      this.add.text(544, y, text, {
+        fontFamily: 'Arial, sans-serif', fontSize: '12px', color: '#e8edf6',
+      }).setOrigin(0.5).setDepth(12);
+    }
+
     this.createMockAgents(roomTexturesAvailable);
     this.selectionIndicator = this.add.graphics()
       .setDepth(OFFICE_DEPTHS.futureAgents + 1);
@@ -173,7 +180,7 @@ export class OfficeScene extends Phaser.Scene {
       };
       motion.apply(presentation);
 
-      if (roomArtwork && agent.id === 'mock-agent-sol') {
+      if (agent.id === 'mock-agent-sol') {
         const steam = this.add.graphics().setPosition(230, 248)
           .setScale(OFFICE_ART_SCALE).setDepth(OFFICE_DEPTHS.background + 1).setVisible(false);
         this.coffeeSteam = createCoffeeSteamMotion(steam,
@@ -250,13 +257,41 @@ export class OfficeScene extends Phaser.Scene {
     room.fillRect(16, 198, 226, 132);
     room.fillStyle(0x4b576e);
     room.fillRect(20, 216, 180, 72);
-    for (const deskX of [260, 448]) {
+    for (const [deskX, deskY] of [[260, 116], [328, 182]]) {
       room.fillStyle(0xe4ad65);
-      room.fillRect(deskX, 116, 104, 36);
+      room.fillRect(deskX, deskY, 108, 44);
       room.fillStyle(0x283044);
-      room.fillRect(deskX + 52, 98, 48, 28);
-      room.fillRect(deskX + 18, 140, 30, 34);
+      room.fillRect(deskX + 52, deskY - 18, 48, 28);
+      room.fillRect(deskX + 14, deskY + 24, 36, 42);
     }
+    room.fillStyle(0x34425a);
+    room.fillRect(230, 260, 18, 8);
+    room.fillStyle(0xb3b7c1);
+    room.fillRect(230, 260, 18, 2);
+    room.fillStyle(0x8ca57b);
+    room.fillRect(234, 260, 8, 8);
+    room.fillRect(242, 262, 4, 4);
+    room.fillStyle(0xfbebc9);
+    room.fillRect(234, 260, 8, 2);
+    room.fillStyle(0x775743);
+    room.fillRect(236, 262, 4, 2);
+    room.fillStyle(0x8991b0);
+    room.fillRect(464, 20, 160, 160);
+    room.fillRect(464, 196, 160, 136);
+    room.fillStyle(0x283044);
+    room.fillRect(456, 20, 8, 312);
+    room.fillRect(464, 180, 160, 16);
+    room.fillStyle(0xdfa35c);
+    room.fillRect(498, 90, 92, 40);
+    room.fillRect(512, 264, 78, 36);
+    room.fillStyle(0x42587c);
+    for (const x of [506, 554]) {
+      room.fillRect(x, 68, 28, 26);
+      room.fillRect(x, 128, 28, 38);
+    }
+    room.fillRect(530, 296, 28, 30);
+    room.fillStyle(0x283044);
+    room.fillRect(524, 244, 40, 24);
     room.lineStyle(4, 0x283044);
     room.strokeRect(8, 8, OFFICE_SCENE_WIDTH - 16, OFFICE_SCENE_HEIGHT - 16);
   }

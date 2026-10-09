@@ -255,3 +255,16 @@ it('drops pre-load reactions, never replays on remount/rerender/selection, and d
   expect(secondGame.acknowledge).not.toHaveBeenCalled(); expect(game.acknowledge).toHaveBeenCalledOnce();
   runtime.dispose(); store.stop();
 });
+
+it('describes empty decorative zones alongside native selection equivalents', async () => {
+  const { renderToStaticMarkup } = await import('react-dom/server');
+  const { createElement } = await import('react');
+  const { OfficeSceneHost } = await import('./OfficeSceneHost');
+  const store = createAgentStateStore({ watch() { return { ready: Promise.resolve(), close() {} }; } });
+  const { createOfficePresentationRuntime } = await import('./officePresentationRuntime');
+  const runtime = createOfficePresentationRuntime(store, { matches: false, addEventListener() {}, removeEventListener() {} });
+  const html = renderToStaticMarkup(createElement(OfficeSceneHost, { store, runtime }));
+  expect(html).toContain('Meeting Room and Focus Room are empty decorative zones.');
+  expect(html.match(/aria-label="Select (Ari|Mina|Sol)"/g)).toHaveLength(3);
+  runtime.dispose();
+});

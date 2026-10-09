@@ -12,7 +12,7 @@ vi.mock('phaser', async () => ({
       anims = { exists: vi.fn(() => false), create: vi.fn() };
       events = { once: vi.fn() };
       time = { delayedCall: vi.fn(() => ({ remove: vi.fn() })), addEvent: vi.fn(() => ({ remove: vi.fn() })) };
-      add = { image: vi.fn(() => ({ setOrigin: vi.fn().mockReturnThis(), setScale: vi.fn().mockReturnThis(), setDepth: vi.fn().mockReturnThis() })), sprite: vi.fn(), text: vi.fn(), rectangle: vi.fn(() => ({ setStrokeStyle: vi.fn().mockReturnThis(), setDepth: vi.fn().mockReturnThis() })), graphics: vi.fn(() => graphics()) };
+      add = { image: vi.fn(() => ({ setOrigin: vi.fn().mockReturnThis(), setScale: vi.fn().mockReturnThis(), setDepth: vi.fn().mockReturnThis() })), sprite: vi.fn(), text: vi.fn(() => label()), rectangle: vi.fn(() => ({ setStrokeStyle: vi.fn().mockReturnThis(), setDepth: vi.fn().mockReturnThis() })), graphics: vi.fn(() => graphics()) };
     },
     Geom: { Rectangle: (await import('node:module')).createRequire(import.meta.url)('phaser/src/geom/rectangle') },
     Input: { Events: { POINTER_DOWN: 'pointerdown' } },
@@ -166,10 +166,10 @@ describe('OfficeScene presentation handoff', () => {
 describe('OfficeScene workstation integration', () => {
   it.each([true, false])('creates exactly two pixel-scaled overlays at the correct artwork=%s positions', artwork => {
     const { internals, monitors } = monitorScene(artwork);
-    expect(internals.add.graphics).toHaveBeenCalledTimes(artwork ? 3 : 2);
+    expect(internals.add.graphics).toHaveBeenCalledTimes(3);
     expect([...internals.workstations.keys()]).toEqual(['mock-agent-ari', 'mock-agent-mina']);
     expect(monitors[0].setPosition).toHaveBeenCalledWith(316, 102);
-    expect(monitors[1].setPosition).toHaveBeenCalledWith(504, 102);
+    expect(monitors[1].setPosition).toHaveBeenCalledWith(384, 168);
     for (const monitor of monitors) { expect(monitor.setScale).toHaveBeenCalledWith(2); expect(monitor.setDepth).toHaveBeenCalledWith(1); }
   });
   it('updates only the matching monitor, reuses objects, and sends the same Completed transition to character and monitor', () => {
@@ -264,12 +264,25 @@ describe('OfficeScene contextual mug integration', () => {
     f.scene.setAgentPresentation('mock-agent-sol', presentation('mock-agent-sol', 'coffee'));
     expect(f.internals.add.graphics).toHaveBeenCalledTimes(3);
   });
-  it('fallback creates no steam controller/object, even with coffee presentation', () => {
+  it('fallback reuses the single canonical steam controller, including static retained/reduced and negative cases', () => {
     const f = monitorScene(false);
-    f.scene.setAgentPresentation('mock-agent-sol', presentation('mock-agent-sol', 'coffee'));
-    expect(f.steam).toBeUndefined(); expect(f.internals.coffeeSteam).toBeUndefined();
-    expect(f.internals.add.graphics).toHaveBeenCalledTimes(2); expect(f.internals.time.addEvent).not.toHaveBeenCalled();
-    expect(f.sprites[2].play).toHaveBeenLastCalledWith('office-agent-mock-agent-sol', true);
+    const coffee = presentation('mock-agent-sol', 'coffee');
+    f.scene.setAgentPresentation('mock-agent-sol', coffee);
+    expect(f.steam.setPosition).toHaveBeenCalledWith(230, 248);
+    expect(f.steam.setVisible).toHaveBeenLastCalledWith(true);
+    expect(f.internals.add.graphics).toHaveBeenCalledTimes(3);
+    expect(f.internals.time.addEvent).toHaveBeenCalledWith(expect.objectContaining({ delay: 1600, loop: true }));
+    for (const next of [{ ...coffee, live: false }, { ...coffee, reducedMotion: true }]) {
+      f.internals.time.addEvent.mockClear();
+      f.scene.setAgentPresentation('mock-agent-sol', next);
+      expect(f.steam.setVisible).toHaveBeenLastCalledWith(true);
+      expect(f.internals.time.addEvent).not.toHaveBeenCalled();
+    }
+    for (const visual of ['waiting', 'idle'] as const) {
+      f.scene.setAgentPresentation('mock-agent-sol', presentation('mock-agent-sol', visual));
+      expect(f.steam.setVisible).toHaveBeenLastCalledWith(false);
+    }
+    expect(f.internals.add.graphics).toHaveBeenCalledTimes(3);
   });
   it('ignores selection, acknowledgements, redundant Sol updates and other identities without restarting', () => {
     const f = monitorScene();
@@ -354,7 +367,7 @@ it('keeps all persistent nameplates independent of lifecycle, freshness and redu
   expect(solLabel.setText).toHaveBeenLastCalledWith('Coffee break');
 });
 
-it.each([['mock-agent-ari', 292, 174, 0], ['mock-agent-mina', 480, 174, 1], ['mock-agent-sol', 220, 282, 2]] as const)('forwards relocated sprite identity and draws the unchanged outline for %s', (id, x, y, index) => {
+it.each([['mock-agent-ari', 292, 174, 0], ['mock-agent-mina', 360, 240, 1], ['mock-agent-sol', 220, 282, 2]] as const)('forwards relocated sprite identity and draws the unchanged outline for %s', (id, x, y, index) => {
   const callback = vi.fn();
   const scene = new OfficeScene(callback);
   const internal = scene as unknown as {
@@ -391,7 +404,7 @@ it.each([true, false])('keeps textured/fallback room geometry and stable noninte
   sprites.forEach(item => internal.add.sprite.mockReturnValueOnce(item));
   sprites.forEach(() => internal.add.text.mockReturnValueOnce(label()).mockReturnValueOnce(label()));
   scene.create();
-  expect(internal.add.sprite.mock.calls.map(args => args.slice(0, 2))).toEqual([[292, 174], [480, 174], [220, 282]]);
+  expect(internal.add.sprite.mock.calls.map(args => args.slice(0, 2))).toEqual([[292, 174], [360, 240], [220, 282]]);
   if (artwork) {
     const images = internal.add.image.mock.results.map(result => result.value);
     expect(images).toHaveLength(2);
@@ -404,11 +417,13 @@ it.each([true, false])('keeps textured/fallback room geometry and stable noninte
   } else {
     expect(internal.add.image).not.toHaveBeenCalled();
     const room = internal.add.graphics.mock.results[0].value as ReturnType<typeof graphics>;
-    expect(room.fillRect).toHaveBeenCalledWith(260, 116, 104, 36);
-    expect(room.fillRect).toHaveBeenCalledWith(448, 116, 104, 36);
+    expect(room.fillRect).toHaveBeenCalledWith(260, 116, 108, 44);
+    expect(room.fillRect).toHaveBeenCalledWith(328, 182, 108, 44);
     expect(room.fillRect).toHaveBeenCalledWith(312, 98, 48, 28);
-    expect(room.fillRect).toHaveBeenCalledWith(500, 98, 48, 28);
+    expect(room.fillRect).toHaveBeenCalledWith(380, 164, 48, 28);
     expect(room.fillRect).toHaveBeenCalledWith(20, 216, 180, 72);
+    expect(room.fillRect).toHaveBeenCalledWith(234, 260, 8, 8);
+    expect(room.fillRect).toHaveBeenCalledWith(230, 260, 18, 8);
   }
 });
 
@@ -418,7 +433,7 @@ it('registers non-overlapping 48×64 world targets using actual Phaser geometry,
   const rectangles = f.sprites.map((item, index) => {
     const config = item.setInteractive.mock.calls[0][0];
     const hitArea = config.hitArea as { x: number; y: number; width: number; height: number };
-    const [x, y] = [[292,174], [480,174], [220,282]][index];
+    const [x, y] = [[292,174], [360,240], [220,282]][index];
     const bounds = { x: x + (hitArea.x - 10) * 2, y: y + (hitArea.y - 24) * 2, width: hitArea.width * 2, height: hitArea.height * 2 };
     expect(bounds).toEqual({ x: x - 24, y: y - 56, width: 48, height: 64 });
     expect(config.hitAreaCallback(hitArea, -1, -3)).toBe(true); // Outside the visible frame, inside approved target.
@@ -438,5 +453,28 @@ it('registers non-overlapping 48×64 world targets using actual Phaser geometry,
   for (let i = 0; i < rectangles.length; i++) for (let j = i + 1; j < rectangles.length; j++) {
     const a = rectangles[i], b = rectangles[j];
     expect(a.x + a.width <= b.x || b.x + b.width <= a.x || a.y + a.height <= b.y || b.y + b.height <= a.y).toBe(true);
+  }
+});
+
+it.each(['office-room-background', 'office-room-foreground'])('uses coherent fallback when %s alone is unavailable', missing => {
+  const scene = new OfficeScene();
+  const internal = scene as unknown as {
+    textures: { exists: ReturnType<typeof vi.fn> };
+    add: { sprite: ReturnType<typeof vi.fn>; image: ReturnType<typeof vi.fn>; text: ReturnType<typeof vi.fn>; rectangle: ReturnType<typeof vi.fn> };
+    coffeeSteam?: unknown;
+  };
+  internal.textures.exists.mockImplementation(key => key !== missing);
+  for (let i = 0; i < 3; i++) internal.add.sprite.mockReturnValueOnce(sprite());
+  scene.create();
+  expect(internal.add.image).not.toHaveBeenCalled();
+  expect(internal.add.sprite).toHaveBeenCalledTimes(3);
+  expect(internal.coffeeSteam).toBeDefined();
+  for (const [text, y, width] of [['Meeting Room', 40, 120], ['Focus Room', 212, 104]] as const) {
+    expect(internal.add.rectangle).toHaveBeenCalledWith(544, y, width, 24, 0x101d2b);
+    const index = internal.add.text.mock.calls.findIndex(args => args[2] === text);
+    expect(internal.add.text.mock.calls[index]).toEqual([544, y, text, expect.objectContaining({ fontSize: '12px' })]);
+    const value = internal.add.text.mock.results[index].value;
+    expect(value.setDepth).toHaveBeenCalledWith(12);
+    expect(value).not.toHaveProperty('setInteractive');
   }
 });

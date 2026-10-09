@@ -155,7 +155,7 @@ export function OfficeSceneHost({ store, runtime }: { readonly store: OfficeStor
             ref={hostRef}
             className="office-scene-host"
             role="img"
-            aria-label={`Pixel-art local simulation office: ${officeDescription}`}
+            aria-label={`Pixel-art local simulation office: ${officeDescription}. Meeting Room and Focus Room are empty decorative zones.`}
           />
           <small className="office-context">Local simulation · No provider connection</small>
           <SelectedAgentSummary {...selected} />

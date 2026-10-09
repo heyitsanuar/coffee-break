@@ -76,6 +76,27 @@ Run one operator/import at a time: the immediate pre-create recheck is not a dis
 
 Focused validation: `node --test scripts/import-ep-05.test.mjs` (also included in `npm test`).
 
+### EP-06 North Star Homepage Experience backlog
+
+The proposed backlog lives in `planning/ep-06-issues.json`, grounded in the approved [EP-06 reference manifest](docs/design/references/ep-06/README.md). EP-06 covers the homepage; real providers remain reserved for EP-07. These references supersede earlier provider-epic numbering and historical EP-05 planning descriptions where they conflict. Backlog preparation does not authorize production implementation: each story requires the normal design, engineering authorization, review and Product Owner acceptance workflow.
+
+This importer manages only EP-06 — North Star Homepage Experience and US-031 through US-036. EP-05 #58 and US-030 #64 must exist with their expected IDs/numbers/titles; their bodies, labels, open/closed state and closure remain untouched. Story dependencies record technical prerequisites separately from recommended integration order.
+
+Requires Node.js, Bash, authenticated GitHub CLI repository read access, and issue-write permission for a separately authorized apply. Apply requires existing `type:user-story` and `epic:north-star-homepage` labels; the maintainer must provision missing labels separately. This importer never creates or changes labels.
+
+```bash
+# Read-only preview: inspect every proposed title/body and mapping.
+bash scripts/import-issues.sh heyitsanuar/coffee-break --epic EP-06
+# Future maintainer-authorized creation only; not part of backlog preparation.
+bash scripts/import-issues.sh heyitsanuar/coffee-break --epic EP-06 --apply
+```
+
+Preview queries all open and closed issues, excludes pull requests, and prints full numbered acceptance criteria and CREATE / SKIP / CONFLICT results. Duplicate planning IDs stop the import. Exact title/body matches SKIP regardless of open/closed state; mismatches CONFLICT and prevent creation. Existing issues are never edited, reopened, relabeled or closed. Epic story lists use stable planning IDs and are not rewritten after creation; newly created story bodies resolve assigned epic/dependency URLs. Printed mappings record GitHub-assigned numbers, which are separate from story IDs.
+
+Run one operator/import at a time: the immediate pre-create recheck is not a distributed lock. Creation is non-transactional. After partial failure, inspect GitHub and the printed mappings, resolve access/conflicts, preview again, then rerun the same separately authorized apply. Earlier successful creations are discovered and skipped; only missing items are created. An unexpected creation URL requires inspection before retrying because creation may already have succeeded. URL validation targets `github.com`; no GitHub Enterprise support is claimed.
+
+Focused validation: `node --test scripts/import-ep-06.test.mjs` (also included in `npm test`). Fake-GitHub tests exercise apply without modifying GitHub. EP-06 preparation runs only the real preview.
+
 ## Workflow
 Use one branch and pull request per user story. Branches follow `feature/us-XXX-short-description` (for example, `feature/us-001-repository`). Run the documented checks before review and merge. See AGENTS.md and docs/architecture/README.md.
 

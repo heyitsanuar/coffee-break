@@ -1,0 +1,469 @@
+{
+  "epic": {
+    "id": "EP-06",
+    "title": "North Star Homepage Experience",
+    "objective": "Implement the Product Owner-approved North Star-inspired homepage skeleton around the dominant Living Office, preserving existing trusted behavior while clearly separating Runtime information, fictional Sample context and informational Preview worlds. EP-06 is homepage/presentation work; real provider integration is reserved for separately approved EP-07 planning.",
+    "scope": [
+      "Deep navy homepage shell, lightweight Office / Agents / Projects region navigation without URL mutation or permanent sidebar, and Studio toolbar.",
+      "Original authored richer 320×180 office at integer 2×, decorative empty Meeting/Focus zones and existing Ari/Mina/Sol behavior.",
+      "Portrait-first selection, truthful freshness dots, compact dark plaques and exact contextual inspection.",
+      "Right-side Sample Recent Activity with three deterministic rows and compact fictional Harbor context.",
+      "Studio Current, Retro 70s/Arcade 80s/Cyber 2000 Preview information and in-app stable-scene Expand.",
+      "1100×760 and 760×540 responsive/accessibility behavior and integrated fidelity/regression evidence."
+    ],
+    "out_of_scope": [
+      "Real providers, provider-specific controls, GitHub integrations, operational history, model/token/cost/productivity metrics.",
+      "Separate product pages, routing infrastructure, permanent sidebar, additional agents, new lifecycle states or invented runtime activity.",
+      "Functional room membership, occupancy, meetings, pathfinding, autonomous navigation or generalized furniture interaction.",
+      "World switching, theme persistence/marketplace, OS fullscreen, new windows or new IPC.",
+      "Contract, Connector, transport, main mirror, preload/IPC or renderer trust-policy changes; Sample content in trusted state.",
+      "Chat, voice, accounts, notifications, task assignment, orchestration, analytics or repository boards."
+    ],
+    "design_authority": [
+      "Original North Star product visual foundation: docs/design/references/north-star/coffee-break-north-star-01.png through coffee-break-north-star-04.png.",
+      "Approved EP-06 final homepage and environment package: docs/design/references/ep-06/README.md and its seven images; archived designer-fidelity-report.md explains intent and historical submission status.",
+      "Accepted EP-05 implementation/references apply where the approved EP-06 changes do not supersede them; trusted behavior and architecture/security remain authoritative.",
+      "Reference images are design targets, not production textures or runtime verification. Product Owner approval supersedes preserved historical NOT APPROVED banners."
+    ],
+    "architectural_constraints": [
+      "React owns application composition, controls, focus, accessibility and precise inspection; Phaser owns authored office and presentation. Existing trusted renderer state remains authoritative. No shared-contract, Connector, transport, main mirror, preload/IPC or provider changes are authorized.",
+      "Sample and Preview are deterministic renderer-local presentation, never trusted runtime fields or fabricated live history.",
+      "Preserve 640×360 office, 320×180 original pixel authorship, integer rendering, canonical identities, lifecycle/coffee/freshness and reduced motion.",
+      "Navigation preserves the exact document URL and sender validation; Expand preserves the same mounted scene/canvas without OS fullscreen.",
+      "Preserve authentication, token isolation, runtime/session validation, narrow preload, contextIsolation, sandbox and nodeIntegration=false.",
+      "One approved story per branch/PR; backlog/import authorization is not production implementation authorization."
+    ],
+    "visual_principles": [
+      "Office-first North Star hierarchy: application chrome → toolbar → authored world → precise contextual rail → Worlds/Agents.",
+      "Deep navy/blue UI, warm coherent pixel environment, dark plaques, restrained violet navigation, coffee selection and cyan focus.",
+      "Truthful Current/Last known/No state dots and text; green means Current, never Online.",
+      "Natural document growth, no horizontal page overflow, complete world, and the approved richer selector below the initial compact viewport."
+    ],
+    "design_workflow": [
+      "Product intent and approved durable references.",
+      "Planner story/engineering scope and explicit implementation authorization.",
+      "Developer implementation with relevant tests/visual evidence.",
+      "Designer implementation review.",
+      "Independent technical review and confirmed-finding correction.",
+      "Product Owner acceptance, authorized finalization and maintainer merge."
+    ],
+    "dependencies": [
+      "US-030"
+    ],
+    "implementation_order": [
+      "US-031",
+      "US-032",
+      "US-033",
+      "US-034",
+      "US-035",
+      "US-036"
+    ],
+    "exit_criteria": [
+      "All six EP-06 stories are individually accepted and merged.",
+      "Integrated homepage matches the approved EP-06 direction with intentional differences documented and reviewed.",
+      "Accepted trusted lifecycle, synchronization/recovery, coffee, selection, accessibility, reduced motion and security behavior remain intact.",
+      "Sample and Preview are unmistakably non-live and never enter trusted state.",
+      "Desktop/compact and expanded behavior are verified with actual runtime measurements/captures and truthful verification limits.",
+      "Integrated tests, fidelity evidence, Designer review, independent review and Product Owner acceptance are recorded.",
+      "No provider integration or unsupported trust-boundary changes are introduced."
+    ]
+  },
+  "historical_context": [
+    {
+      "id": "EP-05",
+      "number": 58,
+      "title": "North Star UI Evolution"
+    },
+    {
+      "id": "US-030",
+      "number": 64,
+      "title": "Verify and Polish North Star Fidelity"
+    }
+  ],
+  "stories": [
+    {
+      "id": "US-031",
+      "epic": "EP-06",
+      "title": "Establish the North Star Homepage Shell",
+      "user_story": "As a Coffee Break user, I want a coherent office-first homepage with lightweight navigation, so that I can reach the office, agents and project context without leaving the page.",
+      "objective": "Establish the approved deep navy homepage composition and Studio toolbar while preserving the accepted Living Office behavior. Prepare regions for later stories without fabricating their content.",
+      "scope": [
+        "Deep navy role-based shell tokens and lightweight top navigation; no permanent sidebar.",
+        "Office, Agents and Projects target homepage regions; Projects reserves the contextual region populated by Harbor in US-034.",
+        "Studio toolbar with three inhabitants and reserved Expand composition; functional gallery/expansion belongs to US-035.",
+        "Desktop and compact document flow retaining the full fixed office and truthful global availability."
+      ],
+      "dependencies": [
+        "US-030"
+      ],
+      "dependency_notes": [
+        "US-030 supplies the accepted runtime, 640×360 office, accessibility and responsive baseline.",
+        "Region composition must be stable for later selector, rail and world content. Later-story content is not implemented here."
+      ],
+      "acceptance_criteria": [
+        "The shell uses the approved deep navy/blue palette and typography hierarchy from the EP-06 references, preserving coffee selection and cyan keyboard focus.",
+        "The header contains lightweight Office, Agents and Projects navigation and no permanent sidebar.",
+        "Each navigation control reaches its named homepage region; Projects targets the reserved project-context region rather than opening a new page or inventing a live project.",
+        "Activating navigation leaves the document URL unchanged, including its hash, and introduces no router, route store or IPC-policy change.",
+        "Navigation does not unmount the office, change selected identity or interrupt trusted runtime presentation.",
+        "The office toolbar identifies Studio as the current authored world and reports exactly three inhabitants, never three Online agents.",
+        "Expand has its approved toolbar placement; functional expansion is deferred to US-035 and any interim unavailable action is explicitly communicated rather than claiming fullscreen functionality.",
+        "The existing 320×180 art at integer 2× remains an intact crisp 640×360 office; no environment or character redraw is introduced.",
+        "One truthful global availability region continues to distinguish connected/synchronized, synchronizing, disconnected and retained/no-state conditions.",
+        "At 1100×760 outer-window size, the office dominates the desktop composition and space is established for contextual right-rail and lower homepage regions.",
+        "At 760×540 outer-window size, the complete office is visible and remaining content is reachable through normal vertical document scrolling without horizontal page scrolling.",
+        "The approved richer selector below the initial compact viewport is supported by reachable Agents navigation and document flow; no later-story selector content is invented here.",
+        "Navigation controls are native keyboard-operable controls with accessible names, logical traversal and visible focus distinct from selection; focus alone never selects an agent.",
+        "Existing mouse/keyboard selection, Clear, exact inspection, reduced motion, reload/remount cleanup and one-canvas behavior remain intact."
+      ],
+      "boundary": "React owns application composition, controls, focus, accessibility and precise inspection; Phaser owns authored office and presentation. Existing trusted renderer state remains authoritative. No shared-contract, Connector, transport, main mirror, preload/IPC or provider changes are authorized.",
+      "design_references": [
+        "docs/design/references/ep-06/README.md",
+        "docs/design/references/ep-06/designer-fidelity-report.md",
+        "docs/design/references/ep-06/ep06-fidelity-desktop.png",
+        "docs/design/references/ep-06/ep06-fidelity-compact.png",
+        "docs/design/references/ep-06/ep06-fidelity-compact-flow.png",
+        "docs/design/references/ep-06/ep06-fidelity-keyboard.png"
+      ],
+      "accessibility_expectations": [
+        "Use named native navigation controls and semantic section destinations without URL mutation.",
+        "Keep focus visible and controls below the initial viewport reachable by keyboard; use normal document scrolling."
+      ],
+      "regression_requirements": [
+        "Preserve the original Phaser instance through section navigation and renderer subscriptions outside UI composition.",
+        "Preserve availability, trusted inspection, selection/Clear, reduced motion and fixed room size."
+      ],
+      "definition_of_done": [
+        "All numbered acceptance criteria are verified with source-grounded tests and applicable actual-renderer evidence.",
+        "Relevant regression tests, npm test, typecheck, lint and build pass; pre-existing warnings and unperformed checks are recorded accurately.",
+        "Designer implementation review passes against the approved references; intentional differences are documented.",
+        "Independent technical review passes and confirmed findings are resolved.",
+        "Product Owner accepts the story; one scoped branch and PR is approved and merged through the repository workflow.",
+        "No provider integration or changes to trusted contracts, Connector, transport, main mirror, preload or IPC are introduced."
+      ]
+    },
+    {
+      "id": "US-032",
+      "epic": "EP-06",
+      "title": "Evolve the Living Office Environment",
+      "user_story": "As a Coffee Break user, I want a richer coherent pixel-art office, so that the workplace reflects the approved North Star environment without implying unsupported room activity.",
+      "objective": "Author the approved environment on the production logical pixel grid, reconciling furniture, agents, runtime overlays and selection as one fixed scene.",
+      "scope": [
+        "Original authored background/foreground at 320×180 and integer 2× display.",
+        "Lounge, two inhabited workstations, coffee area and empty decorative Meeting/Focus zones.",
+        "Coordinated geometry and fallback compatibility; preserve anchors where practical, documenting any necessary migration."
+      ],
+      "dependencies": [
+        "US-031"
+      ],
+      "dependency_notes": [
+        "Integrated fit and capture use the US-031 shell/toolbar; accepted US-030 character and presentation behavior remain constraints.",
+        "Environment design/pixel authorship can be prepared in parallel with shell work after design agreement, but integration must validate the merged shell baseline."
+      ],
+      "acceptance_criteria": [
+        "The environment is newly authored at 320×180 logical pixels; the 1672×941 environment study is used as a visual target, never installed or resampled into a production Phaser texture.",
+        "The complete world displays at integer 2× as exactly 640×360 with nearest-neighbor/pixel-art rendering and no fractional scaling.",
+        "The room retains the approved warm office/cool boundary visual family, richer grouped furniture, plants, shelving and glass articulation.",
+        "The single scene includes recognizable lounge, two workstations, coffee, Meeting Room and Focus Room visual zones matching the approved composition.",
+        "Meeting and Focus furniture is empty decoration with spatial labels only; no room occupancy, membership, navigation, pathfinding, extra live agents or new trusted events exist.",
+        "Exactly Ari, Mina and Sol remain present, using their canonical identities and existing sprite atlases/lifecycle behavior.",
+        "Existing anchors are preserved where practical; any required authored-position migration is minimal, documented and reconciled with all dependent geometry.",
+        "Ari and Mina retain coherent seated chair/desk/monitor relationships; Sol remains coherent with the coffee area without an invented workstation.",
+        "Both trusted workstation state overlays align with their authored monitor fields across all five lifecycle states, and fallback geometry agrees with their placement.",
+        "The permanent mug and canonical coffee steam align; Sol's exact Waiting/activity predicate still controls coffee, while generic Waiting and Idle do not imply coffee.",
+        "Background, overlay, agent, selection, label and foreground depths produce correct occlusion without hiding faces, state meaning, selection outlines or interaction targets.",
+        "Pointer envelopes and selection outlines remain correctly aligned after any geometry change, with the existing 48×64 displayed pointer target behavior retained.",
+        "Live Working/workstation/coffee motion and bounded terminal acknowledgements retain existing semantics; retained state pauses operational loops without losing state meaning.",
+        "Reduced motion preserves static equivalents and suppresses the existing operational/acknowledgement motion without new animation timing.",
+        "Authored/fallback rendering, explicit scene shutdown, React remount/reload, mouse selection and keyboard equivalents remain functional at both supported window sizes."
+      ],
+      "boundary": "React owns application composition, controls, focus, accessibility and precise inspection; Phaser owns authored office and presentation. Existing trusted renderer state remains authoritative. No shared-contract, Connector, transport, main mirror, preload/IPC or provider changes are authorized.",
+      "design_references": [
+        "docs/design/references/ep-06/README.md",
+        "docs/design/references/ep-06/designer-fidelity-report.md",
+        "docs/design/references/ep-06/ep06-environment-study.png",
+        "docs/design/references/ep-06/ep06-fidelity-desktop.png",
+        "docs/design/references/ep-06/ep06-fidelity-compact.png",
+        "docs/design/references/ep-06/ep06-fidelity-retained.png"
+      ],
+      "accessibility_expectations": [
+        "Keep the scene textual description and native selector equivalent; do not present decorative zones as actionable controls.",
+        "Keep labels/readability, selection envelopes and static reduced-motion meaning clear."
+      ],
+      "regression_requirements": [
+        "Validate art dimensions/integrity, anchor-overlay-foreground relationships and fallback geometry.",
+        "Preserve exact coffee, lifecycle, retained state, motion guards and destruction-safe disposal."
+      ],
+      "definition_of_done": [
+        "All numbered acceptance criteria are verified with source-grounded tests and applicable actual-renderer evidence.",
+        "Relevant regression tests, npm test, typecheck, lint and build pass; pre-existing warnings and unperformed checks are recorded accurately.",
+        "Designer implementation review passes against the approved references; intentional differences are documented.",
+        "Independent technical review passes and confirmed findings are resolved.",
+        "Product Owner accepts the story; one scoped branch and PR is approved and merged through the repository workflow.",
+        "No provider integration or changes to trusted contracts, Connector, transport, main mirror, preload or IPC are introduced."
+      ]
+    },
+    {
+      "id": "US-033",
+      "epic": "EP-06",
+      "title": "Refine Agent Identity and Selection",
+      "user_story": "As a Coffee Break user, I want recognizable portraits and truthful freshness beside each identity, so that I can select an agent and distinguish current information from retained or unavailable state.",
+      "objective": "Refine the native selector and in-world labels to the approved portrait-first identity hierarchy while keeping trusted semantics and interaction ownership unchanged.",
+      "scope": [
+        "Canonical portraits with freshness dot, name and lifecycle beneath each portrait.",
+        "Compact dark in-world identity/freshness/lifecycle plaques.",
+        "Existing selection, Clear, focus, textual equivalents and pointer geometry."
+      ],
+      "dependencies": [
+        "US-031",
+        "US-032"
+      ],
+      "dependency_notes": [
+        "The shell supplies region navigation and focus conventions; settled environment geometry determines safe plaque placement.",
+        "Selector markup can be prepared independently of art, but final labels/hit-area integration require the approved US-032 placement."
+      ],
+      "acceptance_criteria": [
+        "The selector contains exactly Ari, Mina and Sol in canonical identity order with no additional or renamed agents.",
+        "Each selector uses the canonical 48×48 integer-scaled portrait and presents portrait → freshness dot → name → lifecycle with the name/lifecycle beneath the portrait.",
+        "Dark in-world plaques retain persistent identity, truthful freshness and compact lifecycle meaning without placing precise activity text in the world.",
+        "Plaques avoid obscuring faces, hands, monitors, selection outlines and pointer envelopes in the approved environment.",
+        "A filled green freshness dot means Current only when trusted agent state exists and the current session is connected and synchronized; it never means Online.",
+        "Retained trusted state uses the approved neutral Last known treatment, preserves lifecycle/activity/reason, and explicitly remains not live.",
+        "No trusted state uses the neutral hollow No state treatment and identity without inventing Idle, activity or availability.",
+        "Freshness remains distinct from lifecycle: an Error agent with current trusted information can still be Current.",
+        "Freshness dots have textual equivalents in accessible names, shared legend and/or inspection, so meaning never depends solely on color.",
+        "Selector buttons remain native keyboard-operable controls with accurate accessible identity and pressed/selected semantics.",
+        "Visible cyan focus remains distinct from warm selection; tabbing or receiving focus does not select an agent.",
+        "Mouse sprite selection and keyboard Space/Enter selection update the same selected identity and agree with selector, summary and inspector.",
+        "Clear selection removes world/selector selection, restores unselected inspection and preserves sensible visible focus.",
+        "The existing minimum native control targets and 48×64 displayed sprite pointer envelope behavior remain usable at both target sizes.",
+        "Lifecycle/availability updates, responsive changes, reload/remount, reduced motion and exact canonical coffee preserve existing selection and trusted presentation semantics without invented state/activity."
+      ],
+      "boundary": "React owns application composition, controls, focus, accessibility and precise inspection; Phaser owns authored office and presentation. Existing trusted renderer state remains authoritative. No shared-contract, Connector, transport, main mirror, preload/IPC or provider changes are authorized.",
+      "design_references": [
+        "docs/design/references/ep-06/README.md",
+        "docs/design/references/ep-06/designer-fidelity-report.md",
+        "docs/design/references/ep-06/ep06-fidelity-desktop.png",
+        "docs/design/references/ep-06/ep06-fidelity-compact-flow.png",
+        "docs/design/references/ep-06/ep06-fidelity-retained.png",
+        "docs/design/references/ep-06/ep06-fidelity-keyboard.png"
+      ],
+      "accessibility_expectations": [
+        "Keep native selector controls, textual freshness, visible focus, logical traversal and activation/Clear behavior.",
+        "Keep below-viewport compact controls keyboard reachable; do not rely on hover or color."
+      ],
+      "regression_requirements": [
+        "Preserve a single React selection authority and existing world/native selection agreement.",
+        "Cover Current, Last known, No state, Error-with-current-data and state updates while focused."
+      ],
+      "definition_of_done": [
+        "All numbered acceptance criteria are verified with source-grounded tests and applicable actual-renderer evidence.",
+        "Relevant regression tests, npm test, typecheck, lint and build pass; pre-existing warnings and unperformed checks are recorded accurately.",
+        "Designer implementation review passes against the approved references; intentional differences are documented.",
+        "Independent technical review passes and confirmed findings are resolved.",
+        "Product Owner accepts the story; one scoped branch and PR is approved and merged through the repository workflow.",
+        "No provider integration or changes to trusted contracts, Connector, transport, main mirror, preload or IPC are introduced."
+      ]
+    },
+    {
+      "id": "US-034",
+      "epic": "EP-06",
+      "title": "Integrate the Contextual Right Rail",
+      "user_story": "As a Coffee Break user, I want precise agent inspection beside clearly labeled example activity, so that I can understand trusted agent information without confusing fictional project context with runtime history.",
+      "objective": "Compact the contextual inspector and place three deterministic Sample entries with Harbor context immediately beneath it, preserving all exact trusted information.",
+      "scope": [
+        "Contextual inspector with exact trusted fields and all availability/selection cases.",
+        "Sample Recent Activity containing Harbor context, three fixed example rows and a native project-context disclosure.",
+        "Natural desktop rail and compact document flow with complete long text."
+      ],
+      "dependencies": [
+        "US-031",
+        "US-033"
+      ],
+      "dependency_notes": [
+        "The shell reserves rail/project regions; the refined selector provides identity/freshness semantics and selection continuity.",
+        "Static Sample copy can be prepared in parallel; integrated inspection/selection checks use the merged selector baseline."
+      ],
+      "acceptance_criteria": [
+        "The desktop contextual rail contains the compact trusted inspector followed immediately by Recent Activity, with approved hierarchy and spacing.",
+        "Selected inspection shows the exact trusted canonical identity, lifecycle, activity and optional reason; unsupported provider, model, token, task or metric fields are absent.",
+        "Unselected inspection invites selection without auto-selecting an agent; Clear remains available with existing guarded/unselected semantics.",
+        "Retained inspection explicitly says Last known / Not live and preserves exact lifecycle, activity and reason; synchronizing availability does not change lifecycle.",
+        "Selected No state inspection preserves identity and says trusted state is unavailable without inferring activity or lifecycle.",
+        "Recent Activity has persistent Sample identification and the text 'Fixed example sequence · Not runtime history'.",
+        "Recent Activity contains exactly three fixed rows: Ari / Search panel draft opened / H-13 · Example PR #19 / 10:10; Mina / Query privacy ready for review / H-14 · Example PR #20 / 10:20; Sol / Notes search sample updated / H-15 · Example work item / 10:30.",
+        "Harbor / Local notes search is compact fictional project context within Sample Activity, not a separate dominant panel or live project integration.",
+        "Project-context disclosure presents explicitly fictional repository and branch examples, clearly stating no account/repository/provider is connected; final example strings are recorded during story design without becoming runtime requirements.",
+        "Fixed example hours are not converted into relative live recency; Sample rows do not change on trusted runtime updates or imply current agent assignments.",
+        "Sample content is deterministic renderer-local presentation and never enters the trusted store, presentation lifecycle, event contracts, Connector or simulator.",
+        "Activity/reason and sample copy wrap and grow naturally without truncation or fixed-height clipping; the rail moves subsequent content down.",
+        "Native Clear/disclosure controls are keyboard reachable with visible focus, accessible names and stable focus through state updates.",
+        "At 1100×760 and 760×540, content stays in approved side/inline flow with usable vertical scrolling, no horizontal overflow, and no fabricated GitHub/provider functionality."
+      ],
+      "boundary": "React owns application composition, controls, focus, accessibility and precise inspection; Phaser owns authored office and presentation. Existing trusted renderer state remains authoritative. No shared-contract, Connector, transport, main mirror, preload/IPC or provider changes are authorized.",
+      "design_references": [
+        "docs/design/references/ep-06/README.md",
+        "docs/design/references/ep-06/designer-fidelity-report.md",
+        "docs/design/references/ep-06/ep06-fidelity-desktop.png",
+        "docs/design/references/ep-06/ep06-fidelity-compact-flow.png",
+        "docs/design/references/ep-06/ep06-fidelity-retained.png"
+      ],
+      "accessibility_expectations": [
+        "Use semantic inspector/activity regions, native disclosure/Clear controls and explicit Sample text.",
+        "Preserve complete truthful text, visible focus and normal document scrolling."
+      ],
+      "regression_requirements": [
+        "Test exact trusted fields and unselected/retained/no-state cases separately from deterministic Sample content.",
+        "Runtime updates must not mutate the Sample sequence or its provenance."
+      ],
+      "definition_of_done": [
+        "All numbered acceptance criteria are verified with source-grounded tests and applicable actual-renderer evidence.",
+        "Relevant regression tests, npm test, typecheck, lint and build pass; pre-existing warnings and unperformed checks are recorded accurately.",
+        "Designer implementation review passes against the approved references; intentional differences are documented.",
+        "Independent technical review passes and confirmed findings are resolved.",
+        "Product Owner accepts the story; one scoped branch and PR is approved and merged through the repository workflow.",
+        "No provider integration or changes to trusted contracts, Connector, transport, main mirror, preload or IPC are introduced."
+      ]
+    },
+    {
+      "id": "US-035",
+      "epic": "EP-06",
+      "title": "Add World Previews and Office Expansion",
+      "user_story": "As a Coffee Break user, I want to inspect future-world concepts and dedicate more application space to my office, so that I can explore the visual direction while preserving the active office and selection.",
+      "objective": "Add truthful informational world previews and an in-app expanded office composition, preserving the same Phaser instance, trusted presentation and native focus behavior.",
+      "scope": [
+        "Studio Current and three named informational Preview entries with approved artwork provenance.",
+        "Studio toolbar access to the world gallery.",
+        "In-app Expand/Exit/Escape composition with stable scene, selection, focus and scroll restoration."
+      ],
+      "dependencies": [
+        "US-031",
+        "US-032",
+        "US-033"
+      ],
+      "dependency_notes": [
+        "Toolbar/composition, final office geometry and native selector are direct prerequisites.",
+        "US-034 is completed earlier in the recommended integration order so the final right rail can be tested when hidden/restored, but its Sample implementation is not a technical prerequisite for preview/Expand preparation."
+      ],
+      "acceptance_criteria": [
+        "Worlds shows exactly Studio — Current, Retro 70s — Preview, Arcade 80s — Preview and Cyber 2000 — Preview.",
+        "Studio remains the only current authored production office; its toolbar identity can reach the homepage world gallery without changing the document URL.",
+        "Each future-world entry uses approved source artwork or source regions with recorded provenance; original North Star files remain unchanged.",
+        "Preview activation reveals useful approved concept information and clearly says the environment is a Preview without functional switching.",
+        "Preview controls are usable native keyboard controls with visible focus, named content and a clear dismissal/collapse interaction where applicable.",
+        "Preview interaction does not change the scene, agents, selected identity, trusted store or any persistent theme/world setting.",
+        "Expand activates an application-owned expanded composition, not OS fullscreen, camera zoom or a new window/IPC capability.",
+        "The expanded composition follows the approved study: general navigation, Worlds and Sample Activity are hidden, while toolbar, full office, selector and precise inspection remain available.",
+        "The same mounted Phaser game, scene and canvas remain present before, during and after Expand/Exit; no second host or replacement game is created.",
+        "The office stays exactly 640×360 at integer scale with no fractional transform or resampling in either composition.",
+        "Selected identity and trusted runtime subscriptions continue uninterrupted; lifecycle/activity/availability changes while expanded update the same world/inspection.",
+        "A visible native Exit control replaces the expansion action in the toolbar.",
+        "Escape exits only while expanded and returns to the normal composition; the handler is removed or inactive outside expansion and during disposal.",
+        "Exiting through Exit or Escape restores visible keyboard focus to the invoking Expand control without changing selection.",
+        "Exit restores the prior document scroll position after normal layout is restored, without a competing focus-induced page jump.",
+        "Desktop 1100×760 and compact 760×540 support entry/exit, complete room visibility and reachable selector/inspection through normal vertical scrolling without horizontal overflow.",
+        "Repeated expansion, resize, availability changes and no-selection/retained/no-state cases produce no duplicate listeners/canvases, selection reset or acknowledgement/animation replay.",
+        "Expanded and informational-preview interactions preserve reduced-motion static meaning, existing sprite/native selection, Clear, exact coffee and destruction-safe shutdown/reload behavior."
+      ],
+      "boundary": "React owns application composition, controls, focus, accessibility and precise inspection; Phaser owns authored office and presentation. Existing trusted renderer state remains authoritative. No shared-contract, Connector, transport, main mirror, preload/IPC or provider changes are authorized.",
+      "design_references": [
+        "docs/design/references/ep-06/README.md",
+        "docs/design/references/ep-06/designer-fidelity-report.md",
+        "docs/design/references/ep-06/ep06-fidelity-desktop.png",
+        "docs/design/references/ep-06/ep06-fidelity-compact-flow.png",
+        "docs/design/references/ep-06/ep06-fidelity-expanded.png",
+        "docs/design/references/ep-06/ep06-fidelity-retained.png",
+        "docs/design/references/ep-06/ep06-fidelity-keyboard.png"
+      ],
+      "accessibility_expectations": [
+        "Keep native Preview/Expand/Exit controls, scoped Escape, visible focus return and normal scroll restoration.",
+        "Hidden regions must not leave focus stranded; compact selector and full inspection remain reachable."
+      ],
+      "regression_requirements": [
+        "Check the actual game/scene/canvas identity through repeated entry/exit and updates.",
+        "Preserve acknowledgement non-replay, runtime continuity, reduced motion, Clear and cleanup; no OS fullscreen or IPC changes."
+      ],
+      "definition_of_done": [
+        "All numbered acceptance criteria are verified with source-grounded tests and applicable actual-renderer evidence.",
+        "Relevant regression tests, npm test, typecheck, lint and build pass; pre-existing warnings and unperformed checks are recorded accurately.",
+        "Designer implementation review passes against the approved references; intentional differences are documented.",
+        "Independent technical review passes and confirmed findings are resolved.",
+        "Product Owner accepts the story; one scoped branch and PR is approved and merged through the repository workflow.",
+        "No provider integration or changes to trusted contracts, Connector, transport, main mirror, preload or IPC are introduced."
+      ]
+    },
+    {
+      "id": "US-036",
+      "epic": "EP-06",
+      "title": "Verify and Polish the Homepage",
+      "user_story": "As a Coffee Break user, I want the integrated homepage to match the approved design and preserve trusted behavior, so that the expanded product experience is coherent, truthful and dependable.",
+      "objective": "Record integrated production-renderer fidelity and regression evidence for all six EP-06 stories and address only confirmed, approved polish findings.",
+      "scope": [
+        "Direct runtime captures, real viewport/input records, provenance and design comparison boards.",
+        "Integrated lifecycle/freshness/selection/motion/preview/expansion regression verification.",
+        "Designer and independent review, Product Owner acceptance and bounded confirmed polish."
+      ],
+      "dependencies": [
+        "US-031",
+        "US-032",
+        "US-033",
+        "US-034",
+        "US-035"
+      ],
+      "dependency_notes": [
+        "All homepage slices must be integrated on the accepted baseline before final fidelity and regression acceptance.",
+        "Earlier stories contribute focused evidence; historical checks may be reused only with explicit source-match/provenance, never relabeled as fresh native observations."
+      ],
+      "acceptance_criteria": [
+        "Actual integrated renderer captures are compared against the approved desktop, compact, full compact flow, expanded, retained and keyboard studies with design/runtime provenance labeled.",
+        "The authored production environment is compared with the approved environment study and original North Star direction, documenting pixel-grid/occlusion translations and intentional differences.",
+        "Capture records identify exact source baseline/tree, full evidence-file hashes, selected identity, input provenance and observations sufficient to reproduce the checks.",
+        "Outer window targets 1100×760 and 760×540 use actual measured native/content bounds and viewport dimensions; no fixed 28px title-bar assumption is asserted as runtime measurement.",
+        "The complete office remains exactly 640×360 with crisp integer-scaled pixel art in normal/expanded and desktop/compact compositions.",
+        "Desktop rail/lower regions and compact room-first flow match the approved hierarchy; below-viewport selectors and full inspection remain reachable through vertical scrolling without horizontal overflow.",
+        "Intermediate layout transitions, long exact activity/reason, unbroken text and supported 200% DOM text enlargement preserve readability, selection/focus and natural document growth.",
+        "Office/Agents/Projects navigation reaches homepage regions, preserves the document URL and retains the mounted scene/runtime/selection.",
+        "All five lifecycle states have observable static/animated meaning consistent with the existing trusted state and exact inspection.",
+        "Sol's exact Waiting plus 'Taking a coffee break in the simulated office' produces canonical coffee; ordinary Waiting or Idle does not imply coffee.",
+        "Current, Last known and No state cases are evidenced in world labels, selector and inspection, with global availability separate from lifecycle and no Online claim.",
+        "Reduced-motion checks preserve static meaning and suppress operational/acknowledgement motion; Chromium emulation and native OS observations are labeled separately.",
+        "Mouse world selection, native selector activation, Clear and summary/inspection agree on identity without focus-only selection.",
+        "Keyboard traversal, visible focus distinct from selection, Space/Enter activation and focus preservation during state/availability/resize updates are verified at both targets.",
+        "World previews are informative and explicitly unavailable for switching; exactly three fixed Sample rows and Harbor context remain unmistakably non-live and independent of trusted state.",
+        "Expand/Exit/Escape preserve the same game/scene/canvas and trusted updates, restore invoking focus and prior scroll, and create no duplicate listeners or acknowledgement replay.",
+        "Reload/remount and explicit scene shutdown preserve single-canvas cleanup and the accepted synchronization, retained state, recovery and security behavior.",
+        "npm test, typecheck, lint, build and git diff --check run on the final tree; exact results, existing warnings and unavailable checks are recorded without fabricated PASS claims.",
+        "Designer fidelity review and independent technical review pass with confirmed findings resolved; Product Owner integrated acceptance is explicitly recorded.",
+        "Evidence distinguishes real simulator/production captures, synthetic supplemental inputs, derived comparison boards, browser input/media emulation and actual manual native/assistive-technology observations; unperformed native accessibility checks remain unclaimed."
+      ],
+      "boundary": "React owns application composition, controls, focus, accessibility and precise inspection; Phaser owns authored office and presentation. Existing trusted renderer state remains authoritative. No shared-contract, Connector, transport, main mirror, preload/IPC or provider changes are authorized.",
+      "design_references": [
+        "docs/design/references/ep-06/README.md",
+        "docs/design/references/ep-06/designer-fidelity-report.md",
+        "docs/design/references/ep-06/ep06-fidelity-desktop.png",
+        "docs/design/references/ep-06/ep06-fidelity-compact.png",
+        "docs/design/references/ep-06/ep06-fidelity-compact-flow.png",
+        "docs/design/references/ep-06/ep06-fidelity-expanded.png",
+        "docs/design/references/ep-06/ep06-fidelity-retained.png",
+        "docs/design/references/ep-06/ep06-fidelity-keyboard.png",
+        "docs/design/references/ep-06/ep06-environment-study.png"
+      ],
+      "accessibility_expectations": [
+        "Verify named controls, truthful text, color-independent meaning, keyboard focus/activation and supported text enlargement.",
+        "Record manual native/screen-reader results only when performed; disclose limitations and do not infer native accessibility from source, tests or studies."
+      ],
+      "regression_requirements": [
+        "Verify all lifecycle/freshness, canonical coffee, synchronization/recovery, reduced-motion and selection behavior.",
+        "Verify real scene continuity, non-replay, no URL mutation, no horizontal overflow and complete evidence provenance."
+      ],
+      "definition_of_done": [
+        "All numbered acceptance criteria are verified with source-grounded tests and applicable actual-renderer evidence.",
+        "Relevant regression tests, npm test, typecheck, lint and build pass; pre-existing warnings and unperformed checks are recorded accurately.",
+        "Designer implementation review passes against the approved references; intentional differences are documented.",
+        "Independent technical review passes and confirmed findings are resolved.",
+        "Product Owner accepts the story; one scoped branch and PR is approved and merged through the repository workflow.",
+        "No provider integration or changes to trusted contracts, Connector, transport, main mirror, preload or IPC are introduced."
+      ]
+    }
+  ]
+}

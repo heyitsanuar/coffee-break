@@ -13,7 +13,7 @@
   "dev:simulated:recovery": "npm run dev:simulated:recovery -w @coffee-break/desktop",
   "typecheck": "npm run typecheck --workspaces --if-present",
   "lint": "npm run lint --workspaces --if-present",
-  "test": "node --test scripts/import-ep-03.test.mjs scripts/import-ep-04.test.mjs scripts/import-ep-05.test.mjs && npm run test --workspaces --if-present",
+  "test": "node --test scripts/import-ep-03.test.mjs scripts/import-ep-04.test.mjs scripts/import-ep-05.test.mjs scripts/import-ep-06.test.mjs && npm run test --workspaces --if-present",
   "build": "npm run build --workspaces --if-present"
  },
  "devDependencies": {

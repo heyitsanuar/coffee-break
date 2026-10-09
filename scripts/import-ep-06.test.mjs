@@ -4,11 +4,11 @@ import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
 import { test } from 'node:test';
-import { runEp05Import, validateEp05Plan } from './import-ep-05.mjs';
+import { runEp06Import, validateEp06Plan } from './import-ep-06.mjs';
 
-const plan = JSON.parse(readFileSync(new URL('../planning/ep-05-issues.json', import.meta.url)));
+const plan = JSON.parse(readFileSync(new URL('../planning/ep-06-issues.json', import.meta.url)));
 const repo = 'example/coffee-break';
-const labels = ['type:user-story', 'epic:north-star-ui-evolution'];
+const labels = ['type:user-story', 'epic:north-star-homepage'];
 const history = plan.historical_context.map((item) => ({
   number: item.number, title: `${item.id} — ${item.title}`,
   body: 'Historical body must remain untouched', state: 'closed', labels: ['historical'],
@@ -16,13 +16,13 @@ const history = plan.historical_context.map((item) => ({
 }));
 const titles = [plan.epic, ...plan.stories].map((item) => `${item.id} — ${item.title}`);
 const epicLists = ['scope', 'out_of_scope', 'design_authority',
-  'architectural_constraints', 'visual_principles', 'design_workflow'];
+  'architectural_constraints', 'visual_principles', 'design_workflow', 'dependencies', 'exit_criteria', 'implementation_order'];
 
 function fake({ failTitle, availableLabels = labels, failAccess, initial = history,
   onList = () => {}, listingLag = false, creationURL } = {}) {
   const issues = structuredClone(initial), calls = [], lines = [];
   const originalCount = issues.length;
-  let failure = failTitle, nextNumber = 80;
+  let failure = failTitle, nextNumber = Math.max(79, ...issues.map(item => item.number)) + 1;
   const gh = (args) => {
     calls.push(args);
     if (['auth', 'repo'].includes(args[0])) {
@@ -57,7 +57,7 @@ function fake({ failTitle, availableLabels = labels, failAccess, initial = histo
     }
     throw new Error(`Forbidden mutation or unexpected call: ${args.join(' ')}`);
   };
-  return { issues, calls, lines, run: (apply = true, data = plan) => runEp05Import({
+  return { issues, calls, lines, run: (apply = true, data = plan) => runEp06Import({
     repo, apply, plan: data, gh, log: line => lines.push(line),
   }) };
 }
@@ -65,12 +65,12 @@ const createCalls = (api) => api.calls.filter(args => args[0] === 'issue' && arg
 const creates = (api) => createCalls(api).map(args => args[args.indexOf('--title') + 1]);
 const assertReadOnly = (api) => assert.ok(api.calls.every(args => ['auth', 'repo', 'api'].includes(args[0])));
 
-test('approved EP-05 validates exact IDs, titles, history, criterion counts and ordered dependencies', () => {
-  assert.equal(validateEp05Plan(plan), plan);
+test('approved EP-06 validates exact IDs, titles, history, criterion counts and ordered dependencies', () => {
+  assert.equal(validateEp06Plan(plan), plan);
   const mutations = [
-    p => { p.epic.id = 'EP-06'; }, p => { p.epic.title = 'Other'; },
+    p => { p.epic.id = 'EP-07'; }, p => { p.epic.title = 'Other'; },
     p => { p.stories.pop(); }, p => { p.stories.push(structuredClone(p.stories[0])); },
-    p => { p.stories[1].id = 'US-025'; }, p => { p.stories.reverse(); },
+    p => { p.stories[1].id = 'US-031'; }, p => { p.stories.reverse(); },
     p => { p.historical_context.pop(); }, p => { p.historical_context.reverse(); },
     p => { p.historical_context[0].number = 47; }, p => { p.historical_context[1].id = 'US-019'; },
     p => { p.historical_context[1].title = 'Other'; },
@@ -97,7 +97,7 @@ test('every required epic and story field rejects missing, blank or wrongly type
       assert.deepEqual(api.calls, []);
     }
   }
-  for (const field of ['user_story', 'objective', 'boundary', 'dependency_notes', 'definition_of_done']) {
+  for (const field of ['user_story', 'objective', 'boundary', 'dependency_notes', 'definition_of_done', 'scope', 'design_references', 'accessibility_expectations', 'regression_requirements']) {
     for (const value of [undefined, '', [], ['valid', ' '], 42]) {
       const data = structuredClone(plan); data.stories[0][field] = value;
       const api = fake(); assert.throws(() => api.run(true, data), /Invalid/);
@@ -110,7 +110,7 @@ test('every required epic and story field rejects missing, blank or wrongly type
   }
   for (const [badRepo, apply] of [['invalid', false], [repo, '--apply']]) {
     let called = false;
-    assert.throws(() => runEp05Import({ repo: badRepo, apply, plan,
+    assert.throws(() => runEp06Import({ repo: badRepo, apply, plan,
       gh: () => { called = true; } }), /Repository|boolean/);
     assert.equal(called, false);
   }
@@ -130,28 +130,31 @@ test('preview reads all open/closed issues and prints seven full bodies/mappings
     for (const content of [plan.epic[field]].flat()) assert.ok(entries[0].body.includes(content), field);
   }
   for (const item of history) assert.ok(entries[0].body.includes(`[${item.title}](${item.html_url})`));
-  assert.match(entries[1].body, /issues\/51/);
-  assert.match(entries[2].body, /- Epic: EP-05\n- Dependencies: US-025/);
+  assert.match(entries[1].body, /issues\/64/);
+  assert.match(entries[2].body, /- Epic: EP-06\n- Dependencies: US-031/);
   plan.stories.forEach((story, i) => {
-    for (const field of ['user_story', 'objective', 'boundary', 'dependency_notes', 'acceptance_criteria', 'definition_of_done']) {
+    assert.equal((entries[i + 1].body.match(/^- \[ \] AC-\d{2}:/gm) ?? []).length, story.acceptance_criteria.length);
+    for (const field of ['user_story', 'objective', 'boundary', 'dependency_notes', 'acceptance_criteria', 'definition_of_done', 'scope', 'design_references', 'accessibility_expectations', 'regression_requirements']) {
       for (const content of [story[field]].flat()) assert.ok(entries[i + 1].body.includes(content), `${story.id}.${field}`);
     }
   });
 });
 
-test('apply creates exactly seven allowlisted issues with assigned epic/history/chain links and no historical edits', () => {
+test('apply creates exactly seven allowlisted issues with assigned epic/history/dependency links and no historical edits', () => {
   const api = fake(); api.run();
   assert.deepEqual(creates(api), titles);
   assert.deepEqual(api.issues.slice(0, 2), history);
   assert.equal(api.calls.some(args => args[0] === 'label'), false);
   const added = api.issues.slice(2);
   assert.deepEqual(added.map(item => item.number), [80, 81, 82, 83, 84, 85, 86]);
-  assert.deepEqual(added[0].labels, ['epic:north-star-ui-evolution']);
+  assert.deepEqual(added[0].labels, ['epic:north-star-homepage']);
   added.slice(1).forEach((item, i) => {
-    assert.deepEqual(item.labels, ['epic:north-star-ui-evolution', 'type:user-story']);
-    assert.match(item.body, /- Epic: \[EP-05 — North Star UI Evolution\]\(https:\/\/github.com\/example\/coffee-break\/issues\/80\)/);
-    const dependency = i === 0 ? 51 : 80 + i;
-    assert.ok(item.body.includes(`https://github.com/${repo}/issues/${dependency}`));
+    assert.deepEqual(item.labels, ['epic:north-star-homepage', 'type:user-story']);
+    assert.match(item.body, /- Epic: \[EP-06 — North Star Homepage Experience\]\(https:\/\/github.com\/example\/coffee-break\/issues\/80\)/);
+    for (const id of plan.stories[i].dependencies) {
+      const dependency = api.issues.find(issue => issue.title.startsWith(id + ' —'));
+      assert.ok(item.body.includes(dependency.html_url), id);
+    }
   });
   assert.doesNotMatch(added[0].body, /issues\/8[0-6]/);
   assert.deepEqual(added[0].body.match(/^- US-0\d+ — .+$/gm), titles.slice(1).map(title => `- ${title}`));
@@ -171,13 +174,13 @@ for (const state of ['open', 'closed']) test(`matching ${state} epic and stories
   const entries = api.run(false); assert.deepEqual(entries.map(entry => entry.status), Array(7).fill('SKIP'));
   api.run(); assert.deepEqual(api.issues, before);
   assertReadOnly({ calls: api.calls.slice(offset) });
-  assert.match(api.lines.at(-1), /US-030 → #86 https:/);
+  assert.match(api.lines.at(-1), /US-036 → #86 https:/);
 });
 
 test('known title/body conflicts and duplicate GitHub IDs stop apply without writes', () => {
   for (const initial of [
     [...history, { number: 60, title: titles[2], body: 'conflicting body' }],
-    [...history, { number: 60, title: 'US-025: wrong title' }],
+    [...history, { number: 60, title: 'US-031: wrong title' }],
     [...history, { number: 60, title: titles[1] }, { number: 61, title: titles[1] }],
     [...history, { ...history[0], number: 62 }],
   ]) {
@@ -187,16 +190,16 @@ test('known title/body conflicts and duplicate GitHub IDs stop apply without wri
   const api = fake({ initial: [...history, { number: 60, title: titles[2], body: 'conflict',
     html_url: `https://github.com/${repo}/issues/60` }] });
   assert.equal(api.run(false)[2].status, 'CONFLICT'); assertReadOnly(api);
-  assert.ok(api.lines.some(line => line.includes('US-026 → #60')));
+  assert.ok(api.lines.some(line => line.includes('US-032 → #60')));
 });
 
-test('real failed apply at US-026 followed by rerun preserves earlier creations and creates only the remainder', () => {
+test('real failed apply at US-032 followed by rerun preserves earlier creations and creates only the remainder', () => {
   const api = fake({ failTitle: titles[2] });
   assert.throws(() => api.run(), /creation failed/);
   assert.deepEqual(creates(api), titles.slice(0, 3));
   const before = structuredClone(api.issues); assert.equal(before.length, 4);
-  assert.ok(api.lines.some(line => line.includes('EP-05 → #80')));
-  assert.ok(api.lines.some(line => line.includes('US-025 → #81')));
+  assert.ok(api.lines.some(line => line.includes('EP-06 → #80')));
+  assert.ok(api.lines.some(line => line.includes('US-031 → #81')));
   const offset = api.calls.length; api.run();
   assert.deepEqual(creates({ calls: api.calls.slice(offset) }), titles.slice(2));
   assert.deepEqual(api.issues.slice(0, 4), before);
@@ -205,13 +208,13 @@ test('real failed apply at US-026 followed by rerun preserves earlier creations 
 });
 
 test('missing existing labels or missing/conflicting historical context prevents all writes', () => {
-  for (const availableLabels of [[], ['type:user-story'], ['epic:north-star-ui-evolution']]) {
+  for (const availableLabels of [[], ['type:user-story'], ['epic:north-star-homepage']]) {
     const api = fake({ availableLabels }); assert.throws(() => api.run(), /Required labels missing/);
     assertReadOnly(api); assert.deepEqual(api.issues, history);
   }
   for (const initial of [[], [history[0]], [history[1]],
     [{ ...history[0], number: 47 }, history[1]],
-    [history[0], { ...history[1], title: 'US-024 — Other' }]]) {
+    [history[0], { ...history[1], title: 'US-030 — Other' }]]) {
     for (const apply of [false, true]) {
       const api = fake({ initial }); assert.throws(() => api.run(apply), /Expected existing/);
       assertReadOnly(api); assert.deepEqual(api.issues, initial);
@@ -226,7 +229,7 @@ for (const failAccess of ['auth', 'repo']) test(`${failAccess} failure prevents 
   }
 });
 
-test('late competing US-028 conflicts stop the real apply loop without editing it', () => {
+test('late competing US-034 conflicts stop the real apply loop without editing it', () => {
   const competing = { number: 99, title: titles[4], body: 'competing scope', state: 'closed',
     html_url: `https://github.com/${repo}/issues/99` };
   const api = fake({ onList: ({ issues }) => {
@@ -234,7 +237,7 @@ test('late competing US-028 conflicts stop the real apply loop without editing i
       issues.push(competing);
     }
   } });
-  assert.throws(() => api.run(), /US-028 conflicts/);
+  assert.throws(() => api.run(), /US-034 conflicts/);
   assert.deepEqual(creates(api), titles.slice(0, 4));
   assert.deepEqual(api.issues.at(-1), competing); assert.deepEqual(api.issues.slice(0, 2), history);
   assert.equal(api.calls.some(args => args[0] === 'issue' && args[1] !== 'create'), false);
@@ -246,12 +249,12 @@ test('unexpected creation URL stops further creates and directs inspection befor
     const api = fake({ creationURL }); assert.throws(() => api.run(), /Unexpected creation URL.*inspect GitHub/);
     assert.deepEqual(creates(api), titles.slice(0, 1));
     assert.deepEqual(api.issues.slice(0, 2), history);
-    assert.equal(api.lines.some(line => line.includes('EP-05 → #')), false);
+    assert.equal(api.lines.some(line => line.includes('EP-06 → #')), false);
   }
 });
 
-test('shell routes EP-05, retains legacy/EP-03/EP-04 paths, and rejects every unknown selector or failed access', () => {
-  const dir = mkdtempSync(join(tmpdir(), 'ep05-shell-'));
+test('shell routes EP-06, retains legacy preview, and rejects unknown selectors or failed access', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'ep06-shell-'));
   const executable = join(dir, 'gh');
   writeFileSync(executable, '#!/bin/sh\ncase "$1" in\n auth|repo) [ "$1" != "$CB_FAIL_ACCESS" ] ;;\n api) printf "%s" "$CB_TEST_ISSUES_JSON" ;;\n *) exit 99 ;;\nesac\n');
   chmodSync(executable, 0o755);
@@ -262,22 +265,49 @@ test('shell routes EP-05, retains legacy/EP-03/EP-04 paths, and rejects every un
       CB_TEST_ISSUES_JSON: JSON.stringify([[oldHistory, ...history]]) };
     const run = (args = [], extra = {}) => spawnSync('bash', ['scripts/import-issues.sh', repo, ...args],
       { cwd: join(import.meta.dirname, '..'), env: { ...env, ...extra }, encoding: 'utf8' });
-    for (const [epic, count, initial] of [['EP-05', 7, history], ['EP-04', 6, [oldHistory]], ['EP-03', 7, []]]) {
+    for (const [epic, count, initial] of [['EP-06', 7, history]]) {
       const result = run(['--epic', epic], { CB_TEST_ISSUES_JSON: JSON.stringify([initial]) });
       assert.equal(result.status, 0, result.stderr);
       assert.equal((result.stdout.match(/\[CREATE\]/g) ?? []).length, count);
     }
     const legacy = run(); assert.equal(legacy.status, 0, legacy.stderr);
     assert.match(legacy.stdout, /Would create: EP-01/); assert.match(legacy.stdout, /Would create: EP-02/);
-    for (const args of [['--epic', 'EP-07'], ['--epic', 'EP-01'], ['--epic', 'EP-05-extra'],
-      ['--epic'], ['--epic', 'EP-05', '--epic', 'EP-05'], ['--apply', '--apply'], ['--unknown']]) {
+    for (const args of [['--epic', 'EP-07'], ['--epic', 'EP-01'], ['--epic', 'EP-06-extra'],
+      ['--epic'], ['--epic', 'EP-06', '--epic', 'EP-06'], ['--apply', '--apply'], ['--unknown']]) {
       const result = run(args); assert.equal(result.status, 2); assert.equal(result.stdout, '');
     }
     for (const failure of ['auth', 'repo']) {
-      const result = run(['--epic', 'EP-05'], { CB_FAIL_ACCESS: failure });
+      const result = run(['--epic', 'EP-06'], { CB_FAIL_ACCESS: failure });
       assert.notEqual(result.status, 0); assert.equal(result.stdout, '');
     }
     const usage = spawnSync('bash', ['scripts/import-issues.sh'], { encoding: 'utf8' });
-    assert.equal(usage.status, 2); assert.match(usage.stderr, /EP-03\|EP-04\|EP-05/);
+    assert.equal(usage.status, 2); assert.match(usage.stderr, /EP-03\|EP-04\|EP-05\|EP-06/);
   } finally { rmSync(dir, { recursive: true, force: true }); }
+});
+
+
+test('apply leaves an exact CLOSED US-031 untouched while creating only missing stories', () => {
+  const seed = fake(); seed.run();
+  const initial = structuredClone(seed.issues.slice(0, 4));
+  initial[3].state = 'closed';
+  const api = fake({ initial });
+  assert.equal(api.run(false)[1].status, 'SKIP');
+  api.run();
+  assert.deepEqual(creates(api), titles.slice(2));
+  assert.deepEqual(api.issues.slice(0, 4), initial);
+  assert.equal(api.issues.filter(issue => issue.title === titles[1]).length, 1);
+  assert.equal(api.calls.some(args => args[0] === 'issue' && args[1] !== 'create'), false);
+});
+
+test('backlog has exact AC counts, technical dependency graph and resolvable design references', () => {
+  assert.deepEqual(plan.stories.map(story => story.acceptance_criteria.length), [14, 15, 15, 14, 18, 20]);
+  assert.deepEqual(plan.stories.map(story => story.dependencies), [
+    ['US-030'], ['US-031'], ['US-031', 'US-032'], ['US-031', 'US-033'],
+    ['US-031', 'US-032', 'US-033'], ['US-031', 'US-032', 'US-033', 'US-034', 'US-035'],
+  ]);
+  assert.deepEqual(plan.epic.dependencies, ['US-030']);
+  assert.deepEqual(plan.epic.implementation_order, plan.stories.map(story => story.id));
+  for (const story of plan.stories) for (const reference of story.design_references) {
+    assert.ok(readFileSync(new URL('../' + reference, import.meta.url)).length > 0, reference);
+  }
 });

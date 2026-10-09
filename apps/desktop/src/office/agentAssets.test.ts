@@ -1,5 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
+import { execFileSync } from 'node:child_process';
+import { fileURLToPath } from 'node:url';
 import { inflateSync } from 'node:zlib';
 import { describe, expect, it } from 'vitest';
 
@@ -85,10 +87,10 @@ describe('US-027 authored character sheets', () => {
     expect(changed).toBeGreaterThan(0);
   });
 
-  it('keeps faces and lifecycle differences visible through the unchanged workstation foreground', () => {
+  it('keeps faces and lifecycle differences visible through the translated workstation foreground', () => {
     const sheet = decode('agent-lifecycle'), foreground = decode('office-room-foreground');
-    for (const [row, anchorX] of [[0, 292], [1, 480]]) {
-      const covered = (x: number, y: number) => foreground.pixels[((174 / 2 - 24 + y) * foreground.width + anchorX / 2 - 10 + x) * 4 + 3] !== 0;
+    for (const [row, anchorX, anchorY] of [[0, 292, 174], [1, 360, 240]]) {
+      const covered = (x: number, y: number) => foreground.pixels[((anchorY / 2 - 24 + y) * foreground.width + anchorX / 2 - 10 + x) * 4 + 3] !== 0;
       let lowerBodyOverlap = 0;
       for (let column = 0; column < 8; column++) {
         const frame = sheet.frame(column, row);
@@ -129,5 +131,36 @@ describe('US-027 authored character sheets', () => {
         expect(hash(decode(name).png)).not.toBe(hash(readFileSync(new URL(`../../../../docs/design/references/us-027/${reference}.png`, import.meta.url))));
       }
     }
+  });
+});
+
+describe('US-032 original room assets', () => {
+  it('decodes native opaque background and exactly the two approved binary-alpha seat strips', () => {
+    const background = decode('office-room-background'), foreground = decode('office-room-foreground');
+    for (const image of [background, foreground]) expect([image.width, image.height]).toEqual([320, 180]);
+    let opaque = 0;
+    for (let y = 0; y < 180; y++) for (let x = 0; x < 320; x++) {
+      const offset = (y * 320 + x) * 4;
+      expect(background.pixels[offset + 3]).toBe(255);
+      const expected = (x >= 141 && x < 151 && y >= 83 && y < 85)
+        || (x >= 175 && x < 185 && y >= 116 && y < 118);
+      expect(foreground.pixels[offset + 3]).toBe(expected ? 255 : 0);
+      if (expected) opaque++;
+    }
+    expect(opaque).toBe(40);
+    // Actual authored fields must match the runtime overlay's uniform base, free of props.
+    for (const [left, top] of [[158, 51], [192, 84]]) {
+      for (let y = top; y < top + 8; y++) for (let x = left; x < left + 20; x++) {
+        expect([...background.pixels.subarray((y * 320 + x) * 4, (y * 320 + x) * 4 + 4)]).toEqual([102, 131, 155, 255]);
+      }
+    }
+  });
+  it('reproduces both exact PNG buffers twice without writing production files', () => {
+    const script = fileURLToPath(new URL('../../verification/author-us-026-room.py', import.meta.url));
+    const generate = () => JSON.parse(execFileSync('python3', ['-c',
+      'import runpy,json,sys; d=runpy.run_path(sys.argv[1]); print(json.dumps({n:d["png"](d[n]).hex() for n in ["background","foreground"]}))', script], { encoding: 'utf8' })) as Record<string, string>;
+    const first = generate(), second = generate();
+    expect(second).toEqual(first);
+    for (const name of ['background', 'foreground']) expect(Buffer.from(first[name], 'hex')).toEqual(decode(`office-room-${name}`).png);
   });
 });

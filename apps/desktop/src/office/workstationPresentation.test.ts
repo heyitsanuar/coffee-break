@@ -19,14 +19,14 @@ function fixture() {
 describe('bounded monitor geometry and vocabulary', () => {
   it('binds Ari/Mina by identity and existing anchors, with no Sol monitor', () => {
     expect(getWorkstationGeometry('mock-agent-ari', true)).toEqual({ x: 316, y: 102, width: 40, height: 16 });
-    expect(getWorkstationGeometry('mock-agent-mina', true)).toEqual({ x: 504, y: 102, width: 40, height: 16 });
+    expect(getWorkstationGeometry('mock-agent-mina', true)).toEqual({ x: 384, y: 168, width: 40, height: 16 });
     expect(getWorkstationGeometry('mock-agent-sol', true)).toBeUndefined();
     expect(getWorkstationGeometry('mock-agent-sol', false)).toBeUndefined();
   });
   it.each(['mock-agent-ari', 'mock-agent-mina'] as const)('%s fallback inset stays inside its fallback monitor', id => {
     const inset = getWorkstationGeometry(id, false)!;
-    const outer = { x: id === 'mock-agent-ari' ? 312 : 500, y: 98, width: 48, height: 28 };
-    expect(inset.y).toBe(102);
+    const outer = { x: id === 'mock-agent-ari' ? 312 : 380, y: id === 'mock-agent-ari' ? 98 : 164, width: 48, height: 28 };
+    expect(inset.y).toBe(outer.y + 4);
     expect(inset.x).toBeGreaterThanOrEqual(outer.x); expect(inset.y).toBeGreaterThanOrEqual(outer.y);
     expect(inset.x + inset.width).toBeLessThanOrEqual(outer.x + outer.width);
     expect(inset.y + inset.height).toBeLessThanOrEqual(outer.y + outer.height);

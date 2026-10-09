@@ -1,18 +1,20 @@
 :root {
-  --color-canvas: #0c1820;
-  --color-header: #10212a;
-  --color-control: #1d3039;
-  --color-boundary: #647e88;
+  --color-canvas: #08121c;
+  --color-header: #0b1725;
+  --color-control: #16283a;
+  --color-border: #243b52;
+  --color-violet: #9d78e6;
+  --color-boundary: #637d99;
   --color-focus: #97dce5;
-  --color-surface: #172a33;
-  --color-ink: #f2e9db;
-  --color-ink-muted: #b4c2c4;
+  --color-surface: #101d2b;
+  --color-ink: #e8edf6;
+  --color-ink-muted: #a4b5ca;
   --color-coffee: #d8ad85;
-  --color-sage: #a3c6ac;
+  --color-sage: #3ddc97;
 
   --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-size-body: 1rem;
-  --font-size-title: 1.125rem;
+  --font-size-title: 1.25rem;
 
   --space-2: 0.5rem;
   --space-3: 0.75rem;
@@ -43,25 +45,27 @@ body {
 
 .application-header {
   min-height: 56px;
-  padding: 10px 24px;
+  padding: 5px 24px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 8px 24px;
   background: var(--color-header);
-  border-bottom: 1px solid color-mix(in srgb, var(--color-boundary) 35%, transparent);
+  border-bottom: 1px solid var(--color-border);
 }
 
-.office-panel { padding: 20px 24px 24px; }
+.office-panel { padding: 12px 24px 24px; }
 .office-composition {
+  max-width: 964px;
+  margin-inline: auto;
   display: grid;
   grid-template-columns: 642px 304px;
   align-items: start;
   gap: 18px;
 }
 .office-composition > * { min-width: 0; }
-.office-world { display: flex; flex-direction: column; gap: 12px; }
+.office-world { display: flex; flex-direction: column; gap: 8px; }
 .selected-agent-summary { display: none; }
 
 .sr-only {
@@ -112,7 +116,7 @@ h1 {
   font-size: var(--font-size-title);
   font-weight: 600;
   letter-spacing: -0.04em;
-  line-height: 1.2;
+  line-height: 24px;
 }
 
 .welcome-copy {
@@ -271,12 +275,18 @@ small {
 .office-context { font-size: 0.75rem; line-height: 1.3333333333; }
 
 /* Stack before the fixed room + dock + gap + gutters can collide. */
-@media (max-width: 1011px) {
+@media (max-width: 1039px) {
   .office-composition {
     grid-template-columns: minmax(0, 642px);
     row-gap: 16px;
   }
-  .office-world { gap: 6px; }
+  .office-composition { max-width: 642px; }
+  .office-panel { padding-top: 8px; }
+  .application-header { min-height: 80px; display: grid; grid-template-columns: auto 1fr; gap: 4px 24px; }
+  .homepage-navigation { justify-self: end; }
+  .connection-status { grid-column: 1 / -1; }
+  h1 { font-size: 1.125rem; }
+  .brand-mark { width: 24px; height: 24px; font-size: 18px; }
   .selected-agent-summary {
     display: block;
     margin: 0;
@@ -305,16 +315,63 @@ small {
   border-top: 1px solid color-mix(in srgb, var(--color-boundary) 35%, transparent);
 }
 
-/* Actual content height drives density; native frame dimensions are not assumed. */
-@media (max-height: 560px) {
-  .application-header {
-    min-height: 40px;
-    padding-block: 7px;
-    row-gap: 6px;
-  }
-  .brand-mark { width: 24px; height: 24px; font-size: 18px; }
-  .connection-status { line-height: 1.4285714286; }
-  .office-panel { padding-top: 4px; }
-  .office-world { gap: 6px; }
-  .selected-agent-summary { line-height: 1.25; }
+/* Shell controls leave the existing agent selection and Phaser ownership intact. */
+.homepage-navigation { display: flex; gap: 8px; }
+.homepage-navigation button {
+  min-height: 44px;
+  padding: 0 12px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--color-ink);
+  font: 600 0.875rem/20px var(--font-sans);
+  cursor: pointer;
 }
+.homepage-navigation button[aria-current="location"] {
+  background: var(--color-control);
+  border-bottom-color: var(--color-violet);
+}
+.homepage-navigation button:hover { background: var(--color-control); }
+.homepage-navigation button:focus-visible,
+.section-destination:focus {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 3px;
+}
+.section-destination {
+  width: fit-content;
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 20px;
+  scroll-margin-top: 12px;
+}
+.studio-toolbar {
+  min-height: 40px;
+  padding: 4px 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  box-shadow: inset 0 0 0 1px var(--color-border);
+  border-radius: 8px;
+  background: var(--color-surface);
+}
+.studio-toolbar h2 { font-size: 0.875rem; }
+.inhabitant-count, .expand-reservation { font-size: 0.75rem; line-height: 16px; color: var(--color-ink-muted); }
+.expand-reservation { margin-left: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.expand-reservation button {
+  height: 32px;
+  padding: 0 12px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  color: var(--color-ink-muted);
+  background: var(--color-control);
+  font: inherit;
+}
+.agents-section { display: flex; flex-direction: column; gap: 8px; }
+.contextual-rail { display: flex; flex-direction: column; gap: 12px; }
+.projects-section { padding: 16px; border: 1px solid var(--color-border); border-radius: 8px; background: var(--color-surface); overflow-wrap: anywhere; }
+.projects-heading { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; }
+.projects-section p { margin: 8px 0 0; color: var(--color-ink-muted); font-size: 0.875rem; line-height: 20px; }
+.sample-label { color: var(--color-violet); font-size: 0.75rem; line-height: 16px; }

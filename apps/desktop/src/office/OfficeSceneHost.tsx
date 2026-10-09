@@ -140,6 +140,17 @@ export function OfficeSceneHost({ store, runtime }: { readonly store: OfficeStor
       <p className="sr-only" aria-live="polite" aria-atomic="true">{selectedAgentFeedback(selected)}</p>
       <div className="office-composition">
         <div className="office-world">
+          <div className="studio-toolbar">
+            <h2 id="office-section-title" className="section-destination" tabIndex={-1} aria-describedby="studio-description">
+              <span className="sr-only">Office — </span>Studio
+            </h2>
+            <span id="studio-description" className="sr-only">Current authored world</span>
+            <span className="inhabitant-count">{MOCK_AGENTS.length} inhabitants</span>
+            <div className="expand-reservation">
+              <span id="expand-unavailable">Available in a future update.</span>
+              <button type="button" disabled aria-describedby="expand-unavailable">Expand</button>
+            </div>
+          </div>
           <div
             ref={hostRef}
             className="office-scene-host"
@@ -147,13 +158,25 @@ export function OfficeSceneHost({ store, runtime }: { readonly store: OfficeStor
             aria-label={`Pixel-art local simulation office: ${officeDescription}`}
           />
           <small className="office-context">Local simulation · No provider connection</small>
-          <AgentSelector selectedAgentId={selectedAgentId} onSelectAgent={handleAgentSelected} />
           <SelectedAgentSummary {...selected} />
+          <section className="agents-section" aria-labelledby="agents-section-title">
+            <h2 id="agents-section-title" className="section-destination" tabIndex={-1}>Agents</h2>
+            <AgentSelector selectedAgentId={selectedAgentId} onSelectAgent={handleAgentSelected} />
+          </section>
         </div>
-        <AgentInspectionPanel
-          {...selected}
-          onClearSelection={() => setSelectedAgentId(null)}
-        />
+        <div className="contextual-rail">
+          <AgentInspectionPanel
+            {...selected}
+            onClearSelection={() => setSelectedAgentId(null)}
+          />
+          <section className="projects-section" aria-labelledby="projects-section-title">
+            <div className="projects-heading">
+              <h2 id="projects-section-title" className="section-destination" tabIndex={-1}>Projects</h2>
+              <span className="sample-label">Sample</span>
+            </div>
+            <p>Project context is reserved for Sample content.<br />No repository is connected.</p>
+          </section>
+        </div>
       </div>
     </>
   );

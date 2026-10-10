@@ -1,12 +1,26 @@
 import { describe, expect, it } from 'vitest';
 import { initialAgentState, type AgentStoreState, type RuntimeAgent } from '../agentState/reducer';
-import { deriveOfficePresentation, sameAgentPresentation } from './officePresentation';
+import { deriveOfficePresentation, sameAgentPresentation, agentFreshness } from './officePresentation';
 
 const COFFEE = 'Taking a coffee break in the simulated office';
 const synced = (id: 'mock-agent-ari' | 'mock-agent-mina' | 'mock-agent-sol', agent: RuntimeAgent): AgentStoreState => ({
   ...initialAgentState,
   connection: 'connected', revision: 1, synchronized: true,
   agentsById: { [id]: agent },
+});
+
+it('projects freshness state-first, independent of lifecycle, motion and activity', () => {
+  const missing = deriveOfficePresentation({ ...initialAgentState, connection: 'connected', synchronized: true });
+  expect(missing['mock-agent-sol'].live).toBe(true);
+  expect(agentFreshness(missing['mock-agent-sol'])).toBe('no-state');
+  for (const state of ['idle', 'working', 'waiting', 'completed', 'error'] as const) {
+    const current = deriveOfficePresentation(synced('mock-agent-mina', { state, activity: 'Exact activity', reason: 'approval_required' }))['mock-agent-mina'];
+    expect(agentFreshness(current)).toBe('current');
+    expect(agentFreshness({ ...current, reducedMotion: true })).toBe('current');
+    expect(agentFreshness({ ...current, live: false })).toBe('last-known');
+    expect(current.activity).toBe('Exact activity');
+    expect(current.reason).toBe('approval_required');
+  }
 });
 
 describe('pure office presentation', () => {

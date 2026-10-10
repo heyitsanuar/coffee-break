@@ -20,7 +20,7 @@ import {
 import { createCharacterMotion } from './applyOfficeVisual';
 import { AGENT_LIFECYCLE_TEXTURE, WORKING_FRAME_RATE, workingFrames } from './agentLifecycleFrames';
 import type { OfficeAcknowledgement } from './officePresentationRuntime';
-import type { OfficeAgentPresentation } from './officePresentation';
+import { agentFreshness, type OfficeAgentPresentation } from './officePresentation';
 import { createWorkstationMotion, getWorkstationGeometry } from './workstationPresentation';
 import { createCoffeeSteamMotion } from './coffeeSteamPresentation';
 
@@ -29,10 +29,14 @@ export { OFFICE_SCENE_HEIGHT, OFFICE_SCENE_WIDTH } from './officeLayout';
 const OFFICE_BACKGROUND_TEXTURE = 'office-room-background';
 const OFFICE_FOREGROUND_TEXTURE = 'office-room-foreground';
 const MOCK_AGENTS_TEXTURE = 'mock-agents';
+const PLAQUE_POSITIONS: Record<MockAgentId, readonly [number, number]> = {
+  'mock-agent-ari': [234, 184], 'mock-agent-mina': [316, 250], 'mock-agent-sol': [176, 292],
+};
 
 export class OfficeScene extends Phaser.Scene {
   private readonly agentSprites = new Map<MockAgentId, Phaser.GameObjects.Sprite>();
   private readonly statusLabels = new Map<MockAgentId, Phaser.GameObjects.Text>();
+  private readonly plaques = new Map<MockAgentId, Phaser.GameObjects.Graphics>();
   private readonly presentations = new Map<MockAgentId, OfficeAgentPresentation>();
   private readonly motions = new Map<MockAgentId, ReturnType<typeof createCharacterMotion>>();
   private readonly workstations = new Map<MockAgentId, ReturnType<typeof createWorkstationMotion>>();
@@ -51,6 +55,7 @@ export class OfficeScene extends Phaser.Scene {
 
   setAgentPresentation(agentId: MockAgentId, presentation: OfficeAgentPresentation): void {
     this.presentations.set(agentId, presentation);
+    this.drawPlaque(agentId);
     this.motions.get(agentId)?.apply(presentation);
     this.workstations.get(agentId)?.apply(presentation);
     if (agentId === 'mock-agent-sol') this.coffeeSteam?.apply(presentation);
@@ -158,27 +163,30 @@ export class OfficeScene extends Phaser.Scene {
         })
         .on(Phaser.Input.Events.POINTER_DOWN, () => this.onAgentSelected(agent.id));
 
-      // Ordinary scene-owned objects: identity stays visible independently of lifecycle/freshness.
-      this.add.rectangle(anchor.x, anchor.y - 66, 44, 18, 0xf5e7c8)
-        .setStrokeStyle(1, 0x5b3a2e).setDepth(OFFICE_DEPTHS.futureAgents + 2);
-      this.add.text(anchor.x, anchor.y - 66, agent.displayName, {
-        fontFamily: 'Arial, sans-serif', fontSize: '12px', color: '#302b29',
-      }).setOrigin(0.5).setDepth(OFFICE_DEPTHS.futureAgents + 2);
+      const [plaqueX, plaqueY] = PLAQUE_POSITIONS[agent.id];
+      this.plaques.set(agent.id, this.add.graphics().setName(`office-plaque-${agent.id}`)
+        .setPosition(plaqueX, plaqueY).setDepth(12));
+      this.add.text(plaqueX + 22, plaqueY + 4, agent.displayName, {
+        fontFamily: 'Arial, sans-serif', fontSize: '12px', fontStyle: 'bold', color: '#e8edf6',
+      }).setOrigin(0).setDepth(12);
 
-      const label = this.add.text(anchor.x, anchor.y + 8, '', {
-        fontFamily: 'Arial, sans-serif', fontSize: '11px', color: '#625a56',
-        backgroundColor: '#f5f1e9', padding: { x: 3, y: 1 },
-      }).setOrigin(0.5, 0).setDepth(OFFICE_DEPTHS.futureAgents + 2).setVisible(false);
+      const label = this.add.text(plaqueX + 8, plaqueY + 18, 'No state', {
+        fontFamily: 'Arial, sans-serif', fontSize: '11px', color: '#a4b5ca',
+      }).setOrigin(0).setDepth(12);
 
       this.agentSprites.set(agent.id, sprite);
       this.statusLabels.set(agent.id, label);
-      const motion = createCharacterMotion(agent, sprite, label,
+      // Motion owns only the context line; missing lifecycle never hides persistent identity/freshness.
+      const motion = createCharacterMotion(agent, sprite, {
+        setText: value => label.setText(value || 'No state'), setVisible: () => label,
+      },
         (delay, callback) => this.time.delayedCall(delay, callback));
       this.motions.set(agent.id, motion);
       const presentation: OfficeAgentPresentation = this.presentations.get(agent.id) ?? {
         id: agent.id, state: null, activity: null, visual: 'placeholder', live: false, reducedMotion: true,
       };
       motion.apply(presentation);
+      this.drawPlaque(agent.id);
 
       if (agent.id === 'mock-agent-sol') {
         const steam = this.add.graphics().setPosition(230, 248)
@@ -208,12 +216,14 @@ export class OfficeScene extends Phaser.Scene {
       this.motions.clear();
       this.agentSprites.clear();
       this.statusLabels.clear();
+      this.plaques.clear();
       this.presentations.clear();
       this.selectionIndicator = undefined;
     });
   }
 
   private updateSelectionIndicator(): void {
+    for (const id of this.plaques.keys()) this.drawPlaque(id);
     const indicator = this.selectionIndicator;
 
     if (!indicator) {
@@ -236,6 +246,23 @@ export class OfficeScene extends Phaser.Scene {
     indicator.strokeRect(x, y, 46, 54);
     indicator.lineStyle(1, 0xf5e7c8, 1);
     indicator.strokeRect(x + 2, y + 2, 42, 50);
+  }
+
+  private drawPlaque(id: MockAgentId): void {
+    const plaque = this.plaques.get(id);
+    if (!plaque) return;
+    const background = 0x101d2b;
+    plaque.clear().fillStyle(background, 1).fillRect(0, 0, 88, 36);
+    plaque.fillStyle(this.selectedAgentId === id ? 0xd8ad85 : 0x637d99, 1);
+    // Filled strips keep every painted border pixel inside the approved rectangle.
+    for (const [x, y, w, h] of [[0, 0, 88, 2], [0, 34, 88, 2], [0, 2, 2, 32], [86, 2, 2, 32]]) plaque.fillRect(x, y, w, h);
+    const presentation = this.presentations.get(id);
+    const freshness = presentation ? agentFreshness(presentation) : 'no-state';
+    plaque.fillStyle(freshness === 'current' ? 0x3ddc97 : 0xa4b5ca, 1);
+    for (const [x, y, w, h] of [[10, 6, 4, 2], [8, 8, 8, 4], [10, 12, 4, 2]]) plaque.fillRect(x, y, w, h);
+    if (freshness !== 'current') {
+      plaque.fillStyle(background, 1).fillRect(freshness === 'last-known' ? 12 : 10, 8, freshness === 'last-known' ? 2 : 4, 4);
+    }
   }
 
   private createFallbackRoom(): void {

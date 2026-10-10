@@ -178,10 +178,10 @@ small {
 }
 
 .agent-selector {
-  padding-inline: 0;
+  padding: 0.375rem;
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-2);
+  gap: 0.75rem;
   margin: 0;
 }
 
@@ -198,14 +198,28 @@ small {
 }
 
 .agent-selector-button {
-  min-height: 44px;
-  min-width: 116px;
-  padding: 5px 8px;
-  font-weight: 600;
+  position: relative;
+  width: 5.5rem;
+  min-height: 7.5rem;
+  padding: 0.5625rem 0.375rem 0.6875rem;
+  border-radius: 6px;
+  flex: 0 0 auto;
   display: inline-flex;
+  flex-direction: column;
   align-items: center;
-  gap: var(--space-2);
+  overflow-wrap: anywhere;
 }
+.agent-selector-button .agent-portrait { margin-bottom: 4px; }
+.agent-selector-button .freshness-dot { margin-bottom: 4px; }
+.agent-selector-name { margin-bottom: 0.125rem; font: 600 0.875rem/1rem var(--font-sans); }
+.agent-selector-lifecycle { color: var(--color-ink-muted); font: 400 0.75rem/1rem var(--font-sans); }
+.freshness-dot { display: inline-block; flex: 0 0 auto; width: 8px; height: 8px; border: 1px solid var(--color-ink-muted); border-radius: 50%; }
+.freshness-dot[data-freshness="current"] { border: 0; background: var(--color-sage); }
+.freshness-dot[data-freshness="last-known"] { background: linear-gradient(90deg, var(--color-ink-muted) 50%, transparent 50%); }
+.freshness-legend { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 8px; }
+.freshness-legend > span { display: inline-flex; align-items: center; gap: 4px; }
+.freshness-legend, .freshness-helper { color: var(--color-ink-muted); font: 400 0.75rem/1rem var(--font-sans); }
+.freshness-helper { margin: 4px 0 0; }
 
 .agent-selector-button[aria-pressed="true"] {
   border-color: var(--color-coffee);
@@ -255,6 +269,8 @@ small {
 }
 
 .clear-selection-button {
+  min-width: 44px;
+  min-height: 44px;
   margin-top: var(--space-3);
 }
 
@@ -303,7 +319,7 @@ small {
   background-repeat: no-repeat;
   image-rendering: pixelated;
 }
-.agent-selector-check { flex: 0 0 12px; }
+.agent-selector-check { position: absolute; top: 5px; right: 3px; width: 12px; height: 12px; color: var(--color-coffee); font: 600 12px/12px var(--font-sans); }
 .agent-selector-button[aria-pressed="false"] .agent-selector-check { visibility: hidden; }
 .agent-inspection[data-selected="false"] { background: transparent; border-color: transparent; }
 .agent-inspection-lifecycle { margin: 4px 0 0; line-height: 1.5; }

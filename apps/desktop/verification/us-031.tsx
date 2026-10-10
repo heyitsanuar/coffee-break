@@ -44,6 +44,13 @@ export const fixture = {
   scene() { return observedScene; },
   presentation() { return runtime.getSnapshot(); },
   snapshot() { return store.getSnapshot(); },
+  withoutTrustedPresentation(id: 'mock-agent-ari' | 'mock-agent-mina' | 'mock-agent-sol') {
+    // US-033 presentation-only edge case: the production reducer rejects incomplete ready mirrors.
+    const current = runtime.getSnapshot();
+    const snapshot = { ...current, [id]: { ...current[id], state: null, activity: null, reason: undefined, visual: 'placeholder' as const } };
+    runtime = { ...runtime, getSnapshot: () => snapshot };
+    render();
+  },
   repair() { revision++; listener?.({ kind: 'change', change: { kind: 'snapshot', state: state() } }); },
   remount() {
     runtime.dispose();

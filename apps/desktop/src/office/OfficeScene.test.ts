@@ -49,7 +49,7 @@ function label() {
 
 function graphics() {
   const instance = { scene: {} as object | undefined, commandBuffer: [] as number[],
-    lineStyle: vi.fn(), strokeRect: vi.fn(), clear: vi.fn(), fillStyle: vi.fn(), fillRect: vi.fn(), setVisible: vi.fn(), setPosition: vi.fn(), setScale: vi.fn(), setDepth: vi.fn(),
+    setName: vi.fn().mockReturnThis(), lineStyle: vi.fn(), strokeRect: vi.fn(), clear: vi.fn(), fillStyle: vi.fn(), fillRect: vi.fn(), setVisible: vi.fn(), setPosition: vi.fn(), setScale: vi.fn(), setDepth: vi.fn(),
     preDestroy() { this.commandBuffer = []; }, emit: vi.fn(), removeAllListeners: vi.fn(),
     removeFromDisplayList: vi.fn(), removeFromUpdateList: vi.fn(),
   };
@@ -66,15 +66,17 @@ function monitorScene(roomArtwork = true) {
     workstations: Map<MockAgentId, { dispose(): void }>;
     coffeeSteam?: { dispose(): void };
     presentations: Map<MockAgentId, unknown>; motions: Map<MockAgentId, unknown>;
-    agentSprites: Map<MockAgentId, unknown>; statusLabels: Map<MockAgentId, unknown>;
+    plaques: Map<MockAgentId, ReturnType<typeof graphics>>; agentSprites: Map<MockAgentId, unknown>; statusLabels: Map<MockAgentId, unknown>;
     createMockAgents(artwork: boolean): void;
   };
   const sprites = [sprite(), sprite(), sprite()];
   sprites.forEach(item => internals.add.sprite.mockReturnValueOnce(item));
   sprites.forEach(() => { internals.add.text.mockReturnValueOnce(label()).mockReturnValueOnce(label()); });
   internals.createMockAgents(roomArtwork);
-  const monitors = internals.add.graphics.mock.results.map(({ value }) => value as ReturnType<typeof graphics>);
-  return { scene, internals, monitors: monitors.slice(0, 2), steam: monitors[2], sprites };
+  const all = internals.add.graphics.mock.results.map(({ value }) => value as ReturnType<typeof graphics>);
+  const monitors = all.filter(value => [[316,102], [384,168]].some(([x,y]) => value.setPosition.mock.calls.some(call => call[0] === x && call[1] === y)));
+  const steam = all.find(value => value.setPosition.mock.calls.some(call => call[0] === 230 && call[1] === 248))!;
+  return { scene, internals, monitors, steam, sprites };
 }
 
 describe('OfficeScene presentation handoff', () => {
@@ -166,7 +168,7 @@ describe('OfficeScene presentation handoff', () => {
 describe('OfficeScene workstation integration', () => {
   it.each([true, false])('creates exactly two pixel-scaled overlays at the correct artwork=%s positions', artwork => {
     const { internals, monitors } = monitorScene(artwork);
-    expect(internals.add.graphics).toHaveBeenCalledTimes(3);
+    expect(internals.add.graphics).toHaveBeenCalledTimes(6);
     expect([...internals.workstations.keys()]).toEqual(['mock-agent-ari', 'mock-agent-mina']);
     expect(monitors[0].setPosition).toHaveBeenCalledWith(316, 102);
     expect(monitors[1].setPosition).toHaveBeenCalledWith(384, 168);
@@ -189,7 +191,7 @@ describe('OfficeScene workstation integration', () => {
     scene.setAgentPresentation('mock-agent-sol', presentation('mock-agent-sol', 'error'));
     scene.acknowledge({ id: 'mock-agent-sol', state: 'completed', sequence: 2 });
     expect(monitors.map(monitor => monitor.clear.mock.calls.length)).toEqual(counts);
-    expect(internals.add.graphics).toHaveBeenCalledTimes(3);
+    expect(internals.add.graphics).toHaveBeenCalledTimes(6);
   });
   it('finishes every cleanup after actual GameObject destruction precedes the scene listener', () => {
     const GameObject = createRequire(import.meta.url)('phaser/src/gameobjects/GameObject') as typeof import('phaser').GameObjects.GameObject;
@@ -212,7 +214,7 @@ describe('OfficeScene workstation integration', () => {
     expect(() => { shutdown(); shutdown(); controllers.forEach(controller => controller.dispose()); tasks.forEach(task => task.callback()); }).not.toThrow();
     for (const task of tasks) expect(task.remove).toHaveBeenCalledOnce();
     expect(f.monitors.map(monitor => monitor.clear.mock.calls.length)).toEqual(counts);
-    for (const map of [f.internals.workstations, f.internals.motions, f.internals.agentSprites, f.internals.statusLabels, f.internals.presentations]) expect(map.size).toBe(0);
+    for (const map of [f.internals.workstations, f.internals.motions, f.internals.agentSprites, f.internals.statusLabels, f.internals.presentations, f.internals.plaques]) expect(map.size).toBe(0);
   });
   it('uses real store/runtime/host delivery: current, same-state, activity, reason, restoration and remount stay settled', async () => {
     let emit!: (message: AgentStateMessage) => void;
@@ -262,7 +264,7 @@ describe('OfficeScene contextual mug integration', () => {
     expect(f.steam.setVisible).toHaveBeenLastCalledWith(false);
     expect(f.sprites[2].play).toHaveBeenLastCalledWith('office-agent-mock-agent-sol-working', true);
     f.scene.setAgentPresentation('mock-agent-sol', presentation('mock-agent-sol', 'coffee'));
-    expect(f.internals.add.graphics).toHaveBeenCalledTimes(3);
+    expect(f.internals.add.graphics).toHaveBeenCalledTimes(6);
   });
   it('fallback reuses the single canonical steam controller, including static retained/reduced and negative cases', () => {
     const f = monitorScene(false);
@@ -270,7 +272,7 @@ describe('OfficeScene contextual mug integration', () => {
     f.scene.setAgentPresentation('mock-agent-sol', coffee);
     expect(f.steam.setPosition).toHaveBeenCalledWith(230, 248);
     expect(f.steam.setVisible).toHaveBeenLastCalledWith(true);
-    expect(f.internals.add.graphics).toHaveBeenCalledTimes(3);
+    expect(f.internals.add.graphics).toHaveBeenCalledTimes(6);
     expect(f.internals.time.addEvent).toHaveBeenCalledWith(expect.objectContaining({ delay: 1600, loop: true }));
     for (const next of [{ ...coffee, live: false }, { ...coffee, reducedMotion: true }]) {
       f.internals.time.addEvent.mockClear();
@@ -282,7 +284,7 @@ describe('OfficeScene contextual mug integration', () => {
       f.scene.setAgentPresentation('mock-agent-sol', presentation('mock-agent-sol', visual));
       expect(f.steam.setVisible).toHaveBeenLastCalledWith(false);
     }
-    expect(f.internals.add.graphics).toHaveBeenCalledTimes(3);
+    expect(f.internals.add.graphics).toHaveBeenCalledTimes(6);
   });
   it('ignores selection, acknowledgements, redundant Sol updates and other identities without restarting', () => {
     const f = monitorScene();
@@ -477,4 +479,53 @@ it.each(['office-room-background', 'office-room-foreground'])('uses coherent fal
     expect(value.setDepth).toHaveBeenCalledWith(12);
     expect(value).not.toHaveProperty('setInteractive');
   }
+});
+
+
+describe('US-033 persistent plaques', () => {
+  it.each([true, false])('keeps approved painted bounds, placement/depth and missing-state identity (artwork=%s)', artwork => {
+    const f = monitorScene(artwork);
+    const positions = [[234,184], [316,250], [176,292]];
+    expect(f.internals.plaques.size).toBe(3);
+    for (const [index, [id, plaque]] of [...f.internals.plaques.entries()].entries()) {
+      expect(plaque.setPosition).toHaveBeenCalledWith(...positions[index]);
+      expect(plaque.setDepth).toHaveBeenCalledWith(12);
+      expect(plaque).not.toHaveProperty('setInteractive');
+      expect(plaque.fillRect).toHaveBeenCalledWith(0,0,88,36);
+      expect(plaque.fillRect).toHaveBeenCalledWith(10,8,4,4); // Hollow No state.
+      for (const [x,y,w,h] of plaque.fillRect.mock.calls) {
+        expect(x).toBeGreaterThanOrEqual(0); expect(y).toBeGreaterThanOrEqual(0);
+        expect(x+w).toBeLessThanOrEqual(88); expect(y+h).toBeLessThanOrEqual(36);
+      }
+      const name = f.internals.add.text.mock.results[index*2].value as ReturnType<typeof label>;
+      const status = f.internals.add.text.mock.results[index*2+1].value as ReturnType<typeof label>;
+      expect(status.setText).toHaveBeenLastCalledWith('No state');
+      expect(status.setVisible).not.toHaveBeenCalled();
+      expect(name.setVisible).not.toHaveBeenCalled();
+      f.scene.setAgentPresentation(id, { ...presentation(id, 'error'), live: true });
+      expect(plaque.fillStyle).toHaveBeenCalledWith(0x3ddc97,1);
+      expect(status.setText).toHaveBeenLastCalledWith('Error');
+    }
+  });
+  it('updates freshness without a lifecycle change, reuses plaques, and clears selected borders', () => {
+    const f = monitorScene();
+    const id = 'mock-agent-mina';
+    const plaque = f.internals.plaques.get(id)!;
+    const error = presentation(id,'error');
+    f.scene.setAgentPresentation(id,error);
+    f.sprites[1].stop.mockClear();
+    plaque.fillStyle.mockClear(); plaque.fillRect.mockClear();
+    f.scene.setSelectedAgent(id);
+    expect(plaque.fillStyle).toHaveBeenCalledWith(0xd8ad85,1);
+    f.scene.setAgentPresentation(id,{ ...error,live:false });
+    expect(plaque.fillStyle).toHaveBeenCalledWith(0xa4b5ca,1);
+    expect(plaque.fillRect).toHaveBeenCalledWith(12,8,2,4); // Last known left half remains filled.
+    plaque.fillStyle.mockClear();
+    f.scene.setSelectedAgent(null);
+    expect(plaque.fillStyle).toHaveBeenCalledWith(0x637d99,1);
+    expect(plaque.fillStyle).not.toHaveBeenCalledWith(0xd8ad85,1);
+    expect(f.internals.plaques.get(id)).toBe(plaque);
+    expect(f.internals.add.graphics).toHaveBeenCalledTimes(6);
+    expect(f.sprites[1].stop).toHaveBeenCalledOnce(); // Availability policy, never selection.
+  });
 });

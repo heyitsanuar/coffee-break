@@ -265,6 +265,6 @@ it('describes empty decorative zones alongside native selection equivalents', as
   const runtime = createOfficePresentationRuntime(store, { matches: false, addEventListener() {}, removeEventListener() {} });
   const html = renderToStaticMarkup(createElement(OfficeSceneHost, { store, runtime }));
   expect(html).toContain('Meeting Room and Focus Room are empty decorative zones.');
-  expect(html.match(/aria-label="Select (Ari|Mina|Sol)"/g)).toHaveLength(3);
+  expect(html.match(/aria-label="Select (Ari|Mina|Sol), No trusted state"/g)).toHaveLength(3);
   runtime.dispose();
 });

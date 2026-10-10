@@ -4,6 +4,8 @@ import { expect, it } from 'vitest';
 import { AgentPortrait } from './AgentPortrait';
 import { AgentSelector } from './AgentSelector';
 import { MOCK_AGENTS } from './mockAgents';
+import { initialAgentState } from '../agentState/reducer';
+import { deriveOfficePresentation } from './officePresentation';
 
 it.each(MOCK_AGENTS)('derives $displayName portraits from its canonical Idle row at integer 2×/3×', agent => {
   const row = MOCK_AGENTS.indexOf(agent);
@@ -25,10 +27,10 @@ it('uses crisp canonical windows and a structurally reserved check independent o
   expect(css).toContain('white-space: pre-wrap');
   expect(css).toContain('height: 44px');
   for (const selectedAgentId of [null, ...MOCK_AGENTS.map(agent => agent.id)]) {
-    const markup = renderToStaticMarkup(<AgentSelector selectedAgentId={selectedAgentId} onSelectAgent={() => {}} />);
-    expect(markup.match(/width:32px;height:32px/g)).toHaveLength(3);
+    const markup = renderToStaticMarkup(<AgentSelector selectedAgentId={selectedAgentId} onSelectAgent={() => {}} presentations={deriveOfficePresentation(initialAgentState)} />);
+    expect(markup.match(/width:48px;height:48px/g)).toHaveLength(3);
     expect(markup.match(/class="agent-selector-check" aria-hidden="true">✓/g)).toHaveLength(3);
     expect(markup.match(/type="button"/g)).toHaveLength(3);
-    for (const detail of ['Activity', 'Last known', 'Current information', 'Offline']) expect(markup).not.toContain(detail);
+    for (const detail of ['Activity', 'Current information', 'Offline']) expect(markup).not.toContain(detail);
   }
 });

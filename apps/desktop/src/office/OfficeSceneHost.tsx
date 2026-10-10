@@ -7,7 +7,7 @@ import { SelectedAgentSummary, selectedAgentFeedback } from './SelectedAgentSumm
 import { OFFICE_STATUS_LABELS } from './applyOfficeVisual';
 import type { OfficeGame, OnAgentSelected } from './createOfficeGame';
 import { MOCK_AGENTS, type MockAgentId } from './mockAgents';
-import { sameAgentPresentation, type OfficeAgentPresentation } from './officePresentation';
+import { sameAgentPresentation, agentFreshness, FRESHNESS_COPY, type OfficeAgentPresentation } from './officePresentation';
 
 export type { OfficeGame } from './createOfficeGame';
 
@@ -130,8 +130,12 @@ export function OfficeSceneHost({ store, runtime }: { readonly store: OfficeStor
   }, [selectedAgentId]);
 
 
-  const officeDescription = MOCK_AGENTS.map(({ id, displayName }) =>
-    `${displayName} ${OFFICE_STATUS_LABELS[presentations[id].visual] || 'awaiting simulation'}`).join(', ');
+  const officeDescription = MOCK_AGENTS.map(({ id, displayName }) => {
+    const presentation = presentations[id];
+    const freshness = FRESHNESS_COPY[agentFreshness(presentation)].description;
+    const lifecycle = presentation.state === null ? 'No state' : OFFICE_STATUS_LABELS[presentation.state];
+    return `${displayName}, ${lifecycle}, ${freshness}${presentation.visual === 'coffee' ? ', Coffee break' : ''}`;
+  }).join('; ');
 
   const selected = { selectedAgentId, presentation: selectedAgentId ? presentations[selectedAgentId] : null };
 
@@ -161,7 +165,7 @@ export function OfficeSceneHost({ store, runtime }: { readonly store: OfficeStor
           <SelectedAgentSummary {...selected} />
           <section className="agents-section" aria-labelledby="agents-section-title">
             <h2 id="agents-section-title" className="section-destination" tabIndex={-1}>Agents</h2>
-            <AgentSelector selectedAgentId={selectedAgentId} onSelectAgent={handleAgentSelected} />
+            <AgentSelector selectedAgentId={selectedAgentId} onSelectAgent={handleAgentSelected} presentations={presentations} />
           </section>
         </div>
         <div className="contextual-rail">

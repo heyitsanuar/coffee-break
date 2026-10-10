@@ -16,6 +16,16 @@ export interface OfficeAgentPresentation {
 
 export type OfficePresentation = Readonly<Record<MockAgentId, OfficeAgentPresentation>>;
 
+export const FRESHNESS_COPY = {
+  current: { label: 'Current', description: 'Current information' },
+  'last-known': { label: 'Last known', description: 'Last known information, not live' },
+  'no-state': { label: 'No state', description: 'No trusted state' },
+} as const;
+
+export function agentFreshness(presentation: OfficeAgentPresentation): keyof typeof FRESHNESS_COPY {
+  return presentation.state === null ? 'no-state' : presentation.live ? 'current' : 'last-known';
+}
+
 const COFFEE_ACTIVITY = 'Taking a coffee break in the simulated office';
 
 export function deriveOfficePresentation(snapshot: AgentStoreState, reducedMotion = false): OfficePresentation {

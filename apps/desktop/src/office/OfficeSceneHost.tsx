@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from '
 import type { OfficeAcknowledgement, OfficePresentationRuntime } from './officePresentationRuntime';
 import type { createAgentStateStore } from '../agentState/store';
 import { AgentInspectionPanel } from './AgentInspectionPanel';
+import { SampleActivity } from './SampleActivity';
 import { AgentSelector } from './AgentSelector';
 import { SelectedAgentSummary, selectedAgentFeedback } from './SelectedAgentSummary';
 import { OFFICE_STATUS_LABELS } from './applyOfficeVisual';
@@ -173,13 +174,7 @@ export function OfficeSceneHost({ store, runtime }: { readonly store: OfficeStor
             {...selected}
             onClearSelection={() => setSelectedAgentId(null)}
           />
-          <section className="projects-section" aria-labelledby="projects-section-title">
-            <div className="projects-heading">
-              <h2 id="projects-section-title" className="section-destination" tabIndex={-1}>Projects</h2>
-              <span className="sample-label">Sample</span>
-            </div>
-            <p>Project context is reserved for Sample content.<br />No repository is connected.</p>
-          </section>
+          <SampleActivity />
         </div>
       </div>
     </>

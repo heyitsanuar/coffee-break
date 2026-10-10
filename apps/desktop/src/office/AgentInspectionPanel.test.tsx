@@ -16,6 +16,16 @@ const renderPanel = (
 );
 
 describe('AgentInspectionPanel', () => {
+  it.each(['idle', 'working', 'waiting', 'completed', 'error'] as const)('preserves exact Current %s inspection', state => {
+    const markup = renderPanel('mock-agent-ari', {
+      id: 'mock-agent-ari', state, activity: `Exact ${state}\n<& literal>`, visual: state, live: true, reducedMotion: false,
+    });
+    expect(markup).toContain(`>${state[0].toUpperCase() + state.slice(1)}</p>`);
+    expect(markup).toContain(`Exact ${state}\n&lt;&amp; literal&gt;`);
+    expect(markup).toContain('Current information');
+    expect(markup).not.toContain('Last known');
+    expect(markup).not.toContain('<dt>Reason</dt>');
+  });
   it('shows no invented runtime state before a trusted snapshot', () => {
     const markup = renderPanel('mock-agent-ari', {
       id: 'mock-agent-ari', state: null, activity: null, live: true, reducedMotion: false, visual: 'placeholder',

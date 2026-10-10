@@ -26,7 +26,7 @@ describe('North Star application composition', () => {
     expect(markup).toContain('Choose someone in the office or below.');
     expect(markup.match(/aria-pressed="false"/g)).toHaveLength(3);
     expect(markup).toContain('aria-disabled="true"');
-    const destinations = [...markup.matchAll(/<h2[^>]*id="([^"]+)"[^>]*tabindex="(-?\d+)"/g)];
+    const destinations = [...markup.matchAll(/<h[23][^>]*id="([^"]+)"[^>]*tabindex="(-?\d+)"/g)];
     expect(destinations.map(match => [match[1], match[2]])).toEqual([
       ['office-section-title', '-1'], ['agents-section-title', '-1'], ['projects-section-title', '-1'],
     ]);
@@ -48,8 +48,12 @@ describe('North Star application composition', () => {
     expect(markup).toContain('3 inhabitants');
     expect(markup).toMatch(/<button[^>]*disabled=""[^>]*aria-describedby="expand-unavailable"[^>]*>Expand<\/button>/);
     expect(markup).toContain('id="expand-unavailable">Available in a future update.');
-    expect(markup).toContain('Project context is reserved for Sample content.');
-    expect(markup).toContain('No repository is connected.');
+    expect(markup).not.toContain('Project context is reserved');
+    expect(markup).not.toContain('class="projects-section"');
+    expect(markup).toContain('No GitHub account, repository, or provider is connected.');
+    expect(markup).toContain('<h3 id="projects-section-title" class="section-destination" tabindex="-1"><span class="sr-only">Projects — </span>Harbor</h3>');
+    const rail = markup.slice(markup.indexOf('class="contextual-rail"'));
+    expect(rail).toMatch(/<section class="agent-inspection"[\s\S]*?<\/section><section class="sample-activity"/);
     expect(markup.match(/<h1/g)).toHaveLength(1);
     runtime.dispose();
   });

@@ -1,0 +1,71 @@
+[
+  {
+    "world": "retro-70s",
+    "source": "docs/design/references/north-star/coffee-break-north-star-03.png",
+    "sourceSha256": "746acf3b8089eeaed5b28e268467cf3954f3c8fbb7f0867b18a06643b55f5867",
+    "sourceDimensions": [
+      1536,
+      1024
+    ],
+    "crop": {
+      "x": 288,
+      "y": 847,
+      "width": 66,
+      "height": 53
+    },
+    "operation": "Pillow Image.crop((x, y, x + width, y + height)); PNG save; no resize or pixel changes",
+    "output": "apps/desktop/src/office/assets/world-retro-70s.png",
+    "outputDimensions": [
+      66,
+      53
+    ],
+    "outputSha256": "d53b2a2f9bd52ee35f4766e6244e175dc731a4fcb562528d814113f05be972c9",
+    "approval": "Product Owner-approved US-035 implementation handoff, artifact 479ca95a-057d-4256-9657-eadb6a2681f0, D1\u2013D10"
+  },
+  {
+    "world": "arcade-80s",
+    "source": "docs/design/references/north-star/coffee-break-north-star-03.png",
+    "sourceSha256": "746acf3b8089eeaed5b28e268467cf3954f3c8fbb7f0867b18a06643b55f5867",
+    "sourceDimensions": [
+      1536,
+      1024
+    ],
+    "crop": {
+      "x": 356,
+      "y": 847,
+      "width": 66,
+      "height": 53
+    },
+    "operation": "Pillow Image.crop((x, y, x + width, y + height)); PNG save; no resize or pixel changes",
+    "output": "apps/desktop/src/office/assets/world-arcade-80s.png",
+    "outputDimensions": [
+      66,
+      53
+    ],
+    "outputSha256": "8e9448b272fbbd307732e96be05a4bf6820ddcc3c6e1b007bee1ec26fe006dc8",
+    "approval": "Product Owner-approved US-035 implementation handoff, artifact 479ca95a-057d-4256-9657-eadb6a2681f0, D1\u2013D10"
+  },
+  {
+    "world": "cyber-2000",
+    "source": "docs/design/references/north-star/coffee-break-north-star-03.png",
+    "sourceSha256": "746acf3b8089eeaed5b28e268467cf3954f3c8fbb7f0867b18a06643b55f5867",
+    "sourceDimensions": [
+      1536,
+      1024
+    ],
+    "crop": {
+      "x": 492,
+      "y": 847,
+      "width": 66,
+      "height": 53
+    },
+    "operation": "Pillow Image.crop((x, y, x + width, y + height)); PNG save; no resize or pixel changes",
+    "output": "apps/desktop/src/office/assets/world-cyber-2000.png",
+    "outputDimensions": [
+      66,
+      53
+    ],
+    "outputSha256": "0affb5753bbb9612f2ebf19895ee22c91d4bcbb79bcc96826f9f5c463bf19949",
+    "approval": "Product Owner-approved US-035 implementation handoff, artifact 479ca95a-057d-4256-9657-eadb6a2681f0, D1\u2013D10"
+  }
+]

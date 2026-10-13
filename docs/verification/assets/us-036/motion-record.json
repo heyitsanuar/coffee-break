@@ -1,0 +1,1494 @@
+{
+  "capturedAt": "2026-10-13T21:58:53.308Z",
+  "sourceClass": "Supplemental production-component fixture; synthetic accepted inputs; Chromium no-preference media emulation",
+  "episodes": [
+    {
+      "outer": {
+        "x": 305,
+        "y": 174,
+        "width": 1100,
+        "height": 760
+      },
+      "content": {
+        "x": 305,
+        "y": 202,
+        "width": 1100,
+        "height": 732
+      },
+      "viewport": [
+        1100,
+        732
+      ],
+      "dpr": 2,
+      "before": {
+        "frames": [
+          [
+            "mock-agent-ari",
+            0,
+            false
+          ],
+          [
+            "mock-agent-mina",
+            9,
+            true
+          ],
+          [
+            "mock-agent-sol",
+            4,
+            true
+          ]
+        ],
+        "monitor": [
+          7,
+          6718363,
+          1,
+          3,
+          0,
+          0,
+          20,
+          8,
+          7,
+          2961462,
+          1,
+          3,
+          6,
+          2,
+          3,
+          2,
+          3,
+          11,
+          4,
+          4,
+          2
+        ],
+        "steam": [
+          7,
+          16249055,
+          1,
+          3,
+          2,
+          4,
+          1,
+          2,
+          3,
+          1,
+          3,
+          2,
+          1,
+          3,
+          1,
+          2,
+          1,
+          1,
+          3,
+          2,
+          1,
+          2,
+          1
+        ],
+        "presentation": {
+          "mock-agent-ari": {
+            "id": "mock-agent-ari",
+            "state": "idle",
+            "activity": "Ready",
+            "visual": "idle",
+            "live": true,
+            "reducedMotion": false
+          },
+          "mock-agent-mina": {
+            "id": "mock-agent-mina",
+            "state": "working",
+            "activity": "Timed live working",
+            "visual": "working",
+            "live": true,
+            "reducedMotion": false
+          },
+          "mock-agent-sol": {
+            "id": "mock-agent-sol",
+            "state": "waiting",
+            "activity": "Taking a coffee break in the simulated office",
+            "visual": "coffee",
+            "live": true,
+            "reducedMotion": false
+          }
+        },
+        "state": {
+          "connection": "connected",
+          "revision": 3,
+          "sessionId": "us-031-fixture-1",
+          "synchronized": true,
+          "agentsById": {
+            "mock-agent-ari": {
+              "state": "idle",
+              "activity": "Ready"
+            },
+            "mock-agent-mina": {
+              "state": "working",
+              "activity": "Timed live working"
+            },
+            "mock-agent-sol": {
+              "state": "waiting",
+              "activity": "Taking a coffee break in the simulated office"
+            }
+          }
+        },
+        "visibility": "visible"
+      },
+      "after": {
+        "frames": [
+          [
+            "mock-agent-ari",
+            0,
+            false
+          ],
+          [
+            "mock-agent-mina",
+            9,
+            true
+          ],
+          [
+            "mock-agent-sol",
+            5,
+            true
+          ]
+        ],
+        "monitor": [
+          7,
+          6718363,
+          1,
+          3,
+          0,
+          0,
+          20,
+          8,
+          7,
+          2961462,
+          1,
+          3,
+          6,
+          2,
+          4,
+          2,
+          3,
+          11,
+          4,
+          3,
+          2
+        ],
+        "steam": [
+          7,
+          16249055,
+          1,
+          3,
+          2,
+          4,
+          1,
+          2,
+          3,
+          1,
+          3,
+          2,
+          1,
+          3,
+          1,
+          2,
+          1,
+          1,
+          3,
+          3,
+          1,
+          2,
+          1
+        ],
+        "presentation": {
+          "mock-agent-ari": {
+            "id": "mock-agent-ari",
+            "state": "idle",
+            "activity": "Ready",
+            "visual": "idle",
+            "live": true,
+            "reducedMotion": false
+          },
+          "mock-agent-mina": {
+            "id": "mock-agent-mina",
+            "state": "working",
+            "activity": "Timed live working",
+            "visual": "working",
+            "live": true,
+            "reducedMotion": false
+          },
+          "mock-agent-sol": {
+            "id": "mock-agent-sol",
+            "state": "waiting",
+            "activity": "Taking a coffee break in the simulated office",
+            "visual": "coffee",
+            "live": true,
+            "reducedMotion": false
+          }
+        },
+        "state": {
+          "connection": "connected",
+          "revision": 3,
+          "sessionId": "us-031-fixture-1",
+          "synchronized": true,
+          "agentsById": {
+            "mock-agent-ari": {
+              "state": "idle",
+              "activity": "Ready"
+            },
+            "mock-agent-mina": {
+              "state": "working",
+              "activity": "Timed live working"
+            },
+            "mock-agent-sol": {
+              "state": "waiting",
+              "activity": "Taking a coffee break in the simulated office"
+            }
+          }
+        },
+        "visibility": "visible"
+      },
+      "changes": {
+        "character": true,
+        "monitor": true,
+        "coffeeCharacter": true,
+        "steam": true
+      },
+      "firstChanged": {
+        "coffeeCharacter": {
+          "elapsedMs": 434,
+          "sample": {
+            "frames": [
+              [
+                "mock-agent-ari",
+                0,
+                false
+              ],
+              [
+                "mock-agent-mina",
+                9,
+                true
+              ],
+              [
+                "mock-agent-sol",
+                5,
+                true
+              ]
+            ],
+            "monitor": [
+              7,
+              6718363,
+              1,
+              3,
+              0,
+              0,
+              20,
+              8,
+              7,
+              2961462,
+              1,
+              3,
+              6,
+              2,
+              3,
+              2,
+              3,
+              11,
+              4,
+              4,
+              2
+            ],
+            "steam": [
+              7,
+              16249055,
+              1,
+              3,
+              2,
+              4,
+              1,
+              2,
+              3,
+              1,
+              3,
+              2,
+              1,
+              3,
+              1,
+              2,
+              1,
+              1,
+              3,
+              2,
+              1,
+              2,
+              1
+            ],
+            "presentation": {
+              "mock-agent-ari": {
+                "id": "mock-agent-ari",
+                "state": "idle",
+                "activity": "Ready",
+                "visual": "idle",
+                "live": true,
+                "reducedMotion": false
+              },
+              "mock-agent-mina": {
+                "id": "mock-agent-mina",
+                "state": "working",
+                "activity": "Timed live working",
+                "visual": "working",
+                "live": true,
+                "reducedMotion": false
+              },
+              "mock-agent-sol": {
+                "id": "mock-agent-sol",
+                "state": "waiting",
+                "activity": "Taking a coffee break in the simulated office",
+                "visual": "coffee",
+                "live": true,
+                "reducedMotion": false
+              }
+            },
+            "state": {
+              "connection": "connected",
+              "revision": 3,
+              "sessionId": "us-031-fixture-1",
+              "synchronized": true,
+              "agentsById": {
+                "mock-agent-ari": {
+                  "state": "idle",
+                  "activity": "Ready"
+                },
+                "mock-agent-mina": {
+                  "state": "working",
+                  "activity": "Timed live working"
+                },
+                "mock-agent-sol": {
+                  "state": "waiting",
+                  "activity": "Taking a coffee break in the simulated office"
+                }
+              }
+            },
+            "visibility": "visible"
+          }
+        },
+        "character": {
+          "elapsedMs": 543,
+          "sample": {
+            "frames": [
+              [
+                "mock-agent-ari",
+                0,
+                false
+              ],
+              [
+                "mock-agent-mina",
+                13,
+                true
+              ],
+              [
+                "mock-agent-sol",
+                5,
+                true
+              ]
+            ],
+            "monitor": [
+              7,
+              6718363,
+              1,
+              3,
+              0,
+              0,
+              20,
+              8,
+              7,
+              2961462,
+              1,
+              3,
+              6,
+              2,
+              3,
+              2,
+              3,
+              11,
+              4,
+              4,
+              2
+            ],
+            "steam": [
+              7,
+              16249055,
+              1,
+              3,
+              2,
+              4,
+              1,
+              2,
+              3,
+              1,
+              3,
+              2,
+              1,
+              3,
+              1,
+              2,
+              1,
+              1,
+              3,
+              2,
+              1,
+              2,
+              1
+            ],
+            "presentation": {
+              "mock-agent-ari": {
+                "id": "mock-agent-ari",
+                "state": "idle",
+                "activity": "Ready",
+                "visual": "idle",
+                "live": true,
+                "reducedMotion": false
+              },
+              "mock-agent-mina": {
+                "id": "mock-agent-mina",
+                "state": "working",
+                "activity": "Timed live working",
+                "visual": "working",
+                "live": true,
+                "reducedMotion": false
+              },
+              "mock-agent-sol": {
+                "id": "mock-agent-sol",
+                "state": "waiting",
+                "activity": "Taking a coffee break in the simulated office",
+                "visual": "coffee",
+                "live": true,
+                "reducedMotion": false
+              }
+            },
+            "state": {
+              "connection": "connected",
+              "revision": 3,
+              "sessionId": "us-031-fixture-1",
+              "synchronized": true,
+              "agentsById": {
+                "mock-agent-ari": {
+                  "state": "idle",
+                  "activity": "Ready"
+                },
+                "mock-agent-mina": {
+                  "state": "working",
+                  "activity": "Timed live working"
+                },
+                "mock-agent-sol": {
+                  "state": "waiting",
+                  "activity": "Taking a coffee break in the simulated office"
+                }
+              }
+            },
+            "visibility": "visible"
+          }
+        },
+        "monitor": {
+          "elapsedMs": 1157,
+          "sample": {
+            "frames": [
+              [
+                "mock-agent-ari",
+                0,
+                false
+              ],
+              [
+                "mock-agent-mina",
+                9,
+                true
+              ],
+              [
+                "mock-agent-sol",
+                4,
+                true
+              ]
+            ],
+            "monitor": [
+              7,
+              6718363,
+              1,
+              3,
+              0,
+              0,
+              20,
+              8,
+              7,
+              2961462,
+              1,
+              3,
+              6,
+              2,
+              4,
+              2,
+              3,
+              11,
+              4,
+              3,
+              2
+            ],
+            "steam": [
+              7,
+              16249055,
+              1,
+              3,
+              2,
+              4,
+              1,
+              2,
+              3,
+              1,
+              3,
+              2,
+              1,
+              3,
+              1,
+              2,
+              1,
+              1,
+              3,
+              2,
+              1,
+              2,
+              1
+            ],
+            "presentation": {
+              "mock-agent-ari": {
+                "id": "mock-agent-ari",
+                "state": "idle",
+                "activity": "Ready",
+                "visual": "idle",
+                "live": true,
+                "reducedMotion": false
+              },
+              "mock-agent-mina": {
+                "id": "mock-agent-mina",
+                "state": "working",
+                "activity": "Timed live working",
+                "visual": "working",
+                "live": true,
+                "reducedMotion": false
+              },
+              "mock-agent-sol": {
+                "id": "mock-agent-sol",
+                "state": "waiting",
+                "activity": "Taking a coffee break in the simulated office",
+                "visual": "coffee",
+                "live": true,
+                "reducedMotion": false
+              }
+            },
+            "state": {
+              "connection": "connected",
+              "revision": 3,
+              "sessionId": "us-031-fixture-1",
+              "synchronized": true,
+              "agentsById": {
+                "mock-agent-ari": {
+                  "state": "idle",
+                  "activity": "Ready"
+                },
+                "mock-agent-mina": {
+                  "state": "working",
+                  "activity": "Timed live working"
+                },
+                "mock-agent-sol": {
+                  "state": "waiting",
+                  "activity": "Taking a coffee break in the simulated office"
+                }
+              }
+            },
+            "visibility": "visible"
+          }
+        },
+        "steam": {
+          "elapsedMs": 1548,
+          "sample": {
+            "frames": [
+              [
+                "mock-agent-ari",
+                0,
+                false
+              ],
+              [
+                "mock-agent-mina",
+                9,
+                true
+              ],
+              [
+                "mock-agent-sol",
+                5,
+                true
+              ]
+            ],
+            "monitor": [
+              7,
+              6718363,
+              1,
+              3,
+              0,
+              0,
+              20,
+              8,
+              7,
+              2961462,
+              1,
+              3,
+              6,
+              2,
+              4,
+              2,
+              3,
+              11,
+              4,
+              3,
+              2
+            ],
+            "steam": [
+              7,
+              16249055,
+              1,
+              3,
+              2,
+              4,
+              1,
+              2,
+              3,
+              1,
+              3,
+              2,
+              1,
+              3,
+              1,
+              2,
+              1,
+              1,
+              3,
+              3,
+              1,
+              2,
+              1
+            ],
+            "presentation": {
+              "mock-agent-ari": {
+                "id": "mock-agent-ari",
+                "state": "idle",
+                "activity": "Ready",
+                "visual": "idle",
+                "live": true,
+                "reducedMotion": false
+              },
+              "mock-agent-mina": {
+                "id": "mock-agent-mina",
+                "state": "working",
+                "activity": "Timed live working",
+                "visual": "working",
+                "live": true,
+                "reducedMotion": false
+              },
+              "mock-agent-sol": {
+                "id": "mock-agent-sol",
+                "state": "waiting",
+                "activity": "Taking a coffee break in the simulated office",
+                "visual": "coffee",
+                "live": true,
+                "reducedMotion": false
+              }
+            },
+            "state": {
+              "connection": "connected",
+              "revision": 3,
+              "sessionId": "us-031-fixture-1",
+              "synchronized": true,
+              "agentsById": {
+                "mock-agent-ari": {
+                  "state": "idle",
+                  "activity": "Ready"
+                },
+                "mock-agent-mina": {
+                  "state": "working",
+                  "activity": "Timed live working"
+                },
+                "mock-agent-sol": {
+                  "state": "waiting",
+                  "activity": "Taking a coffee break in the simulated office"
+                }
+              }
+            },
+            "visibility": "visible"
+          }
+        }
+      },
+      "elapsedMs": 1550
+    },
+    {
+      "outer": {
+        "x": 305,
+        "y": 174,
+        "width": 760,
+        "height": 540
+      },
+      "content": {
+        "x": 305,
+        "y": 202,
+        "width": 760,
+        "height": 512
+      },
+      "viewport": [
+        760,
+        512
+      ],
+      "dpr": 2,
+      "before": {
+        "frames": [
+          [
+            "mock-agent-ari",
+            0,
+            false
+          ],
+          [
+            "mock-agent-mina",
+            9,
+            true
+          ],
+          [
+            "mock-agent-sol",
+            5,
+            true
+          ]
+        ],
+        "monitor": [
+          7,
+          6718363,
+          1,
+          3,
+          0,
+          0,
+          20,
+          8,
+          7,
+          2961462,
+          1,
+          3,
+          6,
+          2,
+          4,
+          2,
+          3,
+          11,
+          4,
+          3,
+          2
+        ],
+        "steam": [
+          7,
+          16249055,
+          1,
+          3,
+          2,
+          4,
+          1,
+          2,
+          3,
+          1,
+          3,
+          2,
+          1,
+          3,
+          1,
+          2,
+          1,
+          1,
+          3,
+          3,
+          1,
+          2,
+          1
+        ],
+        "presentation": {
+          "mock-agent-ari": {
+            "id": "mock-agent-ari",
+            "state": "idle",
+            "activity": "Ready",
+            "visual": "idle",
+            "live": true,
+            "reducedMotion": false
+          },
+          "mock-agent-mina": {
+            "id": "mock-agent-mina",
+            "state": "working",
+            "activity": "Timed live working",
+            "visual": "working",
+            "live": true,
+            "reducedMotion": false
+          },
+          "mock-agent-sol": {
+            "id": "mock-agent-sol",
+            "state": "waiting",
+            "activity": "Taking a coffee break in the simulated office",
+            "visual": "coffee",
+            "live": true,
+            "reducedMotion": false
+          }
+        },
+        "state": {
+          "connection": "connected",
+          "revision": 5,
+          "sessionId": "us-031-fixture-1",
+          "synchronized": true,
+          "agentsById": {
+            "mock-agent-ari": {
+              "state": "idle",
+              "activity": "Ready"
+            },
+            "mock-agent-mina": {
+              "state": "working",
+              "activity": "Timed live working"
+            },
+            "mock-agent-sol": {
+              "state": "waiting",
+              "activity": "Taking a coffee break in the simulated office"
+            }
+          }
+        },
+        "visibility": "visible"
+      },
+      "after": {
+        "frames": [
+          [
+            "mock-agent-ari",
+            0,
+            false
+          ],
+          [
+            "mock-agent-mina",
+            13,
+            true
+          ],
+          [
+            "mock-agent-sol",
+            4,
+            true
+          ]
+        ],
+        "monitor": [
+          7,
+          6718363,
+          1,
+          3,
+          0,
+          0,
+          20,
+          8,
+          7,
+          2961462,
+          1,
+          3,
+          6,
+          2,
+          3,
+          2,
+          3,
+          11,
+          4,
+          4,
+          2
+        ],
+        "steam": [
+          7,
+          16249055,
+          1,
+          3,
+          2,
+          4,
+          1,
+          2,
+          3,
+          1,
+          3,
+          2,
+          1,
+          3,
+          1,
+          2,
+          1,
+          1,
+          3,
+          2,
+          1,
+          2,
+          1
+        ],
+        "presentation": {
+          "mock-agent-ari": {
+            "id": "mock-agent-ari",
+            "state": "idle",
+            "activity": "Ready",
+            "visual": "idle",
+            "live": true,
+            "reducedMotion": false
+          },
+          "mock-agent-mina": {
+            "id": "mock-agent-mina",
+            "state": "working",
+            "activity": "Timed live working",
+            "visual": "working",
+            "live": true,
+            "reducedMotion": false
+          },
+          "mock-agent-sol": {
+            "id": "mock-agent-sol",
+            "state": "waiting",
+            "activity": "Taking a coffee break in the simulated office",
+            "visual": "coffee",
+            "live": true,
+            "reducedMotion": false
+          }
+        },
+        "state": {
+          "connection": "connected",
+          "revision": 5,
+          "sessionId": "us-031-fixture-1",
+          "synchronized": true,
+          "agentsById": {
+            "mock-agent-ari": {
+              "state": "idle",
+              "activity": "Ready"
+            },
+            "mock-agent-mina": {
+              "state": "working",
+              "activity": "Timed live working"
+            },
+            "mock-agent-sol": {
+              "state": "waiting",
+              "activity": "Taking a coffee break in the simulated office"
+            }
+          }
+        },
+        "visibility": "visible"
+      },
+      "changes": {
+        "character": true,
+        "monitor": true,
+        "coffeeCharacter": true,
+        "steam": true
+      },
+      "firstChanged": {
+        "character": {
+          "elapsedMs": 111,
+          "sample": {
+            "frames": [
+              [
+                "mock-agent-ari",
+                0,
+                false
+              ],
+              [
+                "mock-agent-mina",
+                13,
+                true
+              ],
+              [
+                "mock-agent-sol",
+                5,
+                true
+              ]
+            ],
+            "monitor": [
+              7,
+              6718363,
+              1,
+              3,
+              0,
+              0,
+              20,
+              8,
+              7,
+              2961462,
+              1,
+              3,
+              6,
+              2,
+              4,
+              2,
+              3,
+              11,
+              4,
+              3,
+              2
+            ],
+            "steam": [
+              7,
+              16249055,
+              1,
+              3,
+              2,
+              4,
+              1,
+              2,
+              3,
+              1,
+              3,
+              2,
+              1,
+              3,
+              1,
+              2,
+              1,
+              1,
+              3,
+              3,
+              1,
+              2,
+              1
+            ],
+            "presentation": {
+              "mock-agent-ari": {
+                "id": "mock-agent-ari",
+                "state": "idle",
+                "activity": "Ready",
+                "visual": "idle",
+                "live": true,
+                "reducedMotion": false
+              },
+              "mock-agent-mina": {
+                "id": "mock-agent-mina",
+                "state": "working",
+                "activity": "Timed live working",
+                "visual": "working",
+                "live": true,
+                "reducedMotion": false
+              },
+              "mock-agent-sol": {
+                "id": "mock-agent-sol",
+                "state": "waiting",
+                "activity": "Taking a coffee break in the simulated office",
+                "visual": "coffee",
+                "live": true,
+                "reducedMotion": false
+              }
+            },
+            "state": {
+              "connection": "connected",
+              "revision": 5,
+              "sessionId": "us-031-fixture-1",
+              "synchronized": true,
+              "agentsById": {
+                "mock-agent-ari": {
+                  "state": "idle",
+                  "activity": "Ready"
+                },
+                "mock-agent-mina": {
+                  "state": "working",
+                  "activity": "Timed live working"
+                },
+                "mock-agent-sol": {
+                  "state": "waiting",
+                  "activity": "Taking a coffee break in the simulated office"
+                }
+              }
+            },
+            "visibility": "visible"
+          }
+        },
+        "coffeeCharacter": {
+          "elapsedMs": 282,
+          "sample": {
+            "frames": [
+              [
+                "mock-agent-ari",
+                0,
+                false
+              ],
+              [
+                "mock-agent-mina",
+                13,
+                true
+              ],
+              [
+                "mock-agent-sol",
+                4,
+                true
+              ]
+            ],
+            "monitor": [
+              7,
+              6718363,
+              1,
+              3,
+              0,
+              0,
+              20,
+              8,
+              7,
+              2961462,
+              1,
+              3,
+              6,
+              2,
+              4,
+              2,
+              3,
+              11,
+              4,
+              3,
+              2
+            ],
+            "steam": [
+              7,
+              16249055,
+              1,
+              3,
+              2,
+              4,
+              1,
+              2,
+              3,
+              1,
+              3,
+              2,
+              1,
+              3,
+              1,
+              2,
+              1,
+              1,
+              3,
+              3,
+              1,
+              2,
+              1
+            ],
+            "presentation": {
+              "mock-agent-ari": {
+                "id": "mock-agent-ari",
+                "state": "idle",
+                "activity": "Ready",
+                "visual": "idle",
+                "live": true,
+                "reducedMotion": false
+              },
+              "mock-agent-mina": {
+                "id": "mock-agent-mina",
+                "state": "working",
+                "activity": "Timed live working",
+                "visual": "working",
+                "live": true,
+                "reducedMotion": false
+              },
+              "mock-agent-sol": {
+                "id": "mock-agent-sol",
+                "state": "waiting",
+                "activity": "Taking a coffee break in the simulated office",
+                "visual": "coffee",
+                "live": true,
+                "reducedMotion": false
+              }
+            },
+            "state": {
+              "connection": "connected",
+              "revision": 5,
+              "sessionId": "us-031-fixture-1",
+              "synchronized": true,
+              "agentsById": {
+                "mock-agent-ari": {
+                  "state": "idle",
+                  "activity": "Ready"
+                },
+                "mock-agent-mina": {
+                  "state": "working",
+                  "activity": "Timed live working"
+                },
+                "mock-agent-sol": {
+                  "state": "waiting",
+                  "activity": "Taking a coffee break in the simulated office"
+                }
+              }
+            },
+            "visibility": "visible"
+          }
+        },
+        "monitor": {
+          "elapsedMs": 678,
+          "sample": {
+            "frames": [
+              [
+                "mock-agent-ari",
+                0,
+                false
+              ],
+              [
+                "mock-agent-mina",
+                9,
+                true
+              ],
+              [
+                "mock-agent-sol",
+                4,
+                true
+              ]
+            ],
+            "monitor": [
+              7,
+              6718363,
+              1,
+              3,
+              0,
+              0,
+              20,
+              8,
+              7,
+              2961462,
+              1,
+              3,
+              6,
+              2,
+              3,
+              2,
+              3,
+              11,
+              4,
+              4,
+              2
+            ],
+            "steam": [
+              7,
+              16249055,
+              1,
+              3,
+              2,
+              4,
+              1,
+              2,
+              3,
+              1,
+              3,
+              2,
+              1,
+              3,
+              1,
+              2,
+              1,
+              1,
+              3,
+              3,
+              1,
+              2,
+              1
+            ],
+            "presentation": {
+              "mock-agent-ari": {
+                "id": "mock-agent-ari",
+                "state": "idle",
+                "activity": "Ready",
+                "visual": "idle",
+                "live": true,
+                "reducedMotion": false
+              },
+              "mock-agent-mina": {
+                "id": "mock-agent-mina",
+                "state": "working",
+                "activity": "Timed live working",
+                "visual": "working",
+                "live": true,
+                "reducedMotion": false
+              },
+              "mock-agent-sol": {
+                "id": "mock-agent-sol",
+                "state": "waiting",
+                "activity": "Taking a coffee break in the simulated office",
+                "visual": "coffee",
+                "live": true,
+                "reducedMotion": false
+              }
+            },
+            "state": {
+              "connection": "connected",
+              "revision": 5,
+              "sessionId": "us-031-fixture-1",
+              "synchronized": true,
+              "agentsById": {
+                "mock-agent-ari": {
+                  "state": "idle",
+                  "activity": "Ready"
+                },
+                "mock-agent-mina": {
+                  "state": "working",
+                  "activity": "Timed live working"
+                },
+                "mock-agent-sol": {
+                  "state": "waiting",
+                  "activity": "Taking a coffee break in the simulated office"
+                }
+              }
+            },
+            "visibility": "visible"
+          }
+        },
+        "steam": {
+          "elapsedMs": 1511,
+          "sample": {
+            "frames": [
+              [
+                "mock-agent-ari",
+                0,
+                false
+              ],
+              [
+                "mock-agent-mina",
+                13,
+                true
+              ],
+              [
+                "mock-agent-sol",
+                4,
+                true
+              ]
+            ],
+            "monitor": [
+              7,
+              6718363,
+              1,
+              3,
+              0,
+              0,
+              20,
+              8,
+              7,
+              2961462,
+              1,
+              3,
+              6,
+              2,
+              3,
+              2,
+              3,
+              11,
+              4,
+              4,
+              2
+            ],
+            "steam": [
+              7,
+              16249055,
+              1,
+              3,
+              2,
+              4,
+              1,
+              2,
+              3,
+              1,
+              3,
+              2,
+              1,
+              3,
+              1,
+              2,
+              1,
+              1,
+              3,
+              2,
+              1,
+              2,
+              1
+            ],
+            "presentation": {
+              "mock-agent-ari": {
+                "id": "mock-agent-ari",
+                "state": "idle",
+                "activity": "Ready",
+                "visual": "idle",
+                "live": true,
+                "reducedMotion": false
+              },
+              "mock-agent-mina": {
+                "id": "mock-agent-mina",
+                "state": "working",
+                "activity": "Timed live working",
+                "visual": "working",
+                "live": true,
+                "reducedMotion": false
+              },
+              "mock-agent-sol": {
+                "id": "mock-agent-sol",
+                "state": "waiting",
+                "activity": "Taking a coffee break in the simulated office",
+                "visual": "coffee",
+                "live": true,
+                "reducedMotion": false
+              }
+            },
+            "state": {
+              "connection": "connected",
+              "revision": 5,
+              "sessionId": "us-031-fixture-1",
+              "synchronized": true,
+              "agentsById": {
+                "mock-agent-ari": {
+                  "state": "idle",
+                  "activity": "Ready"
+                },
+                "mock-agent-mina": {
+                  "state": "working",
+                  "activity": "Timed live working"
+                },
+                "mock-agent-sol": {
+                  "state": "waiting",
+                  "activity": "Taking a coffee break in the simulated office"
+                }
+              }
+            },
+            "visibility": "visible"
+          }
+        }
+      },
+      "elapsedMs": 1512
+    }
+  ],
+  "sourceSha256": {
+    "apps/desktop/src/office/OfficeScene.ts": "33f4592210591f5d5a3cec6fb179871f4cab585172d88cec12de256ba76d4131",
+    "apps/desktop/src/office/applyOfficeVisual.ts": "f9ad1179b5f775b1f26be8a6e779be32c31380fa3da27241d0bdc57d6e8a64d9",
+    "apps/desktop/src/office/workstationPresentation.ts": "6a71e501b6f6f39972aa44e67f0b7e1ea8d89c1d9c4c48a21ee7c9136733c3bc",
+    "apps/desktop/src/office/coffeeSteamPresentation.ts": "34aaf31b39a8d4300c3d3609d3a27488a9cd3153b602744832724dcdb9ef310e",
+    "apps/desktop/src/office/officePresentationRuntime.ts": "11b9646f39f8b6f9d3da3be0c30bb7f99b84500f88b0ea770f91a529e2b683d1",
+    "apps/desktop/verification/us-035.tsx": "e3111ca7d88a798584ed2c7f8d649f1e2bed8a0e16cc11da6904b1b3b25b22d1"
+  },
+  "toolingSha256": "30615b90ef3192d9509fad31b83a5c0cd92646ee1664fab1125bcb5a3e9eb622",
+  "runtime": {
+    "node": "22.21.1",
+    "acorn": "8.15.0",
+    "ada": "2.9.2",
+    "amaro": "1.1.4",
+    "ares": "1.34.5",
+    "brotli": "1.0.9",
+    "cjs_module_lexer": "2.1.0",
+    "cldr": "44.1",
+    "icu": "74.2",
+    "llhttp": "9.3.0",
+    "modules": "136",
+    "napi": "10",
+    "nbytes": "0.1.1",
+    "ncrypto": "0.0.1",
+    "nghttp2": "1.64.0",
+    "openssl": "0.0.0",
+    "simdjson": "3.13.0",
+    "simdutf": "7.0.0",
+    "sqlite": "3.50.4",
+    "tz": "2025b",
+    "undici": "6.22.0",
+    "unicode": "15.1",
+    "uv": "1.51.0",
+    "uvwasi": "0.0.23",
+    "v8": "13.8.258.32-electron.0",
+    "zlib": "1.3.1",
+    "zstd": "1.5.8",
+    "electron": "37.10.3",
+    "chrome": "138.0.7204.251"
+  }
+}

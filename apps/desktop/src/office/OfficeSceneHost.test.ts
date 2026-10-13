@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import {
   mountOfficeScene,
+  keepOfficeFocusVisible,
   bindOfficePresentation,
   type CreateOfficeGame,
   type OfficeGame,
@@ -267,4 +268,46 @@ it('describes empty decorative zones alongside native selection equivalents', as
   expect(html).toContain('Meeting Room and Focus Room are empty decorative zones.');
   expect(html.match(/aria-label="Select (Ari|Mina|Sol), No trusted state"/g)).toHaveLength(3);
   runtime.dispose();
+});
+
+describe('persistent office keyboard focus clearance', () => {
+  function focused(top: number, bottom: number, keyboard = true, toolbarControl = false) {
+    const control = { matches: vi.fn(() => keyboard), getBoundingClientRect: () => ({ top, bottom }) };
+    const toolbar = { contains: () => toolbarControl, getBoundingClientRect: () => ({ bottom: 60 }) };
+    const scrollBy = vi.fn();
+    const composition = { isConnected: true, contains: () => true, querySelector: () => toolbar,
+      ownerDocument: { activeElement: control, defaultView: { innerHeight: 512, devicePixelRatio: 2, scrollBy } },
+    } as unknown as HTMLElement;
+    return { composition, scrollBy };
+  }
+  it('corrects offscreen focus after layout changes without focusing or selecting', () => {
+    const f = focused(865, 909);
+    keepOfficeFocusVisible(f.composition);
+    expect(f.scrollBy).toHaveBeenCalledExactlyOnceWith({ top: 403, behavior: 'instant' });
+  });
+  it('corrects raw fractional under-clearance outward to the next device pixel', () => {
+    const above = focused(65.75, 110);
+    keepOfficeFocusVisible(above.composition);
+    expect(above.scrollBy).toHaveBeenCalledExactlyOnceWith({ top: -0.5, behavior: 'instant' });
+    const below = focused(400, 506.125);
+    keepOfficeFocusVisible(below.composition);
+    expect(below.scrollBy).toHaveBeenCalledExactlyOnceWith({ top: 0.5, behavior: 'instant' });
+  });
+  it('does not scroll correctly placed keyboard focus', () => {
+    const f = focused(66, 506);
+    keepOfficeFocusVisible(f.composition);
+    expect(f.scrollBy).not.toHaveBeenCalled();
+  });
+  it('excludes pointer focus and the invoking toolbar button', () => {
+    for (const f of [focused(865, 909, false), focused(865, 909, true, true)]) {
+      keepOfficeFocusVisible(f.composition);
+      expect(f.scrollBy).not.toHaveBeenCalled();
+    }
+  });
+  it('cannot scroll a disconnected host after disposal', () => {
+    const f = focused(865, 909);
+    Object.defineProperty(f.composition, 'isConnected', { value: false });
+    keepOfficeFocusVisible(f.composition);
+    expect(f.scrollBy).not.toHaveBeenCalled();
+  });
 });

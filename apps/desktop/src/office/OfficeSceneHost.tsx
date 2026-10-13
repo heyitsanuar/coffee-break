@@ -93,6 +93,24 @@ export function bindOfficePresentation(runtime: OfficePresentationRuntime, mount
   return () => { unsubscribe(); unsubscribeAcknowledgements(); };
 }
 
+export function keepOfficeFocusVisible(composition: HTMLElement): void {
+  if (!composition.isConnected) return;
+  const control = composition.ownerDocument.activeElement;
+  const viewport = composition.ownerDocument.defaultView;
+  const toolbar = composition.querySelector<HTMLElement>('.studio-toolbar');
+  if (!control || !viewport || !toolbar || !composition.contains(control)
+    || !control.matches('button:focus-visible, summary:focus-visible') || toolbar.contains(control)) return;
+  const bounds = control.getBoundingClientRect();
+  const clearance = bounds.top - toolbar.getBoundingClientRect().bottom;
+  const delta = clearance < 6 ? clearance - 6 : Math.max(0, bounds.bottom - viewport.innerHeight + 6);
+  if (delta !== 0) {
+    // Chromium quantizes scroll offsets; round the request outward, never the measured clearance.
+    const scale = viewport.devicePixelRatio || 1;
+    const pixels = delta * scale;
+    viewport.scrollBy({ top: (delta < 0 ? Math.floor(pixels) : Math.ceil(pixels)) / scale, behavior: 'instant' });
+  }
+}
+
 type OfficeStore = Pick<ReturnType<typeof createAgentStateStore>, 'subscribe' | 'getSnapshot'>;
 
 export function OfficeSceneHost({ store, runtime, expanded = false, onToggleExpansion, expansionButtonRef, toolbarRef }: {
@@ -143,16 +161,36 @@ export function OfficeSceneHost({ store, runtime, expanded = false, onToggleExpa
     const worlds = composition.querySelector<HTMLElement>('.worlds-composition-region')!;
     const toolbar = composition.querySelector<HTMLElement>('.studio-toolbar')!;
     const rail = composition.querySelector<HTMLElement>('.contextual-rail')!;
+    let focusFrame: number | undefined;
+    const scheduleFocusCheck = () => {
+      if (focusFrame !== undefined) return;
+      // One check after layout; never refocus, retry, or compete with toolbar return-scroll.
+      focusFrame = window.requestAnimationFrame(() => {
+        focusFrame = undefined;
+        keepOfficeFocusVisible(composition);
+      });
+    };
     // Anchor the single gallery beside Agents without changing its logical DOM order.
     const update = () => {
       const top = context.getBoundingClientRect().bottom - composition.getBoundingClientRect().top + 12;
       composition.style.setProperty('--worlds-top', `${top}px`);
       composition.style.setProperty('--worlds-bottom', `${Math.max(top + worlds.getBoundingClientRect().height, rail.getBoundingClientRect().height)}px`);
+      scheduleFocusCheck();
     };
     const observer = new ResizeObserver(update);
     for (const element of [context, worlds, toolbar, rail]) observer.observe(element);
+    // Expanded display:contents wrappers have no box; observe the actual growing panels.
+    for (const element of composition.querySelectorAll('.agent-inspection, .agents-section')) observer.observe(element);
+    const header = composition.closest('main')?.querySelector('.application-header');
+    if (header) observer.observe(header);
+    window.addEventListener('resize', scheduleFocusCheck);
     update();
-    return () => { observer.disconnect(); composition.style.removeProperty('--worlds-top'); composition.style.removeProperty('--worlds-bottom'); };
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', scheduleFocusCheck);
+      if (focusFrame !== undefined) window.cancelAnimationFrame(focusFrame);
+      composition.style.removeProperty('--worlds-top'); composition.style.removeProperty('--worlds-bottom');
+    };
   }, [expanded]);
 
   const officeDescription = MOCK_AGENTS.map(({ id, displayName }) => {
@@ -168,13 +206,7 @@ export function OfficeSceneHost({ store, runtime, expanded = false, onToggleExpa
     <>
       <p className="sr-only" aria-live="polite" aria-atomic="true">{selectedAgentFeedback(selected)}</p>
       <div className="office-composition" ref={compositionRef} onFocusCapture={event => {
-        const control = event.target as HTMLElement;
-        const toolbar = event.currentTarget.querySelector<HTMLElement>('.studio-toolbar')!;
-        if (!control.matches('button:focus-visible, summary:focus-visible') || toolbar.contains(control)) return;
-        const bounds = control.getBoundingClientRect();
-        const clearance = bounds.top - toolbar.getBoundingClientRect().bottom;
-        if (clearance < 6) window.scrollBy({ top: clearance - 6, behavior: 'instant' });
-        else if (bounds.bottom > window.innerHeight - 6) window.scrollBy({ top: bounds.bottom - window.innerHeight + 6, behavior: 'instant' });
+        keepOfficeFocusVisible(event.currentTarget);
       }}>
         <div className="office-world">
           <div className="studio-toolbar" ref={toolbarRef}>

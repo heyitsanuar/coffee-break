@@ -1,0 +1,2998 @@
+{
+  "status": "DESIGN STUDY ONLY",
+  "baselineHead": "a02f94bf5d65c6854bed58822530798536ef2275",
+  "records": [
+    {
+      "view": "r1-a",
+      "file": "r1-a-compact-plaques-desktop.png",
+      "width": 1100,
+      "height": 760,
+      "physicalCapture": {
+        "width": 2200,
+        "height": 1520
+      },
+      "sha256": "8bb4308302fcb9cef4a3a556f5ed72eca5b4c02e4cd207a3af1047932e11f8ef",
+      "measurement": {
+        "height": 858,
+        "width": 1100,
+        "images": 17,
+        "broken": [],
+        "office": {
+          "width": 642,
+          "height": 362
+        }
+      },
+      "geometry": [
+        {
+          "size": "24",
+          "placement": "A",
+          "labels": [
+            {
+              "agent": "ari",
+              "x": 212,
+              "y": 168,
+              "w": 92,
+              "h": 30,
+              "text": "Ari\n✓\nPreparing the local preview for Product Owner review"
+            },
+            {
+              "agent": "mina",
+              "x": 310,
+              "y": 235,
+              "w": 92,
+              "h": 30,
+              "text": "Mina\nWaiting for Product Owner feedback on the office study"
+            },
+            {
+              "agent": "sol",
+              "x": 148,
+              "y": 292,
+              "w": 92,
+              "h": 30,
+              "text": "Sol\nTaking a coffee break in the simulated office"
+            }
+          ],
+          "faces": [
+            {
+              "x": 234,
+              "y": 100,
+              "w": 32,
+              "h": 20
+            },
+            {
+              "x": 330,
+              "y": 166,
+              "w": 32,
+              "h": 20
+            },
+            {
+              "x": 169,
+              "y": 223,
+              "w": 32,
+              "h": 20
+            }
+          ],
+          "protected": [
+            {
+              "name": "Ari desk / monitor",
+              "x": 217,
+              "y": 94,
+              "w": 115,
+              "h": 61
+            },
+            {
+              "name": "Mina desk / monitor",
+              "x": 310,
+              "y": 170,
+              "w": 124,
+              "h": 54
+            },
+            {
+              "name": "Coffee counter",
+              "x": 4,
+              "y": 198,
+              "w": 177,
+              "h": 54
+            },
+            {
+              "name": "Entry",
+              "x": 263,
+              "y": 290,
+              "w": 102,
+              "h": 60
+            }
+          ]
+        }
+      ],
+      "inspectorWidths": [
+        320
+      ],
+      "clearanceChecks": "Known face and protected desk/counter/entry rectangles; manual image inspection complements this bounded check.",
+      "source": "Static EP-07 refinement page; illustrative fixtures; not a production Electron capture"
+    },
+    {
+      "view": "r1-b",
+      "file": "r1-b-richer-selection-desktop.png",
+      "width": 1100,
+      "height": 760,
+      "physicalCapture": {
+        "width": 2200,
+        "height": 1520
+      },
+      "sha256": "7aec1e6dc38116819ecbcedb88e930326a3586d96f2d0ee6b9f608f51335e5c3",
+      "measurement": {
+        "height": 858,
+        "width": 1100,
+        "images": 17,
+        "broken": [],
+        "office": {
+          "width": 642,
+          "height": 362
+        }
+      },
+      "geometry": [
+        {
+          "size": "24",
+          "placement": "B",
+          "labels": [
+            {
+              "agent": "ari",
+              "x": 338,
+              "y": 98,
+              "w": 118,
+              "h": 57,
+              "text": "Ari\n✓\nPreparing the local preview for Product Owner review"
+            },
+            {
+              "agent": "mina",
+              "x": 310,
+              "y": 245,
+              "w": 108,
+              "h": 37,
+              "text": "Mina\nWaiting for Product Owner feedback on the office study"
+            },
+            {
+              "agent": "sol",
+              "x": 32,
+              "y": 313,
+              "w": 108,
+              "h": 37,
+              "text": "Sol\nTaking a coffee break in the simulated office"
+            }
+          ],
+          "faces": [
+            {
+              "x": 234,
+              "y": 100,
+              "w": 32,
+              "h": 20
+            },
+            {
+              "x": 330,
+              "y": 166,
+              "w": 32,
+              "h": 20
+            },
+            {
+              "x": 169,
+              "y": 223,
+              "w": 32,
+              "h": 20
+            }
+          ],
+          "protected": [
+            {
+              "name": "Ari desk / monitor",
+              "x": 217,
+              "y": 94,
+              "w": 115,
+              "h": 61
+            },
+            {
+              "name": "Mina desk / monitor",
+              "x": 310,
+              "y": 170,
+              "w": 124,
+              "h": 54
+            },
+            {
+              "name": "Coffee counter",
+              "x": 4,
+              "y": 198,
+              "w": 177,
+              "h": 54
+            },
+            {
+              "name": "Entry",
+              "x": 263,
+              "y": 290,
+              "w": 102,
+              "h": 60
+            }
+          ]
+        }
+      ],
+      "inspectorWidths": [
+        320
+      ],
+      "clearanceChecks": "Known face and protected desk/counter/entry rectangles; manual image inspection complements this bounded check.",
+      "source": "Static EP-07 refinement page; illustrative fixtures; not a production Electron capture"
+    },
+    {
+      "view": "r1-c",
+      "file": "r1-c-adaptive-labels-desktop.png",
+      "width": 1100,
+      "height": 760,
+      "physicalCapture": {
+        "width": 2200,
+        "height": 1520
+      },
+      "sha256": "6e446606f9b45c39fa24c1684bdbec1d8f5f2f77779eb66ee3deaea05bd0c95f",
+      "measurement": {
+        "height": 858,
+        "width": 1100,
+        "images": 17,
+        "broken": [],
+        "office": {
+          "width": 642,
+          "height": 362
+        }
+      },
+      "geometry": [
+        {
+          "size": "24",
+          "placement": "C",
+          "labels": [
+            {
+              "agent": "ari",
+              "x": 338,
+              "y": 108,
+              "w": 118,
+              "h": 35,
+              "text": "Ari\n✓\nPreparing the local preview for Product Owner review"
+            },
+            {
+              "agent": "mina",
+              "x": 310,
+              "y": 249,
+              "w": 126,
+              "h": 35,
+              "text": "Mina\nWaiting for Product Owner feedback on the office study"
+            },
+            {
+              "agent": "sol",
+              "x": 32,
+              "y": 315,
+              "w": 126,
+              "h": 35,
+              "text": "Sol\nTaking a coffee break in the simulated office"
+            }
+          ],
+          "faces": [
+            {
+              "x": 234,
+              "y": 100,
+              "w": 32,
+              "h": 20
+            },
+            {
+              "x": 330,
+              "y": 166,
+              "w": 32,
+              "h": 20
+            },
+            {
+              "x": 169,
+              "y": 223,
+              "w": 32,
+              "h": 20
+            }
+          ],
+          "protected": [
+            {
+              "name": "Ari desk / monitor",
+              "x": 217,
+              "y": 94,
+              "w": 115,
+              "h": 61
+            },
+            {
+              "name": "Mina desk / monitor",
+              "x": 310,
+              "y": 170,
+              "w": 124,
+              "h": 54
+            },
+            {
+              "name": "Coffee counter",
+              "x": 4,
+              "y": 198,
+              "w": 177,
+              "h": 54
+            },
+            {
+              "name": "Entry",
+              "x": 263,
+              "y": 290,
+              "w": 102,
+              "h": 60
+            }
+          ]
+        }
+      ],
+      "inspectorWidths": [
+        320
+      ],
+      "clearanceChecks": "Known face and protected desk/counter/entry rectangles; manual image inspection complements this bounded check.",
+      "source": "Static EP-07 refinement page; illustrative fixtures; not a production Electron capture"
+    },
+    {
+      "view": "r1-board",
+      "file": "r1-full-office-comparison.png",
+      "width": 1100,
+      "height": 1372,
+      "physicalCapture": {
+        "width": 2200,
+        "height": 2744
+      },
+      "sha256": "c085cd4fefda2fdf6e188220b0060c6bd88b86796ffcf8e1fb017dd63c822e14",
+      "measurement": {
+        "height": 1372,
+        "width": 1100,
+        "images": 18,
+        "broken": [],
+        "office": {
+          "width": 642,
+          "height": 362
+        }
+      },
+      "geometry": [
+        {
+          "size": "24",
+          "placement": "A",
+          "labels": [
+            {
+              "agent": "ari",
+              "x": 212,
+              "y": 168,
+              "w": 92,
+              "h": 30,
+              "text": "Ari\n✓\nPreparing the local preview for Product Owner review"
+            },
+            {
+              "agent": "mina",
+              "x": 310,
+              "y": 235,
+              "w": 92,
+              "h": 30,
+              "text": "Mina\nWaiting for Product Owner feedback on the office study"
+            },
+            {
+              "agent": "sol",
+              "x": 148,
+              "y": 292,
+              "w": 92,
+              "h": 30,
+              "text": "Sol\nTaking a coffee break in the simulated office"
+            }
+          ],
+          "faces": [
+            {
+              "x": 234,
+              "y": 100,
+              "w": 32,
+              "h": 20
+            },
+            {
+              "x": 330,
+              "y": 166,
+              "w": 32,
+              "h": 20
+            },
+            {
+              "x": 169,
+              "y": 223,
+              "w": 32,
+              "h": 20
+            }
+          ],
+          "protected": [
+            {
+              "name": "Ari desk / monitor",
+              "x": 217,
+              "y": 94,
+              "w": 115,
+              "h": 61
+            },
+            {
+              "name": "Mina desk / monitor",
+              "x": 310,
+              "y": 170,
+              "w": 124,
+              "h": 54
+            },
+            {
+              "name": "Coffee counter",
+              "x": 4,
+              "y": 198,
+              "w": 177,
+              "h": 54
+            },
+            {
+              "name": "Entry",
+              "x": 263,
+              "y": 290,
+              "w": 102,
+              "h": 60
+            }
+          ]
+        },
+        {
+          "size": "24",
+          "placement": "B",
+          "labels": [
+            {
+              "agent": "ari",
+              "x": 338,
+              "y": 98,
+              "w": 118,
+              "h": 57,
+              "text": "Ari\n✓\nPreparing the local preview for Product Owner review"
+            },
+            {
+              "agent": "mina",
+              "x": 310,
+              "y": 245,
+              "w": 108,
+              "h": 37,
+              "text": "Mina\nWaiting for Product Owner feedback on the office study"
+            },
+            {
+              "agent": "sol",
+              "x": 32,
+              "y": 313,
+              "w": 108,
+              "h": 37,
+              "text": "Sol\nTaking a coffee break in the simulated office"
+            }
+          ],
+          "faces": [
+            {
+              "x": 234,
+              "y": 100,
+              "w": 32,
+              "h": 20
+            },
+            {
+              "x": 330,
+              "y": 166,
+              "w": 32,
+              "h": 20
+            },
+            {
+              "x": 169,
+              "y": 223,
+              "w": 32,
+              "h": 20
+            }
+          ],
+          "protected": [
+            {
+              "name": "Ari desk / monitor",
+              "x": 217,
+              "y": 94,
+              "w": 115,
+              "h": 61
+            },
+            {
+              "name": "Mina desk / monitor",
+              "x": 310,
+              "y": 170,
+              "w": 124,
+              "h": 54
+            },
+            {
+              "name": "Coffee counter",
+              "x": 4,
+              "y": 198,
+              "w": 177,
+              "h": 54
+            },
+            {
+              "name": "Entry",
+              "x": 263,
+              "y": 290,
+              "w": 102,
+              "h": 60
+            }
+          ]
+        },
+        {
+          "size": "24",
+          "placement": "C",
+          "labels": [
+            {
+              "agent": "ari",
+              "x": 338,
+              "y": 108,
+              "w": 118,
+              "h": 35,
+              "text": "Ari\n✓\nPreparing the local preview for Product Owner review"
+            },
+            {
+              "agent": "mina",
+              "x": 310,
+              "y": 249,
+              "w": 126,
+              "h": 35,
+              "text": "Mina\nWaiting for Product Owner feedback on the office study"
+            },
+            {
+              "agent": "sol",
+              "x": 32,
+              "y": 315,
+              "w": 126,
+              "h": 35,
+              "text": "Sol\nTaking a coffee break in the simulated office"
+            }
+          ],
+          "faces": [
+            {
+              "x": 234,
+              "y": 100,
+              "w": 32,
+              "h": 20
+            },
+            {
+              "x": 330,
+              "y": 166,
+              "w": 32,
+              "h": 20
+            },
+            {
+              "x": 169,
+              "y": 223,
+              "w": 32,
+              "h": 20
+            }
+          ],
+          "protected": [
+            {
+              "name": "Ari desk / monitor",
+              "x": 217,
+              "y": 94,
+              "w": 115,
+              "h": 61
+            },
+            {
+              "name": "Mina desk / monitor",
+              "x": 310,
+              "y": 170,
+              "w": 124,
+              "h": 54
+            },
+            {
+              "name": "Coffee counter",
+              "x": 4,
+              "y": 198,
+              "w": 177,
+              "h": 54
+            },
+            {
+              "name": "Entry",
+              "x": 263,
+              "y": 290,
+              "w": 102,
+              "h": 60
+            }
+          ]
+        }
+      ],
+      "inspectorWidths": [],
+      "clearanceChecks": "Known face and protected desk/counter/entry rectangles; manual image inspection complements this bounded check.",
+      "source": "Static EP-07 refinement page; illustrative fixtures; not a production Electron capture"
+    },
+    {
+      "view": "r1-closeups",
+      "file": "r1-actual-size-label-details.png",
+      "width": 1400,
+      "height": 1936,
+      "physicalCapture": {
+        "width": 2800,
+        "height": 3872
+      },
+      "sha256": "4be4e30e6f8cefd2ea3cc77124ddf40de83cdb6f625f44d9e2e90ff40b1e47db",
+      "measurement": {
+        "height": 1936,
+        "width": 1400,
+        "images": 48,
+        "broken": [],
+        "office": {
+          "width": 642,
+          "height": 362
+        }
+      },
+      "geometry": [
+        {
+          "size": "20",
+          "placement": "A",
+          "labels": [
+            {
+              "agent": "ari",
+              "x": 211,
+              "y": 167,
+              "w": 92,
+              "h": 30,
+              "text": "Ari\n✓\nPreparing the local preview for Product Owner review"
+            }
+          ],
+          "faces": [
+            {
+              "x": 238,
+              "y": 116,
+              "w": 24,
+              "h": 20
+            }
+          ],
+          "protected": [
+            {
+              "name": "Ari desk / monitor",
+              "x": 217,
+              "y": 94,
+              "w": 115,
+              "h": 61
+            },
+            {
+              "name": "Mina desk / monitor",
+              "x": 310,
+              "y": 170,
+              "w": 124,
+              "h": 54
+            },
+            {
+              "name": "Coffee counter",
+              "x": 4,
+              "y": 198,
+              "w": 177,
+              "h": 54
+            },
+            {
+              "name": "Entry",
+              "x": 263,
+              "y": 290,
+              "w": 102,
+              "h": 60
+            }
+          ]
+        },
+        {
+          "size": "20",
+          "placement": "A",
+          "labels": [
+            {
+              "agent": "mina",
+              "x": 309,
+              "y": 234,
+              "w": 92,
+              "h": 30,
+              "text": "Mina\n✓\nWaiting for Product Owner feedback on the office study"
+            }
+          ],
+          "faces": [
+            {
+              "x": 334,
+              "y": 182,
+              "w": 24,
+              "h": 20
+            }
+          ],
+          "protected": [
+            {
+              "name": "Ari desk / monitor",
+              "x": 217,
+              "y": 94,
+              "w": 115,
+              "h": 61
+            },
+            {
+              "name": "Mina desk / monitor",
+              "x": 310,
+              "y": 170,
+              "w": 124,
+              "h": 54
+            },
+            {
+              "name": "Coffee counter",
+              "x": 4,
+              "y": 198,
+              "w": 177,
+              "h": 54
+            },
+            {
+              "name": "Entry",
+              "x": 263,
+              "y": 290,
+              "w": 102,
+              "h": 60
+            }
+          ]
+        },
+        {
+          "size": "20",
+          "placement": "A",
+          "labels": [
+            {
+              "agent": "sol",
+              "x": 147,
+              "y": 291,
+              "w": 92,
+              "h": 30,
+              "text": "Sol\n✓\nNo trusted state"
+            }
+          ],
+          "faces": [
+            {
+              "x": 173,
+              "y": 239,
+              "w": 24,
+              "h": 20
+            }
+          ],
+          "protected": [
+            {
+              "name": "Ari desk / monitor",
+              "x": 217,
+              "y": 94,
+              "w": 115,
+              "h": 61
+            },
+            {
+              "name": "Mina desk / monitor",
+              "x": 310,
+              "y": 170,
+              "w": 124,
+              "h": 54
+            },
+            {
+              "name": "Coffee counter",
+              "x": 4,
+              "y": 198,
+              "w": 177,
+              "h": 54
+            },
+            {
+              "name": "Entry",
+              "x": 263,
+              "y": 290,
+              "w": 102,
+              "h": 60
+            }
+          ]
+        },
+        {
+          "size": "24",
+          "placement": "A",
+          "labels": [
+            {
+              "agent": "ari",
+              "x": 211,
+              "y": 167,
+              "w": 92,
+              "h": 30,
+              "text": "Ari\n✓\nPreparing the local preview for Product Owner review"
+            }
+          ],
+          "faces": [
+            {
+              "x": 234,
+              "y": 100,
+              "w": 32,
+              "h": 20
+            }
+          ],
+          "protected": [
+            {
+              "name": "Ari desk / monitor",
+              "x": 217,
+              "y": 94,
+              "w": 115,
+              "h": 61
+            },
+            {
+              "name": "Mina desk / monitor",
+              "x": 310,
+              "y": 170,
+              "w": 124,
+              "h": 54
+            },
+            {
+              "name": "Coffee counter",
+              "x": 4,
+              "y": 198,
+              "w": 177,
+              "h": 54
+            },
+            {
+              "name": "Entry",
+              "x": 263,
+              "y": 290,
+              "w": 102,
+              "h": 60
+            }
+          ]
+        },
+        {
+          "size": "24",
+          "placement": "A",
+          "labels": [
+            {
+              "agent": "mina",
+              "x": 309,
+              "y": 234,
+              "w": 92,
+              "h": 30,
+              "text": "Mina\n✓\nWaiting for Product Owner feedback on the office study"
+            }
+          ],
+          "faces": [
+            {
+              "x": 330,
+              "y": 166,
+              "w": 32,
+              "h": 20
+            }
+          ],
+          "protected": [
+            {
+              "name": "Ari desk / monitor",
+              "x": 217,
+              "y": 94,
+              "w": 115,
+              "h": 61
+            },
+            {
+              "name": "Mina desk / monitor",
+              "x": 310,
+              "y": 170,
+              "w": 124,
+              "h": 54
+            },
+            {
+              "name": "Coffee counter",
+              "x": 4,
+              "y": 198,
+              "w": 177,
+              "h": 54
+            },
+            {
+              "name": "Entry",
+              "x": 263,
+              "y": 290,
+              "w": 102,
+              "h": 60
+            }
+          ]
+        },
+        {
+          "size": "24",
+          "placement": "A",
+          "labels": [
+            {
+              "agent": "sol",
+              "x": 147,
+              "y": 291,
+              "w": 92,
+              "h": 30,
+              "text": "Sol\n✓\nNo trusted state"
+            }
+          ],
+          "faces": [
+            {
+              "x": 169,
+              "y": 223,
+              "w": 32,
+              "h": 20
+            }
+          ],
+          "protected": [
+            {
+              "name": "Ari desk / monitor",
+              "x": 217,
+              "y": 94,
+              "w": 115,
+              "h": 61
+            },
+            {
+              "name": "Mina desk / monitor",
+              "x": 310,
+              "y": 170,
+              "w": 124,
+              "h": 54
+            },
+            {
+              "name": "Coffee counter",
+              "x": 4,
+              "y": 198,
+              "w": 177,
+              "h": 54
+            },
+            {
+              "name": "Entry",
+              "x": 263,
+              "y": 290,
+              "w": 102,
+              "h": 60
+            }
+          ]
+        },
+        {
+          "size": "20",
+          "placement": "B",
+          "labels": [
+            {
+              "agent": "ari",
+              "x": 337,
+              "y": 97,
+              "w": 118,
+              "h": 57,
+              "text": "Ari\n✓\nPreparing the local preview for Product Owner review"
+            }
+          ],
+          "faces": [
+            {
+              "x": 238,
+              "y": 116,
+              "w": 24,
+              "h": 20
+            }
+          ],
+          "protected": [
+            {
+              "name": "Ari desk / monitor",
+              "x": 217,
+              "y": 94,
+              "w": 115,
+              "h": 61
+            },
+            {
+              "name": "Mina desk / monitor",
+              "x": 310,
+              "y": 170,
+              "w": 124,
+              "h": 54
+            },
+            {
+              "name": "Coffee counter",
+              "x": 4,
+              "y": 198,
+              "w": 177,
+              "h": 54
+            },
+            {
+              "name": "Entry",
+              "x": 263,
+              "y": 290,
+              "w": 102,
+              "h": 60
+            }
+          ]
+        },
+        {
+          "size": "20",
+          "placement": "B",
+          "labels": [
+            {
+              "agent": "mina",
+              "x": 309,
+              "y": 229,
+              "w": 108,
+              "h": 57,
+              "text": "Mina\n✓\nWaiting for Product Owner feedback on the office study"
+            }
+          ],
+          "faces": [
+            {
+              "x": 334,
+              "y": 182,
+              "w": 24,
+              "h": 20
+            }
+          ],
+          "protected": [
+            {
+              "name": "Ari desk / monitor",
+              "x": 217,
+              "y": 94,
+              "w": 115,
+              "h": 61
+            },
+            {
+              "name": "Mina desk / monitor",
+              "x": 310,
+              "y": 170,
+              "w": 124,
+              "h": 54
+            },
+            {
+              "name": "Coffee counter",
+              "x": 4,
+              "y": 198,
+              "w": 177,
+              "h": 54
+            },
+            {
+              "name": "Entry",
+              "x": 263,
+              "y": 290,
+              "w": 102,
+              "h": 60
+            }
+          ]
+        },
+        {
+          "size": "20",
+          "placement": "B",
+          "labels": [
+            {
+              "agent": "sol",
+              "x": 31,
+              "y": 285,
+              "w": 108,
+              "h": 44,
+              "text": "Sol\n✓\nNo trusted state"
+            }
+          ],
+          "faces": [
+            {
+              "x": 173,
+              "y": 239,
+              "w": 24,
+              "h": 20
+            }
+          ],
+          "protected": [
+            {
+              "name": "Ari desk / monitor",
+              "x": 217,
+              "y": 94,
+              "w": 115,
+              "h": 61
+            },
+            {
+              "name": "Mina desk / monitor",
+              "x": 310,
+              "y": 170,
+              "w": 124,
+              "h": 54
+            },
+            {
+              "name": "Coffee counter",
+              "x": 4,
+              "y": 198,
+              "w": 177,
+              "h": 54
+            },
+            {
+              "name": "Entry",
+              "x": 263,
+              "y": 290,
+              "w": 102,
+              "h": 60
+            }
+          ]
+        },
+        {
+          "size": "24",
+          "placement": "B",
+          "labels": [
+            {
+              "agent": "ari",
+              "x": 337,
+              "y": 97,
+              "w": 118,
+              "h": 57,
+              "text": "Ari\n✓\nPreparing the local preview for Product Owner review"
+            }
+          ],
+          "faces": [
+            {
+              "x": 234,
+              "y": 100,
+              "w": 32,
+              "h": 20
+            }
+          ],
+          "protected": [
+            {
+              "name": "Ari desk / monitor",
+              "x": 217,
+              "y": 94,
+              "w": 115,
+              "h": 61
+            },
+            {
+              "name": "Mina desk / monitor",
+              "x": 310,
+              "y": 170,
+              "w": 124,
+              "h": 54
+            },
+            {
+              "name": "Coffee counter",
+              "x": 4,
+              "y": 198,
+              "w": 177,
+              "h": 54
+            },
+            {
+              "name": "Entry",
+              "x": 263,
+              "y": 290,
+              "w": 102,
+              "h": 60
+            }
+          ]
+        },
+        {
+          "size": "24",
+          "placement": "B",
+          "labels": [
+            {
+              "agent": "mina",
+              "x": 309,
+              "y": 229,
+              "w": 108,
+              "h": 57,
+              "text": "Mina\n✓\nWaiting for Product Owner feedback on the office study"
+            }
+          ],
+          "faces": [
+            {
+              "x": 330,
+              "y": 166,
+              "w": 32,
+              "h": 20
+            }
+          ],
+          "protected": [
+            {
+              "name": "Ari desk / monitor",
+              "x": 217,
+              "y": 94,
+              "w": 115,
+              "h": 61
+            },
+            {
+              "name": "Mina desk / monitor",
+              "x": 310,
+              "y": 170,
+              "w": 124,
+              "h": 54
+            },
+            {
+              "name": "Coffee counter",
+              "x": 4,
+              "y": 198,
+              "w": 177,
+              "h": 54
+            },
+            {
+              "name": "Entry",
+              "x": 263,
+              "y": 290,
+              "w": 102,
+              "h": 60
+            }
+          ]
+        },
+        {
+          "size": "24",
+          "placement": "B",
+          "labels": [
+            {
+              "agent": "sol",
+              "x": 31,
+              "y": 285,
+              "w": 108,
+              "h": 44,
+              "text": "Sol\n✓\nNo trusted state"
+            }
+          ],
+          "faces": [
+            {
+              "x": 169,
+              "y": 223,
+              "w": 32,
+              "h": 20
+            }
+          ],
+          "protected": [
+            {
+              "name": "Ari desk / monitor",
+              "x": 217,
+              "y": 94,
+              "w": 115,
+              "h": 61
+            },
+            {
+              "name": "Mina desk / monitor",
+              "x": 310,
+              "y": 170,
+              "w": 124,
+              "h": 54
+            },
+            {
+              "name": "Coffee counter",
+              "x": 4,
+              "y": 198,
+              "w": 177,
+              "h": 54
+            },
+            {
+              "name": "Entry",
+              "x": 263,
+              "y": 290,
+              "w": 102,
+              "h": 60
+            }
+          ]
+        },
+        {
+          "size": "20",
+          "placement": "C",
+          "labels": [
+            {
+              "agent": "ari",
+              "x": 337,
+              "y": 107,
+              "w": 118,
+              "h": 35,
+              "text": "Ari\n✓\nPreparing the local preview for Product Owner review"
+            }
+          ],
+          "faces": [
+            {
+              "x": 238,
+              "y": 116,
+              "w": 24,
+              "h": 20
+            }
+          ],
+          "protected": [
+            {
+              "name": "Ari desk / monitor",
+              "x": 217,
+              "y": 94,
+              "w": 115,
+              "h": 61
+            },
+            {
+              "name": "Mina desk / monitor",
+              "x": 310,
+              "y": 170,
+              "w": 124,
+              "h": 54
+            },
+            {
+              "name": "Coffee counter",
+              "x": 4,
+              "y": 198,
+              "w": 177,
+              "h": 54
+            },
+            {
+              "name": "Entry",
+              "x": 263,
+              "y": 290,
+              "w": 102,
+              "h": 60
+            }
+          ]
+        },
+        {
+          "size": "20",
+          "placement": "C",
+          "labels": [
+            {
+              "agent": "mina",
+              "x": 309,
+              "y": 248,
+              "w": 126,
+              "h": 35,
+              "text": "Mina\n✓\nWaiting for Product Owner feedback on the office study"
+            }
+          ],
+          "faces": [
+            {
+              "x": 334,
+              "y": 182,
+              "w": 24,
+              "h": 20
+            }
+          ],
+          "protected": [
+            {
+              "name": "Ari desk / monitor",
+              "x": 217,
+              "y": 94,
+              "w": 115,
+              "h": 61
+            },
+            {
+              "name": "Mina desk / monitor",
+              "x": 310,
+              "y": 170,
+              "w": 124,
+              "h": 54
+            },
+            {
+              "name": "Coffee counter",
+              "x": 4,
+              "y": 198,
+              "w": 177,
+              "h": 54
+            },
+            {
+              "name": "Entry",
+              "x": 263,
+              "y": 290,
+              "w": 102,
+              "h": 60
+            }
+          ]
+        },
+        {
+          "size": "20",
+          "placement": "C",
+          "labels": [
+            {
+              "agent": "sol",
+              "x": 31,
+              "y": 314,
+              "w": 126,
+              "h": 35,
+              "text": "Sol\n✓\nNo trusted state"
+            }
+          ],
+          "faces": [
+            {
+              "x": 173,
+              "y": 239,
+              "w": 24,
+              "h": 20
+            }
+          ],
+          "protected": [
+            {
+              "name": "Ari desk / monitor",
+              "x": 217,
+              "y": 94,
+              "w": 115,
+              "h": 61
+            },
+            {
+              "name": "Mina desk / monitor",
+              "x": 310,
+              "y": 170,
+              "w": 124,
+              "h": 54
+            },
+            {
+              "name": "Coffee counter",
+              "x": 4,
+              "y": 198,
+              "w": 177,
+              "h": 54
+            },
+            {
+              "name": "Entry",
+              "x": 263,
+              "y": 290,
+              "w": 102,
+              "h": 60
+            }
+          ]
+        },
+        {
+          "size": "24",
+          "placement": "C",
+          "labels": [
+            {
+              "agent": "ari",
+              "x": 337,
+              "y": 107,
+              "w": 118,
+              "h": 35,
+              "text": "Ari\n✓\nPreparing the local preview for Product Owner review"
+            }
+          ],
+          "faces": [
+            {
+              "x": 234,
+              "y": 100,
+              "w": 32,
+              "h": 20
+            }
+          ],
+          "protected": [
+            {
+              "name": "Ari desk / monitor",
+              "x": 217,
+              "y": 94,
+              "w": 115,
+              "h": 61
+            },
+            {
+              "name": "Mina desk / monitor",
+              "x": 310,
+              "y": 170,
+              "w": 124,
+              "h": 54
+            },
+            {
+              "name": "Coffee counter",
+              "x": 4,
+              "y": 198,
+              "w": 177,
+              "h": 54
+            },
+            {
+              "name": "Entry",
+              "x": 263,
+              "y": 290,
+              "w": 102,
+              "h": 60
+            }
+          ]
+        },
+        {
+          "size": "24",
+          "placement": "C",
+          "labels": [
+            {
+              "agent": "mina",
+              "x": 309,
+              "y": 248,
+              "w": 126,
+              "h": 35,
+              "text": "Mina\n✓\nWaiting for Product Owner feedback on the office study"
+            }
+          ],
+          "faces": [
+            {
+              "x": 330,
+              "y": 166,
+              "w": 32,
+              "h": 20
+            }
+          ],
+          "protected": [
+            {
+              "name": "Ari desk / monitor",
+              "x": 217,
+              "y": 94,
+              "w": 115,
+              "h": 61
+            },
+            {
+              "name": "Mina desk / monitor",
+              "x": 310,
+              "y": 170,
+              "w": 124,
+              "h": 54
+            },
+            {
+              "name": "Coffee counter",
+              "x": 4,
+              "y": 198,
+              "w": 177,
+              "h": 54
+            },
+            {
+              "name": "Entry",
+              "x": 263,
+              "y": 290,
+              "w": 102,
+              "h": 60
+            }
+          ]
+        },
+        {
+          "size": "24",
+          "placement": "C",
+          "labels": [
+            {
+              "agent": "sol",
+              "x": 31,
+              "y": 314,
+              "w": 126,
+              "h": 35,
+              "text": "Sol\n✓\nNo trusted state"
+            }
+          ],
+          "faces": [
+            {
+              "x": 169,
+              "y": 223,
+              "w": 32,
+              "h": 20
+            }
+          ],
+          "protected": [
+            {
+              "name": "Ari desk / monitor",
+              "x": 217,
+              "y": 94,
+              "w": 115,
+              "h": 61
+            },
+            {
+              "name": "Mina desk / monitor",
+              "x": 310,
+              "y": 170,
+              "w": 124,
+              "h": 54
+            },
+            {
+              "name": "Coffee counter",
+              "x": 4,
+              "y": 198,
+              "w": 177,
+              "h": 54
+            },
+            {
+              "name": "Entry",
+              "x": 263,
+              "y": 290,
+              "w": 102,
+              "h": 60
+            }
+          ]
+        }
+      ],
+      "inspectorWidths": [],
+      "clearanceChecks": "Known face and protected desk/counter/entry rectangles; manual image inspection complements this bounded check.",
+      "source": "Static EP-07 refinement page; illustrative fixtures; not a production Electron capture"
+    },
+    {
+      "view": "r2-compare",
+      "file": "r2-inspectors-320px-comparison.png",
+      "width": 728,
+      "height": 1012,
+      "physicalCapture": {
+        "width": 1456,
+        "height": 2024
+      },
+      "sha256": "bc4c3585da296b71362206d5d628d77dec70792f3a58518a2cb8baf30bd5f966",
+      "measurement": {
+        "height": 1012,
+        "width": 728,
+        "images": 2,
+        "broken": [],
+        "office": null
+      },
+      "geometry": [],
+      "inspectorWidths": [
+        320,
+        320
+      ],
+      "clearanceChecks": "Known face and protected desk/counter/entry rectangles; manual image inspection complements this bounded check.",
+      "source": "Static EP-07 refinement page; illustrative fixtures; not a production Electron capture"
+    },
+    {
+      "view": "r2-states",
+      "file": "r2-inspector-content-states.png",
+      "width": 1450,
+      "height": 1936,
+      "physicalCapture": {
+        "width": 2900,
+        "height": 3872
+      },
+      "sha256": "8db06a6e24022b925dd3dd5614ff740ad2aadfa8bc1deb753a5f7456de306096",
+      "measurement": {
+        "height": 1936,
+        "width": 1450,
+        "images": 8,
+        "broken": [],
+        "office": null
+      },
+      "geometry": [],
+      "inspectorWidths": [
+        320,
+        320,
+        320,
+        320,
+        320,
+        320,
+        320,
+        320
+      ],
+      "clearanceChecks": "Known face and protected desk/counter/entry rectangles; manual image inspection complements this bounded check.",
+      "source": "Static EP-07 refinement page; illustrative fixtures; not a production Electron capture"
+    },
+    {
+      "view": "r2-integrated",
+      "file": "r2-grouped-inspector-desktop.png",
+      "width": 1100,
+      "height": 760,
+      "physicalCapture": {
+        "width": 2200,
+        "height": 1520
+      },
+      "sha256": "9232f5b03cd69394e0179fe5333b47c820de72737184773d655f563576f38a0f",
+      "measurement": {
+        "height": 858,
+        "width": 1100,
+        "images": 17,
+        "broken": [],
+        "office": {
+          "width": 642,
+          "height": 362
+        }
+      },
+      "geometry": [
+        {
+          "size": "24",
+          "placement": "C",
+          "labels": [
+            {
+              "agent": "ari",
+              "x": 338,
+              "y": 108,
+              "w": 118,
+              "h": 35,
+              "text": "Ari\n✓\nPreparing the local preview for Product Owner review"
+            },
+            {
+              "agent": "mina",
+              "x": 310,
+              "y": 249,
+              "w": 126,
+              "h": 35,
+              "text": "Mina\nWaiting for Product Owner feedback on the office study"
+            },
+            {
+              "agent": "sol",
+              "x": 32,
+              "y": 315,
+              "w": 126,
+              "h": 35,
+              "text": "Sol\nTaking a coffee break in the simulated office"
+            }
+          ],
+          "faces": [
+            {
+              "x": 234,
+              "y": 100,
+              "w": 32,
+              "h": 20
+            },
+            {
+              "x": 330,
+              "y": 166,
+              "w": 32,
+              "h": 20
+            },
+            {
+              "x": 169,
+              "y": 223,
+              "w": 32,
+              "h": 20
+            }
+          ],
+          "protected": [
+            {
+              "name": "Ari desk / monitor",
+              "x": 217,
+              "y": 94,
+              "w": 115,
+              "h": 61
+            },
+            {
+              "name": "Mina desk / monitor",
+              "x": 310,
+              "y": 170,
+              "w": 124,
+              "h": 54
+            },
+            {
+              "name": "Coffee counter",
+              "x": 4,
+              "y": 198,
+              "w": 177,
+              "h": 54
+            },
+            {
+              "name": "Entry",
+              "x": 263,
+              "y": 290,
+              "w": 102,
+              "h": 60
+            }
+          ]
+        }
+      ],
+      "inspectorWidths": [
+        320
+      ],
+      "clearanceChecks": "Known face and protected desk/counter/entry rectangles; manual image inspection complements this bounded check.",
+      "source": "Static EP-07 refinement page; illustrative fixtures; not a production Electron capture"
+    },
+    {
+      "view": "r3-board",
+      "file": "r3-environment-proportions-2x.png",
+      "width": 1400,
+      "height": 1641,
+      "physicalCapture": {
+        "width": 2800,
+        "height": 3282
+      },
+      "sha256": "e10f2046f412eeff18ee703cd289e0fec07820fb1dc59b4c0bad2cccb3836c36",
+      "measurement": {
+        "height": 1641,
+        "width": 1400,
+        "images": 28,
+        "broken": [],
+        "office": {
+          "width": 642,
+          "height": 362
+        }
+      },
+      "geometry": [
+        {
+          "size": "20",
+          "placement": "C",
+          "labels": [
+            {
+              "agent": "ari",
+              "x": 338,
+              "y": 108,
+              "w": 118,
+              "h": 35,
+              "text": "Ari\n✓\nPreparing the local preview for Product Owner review"
+            },
+            {
+              "agent": "mina",
+              "x": 310,
+              "y": 249,
+              "w": 126,
+              "h": 35,
+              "text": "Mina\nWaiting for Product Owner feedback on the office study"
+            },
+            {
+              "agent": "sol",
+              "x": 32,
+              "y": 315,
+              "w": 126,
+              "h": 35,
+              "text": "Sol\nAwaiting the next simulated update"
+            }
+          ],
+          "faces": [
+            {
+              "x": 240,
+              "y": 120,
+              "w": 24,
+              "h": 20
+            },
+            {
+              "x": 334,
+              "y": 186,
+              "w": 24,
+              "h": 20
+            },
+            {
+              "x": 173,
+              "y": 239,
+              "w": 24,
+              "h": 20
+            }
+          ],
+          "protected": [
+            {
+              "name": "Ari desk / monitor",
+              "x": 217,
+              "y": 94,
+              "w": 115,
+              "h": 61
+            },
+            {
+              "name": "Mina desk / monitor",
+              "x": 310,
+              "y": 170,
+              "w": 124,
+              "h": 54
+            },
+            {
+              "name": "Coffee counter",
+              "x": 4,
+              "y": 198,
+              "w": 177,
+              "h": 54
+            },
+            {
+              "name": "Entry",
+              "x": 263,
+              "y": 290,
+              "w": 102,
+              "h": 60
+            }
+          ]
+        },
+        {
+          "size": "24",
+          "placement": "C",
+          "labels": [
+            {
+              "agent": "ari",
+              "x": 338,
+              "y": 108,
+              "w": 118,
+              "h": 35,
+              "text": "Ari\n✓\nPreparing the local preview for Product Owner review"
+            },
+            {
+              "agent": "mina",
+              "x": 310,
+              "y": 249,
+              "w": 126,
+              "h": 35,
+              "text": "Mina\nWaiting for Product Owner feedback on the office study"
+            },
+            {
+              "agent": "sol",
+              "x": 32,
+              "y": 315,
+              "w": 126,
+              "h": 35,
+              "text": "Sol\nAwaiting the next simulated update"
+            }
+          ],
+          "faces": [
+            {
+              "x": 236,
+              "y": 104,
+              "w": 32,
+              "h": 20
+            },
+            {
+              "x": 330,
+              "y": 170,
+              "w": 32,
+              "h": 20
+            },
+            {
+              "x": 169,
+              "y": 223,
+              "w": 32,
+              "h": 20
+            }
+          ],
+          "protected": [
+            {
+              "name": "Ari desk / monitor",
+              "x": 217,
+              "y": 94,
+              "w": 115,
+              "h": 61
+            },
+            {
+              "name": "Mina desk / monitor",
+              "x": 310,
+              "y": 170,
+              "w": 124,
+              "h": 54
+            },
+            {
+              "name": "Coffee counter",
+              "x": 4,
+              "y": 198,
+              "w": 177,
+              "h": 54
+            },
+            {
+              "name": "Entry",
+              "x": 263,
+              "y": 290,
+              "w": 102,
+              "h": 60
+            }
+          ]
+        },
+        {
+          "size": "20",
+          "placement": "C",
+          "labels": [
+            {
+              "agent": "ari",
+              "x": 338,
+              "y": 108,
+              "w": 118,
+              "h": 35,
+              "text": "Ari\n✓\nPreparing the local preview for Product Owner review"
+            },
+            {
+              "agent": "mina",
+              "x": 310,
+              "y": 249,
+              "w": 126,
+              "h": 35,
+              "text": "Mina\nWaiting for Product Owner feedback on the office study"
+            },
+            {
+              "agent": "sol",
+              "x": 32,
+              "y": 315,
+              "w": 126,
+              "h": 35,
+              "text": "Sol\nAwaiting the next simulated update"
+            }
+          ],
+          "faces": [
+            {
+              "x": 238,
+              "y": 116,
+              "w": 24,
+              "h": 20
+            },
+            {
+              "x": 334,
+              "y": 182,
+              "w": 24,
+              "h": 20
+            },
+            {
+              "x": 173,
+              "y": 239,
+              "w": 24,
+              "h": 20
+            }
+          ],
+          "protected": [
+            {
+              "name": "Ari desk / monitor",
+              "x": 217,
+              "y": 94,
+              "w": 115,
+              "h": 61
+            },
+            {
+              "name": "Mina desk / monitor",
+              "x": 310,
+              "y": 170,
+              "w": 124,
+              "h": 54
+            },
+            {
+              "name": "Coffee counter",
+              "x": 4,
+              "y": 198,
+              "w": 177,
+              "h": 54
+            },
+            {
+              "name": "Entry",
+              "x": 263,
+              "y": 290,
+              "w": 102,
+              "h": 60
+            }
+          ]
+        },
+        {
+          "size": "24",
+          "placement": "C",
+          "labels": [
+            {
+              "agent": "ari",
+              "x": 338,
+              "y": 108,
+              "w": 118,
+              "h": 35,
+              "text": "Ari\n✓\nPreparing the local preview for Product Owner review"
+            },
+            {
+              "agent": "mina",
+              "x": 310,
+              "y": 249,
+              "w": 126,
+              "h": 35,
+              "text": "Mina\nWaiting for Product Owner feedback on the office study"
+            },
+            {
+              "agent": "sol",
+              "x": 32,
+              "y": 315,
+              "w": 126,
+              "h": 35,
+              "text": "Sol\nAwaiting the next simulated update"
+            }
+          ],
+          "faces": [
+            {
+              "x": 234,
+              "y": 100,
+              "w": 32,
+              "h": 20
+            },
+            {
+              "x": 330,
+              "y": 166,
+              "w": 32,
+              "h": 20
+            },
+            {
+              "x": 169,
+              "y": 223,
+              "w": 32,
+              "h": 20
+            }
+          ],
+          "protected": [
+            {
+              "name": "Ari desk / monitor",
+              "x": 217,
+              "y": 94,
+              "w": 115,
+              "h": 61
+            },
+            {
+              "name": "Mina desk / monitor",
+              "x": 310,
+              "y": 170,
+              "w": 124,
+              "h": 54
+            },
+            {
+              "name": "Coffee counter",
+              "x": 4,
+              "y": 198,
+              "w": 177,
+              "h": 54
+            },
+            {
+              "name": "Entry",
+              "x": 263,
+              "y": 290,
+              "w": 102,
+              "h": 60
+            }
+          ]
+        },
+        {
+          "size": "20",
+          "placement": "C",
+          "labels": [
+            {
+              "agent": "ari",
+              "x": 338,
+              "y": 108,
+              "w": 118,
+              "h": 35,
+              "text": "Ari\n✓\nPreparing the local preview for Product Owner review"
+            },
+            {
+              "agent": "mina",
+              "x": 310,
+              "y": 249,
+              "w": 126,
+              "h": 35,
+              "text": "Mina\nWaiting for Product Owner feedback on the office study"
+            },
+            {
+              "agent": "sol",
+              "x": 32,
+              "y": 315,
+              "w": 126,
+              "h": 35,
+              "text": "Sol\nAwaiting the next simulated update"
+            }
+          ],
+          "faces": [
+            {
+              "x": 246,
+              "y": 116,
+              "w": 24,
+              "h": 20
+            },
+            {
+              "x": 342,
+              "y": 182,
+              "w": 24,
+              "h": 20
+            },
+            {
+              "x": 173,
+              "y": 239,
+              "w": 24,
+              "h": 20
+            }
+          ],
+          "protected": [
+            {
+              "name": "Ari desk / monitor",
+              "x": 217,
+              "y": 94,
+              "w": 115,
+              "h": 61
+            },
+            {
+              "name": "Mina desk / monitor",
+              "x": 310,
+              "y": 170,
+              "w": 124,
+              "h": 54
+            },
+            {
+              "name": "Coffee counter",
+              "x": 4,
+              "y": 198,
+              "w": 177,
+              "h": 54
+            },
+            {
+              "name": "Entry",
+              "x": 263,
+              "y": 290,
+              "w": 102,
+              "h": 60
+            }
+          ]
+        },
+        {
+          "size": "24",
+          "placement": "C",
+          "labels": [
+            {
+              "agent": "ari",
+              "x": 338,
+              "y": 108,
+              "w": 118,
+              "h": 35,
+              "text": "Ari\n✓\nPreparing the local preview for Product Owner review"
+            },
+            {
+              "agent": "mina",
+              "x": 310,
+              "y": 249,
+              "w": 126,
+              "h": 35,
+              "text": "Mina\nWaiting for Product Owner feedback on the office study"
+            },
+            {
+              "agent": "sol",
+              "x": 32,
+              "y": 315,
+              "w": 126,
+              "h": 35,
+              "text": "Sol\nAwaiting the next simulated update"
+            }
+          ],
+          "faces": [
+            {
+              "x": 242,
+              "y": 100,
+              "w": 32,
+              "h": 20
+            },
+            {
+              "x": 338,
+              "y": 166,
+              "w": 32,
+              "h": 20
+            },
+            {
+              "x": 169,
+              "y": 223,
+              "w": 32,
+              "h": 20
+            }
+          ],
+          "protected": [
+            {
+              "name": "Ari desk / monitor",
+              "x": 217,
+              "y": 94,
+              "w": 115,
+              "h": 61
+            },
+            {
+              "name": "Mina desk / monitor",
+              "x": 310,
+              "y": 170,
+              "w": 124,
+              "h": 54
+            },
+            {
+              "name": "Coffee counter",
+              "x": 4,
+              "y": 198,
+              "w": 177,
+              "h": 54
+            },
+            {
+              "name": "Entry",
+              "x": 263,
+              "y": 290,
+              "w": 102,
+              "h": 60
+            }
+          ]
+        }
+      ],
+      "inspectorWidths": [],
+      "clearanceChecks": "Known face and protected desk/counter/entry rectangles; manual image inspection complements this bounded check.",
+      "source": "Static EP-07 refinement page; illustrative fixtures; not a production Electron capture"
+    },
+    {
+      "view": "r3-poses",
+      "file": "r3-foot-seat-pose-alignment.png",
+      "width": 1400,
+      "height": 900,
+      "physicalCapture": {
+        "width": 2800,
+        "height": 1800
+      },
+      "sha256": "a09910903b0d68d917aba79b3a3cf771860223eb4075aabe1ee118aa63d7d635",
+      "measurement": {
+        "height": 900,
+        "width": 1400,
+        "images": 18,
+        "broken": [],
+        "office": null
+      },
+      "geometry": [],
+      "inspectorWidths": [],
+      "clearanceChecks": "Known face and protected desk/counter/entry rectangles; manual image inspection complements this bounded check.",
+      "source": "Static EP-07 refinement page; illustrative fixtures; not a production Electron capture"
+    },
+    {
+      "view": "r4-a",
+      "file": "r4-a-reduced-sample-desktop.png",
+      "width": 1100,
+      "height": 760,
+      "physicalCapture": {
+        "width": 2200,
+        "height": 1520
+      },
+      "sha256": "f2794c9debe178d54d32b60633d4f2e1b6b9f7974abe1aa2e6ca0bba811967f9",
+      "measurement": {
+        "height": 777,
+        "width": 1100,
+        "images": 19,
+        "broken": [],
+        "office": {
+          "width": 642,
+          "height": 362
+        }
+      },
+      "geometry": [
+        {
+          "size": "24",
+          "placement": "C",
+          "labels": [
+            {
+              "agent": "ari",
+              "x": 338,
+              "y": 108,
+              "w": 118,
+              "h": 35,
+              "text": "Ari\nPreparing the local preview for Product Owner review"
+            },
+            {
+              "agent": "mina",
+              "x": 310,
+              "y": 249,
+              "w": 126,
+              "h": 35,
+              "text": "Mina\nWaiting for Product Owner feedback on the office study"
+            },
+            {
+              "agent": "sol",
+              "x": 32,
+              "y": 315,
+              "w": 126,
+              "h": 35,
+              "text": "Sol\nTaking a coffee break in the simulated office"
+            }
+          ],
+          "faces": [
+            {
+              "x": 234,
+              "y": 100,
+              "w": 32,
+              "h": 20
+            },
+            {
+              "x": 330,
+              "y": 166,
+              "w": 32,
+              "h": 20
+            },
+            {
+              "x": 169,
+              "y": 223,
+              "w": 32,
+              "h": 20
+            }
+          ],
+          "protected": [
+            {
+              "name": "Ari desk / monitor",
+              "x": 217,
+              "y": 94,
+              "w": 115,
+              "h": 61
+            },
+            {
+              "name": "Mina desk / monitor",
+              "x": 310,
+              "y": 170,
+              "w": 124,
+              "h": 54
+            },
+            {
+              "name": "Coffee counter",
+              "x": 4,
+              "y": 198,
+              "w": 177,
+              "h": 54
+            },
+            {
+              "name": "Entry",
+              "x": 263,
+              "y": 290,
+              "w": 102,
+              "h": 60
+            }
+          ]
+        }
+      ],
+      "inspectorWidths": [],
+      "clearanceChecks": "Known face and protected desk/counter/entry rectangles; manual image inspection complements this bounded check.",
+      "source": "Static EP-07 refinement page; illustrative fixtures; not a production Electron capture"
+    },
+    {
+      "view": "r4-b",
+      "file": "r4-b-collapsed-sample-desktop.png",
+      "width": 1100,
+      "height": 760,
+      "physicalCapture": {
+        "width": 2200,
+        "height": 1520
+      },
+      "sha256": "a5ab81eb97273b19c12aa31ce178df61127f14800790c93088dbe529bc1a1fbc",
+      "measurement": {
+        "height": 762,
+        "width": 1100,
+        "images": 19,
+        "broken": [],
+        "office": {
+          "width": 642,
+          "height": 362
+        }
+      },
+      "geometry": [
+        {
+          "size": "24",
+          "placement": "C",
+          "labels": [
+            {
+              "agent": "ari",
+              "x": 338,
+              "y": 108,
+              "w": 118,
+              "h": 35,
+              "text": "Ari\nPreparing the local preview for Product Owner review"
+            },
+            {
+              "agent": "mina",
+              "x": 310,
+              "y": 249,
+              "w": 126,
+              "h": 35,
+              "text": "Mina\nWaiting for Product Owner feedback on the office study"
+            },
+            {
+              "agent": "sol",
+              "x": 32,
+              "y": 315,
+              "w": 126,
+              "h": 35,
+              "text": "Sol\nTaking a coffee break in the simulated office"
+            }
+          ],
+          "faces": [
+            {
+              "x": 234,
+              "y": 100,
+              "w": 32,
+              "h": 20
+            },
+            {
+              "x": 330,
+              "y": 166,
+              "w": 32,
+              "h": 20
+            },
+            {
+              "x": 169,
+              "y": 223,
+              "w": 32,
+              "h": 20
+            }
+          ],
+          "protected": [
+            {
+              "name": "Ari desk / monitor",
+              "x": 217,
+              "y": 94,
+              "w": 115,
+              "h": 61
+            },
+            {
+              "name": "Mina desk / monitor",
+              "x": 310,
+              "y": 170,
+              "w": 124,
+              "h": 54
+            },
+            {
+              "name": "Coffee counter",
+              "x": 4,
+              "y": 198,
+              "w": 177,
+              "h": 54
+            },
+            {
+              "name": "Entry",
+              "x": 263,
+              "y": 290,
+              "w": 102,
+              "h": 60
+            }
+          ]
+        }
+      ],
+      "inspectorWidths": [],
+      "clearanceChecks": "Known face and protected desk/counter/entry rectangles; manual image inspection complements this bounded check.",
+      "source": "Static EP-07 refinement page; illustrative fixtures; not a production Electron capture"
+    },
+    {
+      "view": "r4-open",
+      "file": "r4-b-sample-disclosed-full-flow.png",
+      "width": 1100,
+      "height": 900,
+      "physicalCapture": {
+        "width": 2200,
+        "height": 1800
+      },
+      "sha256": "88fe4f80b8718af133bb027058b518e3d6986cbb6f2c734ce62ca84b1e277874",
+      "measurement": {
+        "height": 900,
+        "width": 1100,
+        "images": 19,
+        "broken": [],
+        "office": {
+          "width": 642,
+          "height": 362
+        }
+      },
+      "geometry": [
+        {
+          "size": "24",
+          "placement": "C",
+          "labels": [
+            {
+              "agent": "ari",
+              "x": 338,
+              "y": 108,
+              "w": 118,
+              "h": 35,
+              "text": "Ari\nPreparing the local preview for Product Owner review"
+            },
+            {
+              "agent": "mina",
+              "x": 310,
+              "y": 249,
+              "w": 126,
+              "h": 35,
+              "text": "Mina\nWaiting for Product Owner feedback on the office study"
+            },
+            {
+              "agent": "sol",
+              "x": 32,
+              "y": 315,
+              "w": 126,
+              "h": 35,
+              "text": "Sol\nTaking a coffee break in the simulated office"
+            }
+          ],
+          "faces": [
+            {
+              "x": 234,
+              "y": 100,
+              "w": 32,
+              "h": 20
+            },
+            {
+              "x": 330,
+              "y": 166,
+              "w": 32,
+              "h": 20
+            },
+            {
+              "x": 169,
+              "y": 223,
+              "w": 32,
+              "h": 20
+            }
+          ],
+          "protected": [
+            {
+              "name": "Ari desk / monitor",
+              "x": 217,
+              "y": 94,
+              "w": 115,
+              "h": 61
+            },
+            {
+              "name": "Mina desk / monitor",
+              "x": 310,
+              "y": 170,
+              "w": 124,
+              "h": 54
+            },
+            {
+              "name": "Coffee counter",
+              "x": 4,
+              "y": 198,
+              "w": 177,
+              "h": 54
+            },
+            {
+              "name": "Entry",
+              "x": 263,
+              "y": 290,
+              "w": 102,
+              "h": 60
+            }
+          ]
+        }
+      ],
+      "inspectorWidths": [],
+      "clearanceChecks": "Known face and protected desk/counter/entry rectangles; manual image inspection complements this bounded check.",
+      "source": "Static EP-07 refinement page; illustrative fixtures; not a production Electron capture"
+    },
+    {
+      "view": "integrated-overview",
+      "file": "integrated-overview-1100x760.png",
+      "width": 1100,
+      "height": 760,
+      "physicalCapture": {
+        "width": 2200,
+        "height": 1520
+      },
+      "sha256": "4fdcf97dfbe1f711e0b0b38f779515e9070f7b2c0b074cfc02582db77eda2511",
+      "measurement": {
+        "height": 762,
+        "width": 1100,
+        "images": 19,
+        "broken": [],
+        "office": {
+          "width": 642,
+          "height": 362
+        }
+      },
+      "geometry": [
+        {
+          "size": "24",
+          "placement": "C",
+          "labels": [
+            {
+              "agent": "ari",
+              "x": 338,
+              "y": 108,
+              "w": 118,
+              "h": 35,
+              "text": "Ari\nPreparing the local preview for Product Owner review"
+            },
+            {
+              "agent": "mina",
+              "x": 310,
+              "y": 249,
+              "w": 126,
+              "h": 35,
+              "text": "Mina\nWaiting for Product Owner feedback on the office study"
+            },
+            {
+              "agent": "sol",
+              "x": 32,
+              "y": 315,
+              "w": 126,
+              "h": 35,
+              "text": "Sol\nTaking a coffee break in the simulated office"
+            }
+          ],
+          "faces": [
+            {
+              "x": 234,
+              "y": 100,
+              "w": 32,
+              "h": 20
+            },
+            {
+              "x": 330,
+              "y": 166,
+              "w": 32,
+              "h": 20
+            },
+            {
+              "x": 169,
+              "y": 223,
+              "w": 32,
+              "h": 20
+            }
+          ],
+          "protected": [
+            {
+              "name": "Ari desk / monitor",
+              "x": 217,
+              "y": 94,
+              "w": 115,
+              "h": 61
+            },
+            {
+              "name": "Mina desk / monitor",
+              "x": 310,
+              "y": 170,
+              "w": 124,
+              "h": 54
+            },
+            {
+              "name": "Coffee counter",
+              "x": 4,
+              "y": 198,
+              "w": 177,
+              "h": 54
+            },
+            {
+              "name": "Entry",
+              "x": 263,
+              "y": 290,
+              "w": 102,
+              "h": 60
+            }
+          ]
+        }
+      ],
+      "inspectorWidths": [],
+      "clearanceChecks": "Known face and protected desk/counter/entry rectangles; manual image inspection complements this bounded check.",
+      "source": "Static EP-07 refinement page; illustrative fixtures; not a production Electron capture"
+    },
+    {
+      "view": "integrated-selected",
+      "file": "integrated-selected-1100x760.png",
+      "width": 1100,
+      "height": 760,
+      "physicalCapture": {
+        "width": 2200,
+        "height": 1520
+      },
+      "sha256": "6fba7a61abcf92f13f0e4449e992bb8d7b2117e1ff1cb33b883eee978a347a5f",
+      "measurement": {
+        "height": 858,
+        "width": 1100,
+        "images": 17,
+        "broken": [],
+        "office": {
+          "width": 642,
+          "height": 362
+        }
+      },
+      "geometry": [
+        {
+          "size": "24",
+          "placement": "C",
+          "labels": [
+            {
+              "agent": "ari",
+              "x": 338,
+              "y": 108,
+              "w": 118,
+              "h": 35,
+              "text": "Ari\n✓\nPreparing the local preview for Product Owner review"
+            },
+            {
+              "agent": "mina",
+              "x": 310,
+              "y": 249,
+              "w": 126,
+              "h": 35,
+              "text": "Mina\nWaiting for Product Owner feedback on the office study"
+            },
+            {
+              "agent": "sol",
+              "x": 32,
+              "y": 315,
+              "w": 126,
+              "h": 35,
+              "text": "Sol\nTaking a coffee break in the simulated office"
+            }
+          ],
+          "faces": [
+            {
+              "x": 234,
+              "y": 100,
+              "w": 32,
+              "h": 20
+            },
+            {
+              "x": 330,
+              "y": 166,
+              "w": 32,
+              "h": 20
+            },
+            {
+              "x": 169,
+              "y": 223,
+              "w": 32,
+              "h": 20
+            }
+          ],
+          "protected": [
+            {
+              "name": "Ari desk / monitor",
+              "x": 217,
+              "y": 94,
+              "w": 115,
+              "h": 61
+            },
+            {
+              "name": "Mina desk / monitor",
+              "x": 310,
+              "y": 170,
+              "w": 124,
+              "h": 54
+            },
+            {
+              "name": "Coffee counter",
+              "x": 4,
+              "y": 198,
+              "w": 177,
+              "h": 54
+            },
+            {
+              "name": "Entry",
+              "x": 263,
+              "y": 290,
+              "w": 102,
+              "h": 60
+            }
+          ]
+        }
+      ],
+      "inspectorWidths": [
+        320
+      ],
+      "clearanceChecks": "Known face and protected desk/counter/entry rectangles; manual image inspection complements this bounded check.",
+      "source": "Static EP-07 refinement page; illustrative fixtures; not a production Electron capture"
+    },
+    {
+      "view": "integrated-compact",
+      "file": "integrated-compact-760x540.png",
+      "width": 760,
+      "height": 540,
+      "physicalCapture": {
+        "width": 1520,
+        "height": 1080
+      },
+      "sha256": "72f4c15f459df01a87d3c4194198ef72efb6da3fd34e67c3e8a5a333f52d2a52",
+      "measurement": {
+        "height": 1544,
+        "width": 760,
+        "images": 18,
+        "broken": [],
+        "office": {
+          "width": 642,
+          "height": 362
+        }
+      },
+      "geometry": [
+        {
+          "size": "24",
+          "placement": "C",
+          "labels": [
+            {
+              "agent": "ari",
+              "x": 338,
+              "y": 108,
+              "w": 118,
+              "h": 35,
+              "text": "Ari\n✓\nPreparing the local preview for Product Owner review"
+            },
+            {
+              "agent": "mina",
+              "x": 310,
+              "y": 249,
+              "w": 126,
+              "h": 35,
+              "text": "Mina\nWaiting for Product Owner feedback on the office study"
+            },
+            {
+              "agent": "sol",
+              "x": 32,
+              "y": 315,
+              "w": 126,
+              "h": 35,
+              "text": "Sol\nTaking a coffee break in the simulated office"
+            }
+          ],
+          "faces": [
+            {
+              "x": 234,
+              "y": 100,
+              "w": 32,
+              "h": 20
+            },
+            {
+              "x": 330,
+              "y": 166,
+              "w": 32,
+              "h": 20
+            },
+            {
+              "x": 169,
+              "y": 223,
+              "w": 32,
+              "h": 20
+            }
+          ],
+          "protected": [
+            {
+              "name": "Ari desk / monitor",
+              "x": 217,
+              "y": 94,
+              "w": 115,
+              "h": 61
+            },
+            {
+              "name": "Mina desk / monitor",
+              "x": 310,
+              "y": 170,
+              "w": 124,
+              "h": 54
+            },
+            {
+              "name": "Coffee counter",
+              "x": 4,
+              "y": 198,
+              "w": 177,
+              "h": 54
+            },
+            {
+              "name": "Entry",
+              "x": 263,
+              "y": 290,
+              "w": 102,
+              "h": 60
+            }
+          ]
+        }
+      ],
+      "inspectorWidths": [
+        642
+      ],
+      "clearanceChecks": "Known face and protected desk/counter/entry rectangles; manual image inspection complements this bounded check.",
+      "source": "Static EP-07 refinement page; illustrative fixtures; not a production Electron capture"
+    },
+    {
+      "view": "integrated-flow",
+      "file": "integrated-compact-full-flow.png",
+      "width": 760,
+      "height": 1544,
+      "physicalCapture": {
+        "width": 1520,
+        "height": 3088
+      },
+      "sha256": "85d0ac9d3acbce6855ed56f913f8aea884dbef474e92df6f866d1eb8267c4cac",
+      "measurement": {
+        "height": 1544,
+        "width": 760,
+        "images": 18,
+        "broken": [],
+        "office": {
+          "width": 642,
+          "height": 362
+        }
+      },
+      "geometry": [
+        {
+          "size": "24",
+          "placement": "C",
+          "labels": [
+            {
+              "agent": "ari",
+              "x": 338,
+              "y": 108,
+              "w": 118,
+              "h": 35,
+              "text": "Ari\n✓\nPreparing the local preview for Product Owner review"
+            },
+            {
+              "agent": "mina",
+              "x": 310,
+              "y": 249,
+              "w": 126,
+              "h": 35,
+              "text": "Mina\nWaiting for Product Owner feedback on the office study"
+            },
+            {
+              "agent": "sol",
+              "x": 32,
+              "y": 315,
+              "w": 126,
+              "h": 35,
+              "text": "Sol\nTaking a coffee break in the simulated office"
+            }
+          ],
+          "faces": [
+            {
+              "x": 234,
+              "y": 100,
+              "w": 32,
+              "h": 20
+            },
+            {
+              "x": 330,
+              "y": 166,
+              "w": 32,
+              "h": 20
+            },
+            {
+              "x": 169,
+              "y": 223,
+              "w": 32,
+              "h": 20
+            }
+          ],
+          "protected": [
+            {
+              "name": "Ari desk / monitor",
+              "x": 217,
+              "y": 94,
+              "w": 115,
+              "h": 61
+            },
+            {
+              "name": "Mina desk / monitor",
+              "x": 310,
+              "y": 170,
+              "w": 124,
+              "h": 54
+            },
+            {
+              "name": "Coffee counter",
+              "x": 4,
+              "y": 198,
+              "w": 177,
+              "h": 54
+            },
+            {
+              "name": "Entry",
+              "x": 263,
+              "y": 290,
+              "w": 102,
+              "h": 60
+            }
+          ]
+        }
+      ],
+      "inspectorWidths": [
+        642
+      ],
+      "clearanceChecks": "Known face and protected desk/counter/entry rectangles; manual image inspection complements this bounded check.",
+      "source": "Static EP-07 refinement page; illustrative fixtures; not a production Electron capture"
+    }
+  ]
+}

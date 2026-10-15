@@ -1,0 +1,59 @@
+{
+  "status": "VISUAL STUDIES — NOT APPROVED",
+  "baseline": "a02f94bf5d65c6854bed58822530798536ef2275",
+  "generation": "Five built-in image_gen calls. No original reference edited.",
+  "sources": [
+    {
+      "path": "docs/design/references/north-star/coffee-break-north-star-03.png",
+      "sha256": "746acf3b8089eeaed5b28e268467cf3954f3c8fbb7f0867b18a06643b55f5867"
+    },
+    {
+      "path": "docs/design/references/ep-06/ep06-environment-study.png",
+      "sha256": "646bebe2fdb999746d11f05bc2be2c43e8514e5073002a2ca9bf9b18343b0f03"
+    },
+    {
+      "path": "docs/design/references/us-027/agent-identity-lineup.png",
+      "sha256": "f9b327b490770e7c769fda6a545d9b2a62bd3ece023da955336471345965813d"
+    },
+    {
+      "path": "apps/desktop/src/office/assets/agent-lifecycle.png",
+      "sha256": "4a8e6dcbf464df9de35aead2902f5c4f4bba86691f354fc1894f68e24af78d12"
+    },
+    {
+      "path": "docs/verification/assets/us-036/1100-production-100.png",
+      "sha256": "3c72868db6b96b1a23f70f5be55fc4eb72e9d302fa1f64520514f36a4a2d2e3d"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "art/environment-generated.png",
+      "originalGeneratorFile": "exec-887879ed-5b13-4289-8cda-70880001c176.png",
+      "sha256": "0c03ae0c977637cd69c41e32de930d6b47664b4882ece5ddc5d5a2399c6b666c",
+      "method": "built-in image_gen; byte-for-byte copy; conceptual art only"
+    },
+    {
+      "path": "art/characters-20-generated.png",
+      "originalGeneratorFile": "exec-6b66ce1c-a79d-421d-9e99-86bd0f11f4f2.png",
+      "sha256": "572d9a1d2b55cf0f924c59b9360d455e3379ecbd1eb18c3bc250d5697b744e3d",
+      "method": "built-in image_gen; byte-for-byte copy; conceptual art only"
+    },
+    {
+      "path": "art/characters-24-generated.png",
+      "originalGeneratorFile": "exec-4ed891e8-3e9d-48dc-9fbb-9611150e463f.png",
+      "sha256": "87ea00e1abcc50120d7dbb5cae318d062d212bd2157dc7e08d5c4d2a13661a4b",
+      "method": "built-in image_gen; byte-for-byte copy; conceptual art only"
+    },
+    {
+      "path": "art/portraits-generated.png",
+      "originalGeneratorFile": "exec-b298e893-f31e-448d-ba66-0f4820423296.png",
+      "sha256": "0bea6d73f8221417a6dc28a2925600d46f8c08980c0e57c50e0163adc54fd21f",
+      "method": "built-in image_gen; byte-for-byte copy; conceptual art only"
+    },
+    {
+      "path": "art/sol-coffee-generated.png",
+      "originalGeneratorFile": "exec-295e10f0-05a0-4ca9-a7da-9b8c2a2260ee.png",
+      "sha256": "033f629a8dc0e3dfc81c1b3a1e9c535cb7f1b8eb5aa2962cff5a4df430042d37",
+      "method": "built-in image_gen; byte-for-byte copy; conceptual art only"
+    }
+  ]
+}

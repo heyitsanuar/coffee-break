@@ -1,0 +1,236 @@
+{
+  "status": "DESIGN STUDY ONLY",
+  "baselineHead": "a02f94bf5d65c6854bed58822530798536ef2275",
+  "records": [
+    {
+      "view": "01",
+      "file": "01-desktop-overview.png",
+      "width": 1100,
+      "height": 760,
+      "physicalCapture": {
+        "width": 2200,
+        "height": 1520
+      },
+      "sha256": "7f7b8837c2ff7ef0830a01f2dee8e99f15f04da1164df6a3f361261509c0c72f",
+      "measurement": {
+        "height": 762,
+        "width": 1100,
+        "images": 14,
+        "broken": [],
+        "office": {
+          "width": 642,
+          "height": 362
+        }
+      },
+      "source": "Static EP-07 concept page; illustrative fixtures; not a production Electron capture"
+    },
+    {
+      "view": "02",
+      "file": "02-desktop-ari-model-usage.png",
+      "width": 1100,
+      "height": 760,
+      "physicalCapture": {
+        "width": 2200,
+        "height": 1520
+      },
+      "sha256": "32eb81ad71a7b45a9fc107de1b56b2832cdaba6666f6c2ebdcf1be42decb4333",
+      "measurement": {
+        "height": 762,
+        "width": 1100,
+        "images": 12,
+        "broken": [],
+        "office": {
+          "width": 642,
+          "height": 362
+        }
+      },
+      "source": "Static EP-07 concept page; illustrative fixtures; not a production Electron capture"
+    },
+    {
+      "view": "03",
+      "file": "03-label-selection-comparison.png",
+      "width": 1400,
+      "height": 1258,
+      "physicalCapture": {
+        "width": 2800,
+        "height": 2516
+      },
+      "sha256": "6f218c8d5d4a46940aabbeedfa49967a1b8e31d5fade4e2fac98d6cb48460f50",
+      "measurement": {
+        "height": 1258,
+        "width": 1400,
+        "images": 18,
+        "broken": [],
+        "office": null
+      },
+      "source": "Static EP-07 concept page; illustrative fixtures; not a production Electron capture"
+    },
+    {
+      "view": "04",
+      "file": "04-sprite-cell-comparison.png",
+      "width": 1400,
+      "height": 900,
+      "physicalCapture": {
+        "width": 2800,
+        "height": 1800
+      },
+      "sha256": "6c33e30d3f3a70985ad70ee2203233559582b57160fdd2ecf7395f1191efcf2d",
+      "measurement": {
+        "height": 900,
+        "width": 1400,
+        "images": 25,
+        "broken": [],
+        "office": null
+      },
+      "source": "Static EP-07 concept page; illustrative fixtures; not a production Electron capture"
+    },
+    {
+      "view": "05",
+      "file": "05-fixed-hybrid-comparison.png",
+      "width": 1450,
+      "height": 925,
+      "physicalCapture": {
+        "width": 2900,
+        "height": 1850
+      },
+      "sha256": "ca237e8bcf080705dda3ef6c0d3ae092c5f1e1673aca0e26d53d9da97e5c8c17",
+      "measurement": {
+        "height": 925,
+        "width": 1450,
+        "images": 9,
+        "broken": [],
+        "office": {
+          "width": 642,
+          "height": 362
+        }
+      },
+      "source": "Static EP-07 concept page; illustrative fixtures; not a production Electron capture"
+    },
+    {
+      "view": "06a",
+      "file": "06a-compact-760x540.png",
+      "width": 760,
+      "height": 540,
+      "physicalCapture": {
+        "width": 1520,
+        "height": 1080
+      },
+      "sha256": "f3ce4f6e9e65092331ec53ca8a86f65ab0eccfc7df07d101040ef7a29357608d",
+      "measurement": {
+        "height": 1354,
+        "width": 760,
+        "images": 13,
+        "broken": [],
+        "office": {
+          "width": 642,
+          "height": 362
+        }
+      },
+      "source": "Static EP-07 concept page; illustrative fixtures; not a production Electron capture"
+    },
+    {
+      "view": "06c",
+      "file": "06c-compact-full-flow.png",
+      "width": 760,
+      "height": 1690,
+      "physicalCapture": {
+        "width": 1520,
+        "height": 3380
+      },
+      "sha256": "cdd944d76a5479b5891a873e71e71c34691c85b55b3017ac8bf4ad98b90b7c44",
+      "measurement": {
+        "height": 1690,
+        "width": 760,
+        "images": 16,
+        "broken": [],
+        "office": {
+          "width": 642,
+          "height": 362
+        }
+      },
+      "source": "Static EP-07 concept page; illustrative fixtures; not a production Electron capture"
+    },
+    {
+      "view": "06b",
+      "file": "06b-expanded-1100x760.png",
+      "width": 1100,
+      "height": 760,
+      "physicalCapture": {
+        "width": 2200,
+        "height": 1520
+      },
+      "sha256": "18ceb72b45a7981c23f1cd20f11289861874cacbd3fc0d4a568c0562536c72d4",
+      "measurement": {
+        "height": 765,
+        "width": 1100,
+        "images": 5,
+        "broken": [],
+        "office": {
+          "width": 962,
+          "height": 542
+        }
+      },
+      "source": "Static EP-07 concept page; illustrative fixtures; not a production Electron capture"
+    },
+    {
+      "view": "06r",
+      "file": "06r-retained-selected-desktop.png",
+      "width": 1100,
+      "height": 760,
+      "physicalCapture": {
+        "width": 2200,
+        "height": 1520
+      },
+      "sha256": "e686305e04a88e8ac39e10ea01dd663e6a1b677a021880223fdbe568c009cd93",
+      "measurement": {
+        "height": 762,
+        "width": 1100,
+        "images": 12,
+        "broken": [],
+        "office": {
+          "width": 642,
+          "height": 362
+        }
+      },
+      "source": "Static EP-07 concept page; illustrative fixtures; not a production Electron capture"
+    },
+    {
+      "view": "07",
+      "file": "07-controls-state-sheet.png",
+      "width": 1400,
+      "height": 1171,
+      "physicalCapture": {
+        "width": 2800,
+        "height": 2342
+      },
+      "sha256": "f685b042680fde3801b95f991c1f5f0a226e65d75305831f20dbd8c622c671ba",
+      "measurement": {
+        "height": 1171,
+        "width": 1400,
+        "images": 0,
+        "broken": [],
+        "office": null
+      },
+      "source": "Static EP-07 concept page; illustrative fixtures; not a production Electron capture"
+    },
+    {
+      "view": "08",
+      "file": "08-bounded-movement-storyboard.png",
+      "width": 1400,
+      "height": 900,
+      "physicalCapture": {
+        "width": 2800,
+        "height": 1800
+      },
+      "sha256": "a5394d1b2017dd60943f1d997a4edaa0ce855b70ffa64b8b3982b006b21d66ee",
+      "measurement": {
+        "height": 900,
+        "width": 1400,
+        "images": 16,
+        "broken": [],
+        "office": null
+      },
+      "source": "Static EP-07 concept page; illustrative fixtures; not a production Electron capture"
+    }
+  ]
+}

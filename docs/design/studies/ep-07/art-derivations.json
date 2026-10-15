@@ -1,0 +1,538 @@
+{
+  "status": "DESIGN STUDY ONLY",
+  "note": "Two independently generated character alternatives are quantized separately to exact cells. This processing makes a real dimension comparison; it does not establish final hand-cleaned sprite quality, runtime anchors, foreground masks or a production-ready pixel grid.",
+  "derived": [
+    {
+      "path": "art/ari-20-standing.png",
+      "source": "art/characters-20-generated.png",
+      "sourceDimensions": [
+        1402,
+        1122
+      ],
+      "sourceCrop": {
+        "x": 284,
+        "y": 95,
+        "width": 156,
+        "height": 300
+      },
+      "outputDimensions": [
+        20,
+        24
+      ],
+      "operation": "Nearest-neighbour centre sampling into an exact study cell; alpha threshold 128; transparent padding; no interpolation or dithering. Not production sprite approval."
+    },
+    {
+      "path": "art/ari-20-working.png",
+      "source": "art/characters-20-generated.png",
+      "sourceDimensions": [
+        1402,
+        1122
+      ],
+      "sourceCrop": {
+        "x": 617,
+        "y": 110,
+        "width": 155,
+        "height": 285
+      },
+      "outputDimensions": [
+        20,
+        24
+      ],
+      "operation": "Nearest-neighbour centre sampling into an exact study cell; alpha threshold 128; transparent padding; no interpolation or dithering. Not production sprite approval."
+    },
+    {
+      "path": "art/ari-20-walking.png",
+      "source": "art/characters-20-generated.png",
+      "sourceDimensions": [
+        1402,
+        1122
+      ],
+      "sourceCrop": {
+        "x": 951,
+        "y": 94,
+        "width": 194,
+        "height": 307
+      },
+      "outputDimensions": [
+        20,
+        24
+      ],
+      "operation": "Nearest-neighbour centre sampling into an exact study cell; alpha threshold 128; transparent padding; no interpolation or dithering. Not production sprite approval."
+    },
+    {
+      "path": "art/mina-20-standing.png",
+      "source": "art/characters-20-generated.png",
+      "sourceDimensions": [
+        1402,
+        1122
+      ],
+      "sourceCrop": {
+        "x": 272,
+        "y": 428,
+        "width": 166,
+        "height": 306
+      },
+      "outputDimensions": [
+        20,
+        24
+      ],
+      "operation": "Nearest-neighbour centre sampling into an exact study cell; alpha threshold 128; transparent padding; no interpolation or dithering. Not production sprite approval."
+    },
+    {
+      "path": "art/mina-20-working.png",
+      "source": "art/characters-20-generated.png",
+      "sourceDimensions": [
+        1402,
+        1122
+      ],
+      "sourceCrop": {
+        "x": 603,
+        "y": 443,
+        "width": 178,
+        "height": 292
+      },
+      "outputDimensions": [
+        20,
+        24
+      ],
+      "operation": "Nearest-neighbour centre sampling into an exact study cell; alpha threshold 128; transparent padding; no interpolation or dithering. Not production sprite approval."
+    },
+    {
+      "path": "art/mina-20-walking.png",
+      "source": "art/characters-20-generated.png",
+      "sourceDimensions": [
+        1402,
+        1122
+      ],
+      "sourceCrop": {
+        "x": 951,
+        "y": 428,
+        "width": 197,
+        "height": 315
+      },
+      "outputDimensions": [
+        20,
+        24
+      ],
+      "operation": "Nearest-neighbour centre sampling into an exact study cell; alpha threshold 128; transparent padding; no interpolation or dithering. Not production sprite approval."
+    },
+    {
+      "path": "art/sol-20-standing.png",
+      "source": "art/characters-20-generated.png",
+      "sourceDimensions": [
+        1402,
+        1122
+      ],
+      "sourceCrop": {
+        "x": 282,
+        "y": 764,
+        "width": 158,
+        "height": 312
+      },
+      "outputDimensions": [
+        20,
+        24
+      ],
+      "operation": "Nearest-neighbour centre sampling into an exact study cell; alpha threshold 128; transparent padding; no interpolation or dithering. Not production sprite approval."
+    },
+    {
+      "path": "art/sol-20-working.png",
+      "source": "art/characters-20-generated.png",
+      "sourceDimensions": [
+        1402,
+        1122
+      ],
+      "sourceCrop": {
+        "x": 615,
+        "y": 782,
+        "width": 165,
+        "height": 283
+      },
+      "outputDimensions": [
+        20,
+        24
+      ],
+      "operation": "Nearest-neighbour centre sampling into an exact study cell; alpha threshold 128; transparent padding; no interpolation or dithering. Not production sprite approval."
+    },
+    {
+      "path": "art/sol-20-walking.png",
+      "source": "art/characters-20-generated.png",
+      "sourceDimensions": [
+        1402,
+        1122
+      ],
+      "sourceCrop": {
+        "x": 953,
+        "y": 764,
+        "width": 193,
+        "height": 316
+      },
+      "outputDimensions": [
+        20,
+        24
+      ],
+      "operation": "Nearest-neighbour centre sampling into an exact study cell; alpha threshold 128; transparent padding; no interpolation or dithering. Not production sprite approval."
+    },
+    {
+      "path": "art/ari-24-standing.png",
+      "source": "art/characters-24-generated.png",
+      "sourceDimensions": [
+        1402,
+        1122
+      ],
+      "sourceCrop": {
+        "x": 265,
+        "y": 53,
+        "width": 168,
+        "height": 333
+      },
+      "outputDimensions": [
+        24,
+        32
+      ],
+      "operation": "Nearest-neighbour centre sampling into an exact study cell; alpha threshold 128; transparent padding; no interpolation or dithering. Not production sprite approval."
+    },
+    {
+      "path": "art/ari-24-working.png",
+      "source": "art/characters-24-generated.png",
+      "sourceDimensions": [
+        1402,
+        1122
+      ],
+      "sourceCrop": {
+        "x": 609,
+        "y": 63,
+        "width": 186,
+        "height": 324
+      },
+      "outputDimensions": [
+        24,
+        32
+      ],
+      "operation": "Nearest-neighbour centre sampling into an exact study cell; alpha threshold 128; transparent padding; no interpolation or dithering. Not production sprite approval."
+    },
+    {
+      "path": "art/ari-24-walking.png",
+      "source": "art/characters-24-generated.png",
+      "sourceDimensions": [
+        1402,
+        1122
+      ],
+      "sourceCrop": {
+        "x": 967,
+        "y": 51,
+        "width": 196,
+        "height": 337
+      },
+      "outputDimensions": [
+        24,
+        32
+      ],
+      "operation": "Nearest-neighbour centre sampling into an exact study cell; alpha threshold 128; transparent padding; no interpolation or dithering. Not production sprite approval."
+    },
+    {
+      "path": "art/mina-24-standing.png",
+      "source": "art/characters-24-generated.png",
+      "sourceDimensions": [
+        1402,
+        1122
+      ],
+      "sourceCrop": {
+        "x": 246,
+        "y": 415,
+        "width": 190,
+        "height": 327
+      },
+      "outputDimensions": [
+        24,
+        32
+      ],
+      "operation": "Nearest-neighbour centre sampling into an exact study cell; alpha threshold 128; transparent padding; no interpolation or dithering. Not production sprite approval."
+    },
+    {
+      "path": "art/mina-24-working.png",
+      "source": "art/characters-24-generated.png",
+      "sourceDimensions": [
+        1402,
+        1122
+      ],
+      "sourceCrop": {
+        "x": 607,
+        "y": 425,
+        "width": 194,
+        "height": 318
+      },
+      "outputDimensions": [
+        24,
+        32
+      ],
+      "operation": "Nearest-neighbour centre sampling into an exact study cell; alpha threshold 128; transparent padding; no interpolation or dithering. Not production sprite approval."
+    },
+    {
+      "path": "art/mina-24-walking.png",
+      "source": "art/characters-24-generated.png",
+      "sourceDimensions": [
+        1402,
+        1122
+      ],
+      "sourceCrop": {
+        "x": 962,
+        "y": 413,
+        "width": 210,
+        "height": 331
+      },
+      "outputDimensions": [
+        24,
+        32
+      ],
+      "operation": "Nearest-neighbour centre sampling into an exact study cell; alpha threshold 128; transparent padding; no interpolation or dithering. Not production sprite approval."
+    },
+    {
+      "path": "art/sol-24-standing.png",
+      "source": "art/characters-24-generated.png",
+      "sourceDimensions": [
+        1402,
+        1122
+      ],
+      "sourceCrop": {
+        "x": 259,
+        "y": 759,
+        "width": 174,
+        "height": 337
+      },
+      "outputDimensions": [
+        24,
+        32
+      ],
+      "operation": "Nearest-neighbour centre sampling into an exact study cell; alpha threshold 128; transparent padding; no interpolation or dithering. Not production sprite approval."
+    },
+    {
+      "path": "art/sol-24-working.png",
+      "source": "art/characters-24-generated.png",
+      "sourceDimensions": [
+        1402,
+        1122
+      ],
+      "sourceCrop": {
+        "x": 613,
+        "y": 778,
+        "width": 183,
+        "height": 316
+      },
+      "outputDimensions": [
+        24,
+        32
+      ],
+      "operation": "Nearest-neighbour centre sampling into an exact study cell; alpha threshold 128; transparent padding; no interpolation or dithering. Not production sprite approval."
+    },
+    {
+      "path": "art/sol-24-walking.png",
+      "source": "art/characters-24-generated.png",
+      "sourceDimensions": [
+        1402,
+        1122
+      ],
+      "sourceCrop": {
+        "x": 969,
+        "y": 758,
+        "width": 204,
+        "height": 339
+      },
+      "outputDimensions": [
+        24,
+        32
+      ],
+      "operation": "Nearest-neighbour centre sampling into an exact study cell; alpha threshold 128; transparent padding; no interpolation or dithering. Not production sprite approval."
+    },
+    {
+      "path": "art/ari-portrait-24.png",
+      "source": "art/portraits-generated.png",
+      "sourceDimensions": [
+        2172,
+        724
+      ],
+      "sourceCrop": {
+        "x": 106,
+        "y": 49,
+        "width": 530,
+        "height": 646
+      },
+      "outputDimensions": [
+        24,
+        24
+      ],
+      "operation": "Nearest-neighbour centre sampling into an exact study cell; alpha threshold 128; transparent padding; no interpolation or dithering. Not production sprite approval."
+    },
+    {
+      "path": "art/ari-portrait-32.png",
+      "source": "art/portraits-generated.png",
+      "sourceDimensions": [
+        2172,
+        724
+      ],
+      "sourceCrop": {
+        "x": 106,
+        "y": 49,
+        "width": 530,
+        "height": 646
+      },
+      "outputDimensions": [
+        32,
+        32
+      ],
+      "operation": "Nearest-neighbour centre sampling into an exact study cell; alpha threshold 128; transparent padding; no interpolation or dithering. Not production sprite approval."
+    },
+    {
+      "path": "art/mina-portrait-24.png",
+      "source": "art/portraits-generated.png",
+      "sourceDimensions": [
+        2172,
+        724
+      ],
+      "sourceCrop": {
+        "x": 757,
+        "y": 68,
+        "width": 596,
+        "height": 628
+      },
+      "outputDimensions": [
+        24,
+        24
+      ],
+      "operation": "Nearest-neighbour centre sampling into an exact study cell; alpha threshold 128; transparent padding; no interpolation or dithering. Not production sprite approval."
+    },
+    {
+      "path": "art/mina-portrait-32.png",
+      "source": "art/portraits-generated.png",
+      "sourceDimensions": [
+        2172,
+        724
+      ],
+      "sourceCrop": {
+        "x": 757,
+        "y": 68,
+        "width": 596,
+        "height": 628
+      },
+      "outputDimensions": [
+        32,
+        32
+      ],
+      "operation": "Nearest-neighbour centre sampling into an exact study cell; alpha threshold 128; transparent padding; no interpolation or dithering. Not production sprite approval."
+    },
+    {
+      "path": "art/sol-portrait-24.png",
+      "source": "art/portraits-generated.png",
+      "sourceDimensions": [
+        2172,
+        724
+      ],
+      "sourceCrop": {
+        "x": 1519,
+        "y": 54,
+        "width": 538,
+        "height": 642
+      },
+      "outputDimensions": [
+        24,
+        24
+      ],
+      "operation": "Nearest-neighbour centre sampling into an exact study cell; alpha threshold 128; transparent padding; no interpolation or dithering. Not production sprite approval."
+    },
+    {
+      "path": "art/sol-portrait-32.png",
+      "source": "art/portraits-generated.png",
+      "sourceDimensions": [
+        2172,
+        724
+      ],
+      "sourceCrop": {
+        "x": 1519,
+        "y": 54,
+        "width": 538,
+        "height": 642
+      },
+      "outputDimensions": [
+        32,
+        32
+      ],
+      "operation": "Nearest-neighbour centre sampling into an exact study cell; alpha threshold 128; transparent padding; no interpolation or dithering. Not production sprite approval."
+    },
+    {
+      "path": "art/sol-24-coffee.png",
+      "source": "art/sol-coffee-generated.png",
+      "sourceDimensions": [
+        1881,
+        836
+      ],
+      "sourceCrop": {
+        "x": 214,
+        "y": 128,
+        "width": 314,
+        "height": 615
+      },
+      "outputDimensions": [
+        24,
+        32
+      ],
+      "operation": "Nearest-neighbour centre sampling into an exact study cell; alpha threshold 128; transparent padding; no interpolation or dithering. Not production sprite approval."
+    },
+    {
+      "path": "art/sol-24-coffee-walking.png",
+      "source": "art/sol-coffee-generated.png",
+      "sourceDimensions": [
+        1881,
+        836
+      ],
+      "sourceCrop": {
+        "x": 785,
+        "y": 128,
+        "width": 327,
+        "height": 615
+      },
+      "outputDimensions": [
+        24,
+        32
+      ],
+      "operation": "Nearest-neighbour centre sampling into an exact study cell; alpha threshold 128; transparent padding; no interpolation or dithering. Not production sprite approval."
+    },
+    {
+      "path": "art/sol-24-coffee-static.png",
+      "source": "art/sol-coffee-generated.png",
+      "sourceDimensions": [
+        1881,
+        836
+      ],
+      "sourceCrop": {
+        "x": 1350,
+        "y": 128,
+        "width": 308,
+        "height": 613
+      },
+      "outputDimensions": [
+        24,
+        32
+      ],
+      "operation": "Nearest-neighbour centre sampling into an exact study cell; alpha threshold 128; transparent padding; no interpolation or dithering. Not production sprite approval."
+    },
+    {
+      "path": "art/environment-320.png",
+      "source": "art/environment-generated.png",
+      "sourceDimensions": [
+        1672,
+        941
+      ],
+      "sourceCrop": {
+        "x": 0,
+        "y": 0,
+        "width": 1672,
+        "height": 941
+      },
+      "outputDimensions": [
+        320,
+        180
+      ],
+      "operation": "Nearest-neighbour centre sampling into an exact study cell; alpha threshold 128; transparent padding; no interpolation or dithering. Not production sprite approval."
+    }
+  ]
+}

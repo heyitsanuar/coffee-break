@@ -1,0 +1,162 @@
+{
+  "status": "PROPOSED REFINEMENTS — NOT APPROVED",
+  "baselineHead": "a02f94bf5d65c6854bed58822530798536ef2275",
+  "newFiles": [
+    {
+      "path": "docs/design/studies/ep-07/refinements/README.md",
+      "absolutePath": "/Users/asdf/Documents/projects/coffee-break/docs/design/studies/ep-07/refinements/README.md",
+      "bytes": 14328,
+      "sha256": "485108a9ca9c10aa5a7c0df12e3a73bedbed5f4019bc5bc3e8779108f8c48115"
+    },
+    {
+      "path": "docs/design/studies/ep-07/refinements/base-study.js",
+      "absolutePath": "/Users/asdf/Documents/projects/coffee-break/docs/design/studies/ep-07/refinements/base-study.js",
+      "bytes": 4343,
+      "sha256": "069483963d9d1aac35ae70ad353787643d120ae75a6f9be7202378121569a07d"
+    },
+    {
+      "path": "docs/design/studies/ep-07/refinements/preservation-manifest.json",
+      "absolutePath": "/Users/asdf/Documents/projects/coffee-break/docs/design/studies/ep-07/refinements/preservation-manifest.json",
+      "bytes": 9084,
+      "sha256": "4639f23795af9a60c48435cb2fe2cceef8302fff95c6c07275fec2d7d223b748"
+    },
+    {
+      "path": "docs/design/studies/ep-07/refinements/refinements.css",
+      "absolutePath": "/Users/asdf/Documents/projects/coffee-break/docs/design/studies/ep-07/refinements/refinements.css",
+      "bytes": 10780,
+      "sha256": "9dbe483b87bcd9dc344cbf7ffe8e548bbbb5647e14ebb878808a9fa24266524d"
+    },
+    {
+      "path": "docs/design/studies/ep-07/refinements/refinements.js",
+      "absolutePath": "/Users/asdf/Documents/projects/coffee-break/docs/design/studies/ep-07/refinements/refinements.js",
+      "bytes": 20829,
+      "sha256": "42b592250a5f8b69d40e7c95ba896db7462075c4ab042d35d066c9726a01e095"
+    },
+    {
+      "path": "docs/design/studies/ep-07/refinements/render-record.json",
+      "absolutePath": "/Users/asdf/Documents/projects/coffee-break/docs/design/studies/ep-07/refinements/render-record.json",
+      "bytes": 72914,
+      "sha256": "9734ffa06d5b2d6ec8f4ba1ccba93a48dd7a8470b2850557b64f37078045dfe4"
+    },
+    {
+      "path": "docs/design/studies/ep-07/refinements/render-refinements.cjs",
+      "absolutePath": "/Users/asdf/Documents/projects/coffee-break/docs/design/studies/ep-07/refinements/render-refinements.cjs",
+      "bytes": 5647,
+      "sha256": "fe05be8be9f41efec5d7bb8fda6cd2769fedf177c8550560a8f61268deed1ac2"
+    },
+    {
+      "path": "docs/design/studies/ep-07/refinements/renders/integrated-compact-760x540.png",
+      "absolutePath": "/Users/asdf/Documents/projects/coffee-break/docs/design/studies/ep-07/refinements/renders/integrated-compact-760x540.png",
+      "bytes": 343175,
+      "sha256": "72f4c15f459df01a87d3c4194198ef72efb6da3fd34e67c3e8a5a333f52d2a52"
+    },
+    {
+      "path": "docs/design/studies/ep-07/refinements/renders/integrated-compact-full-flow.png",
+      "absolutePath": "/Users/asdf/Documents/projects/coffee-break/docs/design/studies/ep-07/refinements/renders/integrated-compact-full-flow.png",
+      "bytes": 541968,
+      "sha256": "85d0ac9d3acbce6855ed56f913f8aea884dbef474e92df6f866d1eb8267c4cac"
+    },
+    {
+      "path": "docs/design/studies/ep-07/refinements/renders/integrated-overview-1100x760.png",
+      "absolutePath": "/Users/asdf/Documents/projects/coffee-break/docs/design/studies/ep-07/refinements/renders/integrated-overview-1100x760.png",
+      "bytes": 478070,
+      "sha256": "4fdcf97dfbe1f711e0b0b38f779515e9070f7b2c0b074cfc02582db77eda2511"
+    },
+    {
+      "path": "docs/design/studies/ep-07/refinements/renders/integrated-selected-1100x760.png",
+      "absolutePath": "/Users/asdf/Documents/projects/coffee-break/docs/design/studies/ep-07/refinements/renders/integrated-selected-1100x760.png",
+      "bytes": 505928,
+      "sha256": "6fba7a61abcf92f13f0e4449e992bb8d7b2117e1ff1cb33b883eee978a347a5f"
+    },
+    {
+      "path": "docs/design/studies/ep-07/refinements/renders/r1-a-compact-plaques-desktop.png",
+      "absolutePath": "/Users/asdf/Documents/projects/coffee-break/docs/design/studies/ep-07/refinements/renders/r1-a-compact-plaques-desktop.png",
+      "bytes": 504389,
+      "sha256": "8bb4308302fcb9cef4a3a556f5ed72eca5b4c02e4cd207a3af1047932e11f8ef"
+    },
+    {
+      "path": "docs/design/studies/ep-07/refinements/renders/r1-actual-size-label-details.png",
+      "absolutePath": "/Users/asdf/Documents/projects/coffee-break/docs/design/studies/ep-07/refinements/renders/r1-actual-size-label-details.png",
+      "bytes": 2000409,
+      "sha256": "4be4e30e6f8cefd2ea3cc77124ddf40de83cdb6f625f44d9e2e90ff40b1e47db"
+    },
+    {
+      "path": "docs/design/studies/ep-07/refinements/renders/r1-b-richer-selection-desktop.png",
+      "absolutePath": "/Users/asdf/Documents/projects/coffee-break/docs/design/studies/ep-07/refinements/renders/r1-b-richer-selection-desktop.png",
+      "bytes": 506581,
+      "sha256": "7aec1e6dc38116819ecbcedb88e930326a3586d96f2d0ee6b9f608f51335e5c3"
+    },
+    {
+      "path": "docs/design/studies/ep-07/refinements/renders/r1-c-adaptive-labels-desktop.png",
+      "absolutePath": "/Users/asdf/Documents/projects/coffee-break/docs/design/studies/ep-07/refinements/renders/r1-c-adaptive-labels-desktop.png",
+      "bytes": 505959,
+      "sha256": "6e446606f9b45c39fa24c1684bdbec1d8f5f2f77779eb66ee3deaea05bd0c95f"
+    },
+    {
+      "path": "docs/design/studies/ep-07/refinements/renders/r1-full-office-comparison.png",
+      "absolutePath": "/Users/asdf/Documents/projects/coffee-break/docs/design/studies/ep-07/refinements/renders/r1-full-office-comparison.png",
+      "bytes": 1210149,
+      "sha256": "c085cd4fefda2fdf6e188220b0060c6bd88b86796ffcf8e1fb017dd63c822e14"
+    },
+    {
+      "path": "docs/design/studies/ep-07/refinements/renders/r2-grouped-inspector-desktop.png",
+      "absolutePath": "/Users/asdf/Documents/projects/coffee-break/docs/design/studies/ep-07/refinements/renders/r2-grouped-inspector-desktop.png",
+      "bytes": 506671,
+      "sha256": "9232f5b03cd69394e0179fe5333b47c820de72737184773d655f563576f38a0f"
+    },
+    {
+      "path": "docs/design/studies/ep-07/refinements/renders/r2-inspector-content-states.png",
+      "absolutePath": "/Users/asdf/Documents/projects/coffee-break/docs/design/studies/ep-07/refinements/renders/r2-inspector-content-states.png",
+      "bytes": 865482,
+      "sha256": "8db06a6e24022b925dd3dd5614ff740ad2aadfa8bc1deb753a5f7456de306096"
+    },
+    {
+      "path": "docs/design/studies/ep-07/refinements/renders/r2-inspectors-320px-comparison.png",
+      "absolutePath": "/Users/asdf/Documents/projects/coffee-break/docs/design/studies/ep-07/refinements/renders/r2-inspectors-320px-comparison.png",
+      "bytes": 244506,
+      "sha256": "bc4c3585da296b71362206d5d628d77dec70792f3a58518a2cb8baf30bd5f966"
+    },
+    {
+      "path": "docs/design/studies/ep-07/refinements/renders/r3-environment-proportions-2x.png",
+      "absolutePath": "/Users/asdf/Documents/projects/coffee-break/docs/design/studies/ep-07/refinements/renders/r3-environment-proportions-2x.png",
+      "bytes": 1164634,
+      "sha256": "e10f2046f412eeff18ee703cd289e0fec07820fb1dc59b4c0bad2cccb3836c36"
+    },
+    {
+      "path": "docs/design/studies/ep-07/refinements/renders/r3-foot-seat-pose-alignment.png",
+      "absolutePath": "/Users/asdf/Documents/projects/coffee-break/docs/design/studies/ep-07/refinements/renders/r3-foot-seat-pose-alignment.png",
+      "bytes": 213674,
+      "sha256": "a09910903b0d68d917aba79b3a3cf771860223eb4075aabe1ee118aa63d7d635"
+    },
+    {
+      "path": "docs/design/studies/ep-07/refinements/renders/r4-a-reduced-sample-desktop.png",
+      "absolutePath": "/Users/asdf/Documents/projects/coffee-break/docs/design/studies/ep-07/refinements/renders/r4-a-reduced-sample-desktop.png",
+      "bytes": 522434,
+      "sha256": "f2794c9debe178d54d32b60633d4f2e1b6b9f7974abe1aa2e6ca0bba811967f9"
+    },
+    {
+      "path": "docs/design/studies/ep-07/refinements/renders/r4-b-collapsed-sample-desktop.png",
+      "absolutePath": "/Users/asdf/Documents/projects/coffee-break/docs/design/studies/ep-07/refinements/renders/r4-b-collapsed-sample-desktop.png",
+      "bytes": 479033,
+      "sha256": "a5ab81eb97273b19c12aa31ce178df61127f14800790c93088dbe529bc1a1fbc"
+    },
+    {
+      "path": "docs/design/studies/ep-07/refinements/renders/r4-b-sample-disclosed-full-flow.png",
+      "absolutePath": "/Users/asdf/Documents/projects/coffee-break/docs/design/studies/ep-07/refinements/renders/r4-b-sample-disclosed-full-flow.png",
+      "bytes": 530355,
+      "sha256": "88fe4f80b8718af133bb027058b518e3d6986cbb6f2c734ce62ca84b1e277874"
+    },
+    {
+      "path": "docs/design/studies/ep-07/refinements/study.html",
+      "absolutePath": "/Users/asdf/Documents/projects/coffee-break/docs/design/studies/ep-07/refinements/study.html",
+      "bytes": 396,
+      "sha256": "1fbf2d8c4be91958eae6d07eb8239954a56d1c4b4377f8b34e9d122ee6f4ce28"
+    },
+    {
+      "path": "docs/design/studies/ep-07/refinements/artifact-manifest.json",
+      "absolutePath": "/Users/asdf/Documents/projects/coffee-break/docs/design/studies/ep-07/refinements/artifact-manifest.json",
+      "note": "This inventory file; self-hash intentionally omitted."
+    }
+  ],
+  "preservation": "All 54 original EP-07 study files verified unchanged; no tracked repository changes."
+}

@@ -1,0 +1,222 @@
+{
+  "baselineHead": "a02f94bf5d65c6854bed58822530798536ef2275",
+  "originalFiles": [
+    {
+      "path": "docs/design/studies/ep-07/README.md",
+      "sha256": "03167ff9c00f759112b8945c0c7fd718f79e4667983300b9631375916807de7d"
+    },
+    {
+      "path": "docs/design/studies/ep-07/art/ari-20-standing.png",
+      "sha256": "2aa62d22c452c63bf690adebf6d5dbe1ff680863857abc63ef10fe5eff9ef3c2"
+    },
+    {
+      "path": "docs/design/studies/ep-07/art/ari-20-walking.png",
+      "sha256": "a0effcdf69c559123bfa976c01b74ecb62b7c33929d7392bb4555c725706d971"
+    },
+    {
+      "path": "docs/design/studies/ep-07/art/ari-20-working.png",
+      "sha256": "17078bedd52a840f1991e4a2fdabfeb7cf0c8bb81df20efabecc3527802c7187"
+    },
+    {
+      "path": "docs/design/studies/ep-07/art/ari-24-standing.png",
+      "sha256": "6ba35dc2da9b1b8576001f8225f0121079be1bcf92627b319ff168a936ead1ee"
+    },
+    {
+      "path": "docs/design/studies/ep-07/art/ari-24-walking.png",
+      "sha256": "5ac9cca22cc0f4e710ea0da9ecc2648409a31f44fbf53abb1b5ad5e7b843b0fc"
+    },
+    {
+      "path": "docs/design/studies/ep-07/art/ari-24-working.png",
+      "sha256": "1c3692168253cfbd3915a97329f3dcb4c5cc0786c390865736acce3016e30b70"
+    },
+    {
+      "path": "docs/design/studies/ep-07/art/ari-portrait-24.png",
+      "sha256": "e2c6e221b973b49e5302a8ce4024ab43338818826123fd69a0c5026101b7ae87"
+    },
+    {
+      "path": "docs/design/studies/ep-07/art/ari-portrait-32.png",
+      "sha256": "a40cf4ac1557c0f386ea875d31f4a829bffa3da5f1ed220791254e3360062530"
+    },
+    {
+      "path": "docs/design/studies/ep-07/art/characters-20-generated.png",
+      "sha256": "572d9a1d2b55cf0f924c59b9360d455e3379ecbd1eb18c3bc250d5697b744e3d"
+    },
+    {
+      "path": "docs/design/studies/ep-07/art/characters-24-generated.png",
+      "sha256": "87ea00e1abcc50120d7dbb5cae318d062d212bd2157dc7e08d5c4d2a13661a4b"
+    },
+    {
+      "path": "docs/design/studies/ep-07/art/environment-320.png",
+      "sha256": "50906c66f21897e800500e5d6ba75e994fd658804d071c82848a4a64a9ea3ccf"
+    },
+    {
+      "path": "docs/design/studies/ep-07/art/environment-generated.png",
+      "sha256": "0c03ae0c977637cd69c41e32de930d6b47664b4882ece5ddc5d5a2399c6b666c"
+    },
+    {
+      "path": "docs/design/studies/ep-07/art/mina-20-standing.png",
+      "sha256": "f658a9e8bb191ca1b92b067c2b6159c07438000f30a9e83c010363d996b1bfe5"
+    },
+    {
+      "path": "docs/design/studies/ep-07/art/mina-20-walking.png",
+      "sha256": "aa29e9a8d14b52ad4848153e82585c5cbd44c85614775913edd23d90177305a8"
+    },
+    {
+      "path": "docs/design/studies/ep-07/art/mina-20-working.png",
+      "sha256": "db4420712ef69c183335efdb75491a820acc218ae1aac7d619112689e7fdc068"
+    },
+    {
+      "path": "docs/design/studies/ep-07/art/mina-24-standing.png",
+      "sha256": "40eb229c500cc61ba59ec14f5f92ecabe64d33011d875e3b67ba97fbb2902e02"
+    },
+    {
+      "path": "docs/design/studies/ep-07/art/mina-24-walking.png",
+      "sha256": "1790abc874f0d6bf46ccd3819f4af422032ce3aae1972766948dd7526acab642"
+    },
+    {
+      "path": "docs/design/studies/ep-07/art/mina-24-working.png",
+      "sha256": "a3fcae934f6667234f041eeec82a9a7856390e509c589f56b77454bad3f61b99"
+    },
+    {
+      "path": "docs/design/studies/ep-07/art/mina-portrait-24.png",
+      "sha256": "80f69636dc9680a7bb0cd6aa39d7287415237a97f420e683a8acecc7e977a73f"
+    },
+    {
+      "path": "docs/design/studies/ep-07/art/mina-portrait-32.png",
+      "sha256": "bc40c35e43ada77991eeb91481e2dfaf24f9a5594bb063e78a044bc7dbd76847"
+    },
+    {
+      "path": "docs/design/studies/ep-07/art/portraits-generated.png",
+      "sha256": "0bea6d73f8221417a6dc28a2925600d46f8c08980c0e57c50e0163adc54fd21f"
+    },
+    {
+      "path": "docs/design/studies/ep-07/art/sol-20-standing.png",
+      "sha256": "ef7cd3133b5284604c76c8e9ac531a9b0256bdea1ac549a150482440f6cd8ddd"
+    },
+    {
+      "path": "docs/design/studies/ep-07/art/sol-20-walking.png",
+      "sha256": "052c0ddb94629aff7911cfc4805c94175982254cd4cbc028f8d0ad1e7f4b8905"
+    },
+    {
+      "path": "docs/design/studies/ep-07/art/sol-20-working.png",
+      "sha256": "3f5b28fd06348338215e54b140f4aa9340453e43a90d19b8c04a4950d1a7f0bd"
+    },
+    {
+      "path": "docs/design/studies/ep-07/art/sol-24-coffee-static.png",
+      "sha256": "561e1e346479a63e5d70b92ae907ccf94b11bb49bca31bcb7805dd82de04040e"
+    },
+    {
+      "path": "docs/design/studies/ep-07/art/sol-24-coffee-walking.png",
+      "sha256": "bc90fd5bdb7604eb2764af6d523cdfd98000064c62032afb8e385670c628248b"
+    },
+    {
+      "path": "docs/design/studies/ep-07/art/sol-24-coffee.png",
+      "sha256": "ba394f9b8fc64029c70cfbc3bff3440cd37011b925716e3be6b3c66e96a8ebb4"
+    },
+    {
+      "path": "docs/design/studies/ep-07/art/sol-24-standing.png",
+      "sha256": "8f46afbddb356a7c402af46f723740666854522ae5ae5a0cb8dfe36d766bae5e"
+    },
+    {
+      "path": "docs/design/studies/ep-07/art/sol-24-walking.png",
+      "sha256": "691e8dd5ee9bfbd0fbe3892c382fb796b536dcb06fc18dd5e5ea8dc2db185b55"
+    },
+    {
+      "path": "docs/design/studies/ep-07/art/sol-24-working.png",
+      "sha256": "b26d6ac6cc88802049e3f2947b4beb79eeaecec409a91f7f110935af5ff39634"
+    },
+    {
+      "path": "docs/design/studies/ep-07/art/sol-coffee-generated.png",
+      "sha256": "033f629a8dc0e3dfc81c1b3a1e9c535cb7f1b8eb5aa2962cff5a4df430042d37"
+    },
+    {
+      "path": "docs/design/studies/ep-07/art/sol-portrait-24.png",
+      "sha256": "8080cac2b788c5b64e1d2dcb1c29d9f424b92097d7664a3c31c62d7bcbb75a9b"
+    },
+    {
+      "path": "docs/design/studies/ep-07/art/sol-portrait-32.png",
+      "sha256": "2ca3870ddc57b1a2507a1fde7f0b1cdc9478ec2ed3bb961d8415e97cf0655cde"
+    },
+    {
+      "path": "docs/design/studies/ep-07/art-derivations.json",
+      "sha256": "d1e741f4bc77f7b3faa7928b90c6764d23bbd54f0bee002517a54b4069e978d8"
+    },
+    {
+      "path": "docs/design/studies/ep-07/art-provenance.json",
+      "sha256": "a4fb798a6841c0da71a45ed07c1a924bbf5de2158cfe0359432ad4a1ab5e4484"
+    },
+    {
+      "path": "docs/design/studies/ep-07/generation-prompts.md",
+      "sha256": "3a7912fcd97a894b52e3c05495b8d8535a61845c26fc88b0b3c7fdd649138082"
+    },
+    {
+      "path": "docs/design/studies/ep-07/prepare-art.cjs",
+      "sha256": "30ac1e1aebf1c213dc63a36be22b975b9e7a97c5e6859925d48bf306cfc3820b"
+    },
+    {
+      "path": "docs/design/studies/ep-07/render-record.json",
+      "sha256": "50b68382545eb6b224206a254ab2fd41b7606a21c2b7d1d0b2830ea64306b13d"
+    },
+    {
+      "path": "docs/design/studies/ep-07/render-studies.cjs",
+      "sha256": "2dc9b6c16090d16e03bc842cf86112018cc49e613039e5902791c314f05e2e9e"
+    },
+    {
+      "path": "docs/design/studies/ep-07/renders/01-desktop-overview.png",
+      "sha256": "7f7b8837c2ff7ef0830a01f2dee8e99f15f04da1164df6a3f361261509c0c72f"
+    },
+    {
+      "path": "docs/design/studies/ep-07/renders/02-desktop-ari-model-usage.png",
+      "sha256": "32eb81ad71a7b45a9fc107de1b56b2832cdaba6666f6c2ebdcf1be42decb4333"
+    },
+    {
+      "path": "docs/design/studies/ep-07/renders/03-label-selection-comparison.png",
+      "sha256": "6f218c8d5d4a46940aabbeedfa49967a1b8e31d5fade4e2fac98d6cb48460f50"
+    },
+    {
+      "path": "docs/design/studies/ep-07/renders/04-sprite-cell-comparison.png",
+      "sha256": "6c33e30d3f3a70985ad70ee2203233559582b57160fdd2ecf7395f1191efcf2d"
+    },
+    {
+      "path": "docs/design/studies/ep-07/renders/05-fixed-hybrid-comparison.png",
+      "sha256": "ca237e8bcf080705dda3ef6c0d3ae092c5f1e1673aca0e26d53d9da97e5c8c17"
+    },
+    {
+      "path": "docs/design/studies/ep-07/renders/06a-compact-760x540.png",
+      "sha256": "f3ce4f6e9e65092331ec53ca8a86f65ab0eccfc7df07d101040ef7a29357608d"
+    },
+    {
+      "path": "docs/design/studies/ep-07/renders/06b-expanded-1100x760.png",
+      "sha256": "18ceb72b45a7981c23f1cd20f11289861874cacbd3fc0d4a568c0562536c72d4"
+    },
+    {
+      "path": "docs/design/studies/ep-07/renders/06c-compact-full-flow.png",
+      "sha256": "cdd944d76a5479b5891a873e71e71c34691c85b55b3017ac8bf4ad98b90b7c44"
+    },
+    {
+      "path": "docs/design/studies/ep-07/renders/06r-retained-selected-desktop.png",
+      "sha256": "e686305e04a88e8ac39e10ea01dd663e6a1b677a021880223fdbe568c009cd93"
+    },
+    {
+      "path": "docs/design/studies/ep-07/renders/07-controls-state-sheet.png",
+      "sha256": "f685b042680fde3801b95f991c1f5f0a226e65d75305831f20dbd8c622c671ba"
+    },
+    {
+      "path": "docs/design/studies/ep-07/renders/08-bounded-movement-storyboard.png",
+      "sha256": "a5394d1b2017dd60943f1d997a4edaa0ce855b70ffa64b8b3982b006b21d66ee"
+    },
+    {
+      "path": "docs/design/studies/ep-07/studies.css",
+      "sha256": "e763cd36ff697fdaab94703c0e325bd08c2e706fab2fdfa1b014b1a26cd0088e"
+    },
+    {
+      "path": "docs/design/studies/ep-07/studies.js",
+      "sha256": "f9b3c50749d058eca842812a52ce9bff3300e632201699bd04ca5176b1935b29"
+    },
+    {
+      "path": "docs/design/studies/ep-07/study.html",
+      "sha256": "7ad64725c09c30624c2cee4e9d24e6bf7ade55ffb7d6661cf614506ce7ba62fb"
+    }
+  ],
+  "ignoredMetadata": "Existing Finder .DS_Store left in place; not a design artifact."
+}

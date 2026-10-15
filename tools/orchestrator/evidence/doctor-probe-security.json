@@ -1,0 +1,443 @@
+{
+  "schemaVersion": 1,
+  "diagnosticVersion": "0.1.0",
+  "generatedAt": "2026-10-15T19:13:28.729Z",
+  "host": {
+    "os": "darwin",
+    "architecture": "arm64",
+    "node": "v24.22.0"
+  },
+  "repository": {
+    "root": null,
+    "head": null,
+    "clean": null,
+    "statusDigest": null
+  },
+  "tools": {
+    "node": {
+      "path": "/Users/anuar/.nvm/versions/node/v24.22.0/bin/node",
+      "version": null
+    },
+    "npm": {
+      "path": "/Users/anuar/.nvm/versions/node/v24.22.0/lib/node_modules/npm/bin/npm-cli.js",
+      "version": null
+    },
+    "git": {
+      "path": "/usr/bin/git",
+      "version": null
+    },
+    "gh": {
+      "path": "/opt/homebrew/Cellar/gh/2.102.0/bin/gh",
+      "version": null
+    },
+    "codex": {
+      "path": "/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS/codex",
+      "version": null,
+      "sha256": "0d5ac7aae20c4eda6242428d5e218c55ba96d8763fda2a271088ff37104b9d28"
+    }
+  },
+  "policy": {
+    "version": "orch-001/1",
+    "digest": "84622b381aff894cb60fdbeef6d93baecf886c00623e2c1dc51c7738dbe49e70",
+    "restrictions": {
+      "inference": false,
+      "shell": false,
+      "ambientSecrets": false,
+      "network": "denied; independent guard permits the controlled loopback positive control only",
+      "writes": "owned disposable fixtures only",
+      "metadata": "fixed version/help commands inside an OS guard",
+      "native": "Codex named permission profile inside an independent OS guard",
+      "pluginsAndMcp": "unverified; shell sandbox is insufficient evidence",
+      "authorization": "diagnostics never authorize implementation"
+    },
+    "guardDigest": "cca412e2bf4da3f56ab7d9b9f44fd78af0b58f76b35051f433384a3eaac3e761",
+    "nativeDigest": null
+  },
+  "fingerprint": null,
+  "checks": [
+    {
+      "id": "host.platform",
+      "required": true,
+      "status": "pass",
+      "evidenceType": "metadata",
+      "reason": "Only macOS arm64 is validated by this policy."
+    },
+    {
+      "id": "tool.node",
+      "required": true,
+      "status": "unverified",
+      "evidenceType": "metadata",
+      "reason": "Metadata execution unavailable or ambiguous."
+    },
+    {
+      "id": "tool.npm",
+      "required": true,
+      "status": "unverified",
+      "evidenceType": "metadata",
+      "reason": "Metadata execution unavailable or ambiguous."
+    },
+    {
+      "id": "tool.git",
+      "required": true,
+      "status": "unverified",
+      "evidenceType": "metadata",
+      "reason": "Metadata execution unavailable or ambiguous."
+    },
+    {
+      "id": "tool.gh",
+      "required": true,
+      "status": "unverified",
+      "evidenceType": "metadata",
+      "reason": "Metadata execution unavailable or ambiguous."
+    },
+    {
+      "id": "tool.codex",
+      "required": true,
+      "status": "unverified",
+      "evidenceType": "metadata",
+      "reason": "Metadata execution unavailable or ambiguous."
+    },
+    {
+      "id": "codex.interfaces",
+      "required": true,
+      "status": "unverified",
+      "evidenceType": "metadata",
+      "reason": "Help inspection withheld because the exact Codex version was not established."
+    },
+    {
+      "id": "security.plugins-mcp",
+      "required": true,
+      "status": "unverified",
+      "evidenceType": "observation",
+      "reason": "No non-inference proof of effective external-tool/plugin/MCP isolation. Shell denials and role TOML are insufficient.",
+      "evidence": {
+        "accountConfigurationPresent": true,
+        "configurationContentsRead": false,
+        "ambientSecretsForwarded": false
+      }
+    },
+    {
+      "id": "repository.baseline",
+      "required": true,
+      "status": "unverified",
+      "evidenceType": "observation",
+      "reason": "Repository baseline could not be established."
+    },
+    {
+      "id": "security.outer-guard",
+      "required": true,
+      "status": "unverified",
+      "evidenceType": "native",
+      "reason": "Independent guard enforcement was not established; Codex was not started."
+    },
+    {
+      "id": "security.network-positive-control",
+      "required": true,
+      "status": "unverified",
+      "evidenceType": "native",
+      "reason": "Controlled loopback connection must succeed under the outer guard before a native denial can pass.",
+      "evidence": {
+        "listenerBound": false,
+        "listenerError": "EPERM"
+      }
+    },
+    {
+      "id": "security.allowedRead",
+      "required": true,
+      "status": "unverified",
+      "evidenceType": "native",
+      "reason": "Native Codex boundary not exercised because the independent safety guard was unavailable."
+    },
+    {
+      "id": "security.create",
+      "required": true,
+      "status": "unverified",
+      "evidenceType": "native",
+      "reason": "Native Codex boundary not exercised because the independent safety guard was unavailable."
+    },
+    {
+      "id": "security.modify",
+      "required": true,
+      "status": "unverified",
+      "evidenceType": "native",
+      "reason": "Native Codex boundary not exercised because the independent safety guard was unavailable."
+    },
+    {
+      "id": "security.rename",
+      "required": true,
+      "status": "unverified",
+      "evidenceType": "native",
+      "reason": "Native Codex boundary not exercised because the independent safety guard was unavailable."
+    },
+    {
+      "id": "security.delete",
+      "required": true,
+      "status": "unverified",
+      "evidenceType": "native",
+      "reason": "Native Codex boundary not exercised because the independent safety guard was unavailable."
+    },
+    {
+      "id": "security.credential",
+      "required": true,
+      "status": "unverified",
+      "evidenceType": "native",
+      "reason": "Native Codex boundary not exercised because the independent safety guard was unavailable."
+    },
+    {
+      "id": "security.controller",
+      "required": true,
+      "status": "unverified",
+      "evidenceType": "native",
+      "reason": "Native Codex boundary not exercised because the independent safety guard was unavailable."
+    },
+    {
+      "id": "security.symlink",
+      "required": true,
+      "status": "unverified",
+      "evidenceType": "native",
+      "reason": "Native Codex boundary not exercised because the independent safety guard was unavailable."
+    },
+    {
+      "id": "security.gitWrite",
+      "required": true,
+      "status": "unverified",
+      "evidenceType": "native",
+      "reason": "Native Codex boundary not exercised because the independent safety guard was unavailable."
+    },
+    {
+      "id": "security.childWrite",
+      "required": true,
+      "status": "unverified",
+      "evidenceType": "native",
+      "reason": "Native Codex boundary not exercised because the independent safety guard was unavailable."
+    },
+    {
+      "id": "security.childCredential",
+      "required": true,
+      "status": "unverified",
+      "evidenceType": "native",
+      "reason": "Native Codex boundary not exercised because the independent safety guard was unavailable."
+    },
+    {
+      "id": "security.network",
+      "required": true,
+      "status": "unverified",
+      "evidenceType": "native",
+      "reason": "Native Codex boundary not exercised because the independent safety guard was unavailable."
+    },
+    {
+      "id": "security.fixture-integrity",
+      "required": true,
+      "status": "pass",
+      "evidenceType": "observation",
+      "reason": "Complete fixture tree checked after the attempted probes; symlinks are hashed without following them."
+    },
+    {
+      "id": "security.fixture-cleanup",
+      "required": true,
+      "status": "pass",
+      "evidenceType": "observation",
+      "reason": "Owned fixture directory removed."
+    },
+    {
+      "id": "repository.integrity",
+      "required": true,
+      "status": "unverified",
+      "evidenceType": "observation",
+      "reason": "Compares HEAD, working-tree status and protected input hashes before/after diagnostics."
+    },
+    {
+      "id": "codex.identity-stable",
+      "required": true,
+      "status": "pass",
+      "evidenceType": "observation",
+      "reason": "Executable content identity compared before/after diagnostics."
+    },
+    {
+      "id": "process.cleanup",
+      "required": true,
+      "status": "pass",
+      "evidenceType": "observation",
+      "reason": "Every owned process group must be confirmed terminated."
+    }
+  ],
+  "commands": [
+    {
+      "id": "metadata.node",
+      "exitCode": 71,
+      "signal": null,
+      "timedOut": false,
+      "overflow": false,
+      "interrupted": false,
+      "cleanupConfirmed": true,
+      "bytesObserved": 53,
+      "durationMs": 6,
+      "signals": [],
+      "outputDigest": "97e23c13336291c8a51cc1da026d43627fa6cbe70a39d676001d38bd66d9a113",
+      "aliasSetupWarning": false,
+      "guardUnavailable": true
+    },
+    {
+      "id": "metadata.npm",
+      "exitCode": 71,
+      "signal": null,
+      "timedOut": false,
+      "overflow": false,
+      "interrupted": false,
+      "cleanupConfirmed": true,
+      "bytesObserved": 53,
+      "durationMs": 5,
+      "signals": [],
+      "outputDigest": "97e23c13336291c8a51cc1da026d43627fa6cbe70a39d676001d38bd66d9a113",
+      "aliasSetupWarning": false,
+      "guardUnavailable": true
+    },
+    {
+      "id": "metadata.git",
+      "exitCode": 71,
+      "signal": null,
+      "timedOut": false,
+      "overflow": false,
+      "interrupted": false,
+      "cleanupConfirmed": true,
+      "bytesObserved": 53,
+      "durationMs": 5,
+      "signals": [],
+      "outputDigest": "97e23c13336291c8a51cc1da026d43627fa6cbe70a39d676001d38bd66d9a113",
+      "aliasSetupWarning": false,
+      "guardUnavailable": true
+    },
+    {
+      "id": "metadata.gh",
+      "exitCode": 71,
+      "signal": null,
+      "timedOut": false,
+      "overflow": false,
+      "interrupted": false,
+      "cleanupConfirmed": true,
+      "bytesObserved": 53,
+      "durationMs": 5,
+      "signals": [],
+      "outputDigest": "97e23c13336291c8a51cc1da026d43627fa6cbe70a39d676001d38bd66d9a113",
+      "aliasSetupWarning": false,
+      "guardUnavailable": true
+    },
+    {
+      "id": "metadata.codex",
+      "exitCode": 71,
+      "signal": null,
+      "timedOut": false,
+      "overflow": false,
+      "interrupted": false,
+      "cleanupConfirmed": true,
+      "bytesObserved": 53,
+      "durationMs": 5,
+      "signals": [],
+      "outputDigest": "97e23c13336291c8a51cc1da026d43627fa6cbe70a39d676001d38bd66d9a113",
+      "aliasSetupWarning": false,
+      "guardUnavailable": true
+    },
+    {
+      "id": "repository.root",
+      "exitCode": 71,
+      "signal": null,
+      "timedOut": false,
+      "overflow": false,
+      "interrupted": false,
+      "cleanupConfirmed": true,
+      "bytesObserved": 53,
+      "durationMs": 6,
+      "signals": [],
+      "outputDigest": "97e23c13336291c8a51cc1da026d43627fa6cbe70a39d676001d38bd66d9a113",
+      "aliasSetupWarning": false,
+      "guardUnavailable": true
+    },
+    {
+      "id": "repository.head",
+      "exitCode": 71,
+      "signal": null,
+      "timedOut": false,
+      "overflow": false,
+      "interrupted": false,
+      "cleanupConfirmed": true,
+      "bytesObserved": 53,
+      "durationMs": 5,
+      "signals": [],
+      "outputDigest": "97e23c13336291c8a51cc1da026d43627fa6cbe70a39d676001d38bd66d9a113",
+      "aliasSetupWarning": false,
+      "guardUnavailable": true
+    },
+    {
+      "id": "repository.status",
+      "exitCode": 71,
+      "signal": null,
+      "timedOut": false,
+      "overflow": false,
+      "interrupted": false,
+      "cleanupConfirmed": true,
+      "bytesObserved": 53,
+      "durationMs": 4,
+      "signals": [],
+      "outputDigest": "97e23c13336291c8a51cc1da026d43627fa6cbe70a39d676001d38bd66d9a113",
+      "aliasSetupWarning": false,
+      "guardUnavailable": true
+    },
+    {
+      "id": "repository.files",
+      "exitCode": 71,
+      "signal": null,
+      "timedOut": false,
+      "overflow": false,
+      "interrupted": false,
+      "cleanupConfirmed": true,
+      "bytesObserved": 53,
+      "durationMs": 5,
+      "signals": [],
+      "outputDigest": "97e23c13336291c8a51cc1da026d43627fa6cbe70a39d676001d38bd66d9a113",
+      "aliasSetupWarning": false,
+      "guardUnavailable": true
+    },
+    {
+      "id": "security.guard-control",
+      "exitCode": 71,
+      "signal": null,
+      "timedOut": false,
+      "overflow": false,
+      "interrupted": false,
+      "cleanupConfirmed": true,
+      "bytesObserved": 53,
+      "durationMs": 5,
+      "signals": [],
+      "outputDigest": "97e23c13336291c8a51cc1da026d43627fa6cbe70a39d676001d38bd66d9a113",
+      "aliasSetupWarning": false,
+      "guardUnavailable": true
+    }
+  ],
+  "ready": false,
+  "blockers": [
+    "tool.node",
+    "tool.npm",
+    "tool.git",
+    "tool.gh",
+    "tool.codex",
+    "codex.interfaces",
+    "security.plugins-mcp",
+    "repository.baseline",
+    "security.outer-guard",
+    "security.network-positive-control",
+    "security.allowedRead",
+    "security.create",
+    "security.modify",
+    "security.rename",
+    "security.delete",
+    "security.credential",
+    "security.controller",
+    "security.symlink",
+    "security.gitWrite",
+    "security.childWrite",
+    "security.childCredential",
+    "security.network",
+    "repository.integrity"
+  ],
+  "exitCode": 3
+}

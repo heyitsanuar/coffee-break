@@ -1,0 +1,104 @@
+[
+  {
+    "args": [
+      "--help"
+    ],
+    "exitCode": 0,
+    "stdout": "cb-flow 0.1.0 — local, non-inference diagnostics\nUsage:\n  cb-flow --help\n  cb-flow --version\n  cb-flow doctor [--json] [--probe-security]\n\ndoctor inspects fixed tool metadata. --probe-security explicitly enables\ndisposable native probes. Readiness never grants implementation approval.\nExit codes: 0 success; 1 failed check/internal error; 2 usage;\n3 unsupported/unverified; 130 interrupted after cleanup.\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "--version"
+    ],
+    "exitCode": 0,
+    "stdout": "0.1.0\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "doctor"
+    ],
+    "exitCode": 3,
+    "stdout": "ready=false\nexitCode=3\nblockers=tool.node, tool.npm, tool.git, tool.gh, tool.codex, codex.interfaces, security.plugins-mcp, repository.baseline, security.allowedRead, security.create, security.modify, security.rename, security.delete, security.credential, security.controller, security.symlink, security.gitWrite, security.childWrite, security.childCredential, security.network, repository.integrity\nUse --json for bounded evidence.\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "doctor",
+      "--json"
+    ],
+    "exitCode": 3,
+    "ready": false,
+    "blockers": [
+      "tool.node",
+      "tool.npm",
+      "tool.git",
+      "tool.gh",
+      "tool.codex",
+      "codex.interfaces",
+      "security.plugins-mcp",
+      "repository.baseline",
+      "security.allowedRead",
+      "security.create",
+      "security.modify",
+      "security.rename",
+      "security.delete",
+      "security.credential",
+      "security.controller",
+      "security.symlink",
+      "security.gitWrite",
+      "security.childWrite",
+      "security.childCredential",
+      "security.network",
+      "repository.integrity"
+    ],
+    "evidenceFile": "doctor.json",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "doctor",
+      "--probe-security"
+    ],
+    "exitCode": 3,
+    "stdout": "ready=false\nexitCode=3\nblockers=tool.node, tool.npm, tool.git, tool.gh, tool.codex, codex.interfaces, security.plugins-mcp, repository.baseline, security.outer-guard, security.network-positive-control, security.allowedRead, security.create, security.modify, security.rename, security.delete, security.credential, security.controller, security.symlink, security.gitWrite, security.childWrite, security.childCredential, security.network, repository.integrity\nUse --json for bounded evidence.\n",
+    "stderr": ""
+  },
+  {
+    "args": [
+      "doctor",
+      "--probe-security",
+      "--json"
+    ],
+    "exitCode": 3,
+    "ready": false,
+    "blockers": [
+      "tool.node",
+      "tool.npm",
+      "tool.git",
+      "tool.gh",
+      "tool.codex",
+      "codex.interfaces",
+      "security.plugins-mcp",
+      "repository.baseline",
+      "security.outer-guard",
+      "security.network-positive-control",
+      "security.allowedRead",
+      "security.create",
+      "security.modify",
+      "security.rename",
+      "security.delete",
+      "security.credential",
+      "security.controller",
+      "security.symlink",
+      "security.gitWrite",
+      "security.childWrite",
+      "security.childCredential",
+      "security.network",
+      "repository.integrity"
+    ],
+    "evidenceFile": "doctor-probe-security.json",
+    "stderr": ""
+  }
+]

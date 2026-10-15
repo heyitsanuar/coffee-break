@@ -5,7 +5,8 @@
  "type": "module",
  "workspaces": [
   "apps/*",
-  "packages/*"
+  "packages/*",
+  "tools/orchestrator"
  ],
  "scripts": {
   "dev": "npm run dev -w @coffee-break/desktop",

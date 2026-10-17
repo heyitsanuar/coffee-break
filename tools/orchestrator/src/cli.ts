@@ -7,6 +7,7 @@ Usage:
   cb-flow --help
   cb-flow --version
   cb-flow doctor [--json] [--probe-security]
+  cb-flow run create|status|pause|resume|cancel|recover [options]
 
 doctor inspects fixed tool metadata. --probe-security explicitly enables
 disposable native probes. Readiness never grants implementation approval.
@@ -18,6 +19,7 @@ type Doctor = (probe: boolean) => Promise<Report>;
 export async function runCli(args: string[], doctor?: Doctor): Promise<{ code: number; stdout: string; stderr: string }> {
   if (args.length === 1 && args[0] === '--help') return { code: 0, stdout: HELP, stderr: '' };
   if (args.length === 1 && args[0] === '--version') return { code: 0, stdout: VERSION + '\n', stderr: '' };
+  if (args[0] === 'run') return (await import('./workflow/cli.js')).runWorkflow(args.slice(1));
   if (args[0] !== 'doctor' || args.slice(1).some(arg => !['--json', '--probe-security'].includes(arg)) || new Set(args).size !== args.length) return { code: 2, stdout: '', stderr: HELP };
   try {
     const execute = doctor ?? (await import('./doctor.js')).doctor;

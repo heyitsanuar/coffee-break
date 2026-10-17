@@ -30,3 +30,10 @@ it('propagates failure precedence and the post-cleanup interrupt exit code', asy
     expect(JSON.parse(result.stdout).exitCode).toBe(exitCode);
   }
 });
+it('routes only workflow controls without invoking doctor and preserves help/version exits', async () => {
+  const doctor = vi.fn();
+  const result = await runCli(['run', 'approve', 'anything'], doctor);
+  expect(result.code).toBe(2); expect(doctor).not.toHaveBeenCalled();
+  expect((await runCli(['--help'], doctor)).stdout).toContain('run create|status|pause|resume|cancel|recover');
+  expect((await runCli(['--version'], doctor)).code).toBe(0);
+});

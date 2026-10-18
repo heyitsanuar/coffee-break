@@ -1,6 +1,6 @@
 # Local development tooling
 
-Standalone development tooling for [ORCH-001 #100](https://github.com/heyitsanuar/coffee-break/issues/100) and [ORCH-002 #101](https://github.com/heyitsanuar/coffee-break/issues/101), under DEV-ORCH #99. It has no application-runtime imports or runtime dependencies. ORCH-001 provides diagnostics; ORCH-002 adds explicit local workflow-state controls. Neither executes agents, performs inference, grants approval, changes GitHub or implements US-037.
+Standalone development tooling for [ORCH-001 #100](https://github.com/heyitsanuar/coffee-break/issues/100), [ORCH-002 #101](https://github.com/heyitsanuar/coffee-break/issues/101) and [ORCH-003 #102](https://github.com/heyitsanuar/coffee-break/issues/102), under DEV-ORCH #99. It has no application-runtime imports or runtime dependencies. ORCH-001 provides diagnostics; ORCH-002 adds explicit local workflow-state controls. ORCH-003 provides input/report contracts and explicit artifact controls. No subsystem executes agents, performs inference, grants approval, changes GitHub or implements US-037.
 
 The supported baseline is macOS arm64, Node.js 22+, npm 10+, Git 2+, GitHub CLI 2+, and **exactly Codex CLI `0.162.0-alpha.17.2`**. Other Codex versions are unsupported until validated explicitly. A matching version/help interface is metadata evidence, never proof of sandbox enforcement.
 
@@ -181,3 +181,128 @@ Missing or different boot-session identity, malformed lock files and an interrup
 Limits fail explicitly without dropping history. Recovery archives and failed snapshot temporaries remain in the private run directory for inspection; no automatic retention/cleanup policy is introduced.
 
 Workflow tests use real disposable files, deterministic injected I/O failures and IPC barriers. Real competing/killed controllers execute the current storage source transpiled by the already installed TypeScript compiler into owned scratch storage, independent of `dist/`. They do not execute Codex or access real credentials. Run the complete validation commands above; native security enforcement remains separately unverified.
+
+## ORCH-003 input bundles and report contracts
+
+ORCH-003 adds explicit input capture, immutable retained artifacts, offline integrity verification, requested freshness checks and validation-only report contracts. It does not execute agents, grant PO approval, admit production handoff or change diagnostic security policy. Workflow `ready`, artifact integrity, source freshness and native execution readiness are separate facts.
+
+### Commands
+
+After building, use `node tools/orchestrator/dist/src/cli.js` followed by:
+
+```sh
+inputs capture RUN_UUID --config /absolute/path/selection.json --revision N
+inputs attach RUN_UUID --digest SHA256 --mode accept --revision N
+inputs verify RUN_UUID
+inputs verify RUN_UUID --digest CANDIDATE_SHA256
+inputs fresh RUN_UUID --config /absolute/path/selection.json
+report validate RUN_UUID --attempt ATTEMPT_ID --report-id REPORT_UUID --payload /absolute/path/payload.json
+report validate RUN_UUID --attempt ATTEMPT_ID --report-id REPORT_UUID --payload /absolute/path/payload.json --human
+```
+
+`capture` publishes a complete bundle and its separate capture record under the run's writer lease. It returns the reference without advancing workflow revision or attaching inputs. `attach --mode accept` attaches verified inputs at the inputs stage. To replace an existing input, explicitly use `attach --mode replace --digest NEW_SHA256 --revision N`, then `attach --mode accept --digest NEW_SHA256 --revision N+1`. These are separate journal transitions; interruption between them leaves the inputs stage pending acceptance. Old bundles/history remain intact. Attachment supports paired `--event-id UUID --at ISO_TIMESTAMP` flags for exact idempotent retries.
+
+`verify` performs no network call or source recapture. With a candidate digest it reports whether that verified bundle is active. Without one it verifies the current workflow input. `fresh` additionally checks current issue/repository/import/policy/template inputs; it neither stores the recapture nor changes workflow state. A successful stored-integrity check is not evidence of freshness. `run status` retains its existing workflow/storage semantics.
+
+`report validate` is pure validation: it stores no report, completes no attempt and grants no approval. It requires an actual unsettled running/interrupted attempt from the run and the active verified bundle. The CLI has no trusted execution-observation or N/A-policy input flag; its coverage assessment cannot establish that ACs passed. The library contract accepts explicit controller-owned observation/coverage policy inputs for future integration. Producer provenance identifies validation-only, unverified external output, not a demonstrated Codex session. `--human` renders escaped text from the validated record.
+
+Commands return bounded JSON, except the escaped human report. Exit 0 means the requested operation/validation succeeded; a partial/interrupted report may be structurally valid while `successfulCompletion` is false. Exit 1 means rejected/blocked/drift/I/O/ownership/integrity/quota failure; 2 means invalid command/arguments; 3 means unsupported schema or unavailable freshness. No exit authorizes execution, implementation, approval or handoff.
+
+### Selection contract
+
+The selection file is strict JSON, version 1. This example describes synthetic generic inputs, not authorized US-037 inputs:
+
+```json
+{
+  "schemaVersion": 1,
+  "repository": "owner/repo",
+  "story": { "id": "STORY-1", "issue": 7 },
+  "baselineSha": "FULL_PINNED_COMMIT_SHA",
+  "selected": [
+    {
+      "path": "AGENTS.md",
+      "kind": "policy",
+      "provenance": { "origin": "repository-governance", "limitations": [] }
+    }
+  ],
+  "imports": [
+    {
+      "kind": "developer_discovery",
+      "path": "/absolute/path/discovery.md",
+      "origin": "handoff:developer-discovery-version",
+      "basisSha": "FULL_PINNED_COMMIT_SHA",
+      "limitations": ["Native checks not performed"],
+      "compatibility": { "mode": "exact", "policyDigest": null, "rationale": "" }
+    },
+    {
+      "kind": "planner_scope",
+      "path": "/absolute/path/scope.md",
+      "origin": "handoff:planner-scope-version",
+      "basisSha": "FULL_PINNED_COMMIT_SHA",
+      "limitations": [],
+      "compatibility": { "mode": "exact", "policyDigest": null, "rationale": "" }
+    }
+  ],
+  "scope": {
+    "allowedChanges": ["src/example.ts"],
+    "nonGoals": ["No autonomous execution"],
+    "validationPlan": ["typecheck", "tests"],
+    "unresolvedDecisions": []
+  }
+}
+```
+
+Supply real full 40/64-hex commit identities. Selected kinds are `source`, `static_design`, `manifest`, `policy`, `template`; at least one selected policy is required. Policy/template identities are derived from selected bytes. Scope paths are relative, with optional trailing `/**`; they are data, never executed instructions. Issue AC parsing supports one `- [ ] AC-NN: text` declaration per line under `## Acceptance Criteria` (case-insensitive heading); unsupported continuations/formats block rather than silently losing text.
+
+Imports preserve original bytes, including line endings, and require distinct Developer discovery and Planner scope kinds. Origins are stable logical identifiers/URLs, not local absolute/file-URI paths; physical import locators remain outside the portable core. Exact basis policy requires the pinned baseline. Historical mode requires an explicit rationale and `policyDigest` matching a retained selected policy; it preserves the older basis and does not assert current-basis authority or PO authenticity.
+
+US-037 remains blocked with `PILOT_INPUTS_REQUIRED`: authoritative discovery/scope inputs have not been supplied or approved. No override flag, fabricated pilot document or production pilot bundle is provided. Enabling actual pilot readiness requires a separate reviewed, PO-authorized authoritative-input decision.
+
+### Identity, source capture and reference preservation
+
+The scope core contains version/kind, repository/story, baseline, clean-checkout fact, exact issue fields/ACs, file/import manifest, allowed scope, non-goals, validation plan, unresolved decisions and applicable policy/template identities. Its SHA-256 uses the existing bounded canonical JSON encoding; no RFC 8785 claim is made. File/import/applicable collections have stable ordering. Original blob bytes are never normalized. Run/capture UUID, capture/receipt time, local repository root and storage paths live outside this fingerprint.
+
+Capture requires a full pinned SHA, canonical repository root and clean tracked/untracked status. It reads selected Git blobs through fixed tree/blob operations without filters, compares working files before/after, and rechecks HEAD/status. Unsupported modes, symlinks, hard links, traversal, credential/configuration paths and missing/changed inputs block. This is a point-in-time cooperative capture, not an atomic cross-GitHub/filesystem transaction or hostile same-user isolation.
+
+Working-tree observation uses a private temporary Git directory containing only a bounded, descriptor-checked copy of the index, the resolved HEAD, a minimal controller configuration and optional local `info/exclude` bytes. It points at the original object directory for reads. Repository configuration, hooks and `info/attributes` are never copied. Local `filter.*.clean`/`filter.*.process` definitions therefore cannot execute during status, even when `.gitattributes` selects them; no filter-name enumeration/race or outer-shell assumption is used. Tracked changes and nonignored untracked files remain checked; worktree `.gitignore` and local `info/exclude` exclusions are preserved. Capture and explicitly requested freshness use the same observation path, without modifying the original index/configuration.
+
+Before status, the private view inspects **every** index entry using `git ls-files --stage -v -z`. Only recognized uppercase `H`, stage-zero entries with supported modes and the expected object-ID length are admitted. Lowercase `h` identifies assume-unchanged, uppercase `S` identifies skip-worktree, and lowercase `s` identifies both; any of these returns `READ_GIT_INDEX_FLAGS_UNSUPPORTED` before status runs, including on unselected files. Capture is blocked and freshness is `unverified`; no existing bundle is replaced. Review these flags in the source checkout before explicitly retrying. The controller never clears flags or rewrites the original index. Missing/unknown tags, ambiguous framing, unmerged stages or unsupported index layouts fail closed with `READ_GIT_ISOLATION_UNVERIFIED`.
+
+Global/system configuration and attributes are disabled; missing objects cannot trigger lazy fetch and replacement refs are disabled. Git must support the fixed metadata and isolation options, including `--no-lazy-fetch`; unsupported options fail closed. Missing/unsafe/oversized indexes or excludes, submodules, sparse/split indexes needing unrepresented metadata, and failed private setup return `READ_GIT_ISOLATION_UNVERIFIED`, never a fallback to repository-configured status. Cleanup failure blocks success. The complete observation shares a 30-second deadline with existing process termination limits. Private temporary metadata is removed on normal success/error/cancellation; a controller crash can leave inert private temporary metadata.
+
+Repository-specific normalization, file-mode/ignore settings and external exclude files are intentionally not loaded. This can conservatively block a checkout that ordinary configured Git calls clean; it does not waive a cleanliness check. This is configuration isolation for fixed Git observations, not native sandbox enforcement or protection against a hostile same-user process altering the private scratch directory. Existing filesystem TOCTOU/ABA and point-in-time limitations remain.
+
+PNG references must be classified as static design, retain a matching selected manifest declaration and have bounded PNG headers. Four published EP-07 manifest formats are supported: artifact inventory, preservation inventory and the study/refinement render records. Unknown formats block. Only the exact documented artifact-inventory self-entry may omit its own digest; an outer digest still covers the unchanged manifest. Other missing digests fail. Old absolute provenance paths and proposal banners remain original data and are never used as filesystem locators. Design references and imported claims cannot establish runtime/native observations.
+
+### Storage, bounds and recovery
+
+Per-run private storage retains `blob-SHA256.bin`, `bundle-SHA256.json`, `capture-UUID.json`, optional validated `report-UUID.json`, and preserved `artifact.tmp-UUID.json` files. No database/global object store is introduced. Workflow events/checkpoints contain only small references; journal v1 and its limits are unchanged.
+
+Publication requires the existing writer token, validates inputs, synchronizes exclusive temporaries, publishes complete objects without replacing accepted objects, verifies content and capture bindings, then permits a separate journal attachment. Existing same-name/different-content objects conflict. Partial/unreferenced artifacts survive failures and count toward quota; no automatic eviction, adoption, repair or migration occurs. A matching portable hash is not authenticated human authorization.
+
+After `inputs.changed` selects a verified replacement, acceptance must bind that exact reference ID and digest. The shared reducer enforces this for both typed attachment and `WorkflowStore.apply`, and journal replay recomputes the same rule. A different bundle or an opaque-reference substitution is durably rejected and audited without changing the selected input/stage/revision. Explicit acceptance of the selected bundle remains available after restart. Journal v1 and event schemas are unchanged; legacy opaque-only transitions retain their existing behavior.
+
+| Input/artifact resource | Maximum |
+| --- | ---: |
+| Selected files | 256 |
+| Individual selected object | 8 MiB |
+| Issue snapshot | 1 MiB |
+| Each discovery/scope import | 2 MiB |
+| Canonical manifest | 1 MiB |
+| Complete bundle | 64 MiB |
+| Structured report | 1 MiB |
+| Retained artifacts per run, including failures | 256 MiB |
+
+Limits fail with bounded codes and preserve prior evidence. `INPUT_FILE_MISSING`, `SOURCE_CHANGED`, `DIRTY_CHECKOUT`, `MANIFEST_INVALID`, `CONTENT_MISMATCH`, `ARTIFACT_QUOTA`, `IMPORT_BASIS_MISMATCH` and `PILOT_INPUTS_REQUIRED` require correction of the selected inputs or a separate recovery decision before explicit retry. Missing/legacy input references block new consumers while existing legacy workflow controls remain subject to ORCH-002's guards.
+
+Recovery never runs Git/GitHub, recaptures sources, adopts an orphan, launches an agent or settles an interrupted attempt. Native macOS dead-writer reclamation remains unavailable without verified boot identity. Hardware power-loss durability and hostile same-user TOCTOU/ABA containment remain unverified; cooperative file/directory checks and process-crash tests do not prove them.
+
+### GitHub and report trust boundaries
+
+The controller's fixed GitHub operation is `gh issue view NUMBER --repo OWNER/REPO --json number,url,title,body,state`. It validates identity and complete response/AC fields and fails closed on auth/read/parse errors. The host's normal home-backed gh session is opaque to the controller; no token is read or logged by this code. Token-only environment sessions and custom gh config directories are not forwarded. Git and GitHub subprocesses use fixed argv, no shell, bounded binary output, a 30-second deadline and owned-group TERM/KILL cleanup. Raw stderr is never returned. This separate trusted-controller boundary does not widen ORCH-001's diagnostic runner or establish native network/credential/plugin isolation.
+
+Strict report records separate controller identity from payload and assessment. Every expected AC appears once; N/A requires rationale and an applicable controller policy. Evidence resolves only to retained inputs or explicitly controller-verified observations bound to the run/input/SHA. Unsupported claims remain unverified, and validation claims without verified execution observations are assessed unverified. Historical settled attempts cannot be rebound to new inputs. Partial/interrupted output never counts as successful completion.
+
+The artifact primitive supports immutable validated-report storage under an existing writer lease for fault/identity tests and later integration; the CLI performs validation only. Same report identity/bindings/payload is a duplicate even with a later receipt time; changed content/bindings conflict. No report collection loop, execution adapter, production approval or handoff is enabled.
+
+Durable report publication additionally checks that the controller state exactly matches the verified current journal/checkpoint and that no unresolved intent exists. Report observation provenance records revision/sequence separately from the idempotency identity. Offline report verification reconstructs that verified historical prefix, so later interruption cannot erase the original report or reinterpret it as settling the current attempt. Pure validation still requires a trusted controller context; it does not authenticate a producer session.

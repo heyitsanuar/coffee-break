@@ -1,5 +1,5 @@
 import { constants, type BigIntStats } from 'node:fs';
-import { lstat, mkdir, open, realpath, rename, unlink, type FileHandle } from 'node:fs/promises';
+import { lstat, mkdir, open, realpath, readdir, rename, unlink, type FileHandle } from 'node:fs/promises';
 import { homedir, platform } from 'node:os';
 import { dirname, isAbsolute, join, parse, relative, resolve, sep } from 'node:path';
 import { randomUUID } from 'node:crypto';
@@ -81,7 +81,7 @@ export class StoragePaths {
 export class RunDirectory {
   constructor(readonly path: string, private readonly root: string, private readonly anchor: Awaited<ReturnType<typeof chain>>) {}
   private filename(name: string): string {
-    demand(/^(?:journal\.jsonl|snapshot\.json|writer\.lock|recovery\.lock|intent\.json|(?:snapshot\.tmp|snapshot\.corrupt|intent\.reconciled)-[0-9a-f-]{36}\.json)$/.test(name), 'UNSAFE_PATH');
+    demand(/^(?:journal\.jsonl|snapshot\.json|writer\.lock|recovery\.lock|intent\.json|(?:snapshot\.tmp|snapshot\.corrupt|intent\.reconciled|artifact\.tmp|capture|report)-[0-9a-f-]{36}\.json|blob-[a-f0-9]{64}\.bin|bundle-[a-f0-9]{64}\.json)$/.test(name), 'UNSAFE_PATH');
     return join(this.path, name);
   }
   async verify(): Promise<void> { await unchanged(this.anchor, this.root); }
@@ -101,9 +101,9 @@ export class RunDirectory {
       return handle;
     } catch (error) { await handle.close(); throw error; }
   }
-  async create(name: string, bytes: Buffer, beforeSync?: (handle: FileHandle) => Promise<void>): Promise<FileIdentity> {
+  async create(name: string, bytes: Buffer, beforeSync?: (handle: FileHandle) => Promise<void>, beforeWrite?: (handle: FileHandle) => Promise<void>): Promise<FileIdentity> {
     const handle = await this.descriptor(name, constants.O_WRONLY | constants.O_CREAT | constants.O_EXCL, false);
-    try { await writeAll(handle, bytes); await beforeSync?.(handle); await handle.sync(); return identity(await handle.stat({ bigint: true })); } finally { await handle.close(); }
+    try { await beforeWrite?.(handle); await writeAll(handle, bytes); await beforeSync?.(handle); await handle.sync(); return identity(await handle.stat({ bigint: true })); } finally { await handle.close(); }
   }
   async openAppend(name: string): Promise<FileHandle> { return this.descriptor(name, constants.O_WRONLY | constants.O_APPEND, true); }
   async read(name: string, limit: number): Promise<Buffer | null> {
@@ -131,5 +131,10 @@ export class RunDirectory {
   async sync(): Promise<void> {
     await this.verify(); await syncDirectory(this.path, this.anchor[this.anchor.length - 1].identity);
   }
-  temporary(kind: 'snapshot.tmp' | 'snapshot.corrupt' | 'intent.reconciled'): string { return `${kind}-${randomUUID()}.json`; }
+  async entries(): Promise<Array<{ name: string; size: bigint }>> {
+    await this.verify(); const entries: Array<{ name: string; size: bigint }> = [];
+    for (const name of await readdir(this.path)) { const found = await this.inspect(name); demand(found, 'CONCURRENT_CHANGE'); entries.push({ name, size: found.stat.size }); }
+    await this.verify(); return entries;
+  }
+  temporary(kind: 'snapshot.tmp' | 'snapshot.corrupt' | 'intent.reconciled' | 'artifact.tmp'): string { return `${kind}-${randomUUID()}.json`; }
 }

@@ -4,6 +4,9 @@ import { acquire, localLockEnvironment, readLock, reconcileLock, type LockEnviro
 import { appendRecord, makeRecord, noFault, replay, stateAfter, type Fault, type JournalView, type Origin } from './journal.js';
 import type { Disposition } from './reducer.js';
 import { StoragePaths, type RunDirectory } from './paths.js';
+import { ArtifactStore, bindBundle, type ArtifactFault } from '../inputs/artifacts.js';
+import type { PreparedBundle } from '../inputs/bundle.js';
+import type { Reference } from './contracts.js';
 
 type SnapshotHealth = 'current' | 'missing' | 'stale' | 'corrupt' | 'ahead' | 'mismatch' | 'unsupported' | 'not_checked';
 type Health = 'ok' | 'blocked' | 'busy' | 'recovery_required' | 'uncertain' | 'snapshot_stale';
@@ -52,8 +55,10 @@ export class WorkflowStore {
   private readonly paths: StoragePaths;
   private readonly fault: Fault;
   private readonly environment: LockEnvironment;
-  constructor(root?: string, options: { fault?: Fault; lockEnvironment?: LockEnvironment } = {}) {
+  private readonly artifactFault?: ArtifactFault;
+  constructor(root?: string, options: { fault?: Fault; lockEnvironment?: LockEnvironment; artifactFault?: ArtifactFault } = {}) {
     this.paths = new StoragePaths(root); this.fault = options.fault ?? noFault; this.environment = options.lockEnvironment ?? localLockEnvironment;
+    this.artifactFault = options.artifactFault;
   }
   private failure(id: string, error: unknown, state: RunState | null = null): Operation {
     const code = errorCode(error); return operation(id, state, code === 'LOCK_BUSY' ? 'busy' : 'blocked', code, error instanceof WorkflowError ? error.exitCode : 1);
@@ -83,12 +88,12 @@ export class WorkflowStore {
       demand(!await readLock(dir) && (await dir.inspect('journal.jsonl'))?.stat.size === BigInt(check.view.bytes), 'CONCURRENT_CHANGE'); return this.report(id, check);
     } catch (error) { return this.failure(id, error); }
   }
-  private async owned(id: string, action: (dir: RunDirectory) => Promise<Operation>, lockToken?: string): Promise<Operation> {
+  private async owned(id: string, action: (dir: RunDirectory, writerToken: string) => Promise<Operation>, lockToken?: string): Promise<Operation> {
     let result: Operation; let lease: Awaited<ReturnType<typeof acquire>> | undefined;
     try {
       const dir = await this.paths.open(id);
       if (lockToken !== undefined) await reconcileLock(dir, lockToken, this.environment);
-      lease = await acquire(dir, this.environment); result = await action(dir);
+      lease = await acquire(dir, this.environment); result = await action(dir, lease.owner.token);
     } catch (error) { result = this.failure(id, error); }
     if (lease) {
       try { await lease.release(); } catch { result.storage = { ...result.storage, health: 'blocked', code: 'LOCK_RELEASE_FAILED' }; result.exitCode = 1; }
@@ -107,8 +112,43 @@ export class WorkflowStore {
   async apply(id: string, input: unknown, origin: Origin = 'operator'): Promise<Operation> {
     return this.owned(id, async dir => {
       const check = await this.inspect(dir, id); const report = this.report(id, check); if (report.exitCode) return report;
+      // Legacy opaque references remain metadata only. New bundle references
+      // cannot bypass artifact verification through the existing event API.
+      // Pending-input identity is reduced by makeRecord for BOTH entry points;
+      // rejected substitutions still commit an audit record and replay safely.
+      const event = (() => { try { return parseEvent(input); } catch { return null; } })();
+      if (event && (event.type === 'inputs.accepted' || event.type === 'inputs.changed') && event.payload.input.id.startsWith('bundle-v1:') && makeRecord(check.view, input, origin).disposition === 'accepted') await new ArtifactStore(dir).verifyBundle(event.payload.input, check.view.state!);
+      if (event?.type === 'attempt.started' && check.view.state?.input?.id.startsWith('bundle-v1:') && makeRecord(check.view, input, origin).disposition === 'accepted') await new ArtifactStore(dir).verifyBundle(check.view.state.input, check.view.state);
       return this.commit(dir, check.view, input, origin);
     });
+  }
+  async publishInputs(id: string, expectedRevision: number, prepared: PreparedBundle): Promise<Operation & { artifact?: { reference: Reference; captureId: string } }> {
+    return this.owned(id, async (dir, writerToken) => {
+      const check = await this.inspect(dir, id); const report = this.report(id, check); if (report.exitCode) return report;
+      demand(check.view.state?.revision === expectedRevision, 'STALE_REVISION');
+      bindBundle(prepared.core, prepared.capture, check.view.state);
+      const reference = await new ArtifactStore(dir, { fault: this.artifactFault, writerToken }).publishBundle(prepared);
+      return Object.assign(operation(id, check.view.state, 'ok', 'BUNDLE_PUBLISHED'), { artifact: { reference, captureId: prepared.capture.id } });
+    });
+  }
+  async attachInputs(id: string, expectedRevision: number, reference: Reference, mode: 'accept' | 'replace', metadata: { eventId?: string; at?: string } = {}): Promise<Operation> {
+    return this.owned(id, async dir => {
+      const check = await this.inspect(dir, id); const report = this.report(id, check); if (report.exitCode) return report;
+      const state = check.view.state!;
+      demand(mode === 'accept' || mode === 'replace', 'INVALID_ARGUMENTS');
+      const event = { schemaVersion: 1, runId: id, eventId: metadata.eventId ?? randomUUID(), at: metadata.at ?? this.environment.now(), expectedRevision, type: mode === 'accept' ? 'inputs.accepted' : 'inputs.changed', payload: { input: reference } };
+      if (makeRecord(check.view, event, 'operator').disposition !== 'accepted') return this.commit(dir, check.view, event, 'operator');
+      await new ArtifactStore(dir).verifyBundle(reference, state);
+      if (mode === 'accept') demand(state.stage === 'inputs' && (!state.input || canonical(state.input) === canonical(reference)), 'INPUT_REPLACEMENT_REQUIRED');
+      else demand(state.input && canonical(state.input) !== canonical(reference), 'INPUT_REPLACEMENT_REQUIRED');
+      return this.commit(dir, check.view, event, 'operator');
+    });
+  }
+  async verifyInputs(id: string, candidate?: Reference): Promise<Awaited<ReturnType<ArtifactStore['verifyBundle']>> & { state: RunState; active: boolean }> {
+    const first = await this.status(id); demand(first.exitCode === 0 && first.state, first.storage.code); const reference = candidate ?? first.state.input; demand(reference, 'INPUTS_REQUIRED');
+    const result = await new ArtifactStore(await this.paths.open(id)).verifyBundle(reference, first.state);
+    const last = await this.status(id); demand(last.exitCode === 0 && last.state?.journalSequence === first.state.journalSequence, 'CONCURRENT_CHANGE');
+    return { ...result, state: first.state, active: first.state.input !== null && canonical(reference) === canonical(first.state.input) };
   }
   private async snapshot(dir: RunDirectory, view: JournalView): Promise<void> {
     const bytes = Buffer.from(canonical({ schemaVersion: 1, sequence: view.records.length, headHash: view.headHash, state: view.state }, LIMITS.snapshot));

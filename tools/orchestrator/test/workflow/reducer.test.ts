@@ -54,6 +54,16 @@ it('rejects wrong run, stale revisions, unknown events and repeated creation', (
   expect(reduce(state, { ...event('run.paused', {}, state), runId: '22222222-2222-4222-8222-222222222222' }).code).toBe('RUN_MISMATCH');
   expect(reduce(state, { ...event('run.paused', {}, state), type: 'timer.approved' })).toMatchObject({ disposition: 'rejected', state });
 });
+it('binds verified pending replacements during reduction while preserving opaque legacy transitions', () => {
+  const bundle = (value: string) => ({ id: `bundle-v1:${value.repeat(64)}`, digest: value.repeat(64) });
+  const selected = advance(advance(initial(), 'inputs.accepted', { input: bundle('a') }), 'inputs.changed', { input: bundle('b') });
+  for (const input of [bundle('c'), { id: 'legacy', digest: 'b'.repeat(64) }, { id: bundle('b').id, digest: 'c'.repeat(64) }]) {
+    expect(reduce(selected, event('inputs.accepted', { input }, selected))).toMatchObject({ disposition: 'rejected', code: 'INPUT_REPLACEMENT_REQUIRED', state: selected });
+  }
+  expect(advance(selected, 'inputs.accepted', { input: bundle('b') })).toMatchObject({ input: bundle('b'), stage: 'designer_review' });
+  const legacy = advance(initial(), 'inputs.changed', { input: ref });
+  expect(advance(legacy, 'inputs.accepted', { input: { ...ref, id: 'other' } }).stage).toBe('designer_review');
+});
 
 it('preserves reconciliation obligations through blocking and rejects settlement without evidence', () => {
   const blockedRunning = advance(running(), 'run.blocked', { reason });

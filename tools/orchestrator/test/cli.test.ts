@@ -37,3 +37,9 @@ it('routes only workflow controls without invoking doctor and preserves help/ver
   expect((await runCli(['--help'], doctor)).stdout).toContain('run create|status|pause|resume|cancel|recover');
   expect((await runCli(['--version'], doctor)).code).toBe(0);
 });
+it('routes bounded input/report commands without invoking diagnostics or granting approval', async () => {
+  const doctor = vi.fn();
+  for (const args of [['inputs', 'approve', 'anything'], ['report', 'execute', 'anything']]) expect((await runCli(args, doctor)).code).toBe(2);
+  expect(doctor).not.toHaveBeenCalled();
+  expect((await runCli(['--help'], doctor)).stdout).toContain('inputs capture|attach|verify|fresh');
+});

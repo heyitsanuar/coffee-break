@@ -33,6 +33,9 @@ export function reduce(previous: RunState | null, input: unknown): Reduction {
   switch (event.type) {
     case 'inputs.accepted':
       if (state.stage !== 'inputs') return reject('ILLEGAL_TRANSITION');
+      // A selected verified replacement cannot be substituted at acceptance.
+      // Keep this in reduction so both store entry points and replay audit it.
+      if (state.input && (state.input.id.startsWith('bundle-v1:') || event.payload.input.id.startsWith('bundle-v1:')) && canonical(state.input) !== canonical(event.payload.input)) return reject('INPUT_REPLACEMENT_REQUIRED');
       state.input = event.payload.input; state.stage = 'designer_review'; break;
     case 'inputs.changed':
       state.input = event.payload.input; state.stage = 'inputs'; state.status = 'ready'; state.review = null; state.reason = null;

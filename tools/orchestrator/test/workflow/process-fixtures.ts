@@ -12,7 +12,9 @@ export async function compileRuntime(root: string): Promise<string> {
   const output = join(root, 'runtime'); await mkdir(output, { mode: 0o700 });
   await writeFile(join(output, 'package.json'), '{"type":"module"}', { mode: 0o600 });
   const source = fileURLToPath(new URL('../../src/', import.meta.url));
-  for (const path of ['policy.ts', ...(await readdir(join(source, 'workflow'))).filter(name => name.endsWith('.ts')).map(name => 'workflow/' + name)]) {
+  const modules = ['policy.ts'];
+  for (const directory of ['workflow', 'inputs', 'reports']) modules.push(...(await readdir(join(source, directory))).filter(name => name.endsWith('.ts')).map(name => directory + '/' + name));
+  for (const path of modules) {
     await mkdir(join(output, path, '..'), { recursive: true, mode: 0o700 });
     const compiled = ts.transpileModule(await readFile(join(source, path), 'utf8'), { compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ES2022 } });
     await writeFile(join(output, path.replace(/\.ts$/, '.js')), compiled.outputText, { mode: 0o600 });
@@ -20,7 +22,7 @@ export async function compileRuntime(root: string): Promise<string> {
   return pathToFileURL(output + '/').href;
 }
 export interface WorkerMessage { ok?: boolean; token?: string; code?: string; phase?: string; report?: Operation; processLaunchAttempts?: number }
-export function worker(root: string, runtime: string, mode: 'hold' | 'attempt' | 'reconcile' | 'store-hold' | 'store-pause' | 'recover-cold', token = ''): { child: ChildProcess; next(): Promise<WorkerMessage>; stop(): Promise<void> } {
+export function worker(root: string, runtime: string, mode: 'hold' | 'attempt' | 'reconcile' | 'store-hold' | 'store-pause' | 'recover-cold' | 'artifact-hold', token = ''): { child: ChildProcess; next(): Promise<WorkerMessage>; stop(): Promise<void> } {
   const program = `
     const [root,runtime,mode,token]=process.argv.slice(1);
     let processLaunchAttempts=0;
@@ -39,6 +41,13 @@ export function worker(root: string, runtime: string, mode: 'hold' | 'attempt' |
       const {WorkflowStore}=await import(runtime+'workflow/store.js');
       const report=await new WorkflowStore(root).recover('11111111-1111-4111-8111-111111111111',1);
       process.send({report,processLaunchAttempts});process.disconnect();
+    }else if(mode==='artifact-hold') {
+      const {WorkflowStore}=await import(runtime+'workflow/store.js');
+      const prepared=await new Promise(resolve=>{process.once('message',resolve);process.send({phase:'input-ready'})});
+      prepared.blobs=new Map(prepared.blobs.map(([id,data])=>[id,Buffer.from(data,'base64')]));
+      const fault=async point=>{if(point==='beforePublish')await new Promise(resolve=>{process.once('message',resolve);process.send({phase:'artifact-written'})})};
+      const report=await new WorkflowStore(root,{lockEnvironment:environment,artifactFault:fault}).publishInputs('11111111-1111-4111-8111-111111111111',1,prepared);
+      process.send({report});process.disconnect();
     }else if(mode==='store-hold'||mode==='store-pause') {
       const {WorkflowStore}=await import(runtime+'workflow/store.js');
       const {randomUUID}=await import('node:crypto');

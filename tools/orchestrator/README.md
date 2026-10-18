@@ -306,3 +306,95 @@ Strict report records separate controller identity from payload and assessment. 
 The artifact primitive supports immutable validated-report storage under an existing writer lease for fault/identity tests and later integration; the CLI performs validation only. Same report identity/bindings/payload is a duplicate even with a later receipt time; changed content/bindings conflict. No report collection loop, execution adapter, production approval or handoff is enabled.
 
 Durable report publication additionally checks that the controller state exactly matches the verified current journal/checkpoint and that no unresolved intent exists. Report observation provenance records revision/sequence separately from the idempotency identity. Offline report verification reconstructs that verified historical prefix, so later interruption cannot erase the original report or reinterpret it as settling the current attempt. Pure validation still requires a trusted controller context; it does not authenticate a producer session.
+
+## ORCH-004 Phase A — prepared jobs, no execution
+
+Phase A adds process-free preparation and immutable admission evidence. It is an
+intermediate increment of ORCH-004, not completion of the execution story. There
+is no launch adapter, agent session, report generation, approval or handoff.
+
+```text
+cb-flow designer prepare RUN_UUID --revision N --recipe RECIPE_ID --request-id UUID
+cb-flow designer inspect RUN_UUID --preparation UUID
+cb-flow designer admission RUN_UUID --preparation UUID --revision N --request-id UUID
+```
+
+The production recipe catalog is deliberately empty. Only controlled tests inject
+an explicitly test-only synthetic recipe with an enumerated compact/desktop PNG
+set. The CLI has no recipe-file, environment override, force, approval, model or
+shell option. A production preparation request cannot use the synthetic recipe.
+US-037 remains blocked by the unchanged `PILOT_INPUTS_REQUIRED` guard; no real
+pilot recipe or authoritative input exception was added.
+
+A prepared job is a portable SHA-256 identity over canonical manifest bytes. It
+binds bundle, projection, recipe, template, resolved prompt, report schema and
+policies. Run UUID, capture paths/times, preparation time and journal position do
+not enter this identity. Separate controller receipts bind each preparation to
+its actual run, revision, journal sequence/head and accepted bundle. Reusing a
+request ID with changed content or binding fails. A historical receipt remains
+inspectable after workflow advancement, but inspection returns stale (exit 3).
+An audited rejection changes the journal binding even if revision is unchanged.
+
+Retained bundle/input bytes are rehashed. Required original PNG bytes and their
+manifest hashes are retained without resizing or re-encoding; the recipe names
+exact source paths, expected digests and safe logical destinations. Header and
+dimension checks do not establish full PNG decoding or model vision support.
+Projection is logical-only: no execution mount is created. Source, issue, scope
+and imports remain data, and embedded paths/instructions/templates are not run.
+The fully resolved prompt contains a data index; original documents remain
+separate immutable blobs. No Git filters, hooks, GitHub or metadata subprocesses
+run in these commands.
+
+Preparation records retained integrity as verified, selected working files as
+not checked, and full repository/GitHub freshness as unverified. Existing
+`inputs fresh` remains a separate explicit controller command; historical output
+is not current admission evidence. No diagnostic report or user JSON can supply
+native proof. Exact CLI identity, diagnostics, image support and all native
+restrictions remain unverified; the ORCH-001 exact version pin is unchanged.
+The previously observed newer Codex version is not admitted by this increment.
+
+Admission always records `decision: "deny"`, `allowLaunch: false`,
+`authorization: "none"`, and `PHASE_A_EXECUTION_DISABLED`. Exit 3 is a successfully
+recorded denial, not permission or successful execution. Prepare exit 0 means
+preparation only. Operational/integrity/conflict failures exit 1; malformed CLI
+arguments exit 2; unsupported schemas retain exit 3. Unknown commands cannot
+reach an execution path. Existing workflow metadata controls do not launch agents
+and are not expanded by Phase A.
+
+Storage reuses the writer lease, healthy journal/snapshot checks, private file
+checks and immutable temporary-write/rename/sync publication. Source blobs,
+projection and job are published first; their closure is reverified before the
+receipt is published last and checked before acknowledgement. New fixed names are
+`job-SHA.json`, `projection-SHA.json`, `preparation-UUID.json` and
+`admission-UUID.json`. Journal v1 and workflow schemas are unchanged. Admission
+publishes only a separate denied-decision artifact and never a workflow event.
+
+Incomplete objects and temporary files remain evidence; neither inspection nor
+workflow recovery adopts or deletes them. Explicit retry revalidates inputs and
+may deduplicate byte-identical objects before publishing a complete receipt.
+After an unacknowledged publication, explicit inspection can verify retained
+bytes; retry syncs before acknowledging success. I/O failure never reports a
+successful preparation. No power-loss durability guarantee is inferred from
+fault injection or filesystem sync calls.
+
+Limits: 1 MiB per manifest/projection/recipe/schema/prompt, 64 KiB per receipt or
+decision, 260 projected entries, 16 required PNGs, 8 MiB per retained object,
+64 MiB total projection, shared 256 MiB retained-artifact quota and 4,096 directory
+entries including locks/temporary files. Every new artifact, orphan and failed
+temporary consumes the shared quota. There is no automatic cleanup or eviction.
+
+Controller provenance records component/version/policy. Its source SHA is null:
+no authenticated build-source attestation exists, and a job baseline must not be
+misrepresented as the controller's build identity. Recipe/template/schema bytes
+and their versions are retained and verified. Current-policy comparison is
+conservative: incompatible future policies block verification rather than
+silently migrating historical artifacts.
+
+Native filesystem/credential/network/plugin/MCP/hook/delegation/process isolation
+remains unverified. ORCH-002 AC-06 remains PARTIAL: ambiguous macOS dead-writer
+locks cannot be reclaimed without the required boot identity. Cooperative private
+storage is not a hostile same-user sandbox; TOCTOU/ABA and hardware power-loss
+limitations remain. Abrupt controller termination can leave a lock requiring
+existing conservative recovery; no new force-unlock or helper process is added.
+Phase B execution, native qualification, ORCH-005 and real US-037 inputs require
+separate review and explicit authorization.

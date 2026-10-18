@@ -1,5 +1,6 @@
+import { blob, decode as decodeDesigner, DESIGNER_LIMITS, parseManifest, parseProjection, parseReceipt, parseDecision } from '../designer/contracts.js';
 import type { FileHandle } from 'node:fs/promises';
-import { canonical, demand, integer, LIMITS, object, uuid, version, type Reference, type RunState } from '../workflow/contracts.js';
+import { canonical, demand, digest, integer, LIMITS, object, uuid, version, type Reference, type RunState } from '../workflow/contracts.js';
 import { readLock } from '../workflow/lock.js';
 import { emptyView, replay, stateAfter, type JournalView } from '../workflow/journal.js';
 import type { RunDirectory } from '../workflow/paths.js';
@@ -8,10 +9,10 @@ import { INPUT_LIMITS, parseCapture, parseCore, requirePilotInputs, type BundleC
 import { fingerprint, referenceDigest, requiredBlobs, verifyBytes, verifyCapture, type PreparedBundle } from './bundle.js';
 import { reportIdentity, validateReport, type ReportContext, type ValidatedReport } from '../reports/contracts.js';
 
-export type ArtifactFault = (point: 'beforeWrite' | 'afterWrite' | 'beforePublish' | 'afterPublish', handle?: FileHandle, bytes?: Buffer) => Promise<void>;
+export type ArtifactFault = (point: 'beforeWrite' | 'afterWrite' | 'beforePublish' | 'afterRename' | 'afterPublish', handle?: FileHandle, bytes?: Buffer) => Promise<void>;
 const noFault: ArtifactFault = async () => {};
 const decode = (bytes: Buffer): unknown => JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(bytes));
-const artifactName = (name: string): boolean => /^(?:blob-|bundle-|capture-|report-|artifact\.tmp-)/.test(name);
+const artifactName = (name: string): boolean => /^(?:blob-|bundle-|capture-|report-|job-|projection-|preparation-|admission-|artifact\.tmp-)/.test(name);
 export function bindBundle(core: BundleCore, capture: CaptureRecord, state: RunState): void {
   verifyCapture(core, capture, state.runId);
   demand(core.repository === state.repository.id && canonical(core.story) === canonical(state.story) && core.baselineSha === state.baselineSha && capture.root === state.repository.root, 'BUNDLE_CONTEXT_MISMATCH'); requirePilotInputs(core);
@@ -39,17 +40,50 @@ export class ArtifactStore {
   }
   private async put(name: string, bytes: Buffer): Promise<'created' | 'duplicate'> {
     await this.requireWriter();
-    const used = (await this.dir.entries()).filter(e => artifactName(e.name)).reduce((n, e) => n + e.size, 0n);
+    const entries = await this.dir.entries(); demand(entries.length < DESIGNER_LIMITS.directoryEntries, 'ARTIFACT_ENTRY_LIMIT');
+    const used = entries.filter(e => artifactName(e.name)).reduce((n, e) => n + e.size, 0n);
     demand(used <= BigInt(this.quota), 'ARTIFACT_QUOTA');
     const old = await this.dir.read(name, Math.max(INPUT_LIMITS.object, INPUT_LIMITS.report));
     if (old) { demand(old.equals(bytes), 'ARTIFACT_CONFLICT'); return 'duplicate'; }
     demand(used + BigInt(bytes.length) <= BigInt(this.quota), 'ARTIFACT_QUOTA');
     const temporary = this.dir.temporary('artifact.tmp');
     await this.dir.create(temporary, bytes, async handle => { await this.fault('afterWrite', handle, bytes); }, async handle => { await this.fault('beforeWrite', handle, bytes); });
-    await this.dir.sync(); await this.fault('beforePublish');
+    await this.dir.sync(); await this.fault('beforePublish', undefined, bytes);
     // No cooperative publisher can race this check while the writer lease is
     // held. Portable rename is not a hostile same-user no-replace guarantee.
-    await this.requireWriter(); await this.dir.move(temporary, name, false); await this.dir.sync(); await this.fault('afterPublish'); return 'created';
+    await this.requireWriter(); await this.dir.move(temporary, name, false); await this.fault('afterRename', undefined, bytes); await this.dir.sync(); await this.fault('afterPublish', undefined, bytes); return 'created';
+  }
+  // Narrow immutable-object port for Phase A; filenames are controller-derived.
+  async readDesignerBlob(ref: { digest: string; bytes: number }): Promise<Buffer> {
+    blob(ref); const bytes = await this.dir.read(`blob-${ref.digest}.bin`, ref.bytes);
+    demand(bytes && bytes.length === ref.bytes && sha256(bytes) === ref.digest, 'CONTENT_MISMATCH'); return bytes;
+  }
+  async readDesignerDocument(kind: 'job' | 'projection' | 'preparation' | 'admission', id: string): Promise<Buffer | null> {
+    if (kind === 'job' || kind === 'projection') digest(id); else uuid(id);
+    return this.dir.read(`${kind}-${id}.json`, kind === 'job' || kind === 'projection' ? DESIGNER_LIMITS.document : DESIGNER_LIMITS.record);
+  }
+  async designerQuota(objects: readonly DesignerObject[]): Promise<void> {
+    await this.writableState(); const entries = await this.dir.entries();
+    let bytes = entries.filter(e => artifactName(e.name)).reduce((n, e) => n + e.size, 0n); let count = entries.length;
+    const names = new Set<string>();
+    for (const item of objects) {
+      const name = designerObjectName(item); demand(!names.has(name), 'ARTIFACT_CONFLICT'); names.add(name);
+      const previous = await this.dir.read(name, item.bytes.length);
+      if (previous) demand(previous.equals(item.bytes), 'ARTIFACT_CONFLICT'); else { bytes += BigInt(item.bytes.length); count++; }
+    }
+    demand(bytes <= BigInt(this.quota), 'ARTIFACT_QUOTA'); demand(count + 1 <= DESIGNER_LIMITS.directoryEntries, 'ARTIFACT_ENTRY_LIMIT');
+  }
+  async publishDesignerObject(item: DesignerObject): Promise<void> {
+    const state = await this.writableState(); const name = designerObjectName(item);
+    if (item.kind === 'preparation' || item.kind === 'admission') {
+      const record = item.kind === 'preparation' ? parseReceipt(decode(item.bytes)) : parseDecision(decode(item.bytes));
+      const binding = 'workflow' in record ? record.workflow : record.observedWorkflow;
+      const journal = await replay(this.dir);
+      demand(binding.runId === state.runId && binding.revision === state.revision && binding.journalSequence === state.journalSequence && binding.journalHeadHash === journal.headHash && canonical(binding.acceptedInput) === canonical(state.input) && binding.stage === state.stage && binding.status === state.status, 'PREPARATION_CONTEXT_MISMATCH');
+    }
+    await this.put(name, item.bytes);
+    // Explicit retry establishes durability even after a prior unacknowledged rename.
+    await this.dir.sync();
   }
   async publishBundle(prepared: PreparedBundle): Promise<Reference> {
     const state = await this.writableState(); bindBundle(prepared.core, prepared.capture, state);
@@ -104,4 +138,19 @@ export class ArtifactStore {
     uuid(reportId); demand(reportId === context.reportId, 'REPORT_CONTEXT_MISMATCH'); const bytes = await this.dir.read(`report-${reportId}.json`, INPUT_LIMITS.report); demand(bytes, 'REPORT_MISSING');
     return this.readReport(bytes, context);
   }
+}
+
+export type DesignerObject = { kind: 'blob' | 'job' | 'projection' | 'preparation' | 'admission'; id: string; bytes: Buffer };
+function designerObjectName(item: DesignerObject): string {
+  demand(['blob', 'job', 'projection', 'preparation', 'admission'].includes(item.kind), 'UNSAFE_PATH');
+  if (item.kind === 'preparation' || item.kind === 'admission') {
+    uuid(item.id); const parsed = item.kind === 'preparation' ? parseReceipt(decodeDesigner(item.bytes)) : parseDecision(decodeDesigner(item.bytes));
+    demand(parsed.requestId === item.id, 'ARTIFACT_CONFLICT');
+  } else {
+    digest(item.id); demand(sha256(item.bytes) === item.id, 'CONTENT_MISMATCH');
+    if (item.kind === 'job') parseManifest(decodeDesigner(item.bytes));
+    if (item.kind === 'projection') parseProjection(decodeDesigner(item.bytes));
+    demand(item.bytes.length <= INPUT_LIMITS.object, 'RESOURCE_LIMIT');
+  }
+  return `${item.kind}-${item.id}.${item.kind === 'blob' ? 'bin' : 'json'}`;
 }

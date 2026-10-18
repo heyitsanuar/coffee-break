@@ -1,3 +1,8 @@
+import { publishPreparation, verifyPreparation, workflowBinding } from '../designer/artifacts.js';
+import { loadAssets } from '../designer/prepare.js';
+import { resolveRecipe, type DesignerRecipe } from '../designer/recipes.js';
+import { denyAdmission } from '../designer/admission.js';
+import { decode as decodeDesigner, DESIGNER_LIMITS, encode, parseDecision, type DesignerAdmissionDecision, type DesignerPreparationReceipt, type JobInspection } from '../designer/contracts.js';
 import { randomUUID } from 'node:crypto';
 import { canonical, demand, digest, hash, integer, LIMITS, object, parseEvent, parseState, uuid, version, WorkflowError, type RunState } from './contracts.js';
 import { acquire, localLockEnvironment, readLock, reconcileLock, type LockEnvironment } from './lock.js';
@@ -56,9 +61,11 @@ export class WorkflowStore {
   private readonly fault: Fault;
   private readonly environment: LockEnvironment;
   private readonly artifactFault?: ArtifactFault;
-  constructor(root?: string, options: { fault?: Fault; lockEnvironment?: LockEnvironment; artifactFault?: ArtifactFault } = {}) {
+  private readonly designerRecipes?: readonly DesignerRecipe[];
+  constructor(root?: string, options: { fault?: Fault; lockEnvironment?: LockEnvironment; artifactFault?: ArtifactFault; designerRecipes?: readonly DesignerRecipe[] } = {}) {
     this.paths = new StoragePaths(root); this.fault = options.fault ?? noFault; this.environment = options.lockEnvironment ?? localLockEnvironment;
     this.artifactFault = options.artifactFault;
+    this.designerRecipes = options.designerRecipes ? structuredClone(options.designerRecipes) : undefined;
   }
   private failure(id: string, error: unknown, state: RunState | null = null): Operation {
     const code = errorCode(error); return operation(id, state, code === 'LOCK_BUSY' ? 'busy' : 'blocked', code, error instanceof WorkflowError ? error.exitCode : 1);
@@ -149,6 +156,40 @@ export class WorkflowStore {
     const result = await new ArtifactStore(await this.paths.open(id)).verifyBundle(reference, first.state);
     const last = await this.status(id); demand(last.exitCode === 0 && last.state?.journalSequence === first.state.journalSequence, 'CONCURRENT_CHANGE');
     return { ...result, state: first.state, active: first.state.input !== null && canonical(reference) === canonical(first.state.input) };
+  }
+  async prepareDesigner(id: string, expectedRevision: number, recipeId: string, requestId: string): Promise<Operation & { preparation?: DesignerPreparationReceipt }> {
+    uuid(requestId); integer(expectedRevision);
+    return this.owned(id, async (dir, writerToken) => {
+      const check = await this.inspect(dir, id); const report = this.report(id, check); if (report.exitCode) return report;
+      demand(check.view.state!.revision === expectedRevision, 'STALE_REVISION');
+      // Pilot rejection precedes recipe resolution and cannot be bypassed by the test catalog.
+      const artifacts = new ArtifactStore(dir, { writerToken, fault: this.artifactFault });
+      demand(check.view.state!.input, 'INPUTS_REQUIRED'); await artifacts.verifyBundle(check.view.state!.input!, check.view.state!);
+      const preparation = await publishPreparation(dir, artifacts, check.view.state!, resolveRecipe(recipeId, this.designerRecipes), await loadAssets(), requestId, this.environment.now());
+      return Object.assign(operation(id, check.view.state, 'ok', 'DESIGNER_PREPARED'), { preparation });
+    });
+  }
+  async inspectDesigner(id: string, preparationId: string): Promise<JobInspection> {
+    uuid(id); uuid(preparationId);
+    const first = await this.status(id); demand(first.exitCode === 0 && first.state, first.storage.code);
+    const dir = await this.paths.open(id); const result = await verifyPreparation(dir, new ArtifactStore(dir), first.state, preparationId);
+    const last = await this.status(id); demand(last.exitCode === 0 && last.state?.journalSequence === first.state.journalSequence, 'CONCURRENT_CHANGE'); return result;
+  }
+  async designerAdmission(id: string, expectedRevision: number, preparationId: string, requestId: string): Promise<Operation & { admission?: DesignerAdmissionDecision }> {
+    uuid(preparationId); uuid(requestId); integer(expectedRevision);
+    return this.owned(id, async (dir, writerToken) => {
+      const check = await this.inspect(dir, id); const report = this.report(id, check); if (report.exitCode) return report;
+      demand(check.view.state!.revision === expectedRevision, 'STALE_REVISION');
+      const artifacts = new ArtifactStore(dir, { writerToken, fault: this.artifactFault });
+      const inspected = await verifyPreparation(dir, artifacts, check.view.state!, preparationId);
+      const decision = denyAdmission(inspected, workflowBinding(check.view.state!, check.view.headHash), requestId, this.environment.now());
+      const old = await artifacts.readDesignerDocument('admission', requestId);
+      let admission = decision;
+      if (old) { admission = parseDecision(decodeDesigner(old)); demand(encode({ ...admission, evaluatedAt: decision.evaluatedAt }, DESIGNER_LIMITS.record).equals(encode(decision, DESIGNER_LIMITS.record)), 'ADMISSION_REQUEST_CONFLICT'); }
+      const item = { kind: 'admission' as const, id: requestId, bytes: encode(admission, DESIGNER_LIMITS.record) };
+      await artifacts.designerQuota([item]); await artifacts.publishDesignerObject(item);
+      return Object.assign(operation(id, check.view.state, 'blocked', 'PHASE_A_EXECUTION_DISABLED', 3), { admission });
+    });
   }
   private async snapshot(dir: RunDirectory, view: JournalView): Promise<void> {
     const bytes = Buffer.from(canonical({ schemaVersion: 1, sequence: view.records.length, headHash: view.headHash, state: view.state }, LIMITS.snapshot));

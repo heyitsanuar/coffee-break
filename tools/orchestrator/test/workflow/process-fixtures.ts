@@ -13,7 +13,7 @@ export async function compileRuntime(root: string): Promise<string> {
   await writeFile(join(output, 'package.json'), '{"type":"module"}', { mode: 0o600 });
   const source = fileURLToPath(new URL('../../src/', import.meta.url));
   const modules = ['policy.ts'];
-  for (const directory of ['workflow', 'inputs', 'reports']) modules.push(...(await readdir(join(source, directory))).filter(name => name.endsWith('.ts')).map(name => directory + '/' + name));
+  for (const directory of ['workflow', 'inputs', 'reports', 'designer']) modules.push(...(await readdir(join(source, directory))).filter(name => name.endsWith('.ts')).map(name => directory + '/' + name));
   for (const path of modules) {
     await mkdir(join(output, path, '..'), { recursive: true, mode: 0o700 });
     const compiled = ts.transpileModule(await readFile(join(source, path), 'utf8'), { compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ES2022 } });

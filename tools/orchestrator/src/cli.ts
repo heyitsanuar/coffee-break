@@ -7,6 +7,7 @@ Usage:
   cb-flow --help
   cb-flow --version
   cb-flow doctor [--json] [--probe-security]
+  cb-flow designer prepare|inspect|admission RUN_UUID [options]
   cb-flow run create|status|pause|resume|cancel|recover [options]
   cb-flow inputs capture|attach|verify|fresh RUN_UUID [options]
   cb-flow report validate RUN_UUID [options]
@@ -21,6 +22,7 @@ type Doctor = (probe: boolean) => Promise<Report>;
 export async function runCli(args: string[], doctor?: Doctor): Promise<{ code: number; stdout: string; stderr: string }> {
   if (args.length === 1 && args[0] === '--help') return { code: 0, stdout: HELP, stderr: '' };
   if (args.length === 1 && args[0] === '--version') return { code: 0, stdout: VERSION + '\n', stderr: '' };
+  if (args[0] === 'designer') return (await import('./designer/cli.js')).runDesigner(args.slice(1));
   if (args[0] === 'run') return (await import('./workflow/cli.js')).runWorkflow(args.slice(1));
   if (args[0] === 'inputs' || args[0] === 'report') return (await import('./inputs/cli.js')).runInputs(args);
   if (args[0] !== 'doctor' || args.slice(1).some(arg => !['--json', '--probe-security'].includes(arg)) || new Set(args).size !== args.length) return { code: 2, stdout: '', stderr: HELP };

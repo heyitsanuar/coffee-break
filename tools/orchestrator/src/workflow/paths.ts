@@ -81,7 +81,7 @@ export class StoragePaths {
 export class RunDirectory {
   constructor(readonly path: string, private readonly root: string, private readonly anchor: Awaited<ReturnType<typeof chain>>) {}
   private filename(name: string): string {
-    demand(/^(?:journal\.jsonl|snapshot\.json|writer\.lock|recovery\.lock|intent\.json|(?:snapshot\.tmp|snapshot\.corrupt|intent\.reconciled|artifact\.tmp|capture|report)-[0-9a-f-]{36}\.json|blob-[a-f0-9]{64}\.bin|bundle-[a-f0-9]{64}\.json)$/.test(name), 'UNSAFE_PATH');
+    demand(/^(?:journal\.jsonl|snapshot\.json|writer\.lock|recovery\.lock|intent\.json|(?:snapshot\.tmp|snapshot\.corrupt|intent\.reconciled|artifact\.tmp|capture|report|preparation|admission)-[0-9a-f-]{36}\.json|blob-[a-f0-9]{64}\.bin|(?:bundle|job|projection)-[a-f0-9]{64}\.json)$/.test(name), 'UNSAFE_PATH');
     return join(this.path, name);
   }
   async verify(): Promise<void> { await unchanged(this.anchor, this.root); }
